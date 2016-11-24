@@ -1,0 +1,7 @@
+"Resource: /home/ubuntu/Desktop/FinalProject/Life/src/player.ml": "=e\132M\197'5\174S\172\233\241\029b\223\203"
+"Rule: ocaml dependencies mli (%=player )": "\127\173\130\138R\217\172TI\202\017\"pmnJ"
+"Rule: ocaml: cmo* -> byte (%=player )": "\162\174\174\019\b\157P\210;\214\232nvq\241c"
+"Rule: ocaml: ml & cmi -> cmo (%=player )": "37,\211\164vG\2358\159\155;6\026\r\206"
+"Rule: ocaml dependencies ml (%=player )": "\187\255\207\137\031\203\025\249\014mi\217\171\180\219\208"
+"Rule: ocaml: mli -> cmi (%=player )": "\020\131\199B0\149\161\163\r\203d\187cq.\020"
+"Resource: /home/ubuntu/Desktop/FinalProject/Life/src/player.mli": "r\227\209\027:4M\167f\185v(\128\244\222\180"
