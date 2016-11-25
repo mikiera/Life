@@ -23,14 +23,14 @@ end
 module Player: Player = struct
   type history = string ref
   type player = {id:int; nickname: string ref; history: history;
-                  college: string ref; course: string list ref;
+                  college: string ref; course: string ref;
                   advisor: string ref; points: int ref; karma: int ref;
                   retirement: string ref}
   let getID p = p.id
   let getNickname p = !(p.nickname)
   let getHistory p = !(p.history)
   let getCollege p = !(p.college)
-  let getCourse p = failwith "Unimplemented" (*!(p.course)*)
+  let getCourse p = !(p.course)
   let getAdvisor p = !(p.advisor)
   let getPoints p = !(p.points)
   let getKarma p = !(p.karma)
@@ -38,7 +38,7 @@ module Player: Player = struct
   let addNickname p n = p.nickname := n; p
   let addHistory p h = p.history := !(p.history)^h; p
   let changeCollege p c = p.college := c; p
-  let changeCourse p c = failwith "Unimplemented"
+  let changeCourse p c = p.course := c; p
   let changeAdvisor p a = p.advisor:= a; p
   let changePoints p n = p.points := !(p.points) + n; p
   let changeKarma p k = p.karma := !(p.karma) + k; p
