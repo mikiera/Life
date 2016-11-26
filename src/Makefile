@@ -1,8 +1,8 @@
-main:
-	ocamlbuild -pkgs oUnit main.byte
-	
 test:
-	ocamlbuild -pkgs oUnit,str,unix test_main.byte && ./test_main.byte
+	ocamlbuild -pkgs oUnit,yojson,str,ANSITerminal test_main.byte && ./test_main.byte
+
+play:
+	ocamlbuild -pkgs oUnit,yojson,str,ANSITerminal main.byte && ./main.byte
 
 check:
 	bash checkenv.sh && bash checktypes.sh
