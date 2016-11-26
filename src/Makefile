@@ -2,7 +2,7 @@ main:
 	ocamlbuild -pkgs oUnit main.byte
 	
 test:
-	ocamlbuild -pkgs oUnit,str,unix test.byte && ./test.byte
+	ocamlbuild -pkgs oUnit,str,unix test_main.byte && ./test_main.byte
 
 check:
 	bash checkenv.sh && bash checktypes.sh
