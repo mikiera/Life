@@ -1,11 +1,11 @@
 (* map.ml *)
 
-module type Map = struct
-  type location
+module Map = struct
+  type location = unit
 
-  type action
+  type action = unit
 
-  let moveforward : location -> location =
+  let moveforward (current_loc : location) : location =
     failwith "Unimplemented"
 end
 

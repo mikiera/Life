@@ -3,10 +3,10 @@
  *)
 
 (* A [Player] holds the information about one player in the game *)
-module type Player = sig
+module Player : sig
 
-  (* The type of the player's description *)
-  type description
+  (* The type of the player's history *)
+  type history
 
   (* The type of a player *)
   type player
@@ -16,9 +16,6 @@ module type Player = sig
 
   (* [getNickname p] returns the name of the player *)
   val getNickname : player -> string
-
-  (* [getDescription p] returns the description of the player *)
-  val getDescription : player -> description
 
   (* [getHistory p] returns the history of the player *)
   val getHistory : player -> string
@@ -44,9 +41,6 @@ module type Player = sig
   (* Methods that alter [Player] *)
   (* [addNickname p s] adds a nickname to the player *)
   val addNickname : player -> string -> player
-
-  (* [changeDescription p] changes the description of the player *)
-  val changeDescription : player -> description -> player
 
   (* [addHistory p s] adds another line of history to the player *)
   val addHistory : player -> string -> player

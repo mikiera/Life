@@ -1,22 +1,22 @@
 (* game.ml *)
 
-module type Game = struct
-  type turn
+module Game = struct
+  type turn = unit
 
-  type playerloc
+  type playerloc = unit
 
-  type gamestate
+  type gamestate = unit
 
-  let spinner : int list -> int =
+  let spinner (list_nums : int list) : int =
     failwith "Unimplemented"
 
-  let play : string -> gamestate -> gamestate =
+  let play (cmd : string) (gamestate : gamestate) : gamestate =
     failwith "Unimplemented"
 
-  let repl : gamestate -> gamestate =
+  let repl (state : gamestate) : gamestate =
     failwith "Unimplemented"
 end
 
 
 let main file_name =
-  print_newline ("The name of the file is supposedly: " ^ file_name)
+  print_endline "Entering main function"
