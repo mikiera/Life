@@ -1,0 +1,194 @@
+{
+	"game_components": 
+		{ "courses": 
+			[{
+			 "cname": "Graphics",
+			 "cdescription": "Graphics is an upper level elective for those pursuing the graphics vector. ",
+			 "cid":1,
+			 "cpoints": 4000,
+			 "ckarma" : 1245
+			},
+			{
+			 "cname": "Object Oriented Programming",
+			 "cdescription": "OOP is required major level class. It is taught in Java by David Gries.",
+			 "cid":2,
+			 "cpoints": 2000,
+			 "ckarma" : 612
+			},
+			{
+			 "cname": "Python",
+			 "cdescription": "Python is the introductory CS class.",
+			 "cid":3,
+			 "cpoints": 1000,
+			 "ckarma" : 434
+			},
+			{
+			 "cname": "Functional Programming",
+			 "cdescription": "This is 3110.",
+			 "cid":4,
+			 "cpoints": 3000,
+			 "ckarma" : 1432
+			}],
+
+		   "advisors": 
+		   	[{
+		   	 "aname": "Michael Clarkson",
+			 "adescription": "He's known for teaching 3110 and is interested in security.",
+			 "aid":1,
+			},
+			{
+		   	 "aname": "Walker White",
+			 "adescription": "He's known for teaching 1110 and is interested in game design.",
+			 "aid":2,
+			},
+			{
+		   	 "aname": "Anne Bracy",
+			 "adescription": "She's known for teaching 3410 and has worked at Intel.",
+			 "aid":3,
+			},
+			{
+		   	 "aname": "Daisy Fan",
+			 "adescription": "She's known for teaching 1112 and researches applying 
+			  computer science to water and environmental problems.",
+			 "aid":4,
+			}
+			],
+
+		   	"summer_plans": 
+		   	[{
+		   	 "sname": "Internship at Facebook",
+			 "sdescription": "You are an intern on the Facebook messenger team",
+			 "sid":1,
+			 "spoints": 10000,
+			 "skarma" : 1234
+			},
+			{
+		   	 "sname": "Internship at Jane Street Capital",
+			 "sdescription": "You are an intern at Jane Street Capital and you are using OCaml",
+			 "sid":2,
+			 "spoints": 20000,
+			 "skarma" : 12847
+			},
+			{
+		   	 "sname": "Research at Cornell",
+			 "sdescription": "You are spending the summer at Cornell researching under your favorite professor.",
+			 "sid":3,
+			 "spoints": 7000,
+			 "skarma" : 4353
+			},
+			{
+		   	 "sname": "Nothing",
+			 "sdescription": "You are enjoying your summer!",
+			 "sid":4,
+			 "spoints": 0,
+			 "skarma" : 10000
+			}],
+
+			"vectors": 
+		   	[{
+		   	 "vname": "Renaissance",
+			 "vdescription": "This is a vector that has a little bit of everything",
+			 "vid":1,
+			 "vpoints": 1000,
+			 "vkarma" : 1000
+			}, 
+			{
+		   	 "vname": "Graphics",
+			 "vdescription": "This is a vector that focuses on graphics",
+			 "vid":2,
+			 "vpoints": 2000,
+			 "vkarma" : 1000
+			},
+			{
+		   	 "vname": "AI",
+			 "vdescription": "This is a vector that focuses on AI",
+			 "vid":3,
+			 "vpoints": 2000,
+			 "vkarma" : 1000
+			},
+			{
+		   	 "vname": "Theory",
+			 "vdescription": "This is a vector that focuses on theory",
+			 "vid":4,
+			 "vpoints": 2500,
+			 "vkarma" : 1000
+			}],
+			"retirement_plans": 
+		   	[{
+		   	 "rname": "Industry-Big Corp",
+			 "rdescription": "You are working at a large corporation",
+			 "rid":1,
+			 "rpoints": 10000,
+			 "rkarma" : 10000
+			},
+			{
+		   	 "rname": "MEng",
+			 "rdescription": "You returned to Cornell for an MEng",
+			 "rid":2,
+			 "rpoints": -6400,
+			 "rkarma" : 20000
+
+			},
+			{
+		   	 "rname": "Industry-Start Up",
+			 "rdescription": "You are working at a startup",
+			 "rid":3,
+			 "rpoints": 15000,
+			 "rkarma" : 5000
+			}],
+		},
+
+	"map" : [ 
+		{ "squareid": 1,
+		  "squarename": "startroom",
+		  "left": "none",
+		  "right": "square1",
+		  "action": 
+		  {
+		  	"type": "choice",
+		  	"description": "You get to choose between Arts and Sciences or Engineering. Type AS for arts and sciences and E for engineering.",
+		  	"points": 1000,
+		  	"karma": 2000
+		  }
+		},
+		{ "squareid": 2,
+		  "squarename": "square1",
+		  "left": "none",
+		  "right": "square2",
+		  "action": 
+		  {
+		  	"type": "event",
+		  	"description": "You got a 100 on your first CS assignment. Congratulations! You get 500 points",
+		  	"points": 500,
+		  	"karma": 0
+		  }
+		},
+		{ "squareid": 3,
+		  "squarename": "square2",
+		  "left": "none",
+		  "right": "end",
+		  "action": 
+		  {
+		  	"type": "choice",
+		  	"description": "You need to choose an advisor. You also get karma points.",
+		  	"points": 600,
+		  	"karma": 1000
+		  }
+		},
+		{ "squareid": 4,
+		  "squarename": "end",
+		  "left": "none",
+		  "right": "none",
+		  "action": 
+		  {
+		  	"type": "choice",
+		  	"description": "Congratulations! You have graduated!! Now you get to choose your post-Cornell plans. You also get karma points.",
+		  	"points": 0,
+		  	"karma": 1000
+		  }
+		}],
+
+	"start": "startroom",
+	"start_points": 10000,
+
+}
