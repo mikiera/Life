@@ -1,6 +1,13 @@
 (* map.ml *)
 
-module Map = struct
+module Map : sig
+  type location
+
+  type action
+
+  val moveforward: location -> location
+end =
+struct
   type location = unit
 
   type action = unit

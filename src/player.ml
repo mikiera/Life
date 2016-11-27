@@ -18,9 +18,9 @@ module Player : sig
   val changePoints : player -> int -> player
   val changeKarma : player -> int -> player
   val changeFuture : player -> string -> player
-end
+end =
 
-module Player = struct
+struct
   type history = string ref
   type player = {id:int; nickname: string ref; history: history;
                   college: string ref; course: string ref;

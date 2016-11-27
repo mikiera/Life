@@ -1,6 +1,19 @@
 (* game.ml *)
 
-module Game = struct
+module Game : sig
+  type turn
+
+  type playerloc
+
+  type gamestate
+
+  val spinner: int list -> int
+
+  val play: string -> gamestate -> gamestate
+
+  val repl:  gamestate -> gamestate
+end =
+struct
   type turn = unit
 
   type playerloc = unit
