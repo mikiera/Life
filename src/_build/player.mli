@@ -3,14 +3,13 @@
  *)
 
 (* A [Player] holds the information about one player in the game *)
-module type Player = sig
-
-  (* The type of a player's history *)
-  type history
+module Player : sig
 
   (* The type of a player *)
   type player
 
+  (*Creates a player with a given ID*)
+  val createPlayer: int -> player
   (* [getID p] returns the ID of the player *)
   val getID : player -> int
 
@@ -35,8 +34,8 @@ module type Player = sig
   (* [getKarma p] returns the number of karma points the player has *)
   val getKarma : player -> int
 
-  (* [getRetirement p] returns the player's place of retirement *)
-  val getRetirement : player -> string
+  (* [getFuture p] returns the player's place of retirement *)
+  val getFuture : player -> string
 
   (* Methods that alter [Player] *)
   (* [addNickname p s] adds a nickname to the player *)
@@ -60,7 +59,7 @@ module type Player = sig
   (* [changeKarma p i] changes the number of karma points the player has *)
   val changeKarma : player -> int -> player
 
-  (* [changeRetirement p s] changes the place of the player is retiring at *)
-  val changeRetirement : player -> string -> player
+  (* [changeFuture p s] changes the place of the player is retiring at *)
+  val changeFuture : player -> string -> player
 
 end

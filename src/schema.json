@@ -1,0 +1,65 @@
+{
+	"game_components": 
+		{ "courses": 
+			[{
+			 "cname": "string",
+			 "cdescription": "string",
+			 "cid":"int",
+			 "cpoints": "int",
+			 "ckarma" : "int"
+			}],
+
+		   "advisors": 
+		   	[{
+		   	 "aname": "string",
+			 "adescription": "string",
+			 "aid":"int",
+			}],
+
+		   	"summer_plans": 
+		   	[{
+		   	 "sname": "string",
+			 "sdescription": "string",
+			 "sid":"int",
+			 "spoints": "int",
+			 "skarma" : "int"
+			}],
+
+			"vectors": 
+		   	[{
+		   	 "vname": "string",
+			 "vdescription": "string",
+			 "vid":"int",
+			 "vpoints": "int",
+			 "vkarma" : "int"
+			}],
+
+			"retirement_plans": 
+		   	[{
+		   	 "rname": "string",
+			 "rdescription": "string",
+			 "rid":"int",
+			 "rpoints": "int",
+			 "rkarma" : "int"
+
+			}],
+		},
+
+	
+	"map" : [ 
+		{ "squareid": "int",
+		  "squarename": "string",
+		  "left": "string",
+		  "right": "string",
+		  "action": {
+		  	"type": "string",
+		  	"description": "string",
+		  	"points": "int",
+		  	"karma": "int"
+		  }
+		}],
+
+	"start": "string",
+	"start_points":"int",
+
+}
