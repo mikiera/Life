@@ -1,6 +1,6 @@
 (* map.ml *)
 
-module Map : sig
+module Gamemap : sig
   type location
 
   type action
@@ -16,3 +16,4 @@ struct
     failwith "Unimplemented"
 end
 
+let main file = failwith "Unimplemented"
