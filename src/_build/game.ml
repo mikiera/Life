@@ -2,12 +2,11 @@
 open Gamemap
 open Player
 
-
 exception Illegal
 
 type turn = int
 
-type loc = Gamemap.location
+type location = Gamemap.location
 
 type playerloc = {playerid: int; loc: location}
 
@@ -30,11 +29,12 @@ type gamecomp = {college: college;
 
 type gamestate = {turn: turn;
                   playermap: playerloc list;
-                  sqact: (square * action) list;
+                  sqact: (Gamemap.square * Gamemap.action) list;
                   start: int;
                   start_points: int;
-                  gamemap: location list;
+                  gamemap: Gamemap.location list;
                   gamecomp: gamecomp; active_players: int list}
+
 
 let spinner (list_nums : int list) : int =
   failwith "Unimplemented"
@@ -43,7 +43,7 @@ let cmd_checker c =
   let a = String.lowercase_ascii (String.trim c) in a
 
 let play (cmd : string) (gamestate : gamestate) : gamestate =
-  if (cmd = "p" || cmd = "points") then (print_endline (Player.getPoints (List.nth (player_lst) turn)); gamestate)
+  (*if (cmd = "p" || cmd = "points") then (print_endline (Player.getPoints (List.nth (player_lst) turn)); gamestate)
   else if (cmd = "h" || cmd = "history") then (print_endline (Player.getHistory (List.nth (player_lst) turn)); gamestate)
   else if (cmd = "a" || cmd = "advisor") then (print_endline (Player.getAdvisor (List.nth (player_lst) turn)); gamestate)
   else if (cmd = "c" || cmd = "course") then (print_endline (Player.getCourse (List.nth (player_lst) turn)); gamestate)
@@ -53,7 +53,8 @@ let play (cmd : string) (gamestate : gamestate) : gamestate =
   else if (cmd = "help") then failwtih "Unimplemented"
   else if (cmd = "Choice 1") then failwith "Unimplemented"
   else if (cmd = "Choice 2") then failwith "Unimplemented"
-  else raise Illegal
+  else raise Illegal *)
+  failwith "Unimplemented"
 
 let rec repl (state : gamestate) : gamestate =
   print_string  "> ";
@@ -61,7 +62,7 @@ let rec repl (state : gamestate) : gamestate =
   let a = cmd_checker c in
   if (a = "quit" || a = "exit" || a = "q") then ()
   else try(let new_gs = play (cmd_checker c) state in repl new_gs) with
-  |Illegal -> print_endline "Invalid command. Please try again."; repl gs
+  |Illegal -> print_endline "Invalid command. Please try again.";repl state
 
 
 (* parsing functions *)

@@ -1,6 +1,6 @@
 open Player
 
-module type Gamemap = sig
+module Gamemap : sig
   type location
 
   type action
@@ -13,8 +13,7 @@ module type Gamemap = sig
 
   val moveforward: location -> direction -> (square * action) list -> player -> location
 end
-
-module OurMap : Gamemap  = struct
+= struct
   type square = Null | Square of int
   type location = {id: square; left: location; right: location}
   type direction = Left | Right
