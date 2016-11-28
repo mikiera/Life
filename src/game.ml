@@ -1,6 +1,7 @@
 (* game.ml *)
 open Gamemap
 open Player
+open Random
 
 exception Illegal
 
@@ -46,9 +47,6 @@ type gamestate = {turn: turn;
                   gamemap: location list;
                   gamecomp: gamecomp; active_players: int list}
 
-let spinner (list_nums : int list) : int =
-  failwith "Unimplemented"
-
 let cmd_checker c =
   let a = String.lowercase_ascii (String.trim c) in a
 
@@ -56,11 +54,18 @@ let play (cmd : string) (gamestate : gamestate) : gamestate =
 (*   if (cmd = "p" || cmd = "points") then (print_endline (Player.getPoints (List.nth (player_lst) turn)); gamestate)
   else if (cmd = "h" || cmd = "history") then (print_endline (Player.getHistory (List.nth (player_lst) turn)); gamestate)
   else if (cmd = "a" || cmd = "advisor") then (print_endline (Player.getAdvisor (List.nth (player_lst) turn)); gamestate)
-  else if (cmd = "c" || cmd = "course") then (print_endline (Player.getCourse (List.nth (player_lst) turn)); gamestate)
+  else if (cmd = "c" || cmd = "courses") then (print_endline (Player.getCourse (List.nth (player_lst) turn)); gamestate)
   else if (cmd = "co" || cmd = "college") then (print_endline (Player.getCollege (List.nth (player_lst) turn)); gamestate)
   else if (cmd = "n" || cmd = "name") then (print_endline (Player.getNickname (List.nth (player_lst) turn)); gamestate)
-  else if (cmd = "spin") then failwith "Unimplemented"
-  else if (cmd = "help") then failwtih "Unimplemented"
+  else if (cmd = "spin") then ((Random.int 4) + 1)
+  else if (cmd = "help") then (print_endline ("p/points:      check your total points");
+                              print_endline ("a/advisor:     see your advisor");
+                              print_endline ("c/courses:     see your courses");
+                              print_endline ("co/college:    see your college");
+                              print_endline ("n/name:        see your nickname");
+                              print_endline ("spin:          spin the wheel and try your luck!");
+                              print_endline ("help:          see a list of commands available");
+                              gamestate)
   else if (cmd = "Choice 1") then failwith "Unimplemented"
   else if (cmd = "Choice 2") then failwith "Unimplemented"
   else raise Illegal *)
@@ -167,10 +172,6 @@ let rec main_helper file_name =
 
 let main file_name =
    main_helper file_name
-
-
-
-
 
 
 
