@@ -25,7 +25,7 @@ struct
                   college: string ref; course: string ref;
                   advisor: string ref; points: int ref; karma: int ref;
                   future: string ref}
-  let createPlayer n = {id = n; nickname = ref ""; history = ref ""; college = ref ""; course = ref "";
+  let createPlayer n = {id = n; nickname = ref ""; history = ref ("ID: " ^ string_of_int(n) ^ "\n"); college = ref ""; course = ref "";
                         advisor = ref ""; points = ref 0; karma = ref 0; future = ref ""}
   let getID p = p.id
   let getNickname p = !(p.nickname)
@@ -36,11 +36,11 @@ struct
   let getPoints p = !(p.points)
   let getKarma p = !(p.karma)
   let getFuture p = !(p.future)
-  let addNickname p n = p.nickname := n; p
   let addHistory p h = p.history := !(p.history)^h; p
-  let changeCollege p c = p.college := c; p
-  let changeCourse p c = p.course := c; p
-  let changeAdvisor p a = p.advisor:= a; p
+  let addNickname p n = p.nickname := n; addHistory p ("Name: " ^ n ^ "\n")
+  let changeCollege p c = p.college := c; addHistory p ("College: " ^ c ^ "\n")
+  let changeCourse p c = p.course := c; addHistory p ("Course: " ^ c ^ "\n")
+  let changeAdvisor p a = p.advisor:= a; addHistory p ("Advisor: " ^ a ^ "\n")
   let changePoints p n = p.points := !(p.points) + n; p
   let changeKarma p k = p.karma := !(p.karma) + k; p
   let changeFuture p r = p.future:= r; p

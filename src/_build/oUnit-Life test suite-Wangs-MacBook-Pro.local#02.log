@@ -1,3 +1,18 @@
-2016-11-28T01:37:45+00:00 Wangs-MacBook-Pro.local#02 I: Start test Life test suite:1:getID2.
-2016-11-28T01:37:45+00:00 Wangs-MacBook-Pro.local#02 I: Test Life test suite:1:getID2 is successful.
-2016-11-28T01:37:45+00:00 Wangs-MacBook-Pro.local#02 I: End test Life test suite:1:getID2.
+2016-11-28T01:45:36+00:00 Wangs-MacBook-Pro.local#02 I: Start test Life test suite:1:getID2.
+2016-11-28T01:45:36+00:00 Wangs-MacBook-Pro.local#02 I: Test Life test suite:1:getID2 is successful.
+2016-11-28T01:45:36+00:00 Wangs-MacBook-Pro.local#02 I: End test Life test suite:1:getID2.
+2016-11-28T01:45:36+00:00 Wangs-MacBook-Pro.local#02 I: Start test Life test suite:3:getName2.
+2016-11-28T01:45:36+00:00 Wangs-MacBook-Pro.local#02 I: Test Life test suite:3:getName2 is successful.
+2016-11-28T01:45:36+00:00 Wangs-MacBook-Pro.local#02 I: End test Life test suite:3:getName2.
+2016-11-28T01:45:36+00:00 Wangs-MacBook-Pro.local#02 I: Start test Life test suite:5:getCourse.
+2016-11-28T01:45:36+00:00 Wangs-MacBook-Pro.local#02 I: Test Life test suite:5:getCourse is successful.
+2016-11-28T01:45:36+00:00 Wangs-MacBook-Pro.local#02 I: End test Life test suite:5:getCourse.
+2016-11-28T01:45:36+00:00 Wangs-MacBook-Pro.local#02 I: Start test Life test suite:6:getAdvisor.
+2016-11-28T01:45:36+00:00 Wangs-MacBook-Pro.local#02 I: Test Life test suite:6:getAdvisor is successful.
+2016-11-28T01:45:36+00:00 Wangs-MacBook-Pro.local#02 I: End test Life test suite:6:getAdvisor.
+2016-11-28T01:45:36+00:00 Wangs-MacBook-Pro.local#02 I: Start test Life test suite:9:getKarma1.
+2016-11-28T01:45:36+00:00 Wangs-MacBook-Pro.local#02 I: Test Life test suite:9:getKarma1 is successful.
+2016-11-28T01:45:36+00:00 Wangs-MacBook-Pro.local#02 I: End test Life test suite:9:getKarma1.
+2016-11-28T01:45:36+00:00 Wangs-MacBook-Pro.local#02 I: Start test Life test suite:10:getKarma2.
+2016-11-28T01:45:36+00:00 Wangs-MacBook-Pro.local#02 I: Test Life test suite:10:getKarma2 is successful.
+2016-11-28T01:45:36+00:00 Wangs-MacBook-Pro.local#02 I: End test Life test suite:10:getKarma2.
