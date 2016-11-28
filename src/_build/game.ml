@@ -28,7 +28,7 @@ struct
     failwith "Unimplemented"
 
   let play (cmd : string) (gamestate : gamestate) : gamestate =
-  if (cmd = "p" || cmd = "points") then (print_endline (Player.getPoints (List.nth (player_lst) turn)); gamestate)
+  (**if (cmd = "p" || cmd = "points") then (print_endline (Player.getPoints (List.nth (player_lst) turn)); gamestate)
   else if (cmd = "h" || cmd = "history") then (print_endline (Player.getHistory (List.nth (player_lst) turn)); gamestate)
   else if (cmd = "a" || cmd = "advisor") then (print_endline (Player.getAdvisor (List.nth (player_lst) turn)); gamestate)
   else if (cmd = "c" || cmd = "course") then (print_endline (Player.getCourse (List.nth (player_lst) turn)); gamestate)
@@ -38,24 +38,27 @@ struct
   else if (cmd = "help") then failwtih "Unimplemented"
   else if (cmd = "Choice 1") then failwith "Unimplemented"
   else if (cmd = "Choice 2") then failwith "Unimplemented"
-  else raise Illegal
+  else raise Illegal **)
+  failwith "Unimplemented"
 
 let cmd_checker c =
   let a = String.lowercase_ascii (String.trim c) in a
 
   let rec repl (state : gamestate) : gamestate =
-  print_string  "> ";
+  (**print_string  "> ";
   let c = read_line() in
   let a = cmd_checker c in
   if (a = "quit" || a = "exit" || a = "q") then ()
   else try(let new_gs = play (cmd_checker c) state in repl new_gs) with
-  |Illegal -> print_endline "Invalid command. Please try again."; repl gs
+  |Illegal -> print_endline "Invalid command. Please try again."; repl gs **)
+  failwith "Unimplemented"
 end
 
 
 let main file_name =
-  print_endline "Entering main function";
+  (**print_endline "Entering main function";
   try (let j = init_state (Yojson.Basic.from_file file_name) in repl j) with
   |Yojson.Json_error _-> print_endline "Invalid file"; exit 0
   |Sys_error _ -> print_endline "Invalid input"; exit 0
-  |_ -> print_endline "Try again"; exit 0
+  |_ -> print_endline "Try again"; exit 0 **)
+  failwith "Unimplemented"
