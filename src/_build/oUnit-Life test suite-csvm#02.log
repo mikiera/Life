@@ -1,16 +1,22 @@
-2016-11-27T21:36:53+00:00 csvm#02 I: Start test Life test suite:1:getID2.
-2016-11-27T21:36:53+00:00 csvm#02 I: Test Life test suite:1:getID2 is successful.
-2016-11-27T21:36:53+00:00 csvm#02 I: End test Life test suite:1:getID2.
-2016-11-27T21:36:53+00:00 csvm#02 I: Start test Life test suite:3:getName2.
-2016-11-27T21:36:53+00:00 csvm#02 I: Test Life test suite:3:getName2 is successful.
-2016-11-27T21:36:53+00:00 csvm#02 I: End test Life test suite:3:getName2.
-2016-11-27T21:36:53+00:00 csvm#02 I: Start test Life test suite:5:getCourse.
-2016-11-27T21:36:53+00:00 csvm#02 I: Test Life test suite:5:getCourse is successful.
-2016-11-27T21:36:53+00:00 csvm#02 I: End test Life test suite:5:getCourse.
-2016-11-27T21:36:53+00:00 csvm#02 I: Start test Life test suite:8:getPoints2.
-2016-11-27T21:36:53+00:00 csvm#02 E: Test Life test suite:8:getPoints2 has failed.
-2016-11-27T21:36:53+00:00 csvm#02 E: not equal in test Life test suite:8:getPoints2.
-2016-11-27T21:36:53+00:00 csvm#02 E: Raised at file "src/oUnitAssert.ml", line 45, characters 8-27
-2016-11-27T21:36:53+00:00 csvm#02 E: Called from file "src/oUnitRunner.ml", line 46, characters 13-26
-2016-11-27T21:36:53+00:00 csvm#02 E: 
-2016-11-27T21:36:53+00:00 csvm#02 I: End test Life test suite:8:getPoints2.
+2016-11-28T01:42:48+00:00 csvm#02 I: Start test Life test suite:1:getID2.
+2016-11-28T01:42:48+00:00 csvm#02 I: Test Life test suite:1:getID2 is successful.
+2016-11-28T01:42:48+00:00 csvm#02 I: End test Life test suite:1:getID2.
+2016-11-28T01:42:48+00:00 csvm#02 I: Start test Life test suite:2:getName1.
+2016-11-28T01:42:48+00:00 csvm#02 I: Test Life test suite:2:getName1 is successful.
+2016-11-28T01:42:48+00:00 csvm#02 I: End test Life test suite:2:getName1.
+2016-11-28T01:42:48+00:00 csvm#02 I: Start test Life test suite:4:getCollege.
+2016-11-28T01:42:48+00:00 csvm#02 I: Test Life test suite:4:getCollege is successful.
+2016-11-28T01:42:48+00:00 csvm#02 I: End test Life test suite:4:getCollege.
+2016-11-28T01:42:48+00:00 csvm#02 I: Start test Life test suite:7:getPoints1.
+2016-11-28T01:42:48+00:00 csvm#02 I: Test Life test suite:7:getPoints1 is successful.
+2016-11-28T01:42:48+00:00 csvm#02 I: End test Life test suite:7:getPoints1.
+2016-11-28T01:42:48+00:00 csvm#02 I: Start test Life test suite:8:getPoints2.
+2016-11-28T01:42:48+00:00 csvm#02 I: Test Life test suite:8:getPoints2 is successful.
+2016-11-28T01:42:48+00:00 csvm#02 I: End test Life test suite:8:getPoints2.
+2016-11-28T01:42:48+00:00 csvm#02 I: Start test Life test suite:11:getHistory.
+2016-11-28T01:42:48+00:00 csvm#02 E: Test Life test suite:11:getHistory has failed.
+2016-11-28T01:42:48+00:00 csvm#02 E: not equal in test Life test suite:11:getHistory.
+2016-11-28T01:42:48+00:00 csvm#02 E: Raised at file "src/oUnitAssert.ml", line 45, characters 8-27
+2016-11-28T01:42:48+00:00 csvm#02 E: Called from file "src/oUnitRunner.ml", line 46, characters 13-26
+2016-11-28T01:42:48+00:00 csvm#02 E: 
+2016-11-28T01:42:48+00:00 csvm#02 I: End test Life test suite:11:getHistory.

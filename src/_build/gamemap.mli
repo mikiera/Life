@@ -1,5 +1,5 @@
 (* map.mli *)
-
+open Player
 (* A [Map] represents a location that contains info about action items
 * on that location. *)
 module Gamemap : sig
@@ -9,8 +9,9 @@ module Gamemap : sig
   (* the type of actions - stop event, just points...etc *)
   type action
 
+  type player
   (* [moveforward location] returns another location that signals the
    * player where to go next *)
-  val moveforward: location -> location
+  val moveforward: location -> Player.player -> location
 end
 
