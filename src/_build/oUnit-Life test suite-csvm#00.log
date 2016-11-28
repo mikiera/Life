@@ -1,135 +1,134 @@
-2016-11-28T02:21:55+00:00 csvm#00 I: Runner: processes
-2016-11-28T02:21:55+00:00 csvm#00 I: Chooser: simple
-2016-11-28T02:21:55+00:00 csvm#00 I: Configuration suite_name = "Life test suite"
-2016-11-28T02:21:55+00:00 csvm#00 I: Configuration cache_filename = "/home/ubuntu/Desktop/FinalProject/Life/src/_build/oUnit-$(suite_name).cache"
-2016-11-28T02:21:55+00:00 csvm#00 I: Configuration display = "true"
-2016-11-28T02:21:55+00:00 csvm#00 I: Configuration results_style_1_X = "false"
-2016-11-28T02:21:55+00:00 csvm#00 I: Configuration verbose = "false"
-2016-11-28T02:21:55+00:00 csvm#00 I: Configuration health_check_interval = "1."
-2016-11-28T02:21:55+00:00 csvm#00 I: Configuration testdata_dir = "none"
-2016-11-28T02:21:55+00:00 csvm#00 I: Configuration chooser = "simple"
-2016-11-28T02:21:55+00:00 csvm#00 I: Configuration output_html_dir = "none"
-2016-11-28T02:21:55+00:00 csvm#00 I: Configuration processes_kill_period = "5."
-2016-11-28T02:21:55+00:00 csvm#00 I: Configuration runner = "processes"
-2016-11-28T02:21:55+00:00 csvm#00 I: Configuration shards = "2"
-2016-11-28T02:21:55+00:00 csvm#00 I: Configuration processes_grace_period = "5."
-2016-11-28T02:21:55+00:00 csvm#00 I: Configuration log_encoding = "utf-8"
-2016-11-28T02:21:55+00:00 csvm#00 I: Configuration output_junit_file = "none"
-2016-11-28T02:21:55+00:00 csvm#00 I: Configuration output_file = "/home/ubuntu/Desktop/FinalProject/Life/src/_build/oUnit-$(suite_name)-$(shard_id).log"
-2016-11-28T02:21:55+00:00 csvm#00 I: Using 2 workers maximum.
-2016-11-28T02:21:55+00:00 csvm#00 I: Starting worker number csvm#01.
-2016-11-28T02:21:55+00:00 csvm#00 I: Worker csvm#01 started.
-2016-11-28T02:21:55+00:00 csvm#00 I: Starting worker number csvm#02.
-2016-11-28T02:21:55+00:00 csvm#00 I: Worker csvm#02 started.
-2016-11-28T02:21:55+00:00 csvm#00 I: 2 tests running: Life test suite:1:getID2, Life test suite:0:getID1.
-2016-11-28T02:21:55+00:00 csvm#02 I: Start test Life test suite:1:getID2.
-2016-11-28T02:21:55+00:00 csvm#00 I: 2 tests running: Life test suite:1:getID2, Life test suite:0:getID1.
-2016-11-28T02:21:55+00:00 csvm#02 I: Test Life test suite:1:getID2 is successful.
-2016-11-28T02:21:55+00:00 csvm#00 I: 2 tests running: Life test suite:1:getID2, Life test suite:0:getID1.
-2016-11-28T02:21:55+00:00 csvm#02 I: End test Life test suite:1:getID2.
-2016-11-28T02:21:55+00:00 csvm#00 I: 2 tests running: Life test suite:1:getID2, Life test suite:0:getID1.
-2016-11-28T02:21:55+00:00 csvm#00 I: 2 tests running: Life test suite:2:getName1, Life test suite:0:getID1.
-2016-11-28T02:21:55+00:00 csvm#02 I: Start test Life test suite:2:getName1.
-2016-11-28T02:21:55+00:00 csvm#00 I: 2 tests running: Life test suite:2:getName1, Life test suite:0:getID1.
-2016-11-28T02:21:55+00:00 csvm#02 I: Test Life test suite:2:getName1 is successful.
-2016-11-28T02:21:55+00:00 csvm#00 I: 2 tests running: Life test suite:2:getName1, Life test suite:0:getID1.
-2016-11-28T02:21:55+00:00 csvm#02 I: End test Life test suite:2:getName1.
-2016-11-28T02:21:55+00:00 csvm#00 I: 2 tests running: Life test suite:2:getName1, Life test suite:0:getID1.
-2016-11-28T02:21:55+00:00 csvm#00 I: 2 tests running: Life test suite:3:getName2, Life test suite:0:getID1.
-2016-11-28T02:21:55+00:00 csvm#02 I: Start test Life test suite:3:getName2.
-2016-11-28T02:21:55+00:00 csvm#00 I: 2 tests running: Life test suite:3:getName2, Life test suite:0:getID1.
-2016-11-28T02:21:55+00:00 csvm#02 I: Test Life test suite:3:getName2 is successful.
-2016-11-28T02:21:55+00:00 csvm#00 I: 2 tests running: Life test suite:3:getName2, Life test suite:0:getID1.
-2016-11-28T02:21:55+00:00 csvm#02 I: End test Life test suite:3:getName2.
-2016-11-28T02:21:55+00:00 csvm#00 I: 2 tests running: Life test suite:3:getName2, Life test suite:0:getID1.
-2016-11-28T02:21:55+00:00 csvm#01 I: Start test Life test suite:0:getID1.
-2016-11-28T02:21:55+00:00 csvm#00 I: 2 tests running: Life test suite:3:getName2, Life test suite:0:getID1.
-2016-11-28T02:21:55+00:00 csvm#00 I: 2 tests running: Life test suite:4:getCollege, Life test suite:0:getID1.
-2016-11-28T02:21:55+00:00 csvm#02 I: Start test Life test suite:4:getCollege.
-2016-11-28T02:21:55+00:00 csvm#00 I: 2 tests running: Life test suite:4:getCollege, Life test suite:0:getID1.
-2016-11-28T02:21:55+00:00 csvm#01 I: Test Life test suite:0:getID1 is successful.
-2016-11-28T02:21:55+00:00 csvm#00 I: 2 tests running: Life test suite:4:getCollege, Life test suite:0:getID1.
-2016-11-28T02:21:55+00:00 csvm#01 I: End test Life test suite:0:getID1.
-2016-11-28T02:21:55+00:00 csvm#00 I: 2 tests running: Life test suite:4:getCollege, Life test suite:0:getID1.
-2016-11-28T02:21:55+00:00 csvm#00 I: 2 tests running: Life test suite:5:getCourse, Life test suite:4:getCollege.
-2016-11-28T02:21:55+00:00 csvm#02 I: Test Life test suite:4:getCollege is successful.
-2016-11-28T02:21:55+00:00 csvm#00 I: 2 tests running: Life test suite:5:getCourse, Life test suite:4:getCollege.
-2016-11-28T02:21:55+00:00 csvm#02 I: End test Life test suite:4:getCollege.
-2016-11-28T02:21:55+00:00 csvm#00 I: 2 tests running: Life test suite:5:getCourse, Life test suite:4:getCollege.
-2016-11-28T02:21:55+00:00 csvm#00 I: 2 tests running: Life test suite:6:getAdvisor, Life test suite:5:getCourse.
-2016-11-28T02:21:55+00:00 csvm#02 I: Start test Life test suite:6:getAdvisor.
-2016-11-28T02:21:55+00:00 csvm#00 I: 2 tests running: Life test suite:6:getAdvisor, Life test suite:5:getCourse.
-2016-11-28T02:21:55+00:00 csvm#02 I: Test Life test suite:6:getAdvisor is successful.
-2016-11-28T02:21:55+00:00 csvm#00 I: 2 tests running: Life test suite:6:getAdvisor, Life test suite:5:getCourse.
-2016-11-28T02:21:55+00:00 csvm#02 I: End test Life test suite:6:getAdvisor.
-2016-11-28T02:21:55+00:00 csvm#00 I: 2 tests running: Life test suite:6:getAdvisor, Life test suite:5:getCourse.
-2016-11-28T02:21:55+00:00 csvm#00 I: 2 tests running: Life test suite:7:getPoints, Life test suite:5:getCourse.
-2016-11-28T02:21:55+00:00 csvm#02 I: Start test Life test suite:7:getPoints.
-2016-11-28T02:21:55+00:00 csvm#00 I: 2 tests running: Life test suite:7:getPoints, Life test suite:5:getCourse.
-2016-11-28T02:21:55+00:00 csvm#02 I: Test Life test suite:7:getPoints is successful.
-2016-11-28T02:21:55+00:00 csvm#00 I: 2 tests running: Life test suite:7:getPoints, Life test suite:5:getCourse.
-2016-11-28T02:21:55+00:00 csvm#02 I: End test Life test suite:7:getPoints.
-2016-11-28T02:21:55+00:00 csvm#00 I: 2 tests running: Life test suite:7:getPoints, Life test suite:5:getCourse.
-2016-11-28T02:21:55+00:00 csvm#00 I: 2 tests running: Life test suite:8:getKarma, Life test suite:5:getCourse.
-2016-11-28T02:21:55+00:00 csvm#02 I: Start test Life test suite:8:getKarma.
-2016-11-28T02:21:55+00:00 csvm#00 I: 2 tests running: Life test suite:8:getKarma, Life test suite:5:getCourse.
-2016-11-28T02:21:55+00:00 csvm#01 I: Start test Life test suite:5:getCourse.
-2016-11-28T02:21:55+00:00 csvm#00 I: 2 tests running: Life test suite:8:getKarma, Life test suite:5:getCourse.
-2016-11-28T02:21:55+00:00 csvm#02 I: Test Life test suite:8:getKarma is successful.
-2016-11-28T02:21:55+00:00 csvm#00 I: 2 tests running: Life test suite:8:getKarma, Life test suite:5:getCourse.
-2016-11-28T02:21:55+00:00 csvm#02 I: End test Life test suite:8:getKarma.
-2016-11-28T02:21:55+00:00 csvm#00 I: 2 tests running: Life test suite:8:getKarma, Life test suite:5:getCourse.
-2016-11-28T02:21:55+00:00 csvm#00 I: 2 tests running: Life test suite:9:getRetirement, Life test suite:5:getCourse.
-2016-11-28T02:21:55+00:00 csvm#02 I: Start test Life test suite:9:getRetirement.
-2016-11-28T02:21:55+00:00 csvm#00 I: 2 tests running: Life test suite:9:getRetirement, Life test suite:5:getCourse.
-2016-11-28T02:21:55+00:00 csvm#01 I: Test Life test suite:5:getCourse is successful.
-2016-11-28T02:21:55+00:00 csvm#00 I: 2 tests running: Life test suite:9:getRetirement, Life test suite:5:getCourse.
-2016-11-28T02:21:55+00:00 csvm#01 I: End test Life test suite:5:getCourse.
-2016-11-28T02:21:55+00:00 csvm#00 I: 2 tests running: Life test suite:9:getRetirement, Life test suite:5:getCourse.
-2016-11-28T02:21:55+00:00 csvm#00 I: Still 2 tests running : Life test suite:10:getHistory, Life test suite:9:getRetirement.
-2016-11-28T02:21:55+00:00 csvm#00 I: 2 tests running: Life test suite:10:getHistory, Life test suite:9:getRetirement.
-2016-11-28T02:21:55+00:00 csvm#01 I: Start test Life test suite:10:getHistory.
-2016-11-28T02:21:55+00:00 csvm#00 I: Still 2 tests running : Life test suite:10:getHistory, Life test suite:9:getRetirement.
-2016-11-28T02:21:55+00:00 csvm#00 I: 2 tests running: Life test suite:10:getHistory, Life test suite:9:getRetirement.
-2016-11-28T02:21:55+00:00 csvm#02 I: Test Life test suite:9:getRetirement is successful.
-2016-11-28T02:21:55+00:00 csvm#00 I: Still 2 tests running : Life test suite:10:getHistory, Life test suite:9:getRetirement.
-2016-11-28T02:21:55+00:00 csvm#00 I: 2 tests running: Life test suite:10:getHistory, Life test suite:9:getRetirement.
-2016-11-28T02:21:55+00:00 csvm#02 I: End test Life test suite:9:getRetirement.
-2016-11-28T02:21:55+00:00 csvm#00 I: Still 2 tests running : Life test suite:10:getHistory, Life test suite:9:getRetirement.
-2016-11-28T02:21:55+00:00 csvm#00 I: 2 tests running: Life test suite:10:getHistory, Life test suite:9:getRetirement.
-2016-11-28T02:21:55+00:00 csvm#00 I: Still 1 tests running : Life test suite:10:getHistory.
-2016-11-28T02:21:55+00:00 csvm#00 I: 1 tests running: Life test suite:10:getHistory.
-2016-11-28T02:21:55+00:00 csvm#01 I: Test Life test suite:10:getHistory is successful.
-2016-11-28T02:21:55+00:00 csvm#00 I: Still 1 tests running : Life test suite:10:getHistory.
-2016-11-28T02:21:55+00:00 csvm#00 I: 1 tests running: Life test suite:10:getHistory.
-2016-11-28T02:21:55+00:00 csvm#01 I: End test Life test suite:10:getHistory.
-2016-11-28T02:21:55+00:00 csvm#00 I: Still 1 tests running : Life test suite:10:getHistory.
-2016-11-28T02:21:55+00:00 csvm#00 I: 1 tests running: Life test suite:10:getHistory.
-2016-11-28T02:21:55+00:00 csvm#00 I: 0 tests running: .
-2016-11-28T02:21:55+00:00 csvm#00 I: Worker csvm#01 has ended.
-2016-11-28T02:21:55+00:00 csvm#00 I: 0 tests running: .
-2016-11-28T02:21:55+00:00 csvm#00 I: Worker csvm#02 has ended.
-2016-11-28T02:21:55+00:00 csvm#00 I: Used 2 worker during test execution.
-2016-11-28T02:21:55+00:00 csvm#00 I: Run 8 tests with shard csvm#02.
-2016-11-28T02:21:55+00:00 csvm#00 I: Run 3 tests with shard csvm#01.
-2016-11-28T02:21:55+00:00 csvm#00 I: ==============
-2016-11-28T02:21:55+00:00 csvm#00 I: Summary:
-2016-11-28T02:21:55+00:00 csvm#00 I: Test Life test suite:10:getHistory is successful.
-2016-11-28T02:21:55+00:00 csvm#00 I: Test Life test suite:9:getRetirement is successful.
-2016-11-28T02:21:55+00:00 csvm#00 I: Test Life test suite:5:getCourse is successful.
-2016-11-28T02:21:55+00:00 csvm#00 I: Test Life test suite:8:getKarma is successful.
-2016-11-28T02:21:55+00:00 csvm#00 I: Test Life test suite:7:getPoints is successful.
-2016-11-28T02:21:55+00:00 csvm#00 I: Test Life test suite:6:getAdvisor is successful.
-2016-11-28T02:21:55+00:00 csvm#00 I: Test Life test suite:4:getCollege is successful.
-2016-11-28T02:21:55+00:00 csvm#00 I: Test Life test suite:0:getID1 is successful.
-2016-11-28T02:21:55+00:00 csvm#00 I: Test Life test suite:3:getName2 is successful.
-2016-11-28T02:21:55+00:00 csvm#00 I: Test Life test suite:2:getName1 is successful.
-2016-11-28T02:21:55+00:00 csvm#00 I: Test Life test suite:1:getID2 is successful.
-2016-11-28T02:21:55+00:00 csvm#00 I: Ran: 11 tests in: 0.12 seconds.
-2016-11-28T02:21:55+00:00 csvm#00 I: Cases: 11.
-2016-11-28T02:21:55+00:00 csvm#00 I: Tried: 11.
-2016-11-28T02:21:55+00:00 csvm#00 I: Errors: 0.
-2016-11-28T02:21:55+00:00 csvm#00 I: Failures: 0.
-2016-11-28T02:21:55+00:00 csvm#00 I: Skip: 0.
-2016-11-28T02:21:55+00:00 csvm#00 I: Todo: 0.
-2016-11-28T02:21:55+00:00 csvm#00 I: Timeout: 0.
+2016-11-28T02:33:40+00:00 csvm#00 I: Runner: processes
+2016-11-28T02:33:40+00:00 csvm#00 I: Chooser: simple
+2016-11-28T02:33:40+00:00 csvm#00 I: Configuration suite_name = "Life test suite"
+2016-11-28T02:33:40+00:00 csvm#00 I: Configuration cache_filename = "/home/ubuntu/Desktop/FinalProject/Life/src/_build/oUnit-$(suite_name).cache"
+2016-11-28T02:33:40+00:00 csvm#00 I: Configuration display = "true"
+2016-11-28T02:33:40+00:00 csvm#00 I: Configuration results_style_1_X = "false"
+2016-11-28T02:33:40+00:00 csvm#00 I: Configuration verbose = "false"
+2016-11-28T02:33:40+00:00 csvm#00 I: Configuration health_check_interval = "1."
+2016-11-28T02:33:40+00:00 csvm#00 I: Configuration testdata_dir = "none"
+2016-11-28T02:33:40+00:00 csvm#00 I: Configuration chooser = "simple"
+2016-11-28T02:33:40+00:00 csvm#00 I: Configuration output_html_dir = "none"
+2016-11-28T02:33:40+00:00 csvm#00 I: Configuration processes_kill_period = "5."
+2016-11-28T02:33:40+00:00 csvm#00 I: Configuration runner = "processes"
+2016-11-28T02:33:40+00:00 csvm#00 I: Configuration shards = "2"
+2016-11-28T02:33:40+00:00 csvm#00 I: Configuration processes_grace_period = "5."
+2016-11-28T02:33:40+00:00 csvm#00 I: Configuration log_encoding = "utf-8"
+2016-11-28T02:33:40+00:00 csvm#00 I: Configuration output_junit_file = "none"
+2016-11-28T02:33:40+00:00 csvm#00 I: Configuration output_file = "/home/ubuntu/Desktop/FinalProject/Life/src/_build/oUnit-$(suite_name)-$(shard_id).log"
+2016-11-28T02:33:40+00:00 csvm#00 I: Using 2 workers maximum.
+2016-11-28T02:33:40+00:00 csvm#00 I: Starting worker number csvm#01.
+2016-11-28T02:33:40+00:00 csvm#00 I: Worker csvm#01 started.
+2016-11-28T02:33:40+00:00 csvm#00 I: Starting worker number csvm#02.
+2016-11-28T02:33:40+00:00 csvm#00 I: Worker csvm#02 started.
+2016-11-28T02:33:40+00:00 csvm#00 I: 2 tests running: Life test suite:1:getID2, Life test suite:0:getID1.
+2016-11-28T02:33:40+00:00 csvm#01 I: Start test Life test suite:0:getID1.
+2016-11-28T02:33:40+00:00 csvm#00 I: 2 tests running: Life test suite:1:getID2, Life test suite:0:getID1.
+2016-11-28T02:33:40+00:00 csvm#02 I: Start test Life test suite:1:getID2.
+2016-11-28T02:33:40+00:00 csvm#00 I: 2 tests running: Life test suite:1:getID2, Life test suite:0:getID1.
+2016-11-28T02:33:40+00:00 csvm#02 I: Test Life test suite:1:getID2 is successful.
+2016-11-28T02:33:40+00:00 csvm#00 I: 2 tests running: Life test suite:1:getID2, Life test suite:0:getID1.
+2016-11-28T02:33:40+00:00 csvm#02 I: End test Life test suite:1:getID2.
+2016-11-28T02:33:40+00:00 csvm#00 I: 2 tests running: Life test suite:1:getID2, Life test suite:0:getID1.
+2016-11-28T02:33:40+00:00 csvm#00 I: 2 tests running: Life test suite:2:getName1, Life test suite:0:getID1.
+2016-11-28T02:33:40+00:00 csvm#02 I: Start test Life test suite:2:getName1.
+2016-11-28T02:33:40+00:00 csvm#00 I: 2 tests running: Life test suite:2:getName1, Life test suite:0:getID1.
+2016-11-28T02:33:40+00:00 csvm#02 I: Test Life test suite:2:getName1 is successful.
+2016-11-28T02:33:40+00:00 csvm#00 I: 2 tests running: Life test suite:2:getName1, Life test suite:0:getID1.
+2016-11-28T02:33:40+00:00 csvm#02 I: End test Life test suite:2:getName1.
+2016-11-28T02:33:40+00:00 csvm#00 I: 2 tests running: Life test suite:2:getName1, Life test suite:0:getID1.
+2016-11-28T02:33:40+00:00 csvm#00 I: 2 tests running: Life test suite:3:getName2, Life test suite:0:getID1.
+2016-11-28T02:33:40+00:00 csvm#02 I: Start test Life test suite:3:getName2.
+2016-11-28T02:33:40+00:00 csvm#00 I: 2 tests running: Life test suite:3:getName2, Life test suite:0:getID1.
+2016-11-28T02:33:40+00:00 csvm#02 I: Test Life test suite:3:getName2 is successful.
+2016-11-28T02:33:40+00:00 csvm#00 I: 2 tests running: Life test suite:3:getName2, Life test suite:0:getID1.
+2016-11-28T02:33:40+00:00 csvm#02 I: End test Life test suite:3:getName2.
+2016-11-28T02:33:40+00:00 csvm#00 I: 2 tests running: Life test suite:3:getName2, Life test suite:0:getID1.
+2016-11-28T02:33:40+00:00 csvm#00 I: 2 tests running: Life test suite:4:getCollege, Life test suite:0:getID1.
+2016-11-28T02:33:40+00:00 csvm#02 I: Start test Life test suite:4:getCollege.
+2016-11-28T02:33:40+00:00 csvm#00 I: 2 tests running: Life test suite:4:getCollege, Life test suite:0:getID1.
+2016-11-28T02:33:40+00:00 csvm#02 I: Test Life test suite:4:getCollege is successful.
+2016-11-28T02:33:40+00:00 csvm#00 I: 2 tests running: Life test suite:4:getCollege, Life test suite:0:getID1.
+2016-11-28T02:33:40+00:00 csvm#02 I: End test Life test suite:4:getCollege.
+2016-11-28T02:33:40+00:00 csvm#00 I: 2 tests running: Life test suite:4:getCollege, Life test suite:0:getID1.
+2016-11-28T02:33:40+00:00 csvm#00 I: 2 tests running: Life test suite:5:getCourse, Life test suite:0:getID1.
+2016-11-28T02:33:40+00:00 csvm#02 I: Start test Life test suite:5:getCourse.
+2016-11-28T02:33:40+00:00 csvm#00 I: 2 tests running: Life test suite:5:getCourse, Life test suite:0:getID1.
+2016-11-28T02:33:40+00:00 csvm#02 I: Test Life test suite:5:getCourse is successful.
+2016-11-28T02:33:40+00:00 csvm#00 I: 2 tests running: Life test suite:5:getCourse, Life test suite:0:getID1.
+2016-11-28T02:33:40+00:00 csvm#01 I: Test Life test suite:0:getID1 is successful.
+2016-11-28T02:33:40+00:00 csvm#00 I: 2 tests running: Life test suite:5:getCourse, Life test suite:0:getID1.
+2016-11-28T02:33:40+00:00 csvm#01 I: End test Life test suite:0:getID1.
+2016-11-28T02:33:40+00:00 csvm#00 I: 2 tests running: Life test suite:5:getCourse, Life test suite:0:getID1.
+2016-11-28T02:33:40+00:00 csvm#00 I: 2 tests running: Life test suite:6:getAdvisor, Life test suite:5:getCourse.
+2016-11-28T02:33:40+00:00 csvm#01 I: Start test Life test suite:6:getAdvisor.
+2016-11-28T02:33:40+00:00 csvm#00 I: 2 tests running: Life test suite:6:getAdvisor, Life test suite:5:getCourse.
+2016-11-28T02:33:40+00:00 csvm#01 I: Test Life test suite:6:getAdvisor is successful.
+2016-11-28T02:33:40+00:00 csvm#00 I: 2 tests running: Life test suite:6:getAdvisor, Life test suite:5:getCourse.
+2016-11-28T02:33:40+00:00 csvm#01 I: End test Life test suite:6:getAdvisor.
+2016-11-28T02:33:40+00:00 csvm#00 I: 2 tests running: Life test suite:6:getAdvisor, Life test suite:5:getCourse.
+2016-11-28T02:33:40+00:00 csvm#00 I: 2 tests running: Life test suite:7:getPoints, Life test suite:5:getCourse.
+2016-11-28T02:33:40+00:00 csvm#01 I: Start test Life test suite:7:getPoints.
+2016-11-28T02:33:40+00:00 csvm#00 I: 2 tests running: Life test suite:7:getPoints, Life test suite:5:getCourse.
+2016-11-28T02:33:40+00:00 csvm#01 I: Test Life test suite:7:getPoints is successful.
+2016-11-28T02:33:40+00:00 csvm#00 I: 2 tests running: Life test suite:7:getPoints, Life test suite:5:getCourse.
+2016-11-28T02:33:40+00:00 csvm#01 I: End test Life test suite:7:getPoints.
+2016-11-28T02:33:40+00:00 csvm#00 I: 2 tests running: Life test suite:7:getPoints, Life test suite:5:getCourse.
+2016-11-28T02:33:40+00:00 csvm#00 I: 2 tests running: Life test suite:8:getKarma, Life test suite:5:getCourse.
+2016-11-28T02:33:40+00:00 csvm#01 I: Start test Life test suite:8:getKarma.
+2016-11-28T02:33:40+00:00 csvm#00 I: 2 tests running: Life test suite:8:getKarma, Life test suite:5:getCourse.
+2016-11-28T02:33:40+00:00 csvm#01 I: Test Life test suite:8:getKarma is successful.
+2016-11-28T02:33:40+00:00 csvm#00 I: 2 tests running: Life test suite:8:getKarma, Life test suite:5:getCourse.
+2016-11-28T02:33:40+00:00 csvm#01 I: End test Life test suite:8:getKarma.
+2016-11-28T02:33:40+00:00 csvm#00 I: 2 tests running: Life test suite:8:getKarma, Life test suite:5:getCourse.
+2016-11-28T02:33:40+00:00 csvm#00 I: 2 tests running: Life test suite:9:getRetirement, Life test suite:5:getCourse.
+2016-11-28T02:33:40+00:00 csvm#01 I: Start test Life test suite:9:getRetirement.
+2016-11-28T02:33:40+00:00 csvm#00 I: 2 tests running: Life test suite:9:getRetirement, Life test suite:5:getCourse.
+2016-11-28T02:33:40+00:00 csvm#01 I: Test Life test suite:9:getRetirement is successful.
+2016-11-28T02:33:40+00:00 csvm#00 I: 2 tests running: Life test suite:9:getRetirement, Life test suite:5:getCourse.
+2016-11-28T02:33:40+00:00 csvm#01 I: End test Life test suite:9:getRetirement.
+2016-11-28T02:33:40+00:00 csvm#00 I: 2 tests running: Life test suite:9:getRetirement, Life test suite:5:getCourse.
+2016-11-28T02:33:40+00:00 csvm#00 I: Still 2 tests running : Life test suite:10:getHistory, Life test suite:5:getCourse.
+2016-11-28T02:33:40+00:00 csvm#00 I: 2 tests running: Life test suite:10:getHistory, Life test suite:5:getCourse.
+2016-11-28T02:33:40+00:00 csvm#01 I: Start test Life test suite:10:getHistory.
+2016-11-28T02:33:40+00:00 csvm#00 I: Still 2 tests running : Life test suite:10:getHistory, Life test suite:5:getCourse.
+2016-11-28T02:33:40+00:00 csvm#00 I: 2 tests running: Life test suite:10:getHistory, Life test suite:5:getCourse.
+2016-11-28T02:33:40+00:00 csvm#01 I: Test Life test suite:10:getHistory is successful.
+2016-11-28T02:33:40+00:00 csvm#00 I: Still 2 tests running : Life test suite:10:getHistory, Life test suite:5:getCourse.
+2016-11-28T02:33:40+00:00 csvm#00 I: 2 tests running: Life test suite:10:getHistory, Life test suite:5:getCourse.
+2016-11-28T02:33:40+00:00 csvm#01 I: End test Life test suite:10:getHistory.
+2016-11-28T02:33:40+00:00 csvm#00 I: Still 2 tests running : Life test suite:10:getHistory, Life test suite:5:getCourse.
+2016-11-28T02:33:40+00:00 csvm#00 I: 2 tests running: Life test suite:10:getHistory, Life test suite:5:getCourse.
+2016-11-28T02:33:40+00:00 csvm#00 I: Still 1 tests running : Life test suite:5:getCourse.
+2016-11-28T02:33:40+00:00 csvm#00 I: 1 tests running: Life test suite:5:getCourse.
+2016-11-28T02:33:40+00:00 csvm#02 I: End test Life test suite:5:getCourse.
+2016-11-28T02:33:40+00:00 csvm#00 I: Still 1 tests running : Life test suite:5:getCourse.
+2016-11-28T02:33:40+00:00 csvm#00 I: 1 tests running: Life test suite:5:getCourse.
+2016-11-28T02:33:40+00:00 csvm#00 I: 0 tests running: .
+2016-11-28T02:33:40+00:00 csvm#00 I: Worker csvm#01 has ended.
+2016-11-28T02:33:40+00:00 csvm#00 I: 0 tests running: .
+2016-11-28T02:33:40+00:00 csvm#00 I: Worker csvm#02 has ended.
+2016-11-28T02:33:40+00:00 csvm#00 I: Used 2 worker during test execution.
+2016-11-28T02:33:40+00:00 csvm#00 I: Run 5 tests with shard csvm#02.
+2016-11-28T02:33:40+00:00 csvm#00 I: Run 6 tests with shard csvm#01.
+2016-11-28T02:33:40+00:00 csvm#00 I: ==============
+2016-11-28T02:33:40+00:00 csvm#00 I: Summary:
+2016-11-28T02:33:40+00:00 csvm#00 I: Test Life test suite:5:getCourse is successful.
+2016-11-28T02:33:40+00:00 csvm#00 I: Test Life test suite:10:getHistory is successful.
+2016-11-28T02:33:40+00:00 csvm#00 I: Test Life test suite:9:getRetirement is successful.
+2016-11-28T02:33:40+00:00 csvm#00 I: Test Life test suite:8:getKarma is successful.
+2016-11-28T02:33:40+00:00 csvm#00 I: Test Life test suite:7:getPoints is successful.
+2016-11-28T02:33:40+00:00 csvm#00 I: Test Life test suite:6:getAdvisor is successful.
+2016-11-28T02:33:40+00:00 csvm#00 I: Test Life test suite:0:getID1 is successful.
+2016-11-28T02:33:40+00:00 csvm#00 I: Test Life test suite:4:getCollege is successful.
+2016-11-28T02:33:40+00:00 csvm#00 I: Test Life test suite:3:getName2 is successful.
+2016-11-28T02:33:40+00:00 csvm#00 I: Test Life test suite:2:getName1 is successful.
+2016-11-28T02:33:40+00:00 csvm#00 I: Test Life test suite:1:getID2 is successful.
+2016-11-28T02:33:40+00:00 csvm#00 I: Ran: 11 tests in: 0.11 seconds.
+2016-11-28T02:33:40+00:00 csvm#00 I: Cases: 11.
+2016-11-28T02:33:40+00:00 csvm#00 I: Tried: 11.
+2016-11-28T02:33:40+00:00 csvm#00 I: Errors: 0.
+2016-11-28T02:33:40+00:00 csvm#00 I: Failures: 0.
+2016-11-28T02:33:40+00:00 csvm#00 I: Skip: 0.
+2016-11-28T02:33:40+00:00 csvm#00 I: Todo: 0.
+2016-11-28T02:33:40+00:00 csvm#00 I: Timeout: 0.
