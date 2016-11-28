@@ -30,13 +30,13 @@ module OurMap : Gamemap = struct
   let moveforward current_loc dir map_action_list player =
     if ((dir = Right && current_loc.right.id != None) || current_loc.left.id = None) 
     	then let action_item = List.assoc current_loc.right.id map_action_list in
-    		  (Player.changePoints) player action_item.points; 
-    		  (Player.changeKarma) player action_item.karma;
+    		  ignore((Player.changePoints) player action_item.points); 
+    		  ignore((Player.changeKarma) player action_item.karma);
     		  current_loc.right
 	else if (dir = Left && current_loc.left.id != None) 
 		then let action_item = List.assoc current_loc.left.id map_action_list in
-    		  (Player.changePoints) player action_item.points; 
-    		  (Player.changeKarma) player action_item.karma;
+    		  ignore((Player.changePoints) player action_item.points); 
+    		  ignore((Player.changeKarma) player action_item.karma);
 		current_loc.left
 	else current_loc
 end
