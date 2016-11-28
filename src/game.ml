@@ -43,13 +43,6 @@ let spinner (list_nums : int list) : int =
 let cmd_checker c =
   let a = String.lowercase_ascii (String.trim c) in a
 
-  let rec repl (state : gamestate) : gamestate =
-  print_string  "> ";
-  let c = read_line() in
-  let a = cmd_checker c in
-  if (a = "quit" || a = "exit" || a = "q") then ()
-  else try(let new_gs = play (cmd_checker c) state in repl new_gs) with
-  |Illegal -> print_endline "Invalid command. Please try again."; repl gs
 
 
 let play (cmd : string) (gamestate : gamestate) : gamestate =
@@ -65,8 +58,14 @@ let play (cmd : string) (gamestate : gamestate) : gamestate =
   else if (cmd = "Choice 2") then failwith "Unimplemented"
   else raise Illegal
 
-let repl (state : gamestate) : gamestate =
-  failwith "Unimplemented"
+let rec repl (state : gamestate) : gamestate =
+  print_string  "> ";
+  let c = read_line() in
+  let a = cmd_checker c in
+  if (a = "quit" || a = "exit" || a = "q") then ()
+  else try(let new_gs = play (cmd_checker c) state in repl new_gs) with
+  |Illegal -> print_endline "Invalid command. Please try again."; repl gs
+
 
 (* parsing functions *)
 
