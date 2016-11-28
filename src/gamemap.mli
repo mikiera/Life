@@ -2,7 +2,7 @@
 open Player
 (* A [Map] represents a location that contains info about action items
 * on that location. *)
-module type Gamemap = sig
+module Gamemap : sig
   (* The type of a location *)
   type location
 

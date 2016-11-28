@@ -2,17 +2,15 @@
 open Gamemap
 open Player
 
-
 exception Illegal
 
 type turn = int
 
-type location = Gamemap.OurMap.location
+type location = Gamemap.location
 
 type playerloc = {playerid: int; loc: location}
 
 type college = AS | Eng | NONE
-
 
 type cardtype = COURSE | ADVISOR | SUMMER | FUTURE
 
@@ -31,10 +29,10 @@ type gamecomp = {college: college;
 
 type gamestate = {turn: turn;
                   playermap: playerloc list;
-                  sqact: (square * action) list;
+                  sqact: (Gamemap.square * Gamemap.action) list;
                   start: int;
                   start_points: int;
-                  gamemap: location list;
+                  gamemap: Gamemap.location list;
                   gamecomp: gamecomp; active_players: int list}
 
 let spinner (list_nums : int list) : int =
