@@ -8,6 +8,8 @@ type turn = int
 
 type location = Gamemap.location
 
+type square = Null | Square of int
+
 type playerloc = {playerid: int; loc: location}
 
 type college = AS | Eng | NONE
@@ -41,10 +43,8 @@ let spinner (list_nums : int list) : int =
 let cmd_checker c =
   let a = String.lowercase_ascii (String.trim c) in a
 
-
-
 let play (cmd : string) (gamestate : gamestate) : gamestate =
-  if (cmd = "p" || cmd = "points") then (print_endline (Player.getPoints (List.nth (player_lst) turn)); gamestate)
+(*   if (cmd = "p" || cmd = "points") then (print_endline (Player.getPoints (List.nth (player_lst) turn)); gamestate)
   else if (cmd = "h" || cmd = "history") then (print_endline (Player.getHistory (List.nth (player_lst) turn)); gamestate)
   else if (cmd = "a" || cmd = "advisor") then (print_endline (Player.getAdvisor (List.nth (player_lst) turn)); gamestate)
   else if (cmd = "c" || cmd = "course") then (print_endline (Player.getCourse (List.nth (player_lst) turn)); gamestate)
@@ -54,15 +54,16 @@ let play (cmd : string) (gamestate : gamestate) : gamestate =
   else if (cmd = "help") then failwtih "Unimplemented"
   else if (cmd = "Choice 1") then failwith "Unimplemented"
   else if (cmd = "Choice 2") then failwith "Unimplemented"
-  else raise Illegal
+  else raise Illegal *)
+  failwith "Unimplemented"
 
 let rec repl (state : gamestate) : gamestate =
-  print_string  "> ";
-  let c = read_line() in
+  print_string "> ";
+  let c = read_line () in
   let a = cmd_checker c in
-  if (a = "quit" || a = "exit" || a = "q") then ()
+  if (a = "quit" || a = "exit" || a = "q") then state
   else try(let new_gs = play (cmd_checker c) state in repl new_gs) with
-  |Illegal -> print_endline "Invalid command. Please try again."; repl gs
+  |Illegal -> print_endline "Invalid command. Please try again."; repl state
 
 
 (* parsing functions *)
@@ -81,9 +82,12 @@ let extract_card ctype card =
 let make_loc_list loc =
   let open Yojson.Basic.Util in
   let id = loc |> member "squareid" |> to_int in
+  let realid = if id <> 0 then Square id else Null in
   let left = loc |> member "left" |> to_int in
+  let realleft = if left <> 0 then Square left else Null in
   let right = loc |> member "right" |> to_int in
-  {id = id; left = left; right = right}
+  let realright = if right <> 0 then Square right else Null in
+  {id = realid; left = realleft; right = realright}
 
 
 let parse_action action =
