@@ -6,9 +6,18 @@ exception Illegal
 
 type turn = int
 
-type location = Gamemap.location
-
 type square = Null | Square of int
+
+type location = {id: square; left: square; right: square}
+
+type actionType = Event | ChoiceC | ChoiceA | ChoiceS | ChoiceF
+
+type action = {
+      actionType: actionType;
+      description: string;
+      points: int;
+      karma: int
+  }
 
 type playerloc = {playerid: int; loc: location}
 
@@ -31,10 +40,10 @@ type gamecomp = {college: college;
 
 type gamestate = {turn: turn;
                   playermap: playerloc list;
-                  sqact: (Gamemap.square * Gamemap.action) list;
+                  sqact: (square * action) list;
                   start: int;
                   start_points: int;
-                  gamemap: Gamemap.location list;
+                  gamemap: location list;
                   gamecomp: gamecomp; active_players: int list}
 
 let spinner (list_nums : int list) : int =
@@ -57,11 +66,11 @@ let play (cmd : string) (gamestate : gamestate) : gamestate =
   else raise Illegal *)
   failwith "Unimplemented"
 
-let rec repl (state : gamestate) : gamestate =
+let rec repl (state : gamestate)  =
   print_string "> ";
   let c = read_line () in
   let a = cmd_checker c in
-  if (a = "quit" || a = "exit" || a = "q") then state
+  if (a = "quit" || a = "exit" || a = "q") then ()
   else try(let new_gs = play (cmd_checker c) state in repl new_gs) with
   |Illegal -> print_endline "Invalid command. Please try again."; repl state
 
@@ -79,7 +88,7 @@ let extract_card ctype card =
   karma=karma; card_type = ctype}
 
 
-let make_loc_list loc =
+let make_loc_list loc : location =
   let open Yojson.Basic.Util in
   let id = loc |> member "squareid" |> to_int in
   let realid = if id <> 0 then Square id else Null in
@@ -90,7 +99,7 @@ let make_loc_list loc =
   {id = realid; left = realleft; right = realright}
 
 
-let parse_action action =
+let parse_action action : action =
   let open Yojson.Basic.Util in
   let atype = action |> member "type" |> to_string in
   let finaltype = begin match atype with

@@ -1,15 +1,24 @@
 open Player
 
 module Gamemap : sig
-  type location
 
-  type action
+  type square = Null | Square of int
 
-  type direction
+  type location = {id: square; left: square; right: square}
+
+  type actionType = Event | ChoiceC | ChoiceA | ChoiceS | ChoiceF
+
+  type action = {
+      actionType: actionType;
+      description: string;
+      points: int;
+      karma: int
+  }
+
+  type direction = Left | Right
 
   type player
 
-  type square
 
   val moveforward: location -> direction -> (square * action) list -> player -> location
 end

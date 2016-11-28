@@ -4,16 +4,22 @@ open Player
 * on that location. *)
 module Gamemap : sig
   (* The type of a location *)
-  type location
+  type square = Null | Square of int
 
-  (* the type of actions - stop event, just points...etc *)
-  type action
+  type location = {id: square; left: square; right: square}
 
-  type direction
+  type actionType = Event | ChoiceC | ChoiceA | ChoiceS | ChoiceF
+
+  type action = {
+      actionType: actionType;
+      description: string;
+      points: int;
+      karma: int
+  }
+
+  type direction = Left | Right
 
   type player
-
-  type square
 
   (* [moveforward location] returns another location that signals the
    * player where to go next *)
