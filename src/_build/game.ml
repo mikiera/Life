@@ -1,4 +1,5 @@
 open Player
+open Random
 
 exception Illegal
 
@@ -24,8 +25,9 @@ struct
 
   let player_lst = []
 
-  let spinner (list_nums : int list) : int =
-    failwith "Unimplemented"
+(*   let rec multistep n = 
+    if n = 0 then gamestate
+    else Gamemap.moveforward *)
 
   let play (cmd : string) (gamestate : gamestate) : gamestate =
   if (cmd = "p" || cmd = "points") then (print_endline (Player.getPoints (List.nth (player_lst) turn)); gamestate)
@@ -34,7 +36,7 @@ struct
   else if (cmd = "c" || cmd = "course") then (print_endline (Player.getCourse (List.nth (player_lst) turn)); gamestate)
   else if (cmd = "co" || cmd = "college") then (print_endline (Player.getCollege (List.nth (player_lst) turn)); gamestate)
   else if (cmd = "n" || cmd = "name") then (print_endline (Player.getNickname (List.nth (player_lst) turn)); gamestate)
-  else if (cmd = "spin") then failwith "Unimplemented"
+  else if (cmd = "spin") then  ((Random.int 4) + 1)
   else if (cmd = "help") then failwtih "Unimplemented"
   else if (cmd = "Choice 1") then failwith "Unimplemented"
   else if (cmd = "Choice 2") then failwith "Unimplemented"

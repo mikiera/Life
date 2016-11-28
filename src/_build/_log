@@ -1,38 +1,38 @@
 ### Starting build.
 # Target: test_main.ml.depends, tags: { extension:ml, file:test_main.ml, ocaml, ocamldep, quiet }
-/home/ubuntu/.opam/4.03.0/bin/ocamldep.opt -modules test_main.ml > test_main.ml.depends
+/Users/vickyw/.opam/4.03.0/bin/ocamldep.opt -modules test_main.ml > test_main.ml.depends
 # Target: test_game.ml.depends, tags: { extension:ml, file:test_game.ml, ocaml, ocamldep, quiet }
-/home/ubuntu/.opam/4.03.0/bin/ocamldep.opt -modules test_game.ml > test_game.ml.depends
+/Users/vickyw/.opam/4.03.0/bin/ocamldep.opt -modules test_game.ml > test_game.ml.depends
 # Target: game.mli.depends, tags: { extension:mli, file:game.mli, ocaml, ocamldep, quiet }
-/home/ubuntu/.opam/4.03.0/bin/ocamldep.opt -modules game.mli > game.mli.depends
+/Users/vickyw/.opam/4.03.0/bin/ocamldep.opt -modules game.mli > game.mli.depends
 # Target: game.cmi, tags: { byte, compile, extension:mli, file:game.mli, interf, ocaml, quiet }
-/home/ubuntu/.opam/4.03.0/bin/ocamlc.opt -c -I /home/ubuntu/.opam/4.03.0/lib/ANSITerminal -I /home/ubuntu/.opam/4.03.0/lib/biniou -I /home/ubuntu/.opam/4.03.0/lib/bytes -I /home/ubuntu/.opam/4.03.0/lib/easy-format -I /home/ubuntu/.opam/4.03.0/lib/oUnit -I /home/ubuntu/.opam/4.03.0/lib/ocaml -I /home/ubuntu/.opam/4.03.0/lib/yojson -o game.cmi game.mli
+/Users/vickyw/.opam/4.03.0/bin/ocamlc.opt -c -I /Users/vickyw/.opam/4.03.0/lib/ANSITerminal -I /Users/vickyw/.opam/4.03.0/lib/biniou -I /Users/vickyw/.opam/4.03.0/lib/bytes -I /Users/vickyw/.opam/4.03.0/lib/easy-format -I /Users/vickyw/.opam/4.03.0/lib/oUnit -I /Users/vickyw/.opam/4.03.0/lib/ocaml -I /Users/vickyw/.opam/4.03.0/lib/yojson -o game.cmi game.mli
 # Target: test_map.ml.depends, tags: { extension:ml, file:test_map.ml, ocaml, ocamldep, quiet }
-/home/ubuntu/.opam/4.03.0/bin/ocamldep.opt -modules test_map.ml > test_map.ml.depends
+/Users/vickyw/.opam/4.03.0/bin/ocamldep.opt -modules test_map.ml > test_map.ml.depends
 # Target: gamemap.mli.depends, tags: { extension:mli, file:gamemap.mli, ocaml, ocamldep, quiet }
-/home/ubuntu/.opam/4.03.0/bin/ocamldep.opt -modules gamemap.mli > gamemap.mli.depends
+/Users/vickyw/.opam/4.03.0/bin/ocamldep.opt -modules gamemap.mli > gamemap.mli.depends
 # Target: player.mli.depends, tags: { extension:mli, file:player.mli, ocaml, ocamldep, quiet }
-/home/ubuntu/.opam/4.03.0/bin/ocamldep.opt -modules player.mli > player.mli.depends
+/Users/vickyw/.opam/4.03.0/bin/ocamldep.opt -modules player.mli > player.mli.depends
 # Target: player.cmi, tags: { byte, compile, extension:mli, file:player.mli, interf, ocaml, quiet }
-/home/ubuntu/.opam/4.03.0/bin/ocamlc.opt -c -I /home/ubuntu/.opam/4.03.0/lib/ANSITerminal -I /home/ubuntu/.opam/4.03.0/lib/biniou -I /home/ubuntu/.opam/4.03.0/lib/bytes -I /home/ubuntu/.opam/4.03.0/lib/easy-format -I /home/ubuntu/.opam/4.03.0/lib/oUnit -I /home/ubuntu/.opam/4.03.0/lib/ocaml -I /home/ubuntu/.opam/4.03.0/lib/yojson -o player.cmi player.mli
+/Users/vickyw/.opam/4.03.0/bin/ocamlc.opt -c -I /Users/vickyw/.opam/4.03.0/lib/ANSITerminal -I /Users/vickyw/.opam/4.03.0/lib/biniou -I /Users/vickyw/.opam/4.03.0/lib/bytes -I /Users/vickyw/.opam/4.03.0/lib/easy-format -I /Users/vickyw/.opam/4.03.0/lib/oUnit -I /Users/vickyw/.opam/4.03.0/lib/ocaml -I /Users/vickyw/.opam/4.03.0/lib/yojson -o player.cmi player.mli
 # Target: gamemap.cmi, tags: { byte, compile, extension:mli, file:gamemap.mli, interf, ocaml, quiet }
-/home/ubuntu/.opam/4.03.0/bin/ocamlc.opt -c -I /home/ubuntu/.opam/4.03.0/lib/ANSITerminal -I /home/ubuntu/.opam/4.03.0/lib/biniou -I /home/ubuntu/.opam/4.03.0/lib/bytes -I /home/ubuntu/.opam/4.03.0/lib/easy-format -I /home/ubuntu/.opam/4.03.0/lib/oUnit -I /home/ubuntu/.opam/4.03.0/lib/ocaml -I /home/ubuntu/.opam/4.03.0/lib/yojson -o gamemap.cmi gamemap.mli
+/Users/vickyw/.opam/4.03.0/bin/ocamlc.opt -c -I /Users/vickyw/.opam/4.03.0/lib/ANSITerminal -I /Users/vickyw/.opam/4.03.0/lib/biniou -I /Users/vickyw/.opam/4.03.0/lib/bytes -I /Users/vickyw/.opam/4.03.0/lib/easy-format -I /Users/vickyw/.opam/4.03.0/lib/oUnit -I /Users/vickyw/.opam/4.03.0/lib/ocaml -I /Users/vickyw/.opam/4.03.0/lib/yojson -o gamemap.cmi gamemap.mli
 # Target: test_player.ml.depends, tags: { extension:ml, file:test_player.ml, ocaml, ocamldep, quiet }
-/home/ubuntu/.opam/4.03.0/bin/ocamldep.opt -modules test_player.ml > test_player.ml.depends
+/Users/vickyw/.opam/4.03.0/bin/ocamldep.opt -modules test_player.ml > test_player.ml.depends
 # Target: test_game.cmo, tags: { byte, compile, extension:cmo, extension:ml, file:test_game.cmo, file:test_game.ml, implem, ocaml, quiet }
-/home/ubuntu/.opam/4.03.0/bin/ocamlc.opt -c -I /home/ubuntu/.opam/4.03.0/lib/ANSITerminal -I /home/ubuntu/.opam/4.03.0/lib/biniou -I /home/ubuntu/.opam/4.03.0/lib/bytes -I /home/ubuntu/.opam/4.03.0/lib/easy-format -I /home/ubuntu/.opam/4.03.0/lib/oUnit -I /home/ubuntu/.opam/4.03.0/lib/ocaml -I /home/ubuntu/.opam/4.03.0/lib/yojson -o test_game.cmo test_game.ml
+/Users/vickyw/.opam/4.03.0/bin/ocamlc.opt -c -I /Users/vickyw/.opam/4.03.0/lib/ANSITerminal -I /Users/vickyw/.opam/4.03.0/lib/biniou -I /Users/vickyw/.opam/4.03.0/lib/bytes -I /Users/vickyw/.opam/4.03.0/lib/easy-format -I /Users/vickyw/.opam/4.03.0/lib/oUnit -I /Users/vickyw/.opam/4.03.0/lib/ocaml -I /Users/vickyw/.opam/4.03.0/lib/yojson -o test_game.cmo test_game.ml
 # Target: test_map.cmo, tags: { byte, compile, extension:cmo, extension:ml, file:test_map.cmo, file:test_map.ml, implem, ocaml, quiet }
-/home/ubuntu/.opam/4.03.0/bin/ocamlc.opt -c -I /home/ubuntu/.opam/4.03.0/lib/ANSITerminal -I /home/ubuntu/.opam/4.03.0/lib/biniou -I /home/ubuntu/.opam/4.03.0/lib/bytes -I /home/ubuntu/.opam/4.03.0/lib/easy-format -I /home/ubuntu/.opam/4.03.0/lib/oUnit -I /home/ubuntu/.opam/4.03.0/lib/ocaml -I /home/ubuntu/.opam/4.03.0/lib/yojson -o test_map.cmo test_map.ml
+/Users/vickyw/.opam/4.03.0/bin/ocamlc.opt -c -I /Users/vickyw/.opam/4.03.0/lib/ANSITerminal -I /Users/vickyw/.opam/4.03.0/lib/biniou -I /Users/vickyw/.opam/4.03.0/lib/bytes -I /Users/vickyw/.opam/4.03.0/lib/easy-format -I /Users/vickyw/.opam/4.03.0/lib/oUnit -I /Users/vickyw/.opam/4.03.0/lib/ocaml -I /Users/vickyw/.opam/4.03.0/lib/yojson -o test_map.cmo test_map.ml
 # Target: test_player.cmo, tags: { byte, compile, extension:cmo, extension:ml, file:test_player.cmo, file:test_player.ml, implem, ocaml, quiet }
-/home/ubuntu/.opam/4.03.0/bin/ocamlc.opt -c -I /home/ubuntu/.opam/4.03.0/lib/ANSITerminal -I /home/ubuntu/.opam/4.03.0/lib/biniou -I /home/ubuntu/.opam/4.03.0/lib/bytes -I /home/ubuntu/.opam/4.03.0/lib/easy-format -I /home/ubuntu/.opam/4.03.0/lib/oUnit -I /home/ubuntu/.opam/4.03.0/lib/ocaml -I /home/ubuntu/.opam/4.03.0/lib/yojson -o test_player.cmo test_player.ml
+/Users/vickyw/.opam/4.03.0/bin/ocamlc.opt -c -I /Users/vickyw/.opam/4.03.0/lib/ANSITerminal -I /Users/vickyw/.opam/4.03.0/lib/biniou -I /Users/vickyw/.opam/4.03.0/lib/bytes -I /Users/vickyw/.opam/4.03.0/lib/easy-format -I /Users/vickyw/.opam/4.03.0/lib/oUnit -I /Users/vickyw/.opam/4.03.0/lib/ocaml -I /Users/vickyw/.opam/4.03.0/lib/yojson -o test_player.cmo test_player.ml
 # Target: test_main.cmo, tags: { byte, compile, extension:cmo, extension:ml, file:test_main.cmo, file:test_main.ml, implem, ocaml, quiet }
-/home/ubuntu/.opam/4.03.0/bin/ocamlc.opt -c -I /home/ubuntu/.opam/4.03.0/lib/ANSITerminal -I /home/ubuntu/.opam/4.03.0/lib/biniou -I /home/ubuntu/.opam/4.03.0/lib/bytes -I /home/ubuntu/.opam/4.03.0/lib/easy-format -I /home/ubuntu/.opam/4.03.0/lib/oUnit -I /home/ubuntu/.opam/4.03.0/lib/ocaml -I /home/ubuntu/.opam/4.03.0/lib/yojson -o test_main.cmo test_main.ml
+/Users/vickyw/.opam/4.03.0/bin/ocamlc.opt -c -I /Users/vickyw/.opam/4.03.0/lib/ANSITerminal -I /Users/vickyw/.opam/4.03.0/lib/biniou -I /Users/vickyw/.opam/4.03.0/lib/bytes -I /Users/vickyw/.opam/4.03.0/lib/easy-format -I /Users/vickyw/.opam/4.03.0/lib/oUnit -I /Users/vickyw/.opam/4.03.0/lib/ocaml -I /Users/vickyw/.opam/4.03.0/lib/yojson -o test_main.cmo test_main.ml
 # Target: game.ml.depends, tags: { extension:ml, file:game.ml, ocaml, ocamldep, quiet }
-/home/ubuntu/.opam/4.03.0/bin/ocamldep.opt -modules game.ml > game.ml.depends
+/Users/vickyw/.opam/4.03.0/bin/ocamldep.opt -modules game.ml > game.ml.depends
 # Target: game.cmo, tags: { byte, compile, extension:cmo, extension:ml, file:game.cmo, file:game.ml, implem, ocaml, quiet }
-/home/ubuntu/.opam/4.03.0/bin/ocamlc.opt -c -I /home/ubuntu/.opam/4.03.0/lib/ANSITerminal -I /home/ubuntu/.opam/4.03.0/lib/biniou -I /home/ubuntu/.opam/4.03.0/lib/bytes -I /home/ubuntu/.opam/4.03.0/lib/easy-format -I /home/ubuntu/.opam/4.03.0/lib/oUnit -I /home/ubuntu/.opam/4.03.0/lib/ocaml -I /home/ubuntu/.opam/4.03.0/lib/yojson -o game.cmo game.ml
-+ /home/ubuntu/.opam/4.03.0/bin/ocamlc.opt -c -I /home/ubuntu/.opam/4.03.0/lib/ANSITerminal -I /home/ubuntu/.opam/4.03.0/lib/biniou -I /home/ubuntu/.opam/4.03.0/lib/bytes -I /home/ubuntu/.opam/4.03.0/lib/easy-format -I /home/ubuntu/.opam/4.03.0/lib/oUnit -I /home/ubuntu/.opam/4.03.0/lib/ocaml -I /home/ubuntu/.opam/4.03.0/lib/yojson -o game.cmo game.ml
-File "game.ml", line 31, characters 96-100:
+/Users/vickyw/.opam/4.03.0/bin/ocamlc.opt -c -I /Users/vickyw/.opam/4.03.0/lib/ANSITerminal -I /Users/vickyw/.opam/4.03.0/lib/biniou -I /Users/vickyw/.opam/4.03.0/lib/bytes -I /Users/vickyw/.opam/4.03.0/lib/easy-format -I /Users/vickyw/.opam/4.03.0/lib/oUnit -I /Users/vickyw/.opam/4.03.0/lib/ocaml -I /Users/vickyw/.opam/4.03.0/lib/yojson -o game.cmo game.ml
++ /Users/vickyw/.opam/4.03.0/bin/ocamlc.opt -c -I /Users/vickyw/.opam/4.03.0/lib/ANSITerminal -I /Users/vickyw/.opam/4.03.0/lib/biniou -I /Users/vickyw/.opam/4.03.0/lib/bytes -I /Users/vickyw/.opam/4.03.0/lib/easy-format -I /Users/vickyw/.opam/4.03.0/lib/oUnit -I /Users/vickyw/.opam/4.03.0/lib/ocaml -I /Users/vickyw/.opam/4.03.0/lib/yojson -o game.cmo game.ml
+File "game.ml", line 33, characters 96-100:
 Error: Unbound value turn
 Command exited with code 2.
 # Compilation unsuccessful.
