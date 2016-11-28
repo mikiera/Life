@@ -2,10 +2,10 @@ test:
 	ocamlbuild -pkgs oUnit,yojson,str,ANSITerminal test_main.byte && ./test_main.byte
 
 play:
-	ocamlbuild -pkgs oUnit,yojson,str,ANSITerminal main.byte && ./main.byte
+	ocamlbuild -pkgs oUnit,yojson,str,ANSITerminal main.byte && ./main.byte 
 
 check:
-	bash checkenv.sh && bash checktypes.sh
+	bash checkenv.sh && bash checktypes.sh 
 
 clean:
 	ocamlbuild -clean
