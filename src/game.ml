@@ -68,6 +68,10 @@ let rec find_loc_by_squareid (locations: location list) (square_id: square) : lo
   | [] -> failwith "this square id is not in the game"
   | h::t -> if h.id = square_id then h else find_loc_by_squareid t square_id
 
+let change_dir (gamestate:gamestate) (choice:direction) (playerid:playerid) : unit = 
+    let player_loc_info = List.assoc playerid gamestate.playermap in
+    player_loc_info.dir <- choice
+
 let move_one_step gamestate playerid =
     let player_loc_info = List.assoc playerid gamestate.playermap in
     let current_dir = player_loc_info.dir in
