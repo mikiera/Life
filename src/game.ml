@@ -20,7 +20,13 @@ type action = {
       karma: int
   }
 
-type playerloc = {playerid: int; loc: location}
+type direction = Left | Right
+
+type playerid = int
+
+type player_loc_info = {mutable loc: location; mutable dir: direction}
+
+type playerloc = playerid * player_loc_info
 
 type college = AS | Eng | NONE
 
@@ -39,16 +45,54 @@ type gamecomp = {college: college;
                  summer: card list;
                  future: card list}
 
-type gamestate = {turn: turn;
+type gamestate = {turn: playerid;
                   playermap: playerloc list;
                   sqact: (square * action) list;
                   start: int;
                   start_points: int;
                   gamemap: location list;
-                  gamecomp: gamecomp; active_players: int list}
+                  gamecomp: gamecomp; 
+                  players: Player.player list;
+                  active_players: int list}
 
 let cmd_checker c =
   let a = String.lowercase_ascii (String.trim c) in a
+
+let rec find_player_by_id player_list player_id = 
+  match player_list with
+  | [] -> failwith "this player id is not in the game"
+  | h::t -> if (Player.getID h) = player_id then h else find_player_by_id t player_id
+
+let rec find_loc_by_squareid (locations: location list) (square_id: square) : location = 
+  match locations with
+  | [] -> failwith "this square id is not in the game"
+  | h::t -> if h.id = square_id then h else find_loc_by_squareid t square_id
+
+let move_one_step gamestate playerid =
+    let player_loc_info = List.assoc playerid gamestate.playermap in
+    let current_dir = player_loc_info.dir in
+    let current_loc = player_loc_info.loc in
+    let map = gamestate.gamemap in
+    if ((current_dir = Right && current_loc.right <> Null) || current_loc.left = Null)
+      then (let next_square = current_loc.right in 
+            player_loc_info.loc <- (find_loc_by_squareid map next_square); gamestate)
+    else if (current_dir = Left && current_loc.left <> Null)
+      then (let next_square = current_loc.left in 
+            player_loc_info.loc <- (find_loc_by_squareid map next_square); gamestate)
+    else gamestate
+
+let change_pts_karma (gamestate:gamestate) (playerid:playerid) (action:action):Player.player =
+    let player = find_player_by_id gamestate.players playerid in
+    ignore((Player.changePoints) player action.points);
+    (Player.changeKarma) player action.karma
+
+let rec move_multi_step gamestate playerid n =
+    if n = 0 then (let player_loc_info = List.assoc playerid gamestate.playermap in
+                   let current_square = player_loc_info.loc.id in
+                   let action = List.assoc current_square gamestate.sqact in
+                   ignore(change_pts_karma gamestate playerid action))
+    else if n > 0 then (move_multi_step (move_one_step gamestate playerid) playerid (n-1))
+    else failwith "Number of steps can't be negative"
 
 let play (cmd : string) (gamestate : gamestate) : gamestate =
 (*   if (cmd = "p" || cmd = "points") then (print_endline (Player.getPoints (List.nth (player_lst) turn)); gamestate)
@@ -151,7 +195,8 @@ let init_game j =
   start = start;
   start_points = start_points;
   gamemap = gamemap;
-  sqact = sqact}
+  sqact = sqact;
+  players = []}
 
 
 let rec main_helper file_name =
