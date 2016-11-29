@@ -1,3 +1,6 @@
 _build/
 test_main.byte
+test_map.byte
+game.byte
+test_player.byte
 .DS_Store
