@@ -133,27 +133,22 @@ let rec move_multi_step gamestate playerid n =
 let rec play (cmd : string) (gamestate : gamestate) (turn : int) : gamestate =
   let playerid = List.nth gamestate.active_players turn in
   let player = List.nth gamestate.players (playerid - 1) in
-  if (cmd = "p" || cmd = "points") then (print_endline (string_of_int
-    (Player.getPoints player)); gamestate)
-  else if (cmd = "h" || cmd = "history") then (print_endline (Player.getHistory
-    player); gamestate)
-  else if (cmd = "a" || cmd = "advisor") then (print_endline (Player.getAdvisor
-    player); gamestate)
-  else if (cmd = "c" || cmd = "courses") then (print_endline (Player.getCourse
-    player); gamestate)
-  else if (cmd = "co" || cmd = "college") then (print_endline (Player.getCollege
-    player); gamestate)
-  else if (cmd = "n" || cmd = "name") then (print_endline (Player.getNickname
-    player); gamestate)
+  if (cmd = "p" || cmd = "points") then (AT.print_string [get_pcol playerid]
+    (string_of_int (Player.getPoints player) ^ "\n"); gamestate)
+  else if (cmd = "h" || cmd = "history") then (AT.print_string [get_pcol playerid] (Player.getHistory player); gamestate)
+  else if (cmd = "a" || cmd = "advisor") then (AT.print_string [get_pcol playerid] ((Player.getAdvisor player) ^ "\n"); gamestate)
+  else if (cmd = "c" || cmd = "courses") then (AT.print_string [get_pcol playerid] ((Player.getCourse player) ^ "\n"); gamestate)
+  else if (cmd = "co" || cmd = "college") then (AT.print_string [get_pcol playerid] ((Player.getCollege player) ^ "\n"); gamestate)
+  else if (cmd = "n" || cmd = "name") then (AT.print_string [get_pcol playerid] ((Player.getNickname player) ^ "\n"); gamestate)
   else if (cmd = "spin") then let spin = ((Random.int 4) + 1) in gamestate
   else if (cmd = "help") then (
-    print_endline ("p/points:      check your total points");
-    print_endline ("a/advisor:     see your advisor");
-    print_endline ("c/courses:     see your courses");
-    print_endline ("co/college:    see your college");
-    print_endline ("n/name:        see your nickname");
-    print_endline ("spin:          spin the wheel and try your luck!");
-    print_endline ("help:          see a list of commands available");
+    AT.print_string [get_pcol playerid] ("p/points:      check your total points\n");
+    AT.print_string [get_pcol playerid] ("a/advisor:     see your advisor\n");
+    AT.print_string [get_pcol playerid] ("c/courses:     see your courses\n");
+    AT.print_string [get_pcol playerid] ("co/college:    see your college\n");
+    AT.print_string [get_pcol playerid] ("n/name:        see your nickname\n");
+    AT.print_string [get_pcol playerid] ("spin:          spin the wheel and try your luck!\n");
+    AT.print_string [get_pcol playerid] ("help:          see a list of commands available\n");
     gamestate)
   else raise Illegal
 
