@@ -249,8 +249,7 @@ let init_game j =
   start = start;
   start_points = start_points;
   gamemap = gamemap;
-  sqact = sqact;
-  players = []}
+  sqact = sqact}
 
 
 let rec main_helper file_name =
