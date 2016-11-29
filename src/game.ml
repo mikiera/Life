@@ -61,14 +61,15 @@ let cmd_checker c =
 let rec find_player_by_id player_list player_id = 
   match player_list with
   | [] -> failwith "this player id is not in the game"
-  | h::t -> if (Player.getID h) = player_id then h else find_player_by_id t player_id
+  | h::t -> if (Player.getID h) = player_id then h 
+            else find_player_by_id t player_id
 
-let rec find_loc_by_squareid (locations: location list) (square_id: square) : location = 
+let rec find_loc_by_sid (locations:location list) (square_id:square):location = 
   match locations with
   | [] -> failwith "this square id is not in the game"
-  | h::t -> if h.id = square_id then h else find_loc_by_squareid t square_id
+  | h::t -> if h.id = square_id then h else find_loc_by_sid t square_id
 
-let change_dir (gamestate:gamestate) (choice:direction) (playerid:playerid) : unit = 
+let change_dir gamestate choice playerid = 
     let player_loc_info = List.assoc playerid gamestate.playermap in
     player_loc_info.dir <- choice
 
@@ -77,25 +78,32 @@ let move_one_step gamestate playerid =
     let current_dir = player_loc_info.dir in
     let current_loc = player_loc_info.loc in
     let map = gamestate.gamemap in
-    if ((current_dir = Right && current_loc.right <> Null) || current_loc.left = Null)
+    if ((current_dir = Right && current_loc.right <> Null) 
+        || current_loc.left = Null)
       then (let next_square = current_loc.right in 
-            player_loc_info.loc <- (find_loc_by_squareid map next_square); gamestate)
+        player_loc_info.loc <- (find_loc_by_sid map next_square); gamestate)
     else if (current_dir = Left && current_loc.left <> Null)
       then (let next_square = current_loc.left in 
-            player_loc_info.loc <- (find_loc_by_squareid map next_square); gamestate)
+        player_loc_info.loc <- (find_loc_by_sid map next_square); gamestate)
     else gamestate
 
-let change_pts_karma (gamestate:gamestate) (playerid:playerid) (action:action):Player.player =
-    let player = find_player_by_id gamestate.players playerid in
+let change_pk (gs:gamestate) (pid:playerid) (action:action):Player.player =
+    let player = find_player_by_id gs.players pid in
     ignore((Player.changePoints) player action.points);
     (Player.changeKarma) player action.karma
 
 let rec move_multi_step gamestate playerid n =
-    if n = 0 then (let player_loc_info = List.assoc playerid gamestate.playermap in
-                   let current_square = player_loc_info.loc.id in
+    if n = 0 then (let l_info = List.assoc playerid gamestate.playermap in
+                   let current_square = l_info.loc.id in
                    let action = List.assoc current_square gamestate.sqact in
-                   ignore(change_pts_karma gamestate playerid action))
-    else if n > 0 then (move_multi_step (move_one_step gamestate playerid) playerid (n-1))
+                   ignore(change_pk gamestate playerid action))
+    else if n > 0 then (let l_info = List.assoc playerid gamestate.playermap in
+        if (l_info.loc.left = Null && l_info.loc.right = Null)
+        then (let a = List.assoc l_info.loc.id gamestate.sqact in
+              ignore(change_pk gamestate playerid a);
+              print_endline "You have successfully graduated from the 
+              3110 Life. Enter quit to exit the game."; ())
+        else (move_multi_step (move_one_step gamestate playerid) playerid (n-1)))
     else failwith "Number of steps can't be negative"
 
 let play (cmd : string) (gamestate : gamestate) : gamestate =
