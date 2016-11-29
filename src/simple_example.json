@@ -53,8 +53,7 @@
 			},
 			{
 		   	 "name": "Daisy Fan",
-			 "description": "She's known for teaching 1112 and researches applying 
-			  computer science to water and environmental problems.",
+			 "description": "She's known for teaching 1112 and researches applying computer science to water and environmental problems.",
 			 "id":4,
 			 "points": 0,
 			 "karma": 0
@@ -90,7 +89,7 @@
 			 "points": 0,
 			 "karma" : 10000
 			}],
-			"retirement_plans": 
+			"future_plans": 
 		   	[{
 		   	 "name": "Industry-Big Corp",
 			 "description": "You are working at a large corporation",
