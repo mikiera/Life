@@ -72,7 +72,7 @@ let play (cmd : string) (gamestate : gamestate) : gamestate =
   failwith "Unimplemented"
 
 let rec repl (state : gamestate)  =
-  print_string "> ";
+  print_string ">>> ";
   let c = read_line () in
   let a = cmd_checker c in
   if (a = "quit" || a = "exit" || a = "q") then ()
@@ -162,8 +162,8 @@ let rec main_helper file_name =
     let open Yojson.Basic in
     let json = from_file file_name in
     let init = init_game json in
-    let () = print_endline "Welcome to the Life of a CS Major"; in
-    let () = print_endline ""; in repl init
+    let () = print_endline " your game has loaded"; in
+    repl init
   with
     | Illegal -> let () = print_endline "Please enter a valid game file";
       in main_helper (read_line ())
