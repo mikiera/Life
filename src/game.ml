@@ -48,7 +48,7 @@ type gamecomp = {college: college;
                  summer: card list;
                  future: card list}
 
-type gamestate = {turn: playerid;
+type gamestate = {turn: turn;
                   playermap: playerloc list;
                   sqact: (square * action) list;
                   start: int;
@@ -68,7 +68,7 @@ let ccol = AT.red
 let get_pcol id = List.nth [AT.blue; AT.green; AT.magenta] (id mod 3)
 
 (* [print_choice color descrip choices] will print the description in color
- * If the user's input matches a  *)
+ * If the user's input matches a string in list choices *)
 let rec print_choice color descrip choices =
   let () = AT.print_string [color] (descrip ^ "\n> ") in
   let result = read_line () in
@@ -123,52 +123,57 @@ let rec move_multi_step gamestate playerid n =
             ignore(change_pk gamestate playerid a);
             print_endline "You have successfully graduated from the 3110 Life.
             Wait for your friends to join you!";
+            let new_turn = gamestate.turn - 1 in
             let active_players = gamestate.active_players in
             let new_active = List.filter (fun x -> (x <> playerid)) active_players in
-            {gamestate with active_players = new_active})
+            {gamestate with active_players = new_active; turn = new_turn})
       else (move_multi_step (move_one_step gamestate playerid) playerid (n-1)))
     else failwith "Number of steps can't be negative"
 
 let rec play (cmd : string) (gamestate : gamestate) (turn : int) : gamestate =
-  let player = List.nth gamestate.players (turn - 1) in
+  let playeridx = List.nth gamestate.active_players turn in
+  let player = List.nth gamestate.players (playeridx - 1) in
   if (cmd = "p" || cmd = "points") then (print_endline (string_of_int
-    (Player.getPoints player)); repl gamestate turn; gamestate)
+    (Player.getPoints player)); gamestate)
   else if (cmd = "h" || cmd = "history") then (print_endline (Player.getHistory
-    player); repl gamestate turn; gamestate)
+    player); gamestate)
   else if (cmd = "a" || cmd = "advisor") then (print_endline (Player.getAdvisor
-    player); repl gamestate turn; gamestate)
+    player); gamestate)
   else if (cmd = "c" || cmd = "courses") then (print_endline (Player.getCourse
-    player); repl gamestate turn; gamestate)
+    player); gamestate)
   else if (cmd = "co" || cmd = "college") then (print_endline (Player.getCollege
-    player); repl gamestate turn; gamestate)
+    player); gamestate)
   else if (cmd = "n" || cmd = "name") then (print_endline (Player.getNickname
-    player); repl gamestate turn; gamestate)
+    player); gamestate)
   else if (cmd = "spin") then let spin = ((Random.int 4) + 1) in gamestate
-  else if (cmd = "help") then (print_endline ("p/points:      check your total points");
+  else if (cmd = "help") then (
+    print_endline ("p/points:      check your total points");
     print_endline ("a/advisor:     see your advisor");
     print_endline ("c/courses:     see your courses");
     print_endline ("co/college:    see your college");
     print_endline ("n/name:        see your nickname");
     print_endline ("spin:          spin the wheel and try your luck!");
     print_endline ("help:          see a list of commands available");
-    repl gamestate turn; gamestate)
+    gamestate)
   else raise Illegal
 
 and repl (state : gamestate) (turn : int) : unit =
   try
-    let player = List.nth state.players (turn - 1) in
-    let () = AT.print_string [get_pcol turn] ("It is " ^
+    let playeridx = List.nth state.active_players turn in
+    let player = List.nth state.players (playeridx - 1) in
+    let () = AT.print_string [get_pcol playeridx] ("It is " ^
       (Player.getNickname player) ^ "'s turn. Please enter a command.\n>>> ") in
     let cmd = read_line () in
     let check_cmd = cmd_checker cmd in
     if (check_cmd = "quit" || check_cmd = "exit" || check_cmd = "q")
-    then AT.print_string [get_pcol turn] "You have terminated the game.\n"
+    then AT.print_string [get_pcol playeridx] "You have terminated the game.\n"
     else
       let new_gs = play check_cmd state turn in
-      let new_turn = (turn mod (List.length state.players)) + 1 in
+      let new_turn = if (check_cmd <> "spin") then turn
+        else ((turn + 1) mod (List.length state.active_players)) in
       repl new_gs new_turn
   with
-    | _ -> AT.print_string [get_pcol turn]
+    | _ -> AT.print_string [gcol]
       "Invalid command. Please try again.\n"; repl state turn
 
 
@@ -233,6 +238,7 @@ let rec setup_players state =
       then failwith "Invalid number of players.\n" in
     let playerlist = ref [] in
     let playerloclist = ref [] in
+    let activeplayers = ref [] in
     let ailist = ref [] in
     let () = for id = 1 to num_players do
       let player = Player.createPlayer id in
@@ -242,14 +248,16 @@ let rec setup_players state =
       let named_player = Player.addNickname player name in
       let final_player = Player.changePoints named_player state.start_points in
       let aimsg = "Will this player be a human player? (Y/N)" in
-      let human = print_choice (get_pcol id) aimsg ["Y"; "y"; "N"; "n"] in
-      let () = if (human = "N" || human = "n") then ailist := (!ailist @ [id]) in
+      let res = print_choice (get_pcol id) aimsg ["Y"; "y"; "N"; "n"] in
+      let () = if (res = "N" || res = "n") then ailist := (!ailist @ [id]) in
       let locobj = find_loc_by_sid state.gamemap (Square state.start) in
       let playerloc = { loc=locobj; dir=Right } in
+      activeplayers := (!activeplayers @ [id]);
       playerlist := (!playerlist @ [final_player]);
-      playerloclist := (!playerloclist @ [(id, playerloc)])
+      playerloclist := (!playerloclist @ [(id, playerloc)]);
     done in
-    { state with players=(!playerlist); playermap=(!playerloclist) }
+    { state with players=(!playerlist); playermap=(!playerloclist);
+      active_players=(!activeplayers); }
   with
     | _ -> setup_players state
 
@@ -284,7 +292,7 @@ let rec main_helper (file_name : string) =
     let json = Yojson.Basic.from_file file_name in
     let gamestate1 = init_game json in
     let gamestate2 = setup_players gamestate1 in
-    repl gamestate2 1
+    repl gamestate2 (gamestate2.turn)
   with
     | Yojson.Json_error _ -> let () = print_endline ("Invalid json file. Please"
       ^ " try again"); print_string ">>>"; in (main_helper (read_line ()))
