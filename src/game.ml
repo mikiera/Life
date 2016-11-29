@@ -116,13 +116,16 @@ let rec move_multi_step gamestate playerid n =
     if n = 0 then (let l_info = List.assoc playerid gamestate.playermap in
                    let current_square = l_info.loc.id in
                    let action = List.assoc current_square gamestate.sqact in
-                   ignore(change_pk gamestate playerid action))
+                   ignore(change_pk gamestate playerid action); gamestate)
     else if n > 0 then (let l_info = List.assoc playerid gamestate.playermap in
       if (l_info.loc.left = Null && l_info.loc.right = Null)
       then (let a = List.assoc l_info.loc.id gamestate.sqact in
             ignore(change_pk gamestate playerid a);
             print_endline "You have successfully graduated from the 3110 Life.
-            Enter quit to exit the game."; ())
+            Wait for your friends to join you!";
+            let active_players = gamestate.active_players in
+            let new_active = List.filter (fun x -> (x <> playerid)) active_players in
+            {gamestate with active_players = new_active})
       else (move_multi_step (move_one_step gamestate playerid) playerid (n-1)))
     else failwith "Number of steps can't be negative"
 
@@ -158,7 +161,8 @@ and repl (state : gamestate) (turn : int) : unit =
       (Player.getNickname player) ^ "'s turn. Please enter a command.\n>>> ") in
     let cmd = read_line () in
     let check_cmd = cmd_checker cmd in
-    if (check_cmd = "quit" || check_cmd = "exit" || check_cmd = "q") then ()
+    if (check_cmd = "quit" || check_cmd = "exit" || check_cmd = "q")
+    then AT.print_string [get_pcol turn] "You have terminated the game.\n"
     else
       let new_gs = play check_cmd state turn in
       let new_turn = (turn mod (List.length state.players)) + 1 in
@@ -238,8 +242,8 @@ let rec setup_players state =
       let named_player = Player.addNickname player name in
       let final_player = Player.changePoints named_player state.start_points in
       let aimsg = "Will this player be a human player? (Y/N)" in
-      let human = print_choice (get_pcol id) aimsg ["Y"; "N"] in
-      let () = if (human = "N") then ailist := (!ailist @ [id]) in
+      let human = print_choice (get_pcol id) aimsg ["Y"; "y"; "N"; "n"] in
+      let () = if (human = "N" || human = "n") then ailist := (!ailist @ [id]) in
       let locobj = find_loc_by_sid state.gamemap (Square state.start) in
       let playerloc = { loc=locobj; dir=Right } in
       playerlist := (!playerlist @ [final_player]);
