@@ -156,6 +156,8 @@ let init_game j =
 
 let rec main_helper file_name =
  try
+    let c = cmd_checker file_name in if (c = "quit" || c = "exit" || c = "q") then ()
+    else
     let open Yojson.Basic in
     let json = from_file file_name in
     let init = init_game json in
