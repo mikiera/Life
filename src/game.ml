@@ -135,11 +135,16 @@ let rec play (cmd : string) (gamestate : gamestate) (turn : int) : gamestate =
   let player = List.nth gamestate.players (playerid - 1) in
   if (cmd = "p" || cmd = "points") then (AT.print_string [get_pcol playerid]
     (string_of_int (Player.getPoints player) ^ "\n"); gamestate)
-  else if (cmd = "h" || cmd = "history") then (AT.print_string [get_pcol playerid] (Player.getHistory player); gamestate)
-  else if (cmd = "a" || cmd = "advisor") then (AT.print_string [get_pcol playerid] ((Player.getAdvisor player) ^ "\n"); gamestate)
-  else if (cmd = "c" || cmd = "courses") then (AT.print_string [get_pcol playerid] ((Player.getCourse player) ^ "\n"); gamestate)
-  else if (cmd = "co" || cmd = "college") then (AT.print_string [get_pcol playerid] ((Player.getCollege player) ^ "\n"); gamestate)
-  else if (cmd = "n" || cmd = "name") then (AT.print_string [get_pcol playerid] ((Player.getNickname player) ^ "\n"); gamestate)
+  else if (cmd = "h" || cmd = "history") then (AT.print_string [get_pcol playerid]
+          (Player.getHistory player); gamestate)
+  else if (cmd = "a" || cmd = "advisor") then (AT.print_string [get_pcol playerid]
+          ((Player.getAdvisor player) ^ "\n"); gamestate)
+  else if (cmd = "c" || cmd = "courses") then (AT.print_string [get_pcol playerid]
+          ((Player.getCourse player) ^ "\n"); gamestate)
+  else if (cmd = "co" || cmd = "college") then (AT.print_string [get_pcol playerid]
+          ((Player.getCollege player) ^ "\n"); gamestate)
+  else if (cmd = "n" || cmd = "name") then (AT.print_string [get_pcol playerid]
+          ((Player.getNickname player) ^ "\n"); gamestate)
   else if (cmd = "spin") then let spin = ((Random.int 4) + 1) in gamestate
   else if (cmd = "help") then (
     AT.print_string [get_pcol playerid] ("p/points:      check your total points\n");
