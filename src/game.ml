@@ -161,7 +161,7 @@ and repl (state : gamestate) (turn : int) : unit =
       (Player.getNickname player) ^ "'s turn. Please enter a command.\n>>> ") in
     let cmd = read_line () in
     let check_cmd = cmd_checker cmd in
-    if (check_cmd = "quit" || check_cmd = "exit" || check_cmd = "q") 
+    if (check_cmd = "quit" || check_cmd = "exit" || check_cmd = "q")
     then AT.print_string [get_pcol turn] "You have terminated the game.\n"
     else
       let new_gs = play check_cmd state turn in
@@ -285,7 +285,6 @@ let rec main_helper (file_name : string) =
       ^ " try again"); print_string ">>>"; in (main_helper (read_line ()))
     | _ -> let () = print_endline "Invalid input. Please try again";
       print_string ">>> "; in (main_helper (read_line ()))
-
 
 
 let main file_name =
