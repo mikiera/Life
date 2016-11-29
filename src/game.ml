@@ -11,7 +11,7 @@ type square = Null | Square of int
 
 type location = {id: square; left: square; right: square}
 
-type actionType = Event | ChoiceC | ChoiceA | ChoiceS | ChoiceF |ChoiceCol
+type actionType = Event | ChoiceC | ChoiceA | ChoiceS | ChoiceF | ChoiceCol
 
 type action = {
       actionType: actionType;
