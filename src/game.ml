@@ -3,6 +3,8 @@ open Gamemap
 open Player
 open Random
 
+module AT = ANSITerminal
+
 exception Illegal
 
 type turn = int
@@ -45,7 +47,29 @@ type gamestate = {turn: turn;
                   start: int;
                   start_points: int;
                   gamemap: location list;
-                  gamecomp: gamecomp; active_players: int list}
+                  gamecomp: gamecomp;
+                  players: Player.player list;
+                  active_players: int list}
+
+(* constant: game color *)
+let gcol = AT.black
+
+(* constant: list of player colors *)
+let pcol = [AT.blue; AT.green; AT.magenta]
+
+(* constant: color of "choice" text *)
+let ccol = AT.red
+
+(* [get_pcol id] gets the color for player with given id *)
+let get_pcol id = List.nth pcol (id mod 3)
+
+(* [print_choice color descrip choices] will print the description in color
+ * If the user's input matches a  *)
+let rec print_choice color descrip choices =
+  let () = AT.print_string [color] (descrip ^ "\n> ") in
+  let result = read_line () in
+  if (List.mem result choices) then result
+  else (print_choice color descrip choices)
 
 let cmd_checker c =
   let a = String.lowercase_ascii (String.trim c) in a
@@ -130,6 +154,32 @@ let sq_act_list sqact =
   let action = sqact |> member "action" |> parse_action in
   (finalid, action)
 
+(* [setup_player state] takes a game generated after parsing a game json and
+ * initializes it with players *)
+let rec setup_players state =
+  try
+    let () = AT.print_string [gcol] ("How many players are there in the game?"
+      ^ " (1-8)\n> ") in
+    let num_players = int_of_string (read_line ()) in
+    let () = if (num_players < 1 || num_players > 8)
+      then failwith "Invalid number of players.\n" in
+    let playerlist = ref [] in
+    let ailist = ref [] in
+    let () = for id = 1 to num_players do
+      let player = Player.createPlayer id in
+      let () = AT.print_string [get_pcol id]
+      ("Hello Player " ^ (string_of_int id) ^ ". What is your name?\n> " ) in
+      let name = read_line () in
+      let named_player = Player.addNickname player name in
+      let aimsg = "Will this player be a human player? (Y/N)" in
+      let human = print_choice (get_pcol id) aimsg ["Y"; "N"] in
+      let () = if (human = "N") then ailist := (!ailist @ [id]) in
+      playerlist := (!playerlist @ [named_player])
+    done in
+    { state with players=(!playerlist) }
+  with
+    | _ -> setup_players state
+
 let init_game j =
   let open Yojson.Basic.Util in
   let courses = j |> member "courses" |> to_list
@@ -148,6 +198,7 @@ let init_game j =
   let sqact = j |> member "square_action" |> to_list |> List.map sq_act_list in
   {turn=0; playermap = [];
   gamecomp = gamecomp;
+  players = [];
   active_players = [];
   start = start;
   start_points = start_points;
@@ -157,13 +208,14 @@ let init_game j =
 
 let rec main_helper file_name =
  try
+    let () = print_endline "Welcome to the Life of a CS Major"; in
     let c = cmd_checker file_name in if (c = "quit" || c = "exit" || c = "q") then ()
     else
     let open Yojson.Basic in
     let json = from_file file_name in
     let init = init_game json in
-    let () = print_endline "Welcome to the Life of a CS Major"; in
-    let () = print_endline ""; in repl init
+    let setup_people = setup_players init in
+    repl setup_people
   with
     | Illegal -> let () = print_endline "Please enter a valid game file";
       in main_helper (read_line ())
