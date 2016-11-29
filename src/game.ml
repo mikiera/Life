@@ -178,7 +178,7 @@ and repl (state : gamestate) (turn : int) : unit =
       (Player.getNickname player) ^ "'s turn. Please enter a command.\n>>> ") in
     let cmd = read_line () in
     let check_cmd = cmd_checker cmd in
-    if (check_cmd = "quit" || check_cmd = "exit" || check_cmd = "q") 
+    if (check_cmd = "quit" || check_cmd = "exit" || check_cmd = "q")
     then AT.print_string [get_pcol turn] "You have terminated the game.\n"
     else
       let new_gs = play check_cmd state turn in
@@ -249,6 +249,7 @@ let rec setup_players state =
     let () = if (num_players < 1 || num_players > 8)
       then failwith "Invalid number of players.\n" in
     let playerlist = ref [] in
+    let playerloclist = ref [] in
     let ailist = ref [] in
     let () = for id = 1 to num_players do
       let player = Player.createPlayer id in
@@ -256,12 +257,16 @@ let rec setup_players state =
       ("Hello Player " ^ (string_of_int id) ^ ". What is your name?\n> " ) in
       let name = read_line () in
       let named_player = Player.addNickname player name in
+      let final_player = Player.changePoints named_player state.start_points in
       let aimsg = "Will this player be a human player? (Y/N)" in
       let human = print_choice (get_pcol id) aimsg ["Y"; "y"; "N"; "n"] in
-      let () = if (human = "N"||human = "n") then ailist := (!ailist @ [id]) in
-      playerlist := (!playerlist @ [named_player])
+      let () = if (human = "N" || human = "n") then ailist := (!ailist @ [id]) in
+      let locobj = find_loc_by_sid state.gamemap (Square state.start) in
+      let playerloc = { loc=locobj; dir=Right } in
+      playerlist := (!playerlist @ [final_player]);
+      playerloclist := (!playerloclist @ [(id, playerloc)])
     done in
-    { state with players=(!playerlist) }
+    { state with players=(!playerlist); playermap=(!playerloclist) }
   with
     | _ -> setup_players state
 
