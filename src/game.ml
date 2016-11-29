@@ -7,6 +7,7 @@ module AT = ANSITerminal
 
 exception Illegal
 
+(* equivalent to player id, 1-indexed *)
 type turn = int
 
 type square = Null | Square of int
@@ -60,14 +61,11 @@ type gamestate = {turn: playerid;
 (* constant: game color *)
 let gcol = AT.black
 
-(* constant: list of player colors *)
-let pcol = [AT.blue; AT.green; AT.magenta]
-
 (* constant: color of "choice" text *)
 let ccol = AT.red
 
 (* [get_pcol id] gets the color for player with given id *)
-let get_pcol id = List.nth pcol (id mod 3)
+let get_pcol id = List.nth [AT.blue; AT.green; AT.magenta] (id mod 3)
 
 (* [print_choice color descrip choices] will print the description in color
  * If the user's input matches a  *)
@@ -83,15 +81,15 @@ let cmd_checker c =
 let rec find_player_by_id player_list player_id =
   match player_list with
   | [] -> failwith "this player id is not in the game"
-  | h::t -> if (Player.getID h) = player_id then h 
+  | h::t -> if (Player.getID h) = player_id then h
             else find_player_by_id t player_id
 
-let rec find_loc_by_sid (locations:location list) (square_id:square):location = 
+let rec find_loc_by_sid (locations:location list) (square_id:square):location =
   match locations with
   | [] -> failwith "this square id is not in the game"
   | h::t -> if h.id = square_id then h else find_loc_by_sid t square_id
 
-let change_dir gamestate choice playerid = 
+let change_dir gamestate choice playerid =
     let player_loc_info = List.assoc playerid gamestate.playermap in
     player_loc_info.dir <- choice
 
@@ -100,12 +98,12 @@ let move_one_step gamestate playerid =
     let current_dir = player_loc_info.dir in
     let current_loc = player_loc_info.loc in
     let map = gamestate.gamemap in
-    if ((current_dir = Right && current_loc.right <> Null) 
+    if ((current_dir = Right && current_loc.right <> Null)
         || current_loc.left = Null)
-      then (let next_square = current_loc.right in 
+      then (let next_square = current_loc.right in
         player_loc_info.loc <- (find_loc_by_sid map next_square); gamestate)
     else if (current_dir = Left && current_loc.left <> Null)
-      then (let next_square = current_loc.left in 
+      then (let next_square = current_loc.left in
         player_loc_info.loc <- (find_loc_by_sid map next_square); gamestate)
     else gamestate
 
@@ -123,39 +121,51 @@ let rec move_multi_step gamestate playerid n =
       if (l_info.loc.left = Null && l_info.loc.right = Null)
       then (let a = List.assoc l_info.loc.id gamestate.sqact in
             ignore(change_pk gamestate playerid a);
-            print_endline "You have successfully graduated from the 3110 Life. 
+            print_endline "You have successfully graduated from the 3110 Life.
             Enter quit to exit the game."; ())
       else (move_multi_step (move_one_step gamestate playerid) playerid (n-1)))
     else failwith "Number of steps can't be negative"
 
-let play (cmd : string) (gamestate : gamestate) : gamestate =
-(*   if (cmd = "p" || cmd = "points") then (print_endline (Player.getPoints (List.nth (player_lst) turn)); gamestate)
-  else if (cmd = "h" || cmd = "history") then (print_endline (Player.getHistory (List.nth (player_lst) turn)); gamestate)
-  else if (cmd = "a" || cmd = "advisor") then (print_endline (Player.getAdvisor (List.nth (player_lst) turn)); gamestate)
-  else if (cmd = "c" || cmd = "courses") then (print_endline (Player.getCourse (List.nth (player_lst) turn)); gamestate)
-  else if (cmd = "co" || cmd = "college") then (print_endline (Player.getCollege (List.nth (player_lst) turn)); gamestate)
-  else if (cmd = "n" || cmd = "name") then (print_endline (Player.getNickname (List.nth (player_lst) turn)); gamestate)
-  else if (cmd = "spin") then ((Random.int 4) + 1)
+let rec play (cmd : string) (gamestate : gamestate) (turn : int) : gamestate =
+  let player = List.nth gamestate.players (turn - 1) in
+  if (cmd = "p" || cmd = "points") then (print_endline (string_of_int
+    (Player.getPoints player)); repl gamestate turn; gamestate)
+  else if (cmd = "h" || cmd = "history") then (print_endline (Player.getHistory
+    player); repl gamestate turn; gamestate)
+  else if (cmd = "a" || cmd = "advisor") then (print_endline (Player.getAdvisor
+    player); repl gamestate turn; gamestate)
+  else if (cmd = "c" || cmd = "courses") then (print_endline (Player.getCourse
+    player); repl gamestate turn; gamestate)
+  else if (cmd = "co" || cmd = "college") then (print_endline (Player.getCollege
+    player); repl gamestate turn; gamestate)
+  else if (cmd = "n" || cmd = "name") then (print_endline (Player.getNickname
+    player); repl gamestate turn; gamestate)
+  else if (cmd = "spin") then let spin = ((Random.int 4) + 1) in gamestate
   else if (cmd = "help") then (print_endline ("p/points:      check your total points");
-                              print_endline ("a/advisor:     see your advisor");
-                              print_endline ("c/courses:     see your courses");
-                              print_endline ("co/college:    see your college");
-                              print_endline ("n/name:        see your nickname");
-                              print_endline ("spin:          spin the wheel and try your luck!");
-                              print_endline ("help:          see a list of commands available");
-                              gamestate)
-  else if (cmd = "Choice 1") then failwith "Unimplemented"
-  else if (cmd = "Choice 2") then failwith "Unimplemented"
-  else raise Illegal *)
-  failwith "Unimplemented"
+    print_endline ("a/advisor:     see your advisor");
+    print_endline ("c/courses:     see your courses");
+    print_endline ("co/college:    see your college");
+    print_endline ("n/name:        see your nickname");
+    print_endline ("spin:          spin the wheel and try your luck!");
+    print_endline ("help:          see a list of commands available");
+    repl gamestate turn; gamestate)
+  else raise Illegal
 
-let rec repl (state : gamestate)  =
-  print_string ">>> ";
-  let c = read_line () in
-  let a = cmd_checker c in
-  if (a = "quit" || a = "exit" || a = "q") then ()
-  else try(let new_gs = play (cmd_checker c) state in repl new_gs) with
-  |Illegal -> print_endline "Invalid command. Please try again."; repl state
+and repl (state : gamestate) (turn : int) : unit =
+  try
+    let player = List.nth state.players (turn - 1) in
+    let () = AT.print_string [get_pcol turn] ("It is " ^
+      (Player.getNickname player) ^ "'s turn. Please enter a command.\n>>> ") in
+    let cmd = read_line () in
+    let check_cmd = cmd_checker cmd in
+    if (check_cmd = "quit" || check_cmd = "exit" || check_cmd = "q") then ()
+    else
+      let new_gs = play check_cmd state turn in
+      let new_turn = (turn mod (List.length state.players)) + 1 in
+      repl new_gs new_turn
+  with
+    | _ -> AT.print_string [get_pcol turn]
+      "Invalid command. Please try again.\n"; repl state turn
 
 
 (* parsing functions *)
@@ -260,20 +270,19 @@ let init_game j =
   sqact = sqact}
 
 
-let rec main_helper file_name =
- try
-    let () = print_endline "Welcome to the Life of a CS Major"; in
-    let c = cmd_checker file_name in if (c = "quit" || c = "exit" || c = "q") then ()
-    else
-    let open Yojson.Basic in
-    let json = from_file file_name in
-    let init = init_game json in
-    let setup_people = setup_players init in
-    repl setup_people
+let rec main_helper (file_name : string) =
+  try
+    let json = Yojson.Basic.from_file file_name in
+    let gamestate1 = init_game json in
+    let gamestate2 = setup_players gamestate1 in
+    repl gamestate2 1
   with
-    |Yojson.Json_error _ -> let () = print_endline "Please enter a valid json file."; in main_helper (read_line ())
-    |Sys_error _ -> let () = print_endline "Invalid input. Please try again."; print_string ">>> "; in main_helper (read_line ())
-    | _ -> let () = print_endline "Invalid input. Please try again"; print_string ">>> "; in main_helper (read_line ())
+    | Yojson.Json_error _ -> let () = print_endline ("Invalid json file. Please"
+      ^ " try again"); print_string ">>>"; in (main_helper (read_line ()))
+    | _ -> let () = print_endline "Invalid input. Please try again";
+      print_string ">>> "; in (main_helper (read_line ()))
+
+
 
 let main file_name =
    main_helper file_name
