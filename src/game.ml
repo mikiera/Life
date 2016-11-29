@@ -116,13 +116,14 @@ let rec move_multi_step gamestate playerid n =
     if n = 0 then (let l_info = List.assoc playerid gamestate.playermap in
                    let current_square = l_info.loc.id in
                    let action = List.assoc current_square gamestate.sqact in
+                   let () = AT.print_string [get_pcol playerid]
+                    (action.description ^ "\n") in
                    ignore(change_pk gamestate playerid action); gamestate)
     else if n > 0 then (let l_info = List.assoc playerid gamestate.playermap in
       if (l_info.loc.left = Null && l_info.loc.right = Null)
       then (let a = List.assoc l_info.loc.id gamestate.sqact in
             ignore(change_pk gamestate playerid a);
-            print_endline "You have successfully graduated from the 3110 Life.
-            Wait for your friends to join you!";
+            print_endline "You have successfully graduated from the 3110 Life. Wait for your friends to join you!";
             let new_turn = gamestate.turn - 1 in
             let active_players = gamestate.active_players in
             let new_active = List.filter (fun x -> (x <> playerid)) active_players in
@@ -130,22 +131,40 @@ let rec move_multi_step gamestate playerid n =
       else (move_multi_step (move_one_step gamestate playerid) playerid (n-1)))
     else failwith "Number of steps can't be negative"
 
+let rec check_for_fork playerid square gamestate num_step =
+  if num_step <> 0 then false
+  else (let loc = find_loc_by_sid gamestate.gamemap square in
+        if loc.right = Null then false
+        else if loc.left <> Null && loc.right <> Null then true
+        else check_for_fork playerid loc.right gamestate (num_step-1))
+
 let rec play (cmd : string) (gamestate : gamestate) (turn : int) : gamestate =
   let playerid = List.nth gamestate.active_players turn in
   let player = List.nth gamestate.players (playerid - 1) in
   if (cmd = "p" || cmd = "points") then (AT.print_string [get_pcol playerid]
     (string_of_int (Player.getPoints player) ^ "\n"); gamestate)
   else if (cmd = "h" || cmd = "history") then (AT.print_string [get_pcol playerid]
-          (Player.getHistory player); gamestate)
+    (Player.getHistory player); gamestate)
   else if (cmd = "a" || cmd = "advisor") then (AT.print_string [get_pcol playerid]
-          ((Player.getAdvisor player) ^ "\n"); gamestate)
+    ((Player.getAdvisor player) ^ "\n"); gamestate)
   else if (cmd = "c" || cmd = "courses") then (AT.print_string [get_pcol playerid]
-          ((Player.getCourse player) ^ "\n"); gamestate)
+    ((Player.getCourse player) ^ "\n"); gamestate)
   else if (cmd = "co" || cmd = "college") then (AT.print_string [get_pcol playerid]
-          ((Player.getCollege player) ^ "\n"); gamestate)
+    ((Player.getCollege player) ^ "\n"); gamestate)
   else if (cmd = "n" || cmd = "name") then (AT.print_string [get_pcol playerid]
-          ((Player.getNickname player) ^ "\n"); gamestate)
-  else if (cmd = "spin") then let spin = ((Random.int 4) + 1) in gamestate
+    ((Player.getNickname player) ^ "\n"); gamestate)
+  else if (cmd = "spin") then ((let step = ((Random.int 4) + 1) in
+    let playerid = Player.getID player in
+    let player_loc_info = List.assoc playerid gamestate.playermap in
+    let msg = "There's a fork in your path. Do you want to turn left or right? (L/R)" in
+    let () = AT.print_string [get_pcol (Player.getID player)]
+    ("You have moved " ^ (string_of_int step) ^ " steps. Hooray!\n") in
+    if not (check_for_fork playerid player_loc_info.loc.id gamestate step)
+    then (move_multi_step gamestate playerid step)
+    else (let choice = print_choice (get_pcol playerid) msg ["L"; "l"; "R"; "r"]
+          in (if choice = "L" || choice = "l" then player_loc_info.dir <- Left
+              else player_loc_info.dir <- Right);
+              move_multi_step gamestate playerid step)))
   else if (cmd = "help") then (
     AT.print_string [get_pcol playerid] ("p/points:      check your total points\n");
     AT.print_string [get_pcol playerid] ("a/advisor:     see your advisor\n");
@@ -175,7 +194,7 @@ and repl (state : gamestate) (turn : int) : unit =
   with
     | _ -> AT.print_string [gcol]
       "Invalid command. Please try again.\n"; repl state turn
-
+(*priya can you add end of the game when active player list is empty *)
 
 (* parsing functions *)
 

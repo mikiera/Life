@@ -136,15 +136,15 @@
 			{
 			"type": "college",
 			"description": "You get to choose between Arts and Sciences or Engineering. Type AS for arts and sciences and E for engineering.",
-			"points": 1000,
-			"karma": 2000
+			"points": 0,
+			"karma": 0
 			}
 		},
 		{"squareid": 2,
 		"action": 
 			{
 			"type": "event",
-			"description": "You got a 100 on your first CS assignment. Congratulations! You get 500 points",
+			"description": "You got a 100 on your first CS assignment. Congratulations! You get 500 points.",
 			"points": 500,
 			"karma": 0
 			}
