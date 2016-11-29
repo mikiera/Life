@@ -170,7 +170,7 @@
 		}
 	],
 
-	"start": "startroom",
+	"start": 1,
 	"start_points": 10000,
 
 }
