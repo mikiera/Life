@@ -166,8 +166,8 @@ let rec main_helper file_name =
     repl init
   with
     |Yojson.Json_error _ -> let () = print_endline "Please enter a valid json file."; in main_helper (read_line ())
-    |Sys_error _ -> let () = print_endline "Invalid input. Please try again."; print_string "> "; in main_helper (read_line ())
-    | _ -> let () = print_string "Try again"; print_string "> "; in main_helper (read_line ())
+    |Sys_error _ -> let () = print_endline "Invalid input. Please try again."; print_string ">>> "; in main_helper (read_line ())
+    | _ -> let () = print_endline "Invalid input. Please try again"; print_string ">>> "; in main_helper (read_line ())
 
 let main file_name =
    main_helper file_name
