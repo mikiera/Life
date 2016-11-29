@@ -129,6 +129,14 @@ let rec move_multi_step gamestate playerid n =
       else (move_multi_step (move_one_step gamestate playerid) playerid (n-1)))
     else failwith "Number of steps can't be negative"
 
+let rec check_for_fork playerid square gamestate num_step =
+  print_endline "in check fork";
+  if num_step <> 0 then false
+  else (let loc = find_loc_by_sid gamestate.gamemap square in
+        if loc.right = Null then false 
+        else if loc.left <> Null && loc.right <> Null then true
+        else check_for_fork playerid loc.right gamestate (num_step-1))
+
 let rec play (cmd : string) (gamestate : gamestate) (turn : int) : gamestate =
   let player = List.nth gamestate.players (turn - 1) in
   if (cmd = "p" || cmd = "points") then (print_endline (string_of_int
@@ -143,7 +151,16 @@ let rec play (cmd : string) (gamestate : gamestate) (turn : int) : gamestate =
     player); repl gamestate turn; gamestate)
   else if (cmd = "n" || cmd = "name") then (print_endline (Player.getNickname
     player); repl gamestate turn; gamestate)
-  else if (cmd = "spin") then let spin = ((Random.int 4) + 1) in gamestate
+  else if (cmd = "spin") then (let step = ((Random.int 4) + 1) in 
+    let playerid = Player.getID player in
+    let player_loc_info = List.assoc playerid gamestate.playermap in
+    let msg = "There's a fork in your path. Do you want to turn left or right? (L/R)" in
+    if not (check_for_fork playerid player_loc_info.loc.id gamestate step) 
+    then (print_endline "go ahead"; move_multi_step gamestate playerid step)
+    else (print_endline "fork ahead"; let choice = print_choice (get_pcol playerid) msg ["L"; "l"; "R"; "r"]
+          in (if choice = "L" || choice = "l" then player_loc_info.dir <- Left
+              else player_loc_info.dir <- Right); 
+              move_multi_step gamestate playerid step))
   else if (cmd = "help") then (print_endline ("p/points:      check your total points");
     print_endline ("a/advisor:     see your advisor");
     print_endline ("c/courses:     see your courses");
