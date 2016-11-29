@@ -116,6 +116,8 @@ let rec move_multi_step gamestate playerid n =
     if n = 0 then (let l_info = List.assoc playerid gamestate.playermap in
                    let current_square = l_info.loc.id in
                    let action = List.assoc current_square gamestate.sqact in
+                   let () = AT.print_string [get_pcol playerid] 
+                    (action.description ^ "\n") in
                    ignore(change_pk gamestate playerid action); gamestate)
     else if n > 0 then (let l_info = List.assoc playerid gamestate.playermap in
       if (l_info.loc.left = Null && l_info.loc.right = Null)
@@ -130,7 +132,6 @@ let rec move_multi_step gamestate playerid n =
     else failwith "Number of steps can't be negative"
 
 let rec check_for_fork playerid square gamestate num_step =
-  print_endline "in check fork";
   if num_step <> 0 then false
   else (let loc = find_loc_by_sid gamestate.gamemap square in
         if loc.right = Null then false 
@@ -151,16 +152,18 @@ let rec play (cmd : string) (gamestate : gamestate) (turn : int) : gamestate =
     player); repl gamestate turn; gamestate)
   else if (cmd = "n" || cmd = "name") then (print_endline (Player.getNickname
     player); repl gamestate turn; gamestate)
-  else if (cmd = "spin") then (let step = ((Random.int 4) + 1) in 
+  else if (cmd = "spin") then ((let step = ((Random.int 4) + 1) in 
     let playerid = Player.getID player in
     let player_loc_info = List.assoc playerid gamestate.playermap in
     let msg = "There's a fork in your path. Do you want to turn left or right? (L/R)" in
+    let () = AT.print_string [get_pcol (Player.getID player)] 
+    ("You have moved " ^ (string_of_int step) ^ " steps. Hooray!\n") in
     if not (check_for_fork playerid player_loc_info.loc.id gamestate step) 
-    then (print_endline "go ahead"; move_multi_step gamestate playerid step)
-    else (print_endline "fork ahead"; let choice = print_choice (get_pcol playerid) msg ["L"; "l"; "R"; "r"]
+    then (move_multi_step gamestate playerid step)
+    else (let choice = print_choice (get_pcol playerid) msg ["L"; "l"; "R"; "r"]
           in (if choice = "L" || choice = "l" then player_loc_info.dir <- Left
               else player_loc_info.dir <- Right); 
-              move_multi_step gamestate playerid step))
+              move_multi_step gamestate playerid step)))
   else if (cmd = "help") then (print_endline ("p/points:      check your total points");
     print_endline ("a/advisor:     see your advisor");
     print_endline ("c/courses:     see your courses");
