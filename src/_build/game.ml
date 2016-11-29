@@ -132,13 +132,13 @@ let sq_act_list sqact =
 
 let init_game j =
   let open Yojson.Basic.Util in
-  let courses = j |> member "game_components" |> member "courses" |> to_list
+  let courses = j |> member "courses" |> to_list
     |> List.map (extract_card COURSE) in
-  let advisors = j |> member "game_components" |> member "advisors" |> to_list
+  let advisors = j |> member "advisors" |> to_list
     |>  List.map (extract_card ADVISOR) in
-  let summer = j |> member "game_components" |> member "summer_plans" |> to_list
+  let summer = j |> member "summer_plans" |> to_list
     |>  List.map (extract_card SUMMER) in
-  let future = j |> member "game_components" |> member "future_plans" |> to_list
+  let future = j |> member "future_plans" |> to_list
     |>  List.map (extract_card FUTURE) in
   let gamecomp = {college = NONE; courses = courses; advisors = advisors;
   summer = summer; future = future } in
