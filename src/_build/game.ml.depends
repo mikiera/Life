@@ -1,1 +1,1 @@
-game.ml: Gamemap List Player String Yojson
+game.ml: Gamemap List Player Random String Yojson
