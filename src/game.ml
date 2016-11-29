@@ -11,7 +11,7 @@ type square = Null | Square of int
 
 type location = {id: square; left: square; right: square}
 
-type actionType = Event | ChoiceC | ChoiceA | ChoiceS | ChoiceF
+type actionType = Event | ChoiceC | ChoiceA | ChoiceS | ChoiceF |ChoiceCol
 
 type action = {
       actionType: actionType;
@@ -113,6 +113,7 @@ let parse_action action : action =
     | "advisor" -> ChoiceA
     | "summer" -> ChoiceS
     | "future" -> ChoiceF
+    | "college" -> ChoiceCol
     | _ -> Event  end
   in
   let description = action |> member "description" |> to_string in
