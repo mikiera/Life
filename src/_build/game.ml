@@ -164,13 +164,9 @@ let rec main_helper file_name =
     let () = print_endline "Welcome to the Life of a CS Major"; in
     let () = print_endline ""; in repl init
   with
-    | Illegal -> let () = print_endline "Please enter a valid game file";
-      in main_helper (read_line ())
-    | _ -> let () = print_string "This is an invalid game file.";
-      print_endline "It does not fit the schema. Please enter a valid json file";
-      print_string "> ";
-      in main_helper (read_line ())
-
+    |Yojson.Json_error _ -> let () = print_endline "Please enter a valid json file."; in main_helper (read_line ())
+    |Sys_error _ -> let () = print_endline "Invalid input. Please try again."; print_string "> "; in main_helper (read_line ())
+    | _ -> let () = print_string "Try again"; print_string "> "; in main_helper (read_line ())
 
 let main file_name =
    main_helper file_name
