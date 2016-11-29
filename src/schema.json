@@ -1,6 +1,5 @@
 {
-	"game_components": 
-		{ "courses": 
+		"courses": 
 			[{
 			 "name": "string",
 			 "description": "string",
@@ -36,7 +35,6 @@
 			 "karma" : "int"
 
 			}],
-		},
 
 	"map" : [ 
 		{ "squareid": "int",
