@@ -37,6 +37,9 @@ module Player : sig
   (* [getFuture p] returns the player's place of retirement *)
   val getFuture : player -> string
 
+  (* [getSummerPlans p] returns the player's summer plans *)
+  val getSummerPlans : player -> string
+
   (* Methods that alter [Player] *)
   (* [addNickname p s] adds a nickname to the player *)
   val addNickname : player -> string -> player
@@ -61,5 +64,8 @@ module Player : sig
 
   (* [changeFuture p s] changes the place of the player is retiring at *)
   val changeFuture : player -> string -> player
+
+  (* [changeSummerPlans p s] changes the summer plans of the player to s *)
+  val changeSummerPlans : player -> string -> player
 
 end
