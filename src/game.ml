@@ -131,8 +131,8 @@ let rec move_multi_step gamestate playerid n =
     else failwith "Number of steps can't be negative"
 
 let rec play (cmd : string) (gamestate : gamestate) (turn : int) : gamestate =
-  let playeridx = List.nth gamestate.active_players turn in
-  let player = List.nth gamestate.players (playeridx - 1) in
+  let playerid = List.nth gamestate.active_players turn in
+  let player = List.nth gamestate.players (playerid - 1) in
   if (cmd = "p" || cmd = "points") then (print_endline (string_of_int
     (Player.getPoints player)); gamestate)
   else if (cmd = "h" || cmd = "history") then (print_endline (Player.getHistory
@@ -159,14 +159,14 @@ let rec play (cmd : string) (gamestate : gamestate) (turn : int) : gamestate =
 
 and repl (state : gamestate) (turn : int) : unit =
   try
-    let playeridx = List.nth state.active_players turn in
-    let player = List.nth state.players (playeridx - 1) in
-    let () = AT.print_string [get_pcol playeridx] ("It is " ^
+    let playerid = List.nth state.active_players turn in
+    let player = List.nth state.players (playerid - 1) in
+    let () = AT.print_string [get_pcol playerid] ("It is " ^
       (Player.getNickname player) ^ "'s turn. Please enter a command.\n>>> ") in
     let cmd = read_line () in
     let check_cmd = cmd_checker cmd in
     if (check_cmd = "quit" || check_cmd = "exit" || check_cmd = "q")
-    then AT.print_string [get_pcol playeridx] "You have terminated the game.\n"
+    then AT.print_string [gcol] "You have terminated the game.\n"
     else
       let new_gs = play check_cmd state turn in
       let new_turn = if (check_cmd <> "spin") then turn
