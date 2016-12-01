@@ -64,12 +64,14 @@ let ccol = AT.red
 (* [get_pcol id] gets the color for player with given id *)
 let get_pcol id = List.nth [AT.blue; AT.green; AT.magenta] (id mod 3)
 
-
+(* [cmd_checker c] returns the string c with all lowercase letters and no
+ * leading or trailing spaces *)
 let cmd_checker c =
   let a = String.lowercase_ascii (String.trim c) in a
 
 (* [print_choice color descrip choices] will print the description in color
- * If the user's input matches a string in list choices *)
+ * If the user's input matches a string in list choices
+ * color is an ANSITerminal color, descrip is string, choices is string list *)
 let rec print_choice color descrip choices =
   let () = AT.print_string [color] (descrip ^ "\n> ") in
   let result = read_line () in
@@ -77,15 +79,22 @@ let rec print_choice color descrip choices =
   if (List.mem fixedresult choices) then fixedresult
   else (print_choice color descrip choices)
 
+(* [find_player_by_id player_list player_id] returns the Player object
+ * that has the id player_id; if the player_id does not correspond with a
+ * Player, a Failure is raised
+ * player_list is a list of Player objects, player_id is an int *)
 let rec find_player_by_id player_list player_id =
   match player_list with
-  | [] -> failwith "this player id is not in the game"
+  | [] -> raise (Failure "This player id is not in the game.")
   | h::t -> if (Player.getID h) = player_id then h
             else find_player_by_id t player_id
 
+(* [find_loc_by_sid locations square_id] finds the location object with
+ * identifier square_id; if square is not found in locations, Failure is raised
+ * locations is a list of locations, square_id is Null or Square i (i : int) *)
 let rec find_loc_by_sid (locations:location list) (square_id:square):location =
   match locations with
-  | [] -> failwith "this square id is not in the game"
+  | [] -> raise (Failure "This square id is not in the game.")
   | h::t -> if h.id = square_id then h else find_loc_by_sid t square_id
 
 let remove_card card gamecomp gamestate =
@@ -138,10 +147,17 @@ let get_correct_comp actionType gamestate =
     | ChoiceCol -> failwith "no gamecomp"
     | Event -> failwith "no gamecomp"
 
-let change_dir gamestate choice playerid =
+(* [change_dir gamestate choice playerid] modifies the location info of player
+ * identified by playerid stored in gamestate.playermap
+ * gamestate is a gamestate, choice is a direction, playerid is an int *)
+let change_dir (gamestate : gamestate) (choice : direction) (playerid : playerid) =
     let player_loc_info = List.assoc playerid gamestate.playermap in
     player_loc_info.dir <- choice
 
+(* [move_one_step gamestate playerid] returns the gamestate after the player
+ * identified by playerid moves one step forward where the direction is
+ * determined by the location information stored in gamestate.playermap
+ * gamestate is a gamestate, playerid is an int *)
 let move_one_step gamestate playerid =
     let player_loc_info = List.assoc playerid gamestate.playermap in
     let current_dir = player_loc_info.dir in

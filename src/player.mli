@@ -56,10 +56,10 @@ module Player : sig
   (* [changeAdvisor p s] changes the player's faculty advisor *)
   val changeAdvisor : player -> string -> player
 
-  (* [changePoints p i] changes the number of currency points the player has *)
+  (* [changePoints p i] adds i points to the current number of currency points *)
   val changePoints : player -> int -> player
 
-  (* [changeKarma p i] changes the number of karma points the player has *)
+  (* [changeKarma p i] adds i karma to the current number of karma *)
   val changeKarma : player -> int -> player
 
   (* [changeFuture p s] changes the place of the player is retiring at *)
