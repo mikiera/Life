@@ -9,7 +9,6 @@ let s = Yojson.Basic.from_file "a.json"
 let init_s = s |> init_game
 let gamemap = init_s.gamemap
 let sqact = init_s.sqact
-let college = init_s.gamecomp.college
 let advisors = init_s.gamecomp.advisors
 let summer = init_s.gamecomp.summer
 
