@@ -253,9 +253,9 @@ let rec get_list_of_valid_choices cardlst lst =
 let get_start_msg actionType =
   match actionType with
   | ChoiceC ->
-  "Choose a course from the following list by typing the course number:"
+  "Choose a course from the following list by typing the course number"
   | ChoiceA ->
-  "Choose an advisor from the following list by typing the advisor number:"
+  "Choose an advisor from the following list by typing the advisor number"
   | ChoiceF ->
   "Determine your future from the following list by typing the corresponding number"
   | ChoiceS ->
