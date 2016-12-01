@@ -106,6 +106,10 @@ let change_dir (gamestate : gamestate) (choice : direction) (playerid : playerid
     let player_loc_info = List.assoc playerid gamestate.playermap in
     player_loc_info.dir <- choice
 
+(* [move_one_step gamestate playerid] returns the gamestate after the player
+ * identified by playerid moves one step forward where the direction is
+ * determined by the location information stored in gamestate.playermap
+ * gamestate is a gamestate, playerid is an int *)
 let move_one_step gamestate playerid =
     let player_loc_info = List.assoc playerid gamestate.playermap in
     let current_dir = player_loc_info.dir in
