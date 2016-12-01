@@ -68,28 +68,41 @@ let ccol = AT.red
 let get_pcol id = List.nth [AT.blue; AT.green; AT.magenta] (id mod 3)
 
 (* [print_choice color descrip choices] will print the description in color
- * If the user's input matches a string in list choices *)
+ * If the user's input matches a string in list choices
+ * color is an ANSITerminal color, descrip is string, choices is string list *)
 let rec print_choice color descrip choices =
   let () = AT.print_string [color] (descrip ^ "\n> ") in
   let result = read_line () in
   if (List.mem result choices) then result
   else (print_choice color descrip choices)
 
+(* [cmd_checker c] returns the string c with all lowercase letters and no
+ * leading or trailing spaces *)
 let cmd_checker c =
   let a = String.lowercase_ascii (String.trim c) in a
 
+(* [find_player_by_id player_list player_id] returns the Player object
+ * that has the id player_id; if the player_id does not correspond with a
+ * Player, a Failure is raised
+ * player_list is a list of Player objects, player_id is an int *)
 let rec find_player_by_id player_list player_id =
   match player_list with
-  | [] -> failwith "this player id is not in the game"
+  | [] -> raise (Failure "This player id is not in the game.")
   | h::t -> if (Player.getID h) = player_id then h
             else find_player_by_id t player_id
 
+(* [find_loc_by_sid locations square_id] finds the location object with
+ * identifier square_id; if square is not found in locations, Failure is raised
+ * locations is a list of locations, square_id is Null or Square i (i : int) *)
 let rec find_loc_by_sid (locations:location list) (square_id:square):location =
   match locations with
-  | [] -> failwith "this square id is not in the game"
+  | [] -> raise (Failure "This square id is not in the game.")
   | h::t -> if h.id = square_id then h else find_loc_by_sid t square_id
 
-let change_dir gamestate choice playerid =
+(* [change_dir gamestate choice playerid] modifies the location info of player
+ * identified by playerid stored in gamestate.playermap
+ * gamestate is a gamestate, choice is a direction, playerid is an int *)
+let change_dir (gamestate : gamestate) (choice : direction) (playerid : playerid) =
     let player_loc_info = List.assoc playerid gamestate.playermap in
     player_loc_info.dir <- choice
 
@@ -116,7 +129,7 @@ let rec move_multi_step gamestate playerid n =
     if n = 0 then (let l_info = List.assoc playerid gamestate.playermap in
                    let current_square = l_info.loc.id in
                    let action = List.assoc current_square gamestate.sqact in
-                   let () = AT.print_string [get_pcol playerid] 
+                   let () = AT.print_string [get_pcol playerid]
                     (action.description ^ "\n") in
                    ignore(change_pk gamestate playerid action); gamestate)
     else if n > 0 then (let l_info = List.assoc playerid gamestate.playermap in
@@ -134,7 +147,7 @@ let rec move_multi_step gamestate playerid n =
 let rec check_for_fork playerid square gamestate num_step =
   if num_step <> 0 then false
   else (let loc = find_loc_by_sid gamestate.gamemap square in
-        if loc.right = Null then false 
+        if loc.right = Null then false
         else if loc.left <> Null && loc.right <> Null then true
         else check_for_fork playerid loc.right gamestate (num_step-1))
 
@@ -143,27 +156,27 @@ let rec play (cmd : string) (gamestate : gamestate) (turn : int) : gamestate =
   let player = List.nth gamestate.players (playerid - 1) in
   if (cmd = "p" || cmd = "points") then (AT.print_string [get_pcol playerid]
     (string_of_int (Player.getPoints player) ^ "\n"); gamestate)
-  else if (cmd = "h" || cmd = "history") then (AT.print_string [get_pcol playerid] 
+  else if (cmd = "h" || cmd = "history") then (AT.print_string [get_pcol playerid]
     (Player.getHistory player); gamestate)
-  else if (cmd = "a" || cmd = "advisor") then (AT.print_string [get_pcol playerid] 
+  else if (cmd = "a" || cmd = "advisor") then (AT.print_string [get_pcol playerid]
     ((Player.getAdvisor player) ^ "\n"); gamestate)
-  else if (cmd = "c" || cmd = "courses") then (AT.print_string [get_pcol playerid] 
+  else if (cmd = "c" || cmd = "courses") then (AT.print_string [get_pcol playerid]
     ((Player.getCourse player) ^ "\n"); gamestate)
-  else if (cmd = "co" || cmd = "college") then (AT.print_string [get_pcol playerid] 
+  else if (cmd = "co" || cmd = "college") then (AT.print_string [get_pcol playerid]
     ((Player.getCollege player) ^ "\n"); gamestate)
-  else if (cmd = "n" || cmd = "name") then (AT.print_string [get_pcol playerid] 
+  else if (cmd = "n" || cmd = "name") then (AT.print_string [get_pcol playerid]
     ((Player.getNickname player) ^ "\n"); gamestate)
-  else if (cmd = "spin") then ((let step = ((Random.int 4) + 1) in 
+  else if (cmd = "spin") then ((let step = ((Random.int 4) + 1) in
     let playerid = Player.getID player in
     let player_loc_info = List.assoc playerid gamestate.playermap in
     let msg = "There's a fork in your path. Do you want to turn left or right? (L/R)" in
-    let () = AT.print_string [get_pcol (Player.getID player)] 
+    let () = AT.print_string [get_pcol (Player.getID player)]
     ("You have moved " ^ (string_of_int step) ^ " steps. Hooray!\n") in
-    if not (check_for_fork playerid player_loc_info.loc.id gamestate step) 
+    if not (check_for_fork playerid player_loc_info.loc.id gamestate step)
     then (move_multi_step gamestate playerid step)
     else (let choice = print_choice (get_pcol playerid) msg ["L"; "l"; "R"; "r"]
           in (if choice = "L" || choice = "l" then player_loc_info.dir <- Left
-              else player_loc_info.dir <- Right); 
+              else player_loc_info.dir <- Right);
               move_multi_step gamestate playerid step)))
   else if (cmd = "help") then (
     AT.print_string [get_pcol playerid] ("p/points:      check your total points\n");
