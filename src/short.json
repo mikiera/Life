@@ -377,7 +377,7 @@
 		"action": 
 			{
 			"type": "event",
-			"description": "You went to career fair info session for Google and got free dinner. Get 300 points and karma",
+			"description": "You went to a tech talk for Google and got free dinner. Get 300 points and karma",
 			"points": 300,
 			"karma": 0
 			}
@@ -422,7 +422,7 @@
 		"action": 
 			{
 			"type": "course",
-			"description": "It's preenroll. Select a course for next semester! Get 400 points for waking up on time.",
+			"description": "It's pre-enroll. Select a course for next semester! Get 400 points for waking up on time.",
 			"points": 400,
 			"karma": 0
 			}
@@ -440,7 +440,7 @@
 		"action": 
 			{
 			"type": "event",
-			"description": "You pulled your first allnighter. Congrats? Get 500 points and karma. ",
+			"description": "You pulled your first all-nighter. Congrats? Get 500 points and karma. ",
 			"points": 500,
 			"karma": 1000
 			}
@@ -454,36 +454,294 @@
 			"karma": 0
 			}
 		},
-
-		{ "squareid": 4,
-		  "action": 
-			{
-			"type": "advisor",
-			"description": "You need to choose an advisor. You also get karma points.",
-			"points": 600,
-			"karma": 1000
-			}
-		}, 
-	 	{ "squareid": 5,
+    { "squareid": 19,
+      "action": 
+      {
+      "type": "event",
+      "description": "You decided to go to an ACSU GBody meeting. Get 0 points for eating free pizza.",
+      "points": 0,
+      "karma": -5
+      }
+    },
+    { "squareid": 20,
+      "action": 
+      {
+      "type": "event",
+      "description": "You created an actual Github for independent projects. Get 202 points for at least trying.",
+      "points": 202,
+      "karma": 112
+      }
+    },
+    { "squareid": 21,
+      "action": 
+      {
+      "type": "event",
+      "description": "You affiliated with the CS major! Congrats fam :') 9999 points",
+      "points": 9999,
+      "karma": 456
+      }
+    },
+    { "squareid": 22,
+      "action": 
+      {
+      "type": "course",
+      "description": "The semester's been rough and you have to drop your class :( Get 111 points for caring about your own health.",
+      "points": 111,
+      "karma": 52
+      }
+    },
+    { "squareid": 23,
+      "action": 
+      {
+      "type": "event",
+      "description": "There are no assignments due this weekend! Go out tonight with some friends and get 99 points.",
+      "points": 99,
+      "karma": 274
+      }
+    },
+    { "squareid": 24,
+      "action": 
+      {
+      "type": "event",
+      "description": "You submitted an empty zip file on CMS. Lose 398 points for carelessness :(",
+      "points": -398,
+      "karma": 35
+      }
+    },
+    { "squareid": 25,
+      "action": 
+      {
+      "type": "event",
+      "description": "You're stuck on 2-3 trees, but your best friend is a 3110 TA! Ask them for 3110 points-I mean help on the assignment.",
+      "points": 3110,
+      "karma": 3110
+      }
+    },
+    { "squareid": 26,
+      "action": 
+      {
+      "type": "event",
+      "description": "You have nothing to do. What a rare occurrence!!! 42 points.",
+      "points": 42,
+      "karma": 24
+      }
+    },
+    { "squareid": 27,
+      "action": 
+      {
+      "type": "event",
+      "description": "You haven't showered in 3 days. There's an assignment due.. BUT YOU HAVEN'T SHOWERED. -101 points",
+      "points": -101,
+      "karma": -803
+      }
+    },
+	 	{ "squareid": 28,
 		  "action": 
 			{
 			"type": "event",
-			"description": "You finished 3110! You're on track!",
+			"description": "You completed 3110! This has been 3110. Get 3110 points.",
 			"points": 3110,
-			"karma": 10
+			"karma": 696
 			}
 		},
-		{ "squareid": 6,
-		  "action": 
-			{
-			"type": "future",
-			"description": "Congratulations! You have graduated!! Now you get to choose your post-Cornell plans. You also get karma points.",
-			"points": 0,
-			"karma": 10
-			}
-		}],
-
+    { "squareid": 29,
+      "action": 
+      {
+      "type": "event",
+      "description": "Your question on Piazza was never answered. You look at the red dot and feel 78 points slipping away.",
+      "points": -78,
+      "karma": -21
+      }
+    },
+    { "squareid": 30,
+      "action": 
+      {
+      "type": "advisor",
+      "description": "You need to choose an advisor. You also get karma points.",
+      "points": 600,
+      "karma": 1000
+      }
+    }, 
+    { "squareid": 31,
+      "action": 
+      {
+      "type": "event",
+      "description": "Your CS partner decided to drop the class. Tough luck bud, you have to find a new one. lose 33 points.",
+      "points": -33,
+      "karma": -2
+      }
+    }, 
+    { "squareid": 32,
+      "action": 
+      {
+      "type": "event",
+      "description": "You crashed. Your computer crashed. It's a really unfortunate week. You lose 444 points, but at least you got some karma points for making through a rough time.",
+      "points": -444,
+      "karma": 67
+      }
+    }, 
+    { "squareid": 33,
+      "action": 
+      {
+      "type": "event",
+      "description": "You go to bed on one day and you get up on a different calendar day. w0w. You get 688 points.",
+      "points": 688,
+      "karma": 511
+      }
+    }, 
+    { "squareid": 34,
+      "action": 
+      {
+      "type": "event",
+      "description": "You slept through a prelim. Uh oh. You will have to lose 298 points.",
+      "points": -298,
+      "karma": -105
+      }
+    }, 
+    { "squareid": 35,
+      "action": 
+      {
+      "type": "event",
+      "description": "You got flown out to an interview. Get 836 points and a ton of free food that's all paid for.",
+      "points": 836,
+      "karma": 800
+      }
+    },
+    { "squareid": 36,
+      "action": 
+      {
+      "type": "event",
+      "description": "Regrades are due tonight, but the handback room was closed when you went there to check. You lose 39 points.",
+      "points": -39,
+      "karma": -12
+      }
+    }, 
+    { "squareid": 37,
+      "action": 
+      {
+      "type": "event",
+      "description": "CMS crashed. Lose 307 points for being unlucky.",
+      "points": -307,
+      "karma": -15
+      }
+    },
+    { "squareid": 38,
+      "action": 
+      {
+      "type": "event",
+      "description": "It's time for Grace Hopper! Get free swag and maybe a job.. Get 456 points!",
+      "points": 456,
+      "karma": 564
+      }
+    }, 
+    { "squareid": 39,
+      "action": 
+      {
+      "type": "event",
+      "description": "You're at office hours, but the line was so long, the TAs couldn't get to you. Lose 165 points, your sanity, your temper, and your faith in humanity. ",
+      "points": -165,
+      "karma": -561
+      }
+    }, 
+    { "squareid": 40,
+      "action": 
+      {
+      "type": "event",
+      "description": "YOUR CODE WORKS. YOUR GROUP MEMBERS ARE JUMPING UP AND DOWN FOR JOY!!! You got 475 points.",
+      "points": 475,
+      "karma": 14742
+      }
+    }, 
+    { "squareid": 41,
+      "action": 
+      {
+      "type": "event",
+      "description": "Life segfaulted. Lose 480 points.",
+      "points": -480,
+      "karma": -129
+      }
+    }, 
+    { "squareid": 42,
+      "action": 
+      {
+      "type": "event",
+      "description": "You got an award for your hack at Big Red Hacks. Yayyyyy, get 510 points!",
+      "points": 510,
+      "karma": 150
+      }
+    }, 
+    { "squareid": 43,
+      "action": 
+      {
+      "type": "event",
+      "description": "You learned how to inspect element and you start messing with things :) Get 71 points",
+      "points": 71,
+      "karma": 17
+      }
+    }, 
+    { "squareid": 44,
+      "action": 
+      {
+      "type": "advisor",
+      "description": "Your faculty advisor went on sabbatical, so you need to choose a new advisor. You lost 6 points.",
+      "points": -6,
+      "karma": 1000
+      }
+    }, 
+    { "squareid": 45,
+      "action": 
+      {
+      "type": "event",
+      "description": "You finally used Vim enough to know how to quit. Good job - the gods of CS award you with 621 points.",
+      "points": 621,
+      "karma": 216
+      }
+    }, 
+    { "squareid": 46,
+      "action": 
+      {
+      "type": "event",
+      "description": "Wow! You got hired as the head TA. Get 530 points for loving baby CS majors <3",
+      "points": 530,
+      "karma": 1503
+      }
+    }, 
+    { "squareid": 47,
+      "action": 
+      {
+      "type": "event",
+      "description": "You're tired, but you still need to graduate. There's no time to waste. Go to Carpenter and crank out that pset. Lose 13 points.",
+      "points": -13,
+      "karma": -171
+      }
+    }, 
+    { "squareid": 48,
+      "action": 
+      {
+      "type": "event",
+      "description": "You give your CS partner (and now lifetime friend) a hug. It's been a long journey, but you've made it. Get 528 points :)",
+      "points": 528,
+      "karma": 803
+      }
+    }, 
+    { "squareid": 49,
+      "action": 
+      {
+      "type": "event",
+      "description": "You're looking forward to graduation. Feel the senioritis settle in for 395 points ;)",
+      "points": 395,
+      "karma": 593
+      }
+    }, 
+    { "squareid": 50,
+      "action": 
+      {
+      "type": "future",
+      "description": "Congratulations! You have graduated!! Now you get to choose your post-Cornell plans. You also get karma points.",
+      "points": 0,
+      "karma": 10
+      }
+    }],
 	"start": 1,
 	"start_points": 10
-
 }
