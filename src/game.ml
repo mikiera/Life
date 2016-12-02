@@ -224,16 +224,31 @@ let rec check_for_fork playerid square gamestate num_step =
         else if loc.left <> Null && loc.right <> Null then true
         else check_for_fork playerid loc.right gamestate (num_step-1))
 
+(* [get_player_direction playerid gamestate] returns the dir of the player *)
+let get_player_direction playerid gamestate =
+  let locinfo = List.filter (fun (x,y) -> x = playerid) gamestate.playermap in
+  match locinfo with
+    | [] -> failwith "player not found"
+    | (h1, h2) ::t -> h2.dir
+
+(* [convert_dir_square loc dir] returns the correct square based on direction *)
+let convert_dir_square loc dir =
+  match dir with
+    | Left -> loc.left
+    | Right -> loc.right
+
 (* [get_step_for_choice_event playerid square gamestate num_step] returns a
  * tuple of corrected number of steps for mandatory stops and the actionType *)
  (* starts at loc.right *)
 let rec get_step_for_choice_event playerid square gamestate num_step =
   let loc = find_loc_by_sid gamestate.gamemap square in
   let action = List.assoc square gamestate.sqact in
+  let dir = get_player_direction playerid gamestate in
+  let locdir = convert_dir_square loc dir in
   if num_step = 1 then (num_step, action.actionType)
   else
     if (action.actionType = Event)
-      then get_step_for_choice_event playerid loc.right gamestate (num_step -1)
+      then get_step_for_choice_event playerid locdir gamestate (num_step -1)
     else (num_step, action.actionType)
 
 (* [handle_fork playerid player_loc_info gamestate step] handles fork events and
