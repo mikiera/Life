@@ -241,7 +241,7 @@ let rec create_message_from_cards msg cardlst =
     | [] -> msg
     | h :: t -> let desc = h.name in
                 let id = string_of_int h.id in
-                let newmsg = msg^" "^id^") "^desc in
+                let newmsg = msg^"\n"^id^") "^desc in
                 create_message_from_cards newmsg t
 
 let rec get_list_of_valid_choices cardlst lst =
@@ -297,7 +297,7 @@ let handle_choice_helper player gamestate actionType =
   let valid_choices = get_list_of_valid_choices cardlst [] in
   let cardmsg = create_message_from_cards "" cardlst in
   let startmsg = get_start_msg actionType in
-  let msg = startmsg^" : "^cardmsg in
+  let msg = startmsg^":"^cardmsg in
   let choice = print_choice ccol msg valid_choices in
   let id = int_of_string choice in
   let newcard = get_card_by_id id cardlst in
