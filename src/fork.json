@@ -284,9 +284,13 @@
 		},
 		{ "squareid": 5,
 		   "left": 0,
-			"right": 6
+			"right": 7
 		},
 		{ "squareid": 6,
+		   "left": 0,
+			"right": 7
+		},
+		{ "squareid": 7,
 		   "left": 0,
 			"right": 0
 		}],
@@ -337,12 +341,21 @@
 			"karma": 10
 			}
 		},
-		{ "squareid": 6,
+		{ "squareid": 7,
 		  "action": 
 			{
 			"type": "future",
 			"description": "Congratulations! You have graduated!! Now you get to choose your post-Cornell plans. You also get karma points.",
 			"points": 0,
+			"karma": 10
+			}
+		},
+		{ "squareid": 6,
+		  "action": 
+			{
+			"type": "event",
+			"description": "It's CS Formal, get 300 points!",
+			"points": 300,
 			"karma": 10
 			}
 		}],
