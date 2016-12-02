@@ -103,6 +103,8 @@ let rec find_loc_by_sid (locations:location list) (square_id:square):location =
   | [] -> raise (Failure "This square id is not in the game.")
   | h::t -> if h.id = square_id then h else find_loc_by_sid t square_id
 
+(* [remove_card card gamecomp gamestate] removes a card from the gamestate and
+ * returns the new gamestate *)
 let remove_card card gamecomp gamestate =
   let newgamecomp =
     begin match card.card_type with
@@ -123,6 +125,8 @@ let remove_card card gamecomp gamestate =
     end in
   {gamestate with gamecomp = newgamecomp}
 
+(* [add_card card gamecomp gamestate] adds a card back into the gamestate and
+ * returns the new gamestate *)
 let add_card card gamecomp gamestate =
   let newgamecomp =
     begin match card.card_type with
@@ -143,7 +147,8 @@ let add_card card gamecomp gamestate =
     end in
   {gamestate with gamecomp = newgamecomp}
 
-
+(* [get_correct_comp actionType gamestate] returns the correct gamecomp
+ * card list based on the actionType *)
 let get_correct_comp actionType gamestate =
   match actionType with
     | ChoiceC -> gamestate.gamecomp.courses
@@ -183,9 +188,9 @@ let change_pk (gs:gamestate) (pid:playerid) (action:action):Player.player =
     ignore((Player.changePoints) player action.points);
     (Player.changeKarma) player action.karma
 
-let check_if_at_end left right =
-  (left = Null && right = Null)
 
+(* [end_game_user gamestate playerid l_info] removes a user from the game once
+ * they reached the end; returns a gamestate *)
 let end_game_user gamestate playerid n l_info =
   let a = List.assoc l_info.loc.id gamestate.sqact in
   ignore(change_pk gamestate playerid a);
@@ -283,19 +288,23 @@ let get_start_msg actionType =
   "Choose your summer plans from the following list by typing the corresponding number"
   | _ -> "not a valid actionType"
 
-
+(* [get_card_by_id id cardlst] returns the card associated with that id *)
 let rec get_card_by_id id cardlst =
   match cardlst with
     | [] -> failwith "this card is not available"
     | h :: t -> if h.id = id then h else get_card_by_id id t
 
-
+(* [check_if_player_has_card playercardlst actionType]
+ * returns the card associated with that id *)
 let rec check_if_player_has_card playercardlst actionType =
   match playercardlst with
     | [] -> ([], playercardlst)
     | h :: t -> if h.card_type=actionType then ([h],t)
                 else check_if_player_has_card t actionType
 
+(* [update_player_has_card player actionType card]
+ * returns a player with changed fields based on action type, as
+ * well as new point and karma values *)
 let update_player player actionType card =
   let name = card.name in
   match actionType with
@@ -314,11 +323,15 @@ let update_player player actionType card =
     | ChoiceCol -> (Player.changeCollege) player name
     | Event -> player
 
+(* [update_player_card_list playerid playercardlst gamestate newcardlst]
+ * updates the player card list to remove the player currently choosing cards *)
 let update_player_card_list playerid playercardlst gamestate newcardlst =
   let noplaylst = List.filter (fun (x,y) -> x <> playerid) playercardlst in
   let newlst = (playerid, newcardlst) :: noplaylst in
   {gamestate with playercard = newlst}
 
+(* [handle_choice_helper player gamestate actionType] is a helper function
+ * that handles choice events and returns a new gamestate *)
 let handle_choice_helper player gamestate actionType =
   let playerid = Player.getID player in
   let cardlst = get_correct_comp actionType gamestate in
@@ -423,9 +436,9 @@ and repl (state : gamestate) (turn : int) : unit =
   with
     | _ -> AT.print_string [gcol]
       "Invalid command. Please try again.\n"; repl state turn
-(*priya can you add end of the game when active player list is empty *)
 
 (* parsing functions *)
+
 
 let extract_card ctype card =
   let open Yojson.Basic.Util in
