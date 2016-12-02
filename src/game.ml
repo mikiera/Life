@@ -340,6 +340,16 @@ let update_player_card_list playerid playercardlst gamestate newcardlst =
   let newlst = (playerid, newcardlst) :: noplaylst in
   {gamestate with playercard = newlst}
 
+
+  let print_descrip playerid newcard =
+    match newcard.card_type with
+      | ChoiceA -> AT.print_string [get_pcol playerid]
+            ("\nYou picked "^newcard.name^"\n"^newcard.description^"\n \n")
+      | _ -> AT.print_string [get_pcol playerid]
+            ("\nYou picked "^newcard.name^"\n"^newcard.description^"\n"^
+            "The points associated with "^newcard.name^" is "^
+            (string_of_int newcard.points)^" points. \n \n")
+
 (* [handle_choice_helper player gamestate actionType] is a helper function
  * that handles choice events and returns a new gamestate *)
 let handle_choice_helper player gamestate actionType =
@@ -357,6 +367,7 @@ let handle_choice_helper player gamestate actionType =
   let newpclst = newcard :: fixpclst in
   let gs =
     update_player_card_list playerid gamestate.playercard gamestate newpclst in
+  let () = print_descrip playerid newcard in
   let newgs_remove = remove_card newcard gs.gamecomp gs in
   (ignore (update_player player actionType newcard));
   if oldcard = [] then newgs_remove
