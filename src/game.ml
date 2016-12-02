@@ -99,9 +99,11 @@ let rec find_player_by_id player_list player_id =
  * identifier square_id; if square is not found in locations, Failure is raised
  * locations is a list of locations, square_id is Null or Square i (i : int) *)
 let rec find_loc_by_sid (locations:location list) (square_id:square):location =
-  match locations with
+  if (square_id = Null) then raise (Failure "This is not a valid square id.")
+  else
+  (match locations with
   | [] -> raise (Failure "This square id is not in the game.")
-  | h::t -> if h.id = square_id then h else find_loc_by_sid t square_id
+  | h::t -> if h.id = square_id then h else find_loc_by_sid t square_id)
 
 (* [remove_card card gamecomp gamestate] removes a card from the gamestate and
  * returns the new gamestate *)
@@ -157,13 +159,6 @@ let get_correct_comp actionType gamestate =
     | ChoiceS -> gamestate.gamecomp.summer
     | ChoiceCol -> failwith "no gamecomp"
     | Event -> failwith "no gamecomp"
-
-(* [change_dir gamestate choice playerid] modifies the location info of player
- * identified by playerid stored in gamestate.playermap
- * gamestate is a gamestate, choice is a direction, playerid is an int *)
-let change_dir (gamestate : gamestate) (choice : direction) (playerid : playerid) =
-    let player_loc_info = List.assoc playerid gamestate.playermap in
-    player_loc_info.dir <- choice
 
 (* [move_one_step gamestate playerid] returns the gamestate after the player
  * identified by playerid moves one step forward where the direction is
