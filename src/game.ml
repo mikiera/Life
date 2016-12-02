@@ -68,41 +68,28 @@ let ccol = AT.red
 let get_pcol id = List.nth [AT.blue; AT.green; AT.magenta] (id mod 3)
 
 (* [print_choice color descrip choices] will print the description in color
- * If the user's input matches a string in list choices
- * color is an ANSITerminal color, descrip is string, choices is string list *)
+ * If the user's input matches a string in list choices *)
 let rec print_choice color descrip choices =
   let () = AT.print_string [color] (descrip ^ "\n> ") in
   let result = read_line () in
   if (List.mem result choices) then result
   else (print_choice color descrip choices)
 
-(* [cmd_checker c] returns the string c with all lowercase letters and no
- * leading or trailing spaces *)
 let cmd_checker c =
   let a = String.lowercase_ascii (String.trim c) in a
 
-(* [find_player_by_id player_list player_id] returns the Player object
- * that has the id player_id; if the player_id does not correspond with a
- * Player, a Failure is raised
- * player_list is a list of Player objects, player_id is an int *)
 let rec find_player_by_id player_list player_id =
   match player_list with
-  | [] -> raise (Failure "This player id is not in the game.")
+  | [] -> failwith "this player id is not in the game"
   | h::t -> if (Player.getID h) = player_id then h
             else find_player_by_id t player_id
 
-(* [find_loc_by_sid locations square_id] finds the location object with
- * identifier square_id; if square is not found in locations, Failure is raised
- * locations is a list of locations, square_id is Null or Square i (i : int) *)
 let rec find_loc_by_sid (locations:location list) (square_id:square):location =
   match locations with
-  | [] -> raise (Failure "This square id is not in the game.")
+  | [] -> failwith "this square id is not in the game"
   | h::t -> if h.id = square_id then h else find_loc_by_sid t square_id
 
-(* [change_dir gamestate choice playerid] modifies the location info of player
- * identified by playerid stored in gamestate.playermap
- * gamestate is a gamestate, choice is a direction, playerid is an int *)
-let change_dir (gamestate : gamestate) (choice : direction) (playerid : playerid) =
+let change_dir gamestate choice playerid =
     let player_loc_info = List.assoc playerid gamestate.playermap in
     player_loc_info.dir <- choice
 

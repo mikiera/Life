@@ -127,6 +127,10 @@
 		},
 		{ "squareid": 4,
 		   "left": 0,
+			"right": 5
+		},
+		{ "squareid": 5,
+		   "left": 0,
 			"right": 0
 		}],
 
@@ -134,13 +138,22 @@
 		{"squareid": 1,
 		"action": 
 			{
+			"type": "event",
+			"description": "event. should not be printed",
+			"points": 0,
+			"karma": 0
+			}
+		},																					
+		{"squareid": 2,
+		"action": 
+			{
 			"type": "college",
-			"description": "You get to choose between Arts and Sciences or Engineering. Type AS for arts and sciences and E for engineering.",
+			"description": "You get to choose between Arts and Sciences or Engineering.",
 			"points": 0,
 			"karma": 0
 			}
 		},
-		{"squareid": 2,
+		{"squareid": 3,
 		"action": 
 			{
 			"type": "event",
@@ -149,7 +162,7 @@
 			"karma": 0
 			}
 		},
-		{ "squareid": 3,
+		{ "squareid": 4,
 		  "action": 
 			{
 			"type": "advisor",
@@ -158,7 +171,7 @@
 			"karma": 1000
 			}
 		}, 
-	 	{ "squareid": 4,
+	 	{ "squareid": 5,
 		  "action": 
 			{
 			"type": "future",
