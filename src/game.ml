@@ -299,10 +299,18 @@ let rec check_if_player_has_card playercardlst actionType =
 let update_player player actionType card =
   let name = card.name in
   match actionType with
-    | ChoiceC -> (Player.changeCourse) player name
-    | ChoiceA -> (Player.changeAdvisor) player name
-    | ChoiceF -> (Player.changeFuture) player name
-    | ChoiceS -> (Player.changeSummerPlans) player name
+    | ChoiceC -> (ignore((Player.changeCourse) player name));
+                 (ignore((Player.changePoints) player card.points));
+                 (Player.changeKarma) player card.karma
+    | ChoiceA -> (ignore((Player.changeAdvisor) player name));
+                 (ignore((Player.changePoints) player card.points));
+                 (Player.changeKarma) player card.karma
+    | ChoiceF -> (ignore((Player.changeFuture) player name));
+                 (ignore((Player.changePoints) player card.points));
+                 (Player.changeKarma) player card.karma
+    | ChoiceS -> (ignore((Player.changeSummerPlans) player name));
+                 (ignore((Player.changePoints) player card.points));
+                 (Player.changeKarma) player card.karma
     | ChoiceCol -> (Player.changeCollege) player name
     | Event -> player
 
