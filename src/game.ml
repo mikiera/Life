@@ -1,4 +1,5 @@
 (* game.ml *)
+(* open Gamemap *)
 open Player
 open Random
 
@@ -63,6 +64,10 @@ let ccol = AT.red
 
 (* [get_pcol id] gets the color for player with given id *)
 let get_pcol id = List.nth [AT.blue; AT.green; AT.magenta] (id mod 3)
+
+let get_square_num square = match square with
+  |Square n -> n
+  |Null -> 0
 
 (* [cmd_checker c] returns the string c with all lowercase letters and no
  * leading or trailing spaces *)
