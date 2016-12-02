@@ -392,7 +392,6 @@ let spin_helper gamestate player step =
   let newstep = step - leftover + 1 in
   let () = AT.print_string [get_pcol (Player.getID player)]
       ("You have moved " ^ (string_of_int newstep) ^ " steps. Hooray!\n") in
-  let () = print_int newstep in
   if (actionType = Event) then
     (if not (check_for_fork playerid player_loc_info.loc.id gamestate newstep)
       then move_multi_step gamestate playerid newstep
