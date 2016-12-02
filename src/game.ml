@@ -1,5 +1,5 @@
 (* game.ml *)
-open Gamemap
+(* open Gamemap *)
 open Player
 open Random
 
@@ -31,19 +31,16 @@ type player_loc_info = {mutable loc: location; mutable dir: direction}
 
 type playerloc = playerid * player_loc_info
 
-type college = AS | Eng | NONE
-
-type cardtype = COURSE | ADVISOR | SUMMER | FUTURE
-
 type card = {name: string;
              description: string;
              id: int;
              points: int;
              karma: int;
-             card_type: cardtype}
+             card_type: actionType}
 
-type gamecomp = {college: college;
-                 courses: card list;
+type playercard = (playerid * card list)
+
+type gamecomp = {courses: card list;
                  advisors: card list;
                  summer: card list;
                  future: card list}
@@ -56,6 +53,7 @@ type gamestate = {turn: turn;
                   gamemap: location list;
                   gamecomp: gamecomp;
                   players: Player.player list;
+                  playercard: playercard list;
                   active_players: int list}
 
 (* constant: game color *)
@@ -67,32 +65,99 @@ let ccol = AT.red
 (* [get_pcol id] gets the color for player with given id *)
 let get_pcol id = List.nth [AT.blue; AT.green; AT.magenta] (id mod 3)
 
-(* [print_choice color descrip choices] will print the description in color
- * If the user's input matches a string in list choices *)
-let rec print_choice color descrip choices =
-  let () = AT.print_string [color] (descrip ^ "\n> ") in
-  let result = read_line () in
-  if (List.mem result choices) then result
-  else (print_choice color descrip choices)
+let get_square_num square = match square with
+  |Square n -> n
+  |Null -> 0
 
+(* [cmd_checker c] returns the string c with all lowercase letters and no
+ * leading or trailing spaces *)
 let cmd_checker c =
   let a = String.lowercase_ascii (String.trim c) in a
 
+(* [print_choice color descrip choices] will print the description in color
+ * If the user's input matches a string in list choices
+ * color is an ANSITerminal color, descrip is string, choices is string list *)
+let rec print_choice color descrip choices =
+  let () = AT.print_string [color] (descrip ^ "\n> ") in
+  let result = read_line () in
+  let fixedresult = cmd_checker result in
+  if (List.mem fixedresult choices) then fixedresult
+  else (print_choice color descrip choices)
+
+(* [find_player_by_id player_list player_id] returns the Player object
+ * that has the id player_id; if the player_id does not correspond with a
+ * Player, a Failure is raised
+ * player_list is a list of Player objects, player_id is an int *)
 let rec find_player_by_id player_list player_id =
   match player_list with
-  | [] -> failwith "this player id is not in the game"
+  | [] -> raise (Failure "This player id is not in the game.")
   | h::t -> if (Player.getID h) = player_id then h
             else find_player_by_id t player_id
 
+(* [find_loc_by_sid locations square_id] finds the location object with
+ * identifier square_id; if square is not found in locations, Failure is raised
+ * locations is a list of locations, square_id is Null or Square i (i : int) *)
 let rec find_loc_by_sid (locations:location list) (square_id:square):location =
-  match locations with
-  | [] -> failwith "this square id is not in the game"
-  | h::t -> if h.id = square_id then h else find_loc_by_sid t square_id
+  if (square_id = Null) then raise (Failure "This is not a valid square id.")
+  else
+  (match locations with
+  | [] -> raise (Failure "This square id is not in the game.")
+  | h::t -> if h.id = square_id then h else find_loc_by_sid t square_id)
 
-let change_dir gamestate choice playerid =
-    let player_loc_info = List.assoc playerid gamestate.playermap in
-    player_loc_info.dir <- choice
+let remove_card card gamecomp gamestate =
+  let newgamecomp =
+    begin match card.card_type with
+    | ChoiceC -> let lst = gamecomp.courses in
+                let cardlst = List.filter (fun x -> x.id <> card.id) lst in
+                {gamecomp with courses = cardlst}
+    | ChoiceA -> let lst = gamecomp.advisors in
+                 let cardlst = List.filter (fun x -> x.id <> card.id) lst in
+                 {gamecomp with advisors = cardlst}
+    | ChoiceF -> let lst = gamecomp.future in
+                let cardlst = List.filter (fun x -> x.id <> card.id) lst in
+                {gamecomp with future = cardlst}
+    | ChoiceS -> let lst = gamecomp.summer in
+                let cardlst = List.filter (fun x -> x.id <> card.id) lst in
+                {gamecomp with summer = cardlst}
+    | ChoiceCol -> gamecomp
+    | Event -> gamecomp
+    end in
+  {gamestate with gamecomp = newgamecomp}
 
+let add_card card gamecomp gamestate =
+  let newgamecomp =
+    begin match card.card_type with
+    | ChoiceC -> let lst = gamecomp.courses in
+                let cardlst = card :: lst in
+                {gamecomp with courses = cardlst}
+    | ChoiceA -> let lst = gamecomp.advisors in
+                 let cardlst = card :: lst in
+                 {gamecomp with advisors = cardlst}
+    | ChoiceF -> let lst = gamecomp.future in
+                let cardlst = card :: lst in
+                {gamecomp with future = cardlst}
+    | ChoiceS -> let lst = gamecomp.summer in
+                let cardlst = card :: lst in
+                {gamecomp with summer = cardlst}
+    | ChoiceCol -> gamecomp
+    | Event -> gamecomp
+    end in
+  {gamestate with gamecomp = newgamecomp}
+
+
+let get_correct_comp actionType gamestate =
+  match actionType with
+    | ChoiceC -> gamestate.gamecomp.courses
+    | ChoiceA -> gamestate.gamecomp.advisors
+    | ChoiceF -> gamestate.gamecomp.future
+    | ChoiceS -> gamestate.gamecomp.summer
+    | ChoiceCol -> failwith "no gamecomp"
+    | Event -> failwith "no gamecomp"
+
+(* [move_one_step gamestate playerid] returns the gamestate after the player
+ * identified by playerid moves one step forward where the direction is
+ * determined by the location information stored in gamestate.playermap
+ * gamestate is a gamestate, playerid is an int *)
 let move_one_step gamestate playerid =
     let player_loc_info = List.assoc playerid gamestate.playermap in
     let current_dir = player_loc_info.dir in
@@ -132,11 +197,149 @@ let rec move_multi_step gamestate playerid n =
     else failwith "Number of steps can't be negative"
 
 let rec check_for_fork playerid square gamestate num_step =
-  if num_step <> 0 then false
+  if num_step = 0 then false
   else (let loc = find_loc_by_sid gamestate.gamemap square in
         if loc.right = Null then false
         else if loc.left <> Null && loc.right <> Null then true
         else check_for_fork playerid loc.right gamestate (num_step-1))
+
+(* [get_step_for_choice_event playerid square gamestate num_step] returns a
+ * tuple of corrected number of steps for mandatory stops and the actionType *)
+ (* starts at loc.right *)
+let rec get_step_for_choice_event playerid square gamestate num_step =
+  let loc = find_loc_by_sid gamestate.gamemap square in
+  let action = List.assoc square gamestate.sqact in
+  if num_step = 1 then (num_step, action.actionType)
+  else
+    if (action.actionType = Event)
+      then get_step_for_choice_event playerid loc.right gamestate (num_step -1)
+    else (num_step, action.actionType)
+
+(* [handle_fork playerid player_loc_info gamestate step] handles fork events and
+ * returns a new gamestate *)
+let handle_fork playerid player_loc_info gamestate step =
+  let msg =
+  "There's a fork in your path. Do you want to turn left or right? (L/R)" in
+  let choice = print_choice (get_pcol playerid) msg ["L"; "l"; "R"; "r"]
+  in (if choice = "L" || choice = "l" then player_loc_info.dir <- Left
+      else player_loc_info.dir <- Right);
+  move_multi_step gamestate playerid step
+
+(* [pick_college player gamestate] allows the user to select a college and
+ * modifies a player and returns a new gamestate
+ *)
+let pick_college player gamestate =
+  let msg = "To choose Arts and Sciences, type AS. For Engineering, type ENG" in
+  let choice = print_choice ccol msg ["AS"; "as"; "As"; "ENG"; "eng"; "Eng"] in
+  if (choice = "AS" || choice = "as" || choice = "As")
+    then (ignore((Player.changeCollege) player "Arts and Sciences"); gamestate)
+  else (ignore((Player.changeCollege) player "Engineering"); gamestate)
+
+
+let rec create_message_from_cards msg cardlst =
+  match cardlst with
+    | [] -> msg
+    | h :: t -> let desc = h.name in
+                let id = string_of_int h.id in
+                let newmsg = msg^"\n"^id^") "^desc in
+                create_message_from_cards newmsg t
+
+let rec get_list_of_valid_choices cardlst lst =
+  match cardlst with
+    | [] -> lst
+    | h :: t -> let newlst = (string_of_int h.id) :: lst in
+                get_list_of_valid_choices t newlst
+
+let get_start_msg actionType =
+  match actionType with
+  | ChoiceC ->
+  "Choose a course from the following list by typing the course number"
+  | ChoiceA ->
+  "Choose an advisor from the following list by typing the advisor number"
+  | ChoiceF ->
+  "Determine your future from the following list by typing the corresponding number"
+  | ChoiceS ->
+  "Choose your summer plans from the following list by typing the corresponding number"
+  | _ -> "not a valid actionType"
+
+
+let rec get_card_by_id id cardlst =
+  match cardlst with
+    | [] -> failwith "this card is not available"
+    | h :: t -> if h.id = id then h else get_card_by_id id t
+
+
+let rec check_if_player_has_card playercardlst actionType =
+  match playercardlst with
+    | [] -> ([], playercardlst)
+    | h :: t -> if h.card_type=actionType then ([h],t)
+                else check_if_player_has_card t actionType
+
+let update_player player actionType card =
+  let name = card.name in
+  match actionType with
+    | ChoiceC -> (Player.changeCourse) player name
+    | ChoiceA -> (Player.changeAdvisor) player name
+    | ChoiceF -> (Player.changeFuture) player name
+    | ChoiceS -> (Player.changeSummerPlans) player name
+    | ChoiceCol -> (Player.changeCollege) player name
+    | Event -> player
+
+let update_player_card_list playerid playercardlst gamestate newcardlst =
+  let noplaylst = List.filter (fun (x,y) -> x <> playerid) playercardlst in
+  let newlst = (playerid, newcardlst) :: noplaylst in
+  {gamestate with playercard = newlst}
+
+
+let handle_choice_helper player gamestate actionType =
+  let playerid = Player.getID player in
+  let cardlst = get_correct_comp actionType gamestate in
+  let valid_choices = get_list_of_valid_choices cardlst [] in
+  let cardmsg = create_message_from_cards "" cardlst in
+  let startmsg = get_start_msg actionType in
+  let msg = startmsg^":"^cardmsg in
+  let choice = print_choice ccol msg valid_choices in
+  let id = int_of_string choice in
+  let newcard = get_card_by_id id cardlst in
+  let playercardlst = List.assoc playerid gamestate.playercard in
+  let (oldcard, fixpclst) = check_if_player_has_card playercardlst actionType in
+  let newpclst = newcard :: fixpclst in
+  let gs =
+    update_player_card_list playerid gamestate.playercard gamestate newpclst in
+  let newgs_remove = remove_card newcard gs.gamecomp gs in
+  (ignore (update_player player actionType newcard));
+  if oldcard = [] then newgs_remove
+  else let addcard = List.hd oldcard in
+  add_card addcard newgs_remove.gamecomp newgs_remove
+
+
+(* [handle_choice playerid gamestate actionType] handles choice
+ * events and returns a new gamestate with the corrected components *)
+let handle_choice player gamestate actionType : gamestate =
+  if (actionType = ChoiceCol) then pick_college player gamestate
+  else handle_choice_helper player gamestate actionType
+
+(* [spin_helper gamestate player step] is a helper function that handles spin
+ * command *)
+let spin_helper gamestate player step =
+  let playerid = Player.getID player in
+  let player_loc_info = List.assoc playerid gamestate.playermap in
+  let (leftover,actionType) =
+  get_step_for_choice_event playerid player_loc_info.loc.right gamestate step in
+  let newstep = step - leftover + 1 in
+  let () = AT.print_string [get_pcol (Player.getID player)]
+      ("You have moved " ^ (string_of_int newstep) ^ " steps. Hooray!\n") in
+  if (actionType = Event) then
+    (if not (check_for_fork playerid player_loc_info.loc.id gamestate newstep)
+      then move_multi_step gamestate playerid newstep
+    else handle_fork playerid player_loc_info gamestate newstep)
+  else
+    (if not (check_for_fork playerid player_loc_info.loc.id gamestate newstep)
+     then let newgs = move_multi_step gamestate playerid newstep in
+        handle_choice player newgs actionType
+    else
+      let new_gs = handle_fork playerid player_loc_info gamestate newstep in
+      handle_choice player new_gs actionType)
 
 let rec play (cmd : string) (gamestate : gamestate) (turn : int) : gamestate =
   let playerid = List.nth gamestate.active_players turn in
@@ -153,26 +356,23 @@ let rec play (cmd : string) (gamestate : gamestate) (turn : int) : gamestate =
     ((Player.getCollege player) ^ "\n"); gamestate)
   else if (cmd = "n" || cmd = "name") then (AT.print_string [get_pcol playerid]
     ((Player.getNickname player) ^ "\n"); gamestate)
-  else if (cmd = "spin") then ((let step = ((Random.int 4) + 1) in
-    let playerid = Player.getID player in
-    let player_loc_info = List.assoc playerid gamestate.playermap in
-    let msg = "There's a fork in your path. Do you want to turn left or right? (L/R)" in
-    let () = AT.print_string [get_pcol (Player.getID player)]
-    ("You have moved " ^ (string_of_int step) ^ " steps. Hooray!\n") in
-    if not (check_for_fork playerid player_loc_info.loc.id gamestate step)
-    then (move_multi_step gamestate playerid step)
-    else (let choice = print_choice (get_pcol playerid) msg ["L"; "l"; "R"; "r"]
-          in (if choice = "L" || choice = "l" then player_loc_info.dir <- Left
-              else player_loc_info.dir <- Right);
-              move_multi_step gamestate playerid step)))
+  else if (cmd = "spin") then let step = ((Random.int 4) + 1) in
+    spin_helper gamestate player step
   else if (cmd = "help") then (
-    AT.print_string [get_pcol playerid] ("p/points:      check your total points\n");
-    AT.print_string [get_pcol playerid] ("a/advisor:     see your advisor\n");
-    AT.print_string [get_pcol playerid] ("c/courses:     see your courses\n");
-    AT.print_string [get_pcol playerid] ("co/college:    see your college\n");
-    AT.print_string [get_pcol playerid] ("n/name:        see your nickname\n");
-    AT.print_string [get_pcol playerid] ("spin:          spin the wheel and try your luck!\n");
-    AT.print_string [get_pcol playerid] ("help:          see a list of commands available\n");
+    AT.print_string [get_pcol playerid]
+    ("p/points:      check your total points\n");
+    AT.print_string [get_pcol playerid]
+    ("a/advisor:     see your advisor\n");
+    AT.print_string [get_pcol playerid]
+    ("c/courses:     see your courses\n");
+    AT.print_string [get_pcol playerid]
+    ("co/college:    see your college\n");
+    AT.print_string [get_pcol playerid]
+    ("n/name:        see your nickname\n");
+    AT.print_string [get_pcol playerid]
+    ("spin:          spin the wheel and try your luck!\n");
+    AT.print_string [get_pcol playerid]
+    ("help:          see a list of commands available\n");
     gamestate)
   else raise Illegal
 
@@ -258,6 +458,7 @@ let rec setup_players state =
     let playerlist = ref [] in
     let playerloclist = ref [] in
     let activeplayers = ref [] in
+    let playercard = ref [] in
     let ailist = ref [] in
     let () = for id = 1 to num_players do
       let player = Player.createPlayer id in
@@ -274,23 +475,24 @@ let rec setup_players state =
       activeplayers := (!activeplayers @ [id]);
       playerlist := (!playerlist @ [final_player]);
       playerloclist := (!playerloclist @ [(id, playerloc)]);
+      playercard := (!playercard @ [(id, [])]);
     done in
     { state with players=(!playerlist); playermap=(!playerloclist);
-      active_players=(!activeplayers); }
+      active_players=(!activeplayers); playercard = (!playercard) }
   with
     | _ -> setup_players state
 
 let init_game j =
   let open Yojson.Basic.Util in
   let courses = j |> member "courses" |> to_list
-    |> List.map (extract_card COURSE) in
+    |> List.map (extract_card ChoiceC) in
   let advisors = j |> member "advisors" |> to_list
-    |>  List.map (extract_card ADVISOR) in
+    |>  List.map (extract_card ChoiceA) in
   let summer = j |> member "summer_plans" |> to_list
-    |>  List.map (extract_card SUMMER) in
+    |>  List.map (extract_card ChoiceS) in
   let future = j |> member "future_plans" |> to_list
-    |>  List.map (extract_card FUTURE) in
-  let gamecomp = {college = NONE; courses = courses; advisors = advisors;
+    |>  List.map (extract_card ChoiceF) in
+  let gamecomp = {courses = courses; advisors = advisors;
   summer = summer; future = future } in
   let start = j |> member "start" |> to_int in
   let start_points = j |> member "start_points" |> to_int in
@@ -303,6 +505,7 @@ let init_game j =
   start = start;
   start_points = start_points;
   gamemap = gamemap;
+  playercard = [];
   sqact = sqact}
 
 
