@@ -1,5 +1,5 @@
 (* game.ml *)
-open Gamemap
+(* open Gamemap *)
 open Player
 open Random
 
@@ -66,6 +66,10 @@ let ccol = AT.red
 
 (* [get_pcol id] gets the color for player with given id *)
 let get_pcol id = List.nth [AT.blue; AT.green; AT.magenta] (id mod 3)
+
+let get_square_num square = match square with
+  |Square n -> n
+  |Null -> 0
 
 (* [print_choice color descrip choices] will print the description in color
  * If the user's input matches a string in list choices *)
