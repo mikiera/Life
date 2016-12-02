@@ -284,13 +284,9 @@
 		},
 		{ "squareid": 5,
 		   "left": 0,
-			"right": 7
+			"right": 6
 		},
 		{ "squareid": 6,
-		   "left": 0,
-			"right": 7
-		},
-		{ "squareid": 7,
 		   "left": 0,
 			"right": 0
 		}],
@@ -300,7 +296,7 @@
 		"action": 
 			{
 			"type": "event",
-			"description": "event. should not be printed",
+			"description": "Get ready for the Life of a CS Major! Where will you go?",
 			"points": 0,
 			"karma": 0
 			}
@@ -309,7 +305,7 @@
 		"action": 
 			{
 			"type": "college",
-			"description": "You get to choose between Arts and Sciences or Engineering.",
+			"description": "First, you get must choose between Arts and Sciences or Engineering.",
 			"points": 0,
 			"karma": 0
 			}
@@ -318,11 +314,147 @@
 		"action": 
 			{
 			"type": "event",
+			"description": "It's your first day on campus and you got lost. Lose 20 points.",
+			"points": -20,
+			"karma": 0
+			}
+		},
+		{"squareid": 4,
+		"action": 
+			{
+			"type": "event",
+			"description": "You applied for a project team and now you're waiting on results. Get some karma.",
+			"points": 0,
+			"karma": 500
+			}
+		},
+		{"squareid": 5,
+		"action": 
+			{
+			"type": "event",
 			"description": "You got a 100 on your first CS assignment. Congratulations! You get 500 points.",
 			"points": 500,
 			"karma": 0
 			}
 		},
+		{"squareid": 6,
+		"action": 
+			{
+			"type": "event",
+			"description": "You went to a gbody for WICC or ASCU. You got a really awesome mentor to help you out! Get 300 points and some karma.",
+			"points": 300,
+			"karma": 100
+			}
+		},
+		{"squareid": 7,
+		"action": 
+			{
+			"type": "event",
+			"description": "Career fair is coming up, should you go? Might as well for some swag. Get 700 points.",
+			"points": 700,
+			"karma": 0
+			}
+		},
+		{"squareid": 8,
+		"action": 
+			{
+			"type": "event",
+			"description": "You need a partner for your next CS assignment. But you couldn't find one. Lose 900 points.",
+			"points": -900,
+			"karma": 0
+			}
+		},
+		{"squareid": 9,
+		"action": 
+			{
+			"type": "event",
+			"description": "You need a partner for your next CS assignment. Luckily your best friend is also in your class. Get 900 points.",
+			"points": 900,
+			"karma": 0
+			}
+		},
+		{"squareid": 10,
+		"action": 
+			{
+			"type": "event",
+			"description": "You went to career fair info session for Google and got free dinner. Get 300 points and karma",
+			"points": 300,
+			"karma": 0
+			}
+		},
+		{"squareid": 11,
+		"action": 
+			{
+			"type": "event",
+			"description": "As a freshman, you got onto a project team for the CS team with no experience! Get 1000 points and karma!",
+			"points": 1000,
+			"karma": 1000
+			}
+		},
+		{"squareid": 12,
+		"action": 
+			{
+			"type": "event",
+			"description": "You aced your first CS prelim! Two standard deviations above the mean! Get 1500 points and karma!",
+			"points": 1500,
+			"karma": 600
+			}
+		},
+		{"squareid": 13,
+		"action": 
+			{
+			"type": "event",
+			"description": "You failed your first CS prelim! Two standard deviations below the mean! Lose 800 points.",
+			"points": -800,
+			"karma": 0
+			}
+		},
+		{"squareid": 14,
+		"action": 
+			{
+			"type": "event",
+			"description": "You slept through lecture today and the Prof took attendance. Lose 500 points and get some karma for getting sleep.",
+			"points": -500,
+			"karma": 40
+			}
+		},
+		{"squareid": 15,
+		"action": 
+			{
+			"type": "course",
+			"description": "It's preenroll. Select a course for next semester! Get 400 points for waking up on time.",
+			"points": 400,
+			"karma": 0
+			}
+		},
+		{"squareid": 16,
+		"action": 
+			{
+			"type": "event",
+			"description": "Your laptop ran out of battery while you were on central. Lose 200 points. ",
+			"points": -200,
+			"karma": 0
+			}
+		},
+		{"squareid": 17,
+		"action": 
+			{
+			"type": "event",
+			"description": "You pulled your first allnighter. Congrats? Get 500 points and karma. ",
+			"points": 500,
+			"karma": 1000
+			}
+		},
+		{"squareid": 18,
+		"action": 
+			{
+			"type": "event",
+			"description": "You went to office hours and got to know your professor well. Get 200 points and karma.",
+			"points": 200,
+			"karma": 0
+			}
+		},
+
 		{ "squareid": 4,
 		  "action": 
 			{
@@ -341,7 +473,7 @@
 			"karma": 10
 			}
 		},
-		{ "squareid": 7,
+		{ "squareid": 6,
 		  "action": 
 			{
 			"type": "future",
@@ -349,18 +481,9 @@
 			"points": 0,
 			"karma": 10
 			}
-		},
-		{ "squareid": 6,
-		  "action": 
-			{
-			"type": "event",
-			"description": "It's CS Formal, get 300 points!",
-			"points": 300,
-			"karma": 10
-			}
 		}],
 
 	"start": 1,
-	"start_points": 10000
+	"start_points": 10
 
 }
