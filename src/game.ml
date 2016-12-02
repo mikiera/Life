@@ -346,6 +346,32 @@ let spin_helper gamestate player step =
       let new_gs = handle_fork playerid player_loc_info gamestate newstep in
       handle_choice player new_gs actionType)
 
+let rec reveal_results player_lst =
+  match player_lst with 
+  | [] -> ""
+  | h::t -> (Player.getNickname h) ^ ("   Karma: ") ^ (string_of_int(Player.getPoints h)) 
+                                   ^ ("   Points: ") ^ (string_of_int(Player.getKarma h))
+                                   ^ ("\n") ^ (reveal_results t)
+
+let rec find_max_score player_lst max =
+  match player_lst with 
+  | [] -> max
+  | h::t -> let total = (Player.getPoints h) + (Player.getKarma h) in
+            if (total >= max) then (find_max_score t total) else (find_max_score t max)
+
+let rec find_player_by_score player_lst score =
+  match player_lst with 
+  | [] -> []
+  | h::t -> if ((Player.getPoints h) + (Player.getKarma h)) = score
+            then (Player.getNickname h)::(find_player_by_score t score)
+            else find_player_by_score t score
+
+let rec winner_annoucement winner_lst =
+  match winner_lst with
+  | [] -> ""
+  | h::[] -> h
+  | h::t -> h ^ " " ^ (winner_annoucement t)
+
 let rec play (cmd : string) (gamestate : gamestate) (turn : int) : gamestate =
   let playerid = List.nth gamestate.active_players turn in
   let player = List.nth gamestate.players (playerid - 1) in
@@ -383,7 +409,16 @@ let rec play (cmd : string) (gamestate : gamestate) (turn : int) : gamestate =
 
 and repl (state : gamestate) (turn : int) : unit =
   try
-    let playerid = List.nth state.active_players turn in
+      if ((List.length state.active_players) = 0) then 
+      (AT.print_string [gcol] ("Everybody has finished the game. 
+      It's time to reveal the final results.\n" 
+      ^ (reveal_results state.players) 
+      ^ "Congratulations to our winner(s): " 
+      ^ (let players = state.players in
+         let winners = find_player_by_score players (find_max_score players 0) in
+         winner_annoucement winners)
+      ^ "!")) else
+   (let playerid = List.nth state.active_players turn in
     let player = List.nth state.players (playerid - 1) in
     let () = AT.print_string [get_pcol playerid] ("It is " ^
       (Player.getNickname player) ^ "'s turn. Please enter a command.\n>>> ") in
@@ -395,7 +430,7 @@ and repl (state : gamestate) (turn : int) : unit =
       let new_gs = play check_cmd state turn in
       let new_turn = if (check_cmd <> "spin") then turn
         else ((turn + 1) mod (List.length state.active_players)) in
-      repl new_gs new_turn
+      repl new_gs new_turn)
   with
     | _ -> AT.print_string [gcol]
       "Invalid command. Please try again.\n"; repl state turn
