@@ -188,15 +188,13 @@ let change_pk (gs:gamestate) (pid:playerid) (action:action):Player.player =
 
 (* [end_game_user gamestate playerid l_info] removes a user from the game once
  * they reached the end; returns a gamestate *)
-let end_game_user gamestate playerid n l_info =
+let end_game_user gamestate playerid l_info =
   let a = List.assoc l_info.loc.id gamestate.sqact in
   ignore(change_pk gamestate playerid a);
-  print_endline "You have successfully graduated from the 3110 Life. Wait for your friends to join you!";
-  let new_turn = gamestate.turn - 1 in
+  let new_turn = -1 in
   let active_players = gamestate.active_players in
   let new_active = List.filter (fun x -> (x <> playerid)) active_players in
   {gamestate with active_players = new_active; turn = new_turn}
-
 
 let rec move_multi_step gamestate playerid n =
     if n = 0 then (let l_info = List.assoc playerid gamestate.playermap in
@@ -204,13 +202,10 @@ let rec move_multi_step gamestate playerid n =
                    let action = List.assoc current_square gamestate.sqact in
                    let () = AT.print_string [get_pcol playerid]
                     (action.description ^ "\n") in
-                   ignore(change_pk gamestate playerid action);
-                  begin if (l_info.loc.left = Null && l_info.loc.right = Null)
-                    then end_game_user gamestate playerid n l_info
-                  else gamestate end)
+                   ignore(change_pk gamestate playerid action); gamestate)
     else if n > 0 then (let l_info = List.assoc playerid gamestate.playermap in
       if (l_info.loc.left = Null && l_info.loc.right = Null)
-        then end_game_user gamestate playerid n l_info
+        then gamestate
       else (move_multi_step (move_one_step gamestate playerid) playerid (n-1)))
     else failwith "Number of steps can't be negative"
 
@@ -378,12 +373,15 @@ let handle_choice_helper player gamestate actionType =
   let gs =
     update_player_card_list playerid gamestate.playercard gamestate newpclst in
   let () = print_descrip playerid newcard in
-  let newgs_remove = remove_card newcard gs.gamecomp gs in
+  (if actionType = ChoiceF then (
+    update_player player actionType newcard;
+    let l_info = List.assoc playerid gs.playermap in
+    end_game_user gs playerid l_info)
+   else (let newgs_remove = remove_card newcard gs.gamecomp gs in
   (ignore (update_player player actionType newcard));
   if oldcard = [] then newgs_remove
   else let addcard = List.hd oldcard in
-  add_card addcard newgs_remove.gamecomp newgs_remove
-
+  add_card addcard newgs_remove.gamecomp newgs_remove))
 
 (* [handle_choice playerid gamestate actionType] handles choice
  * events and returns a new gamestate with the corrected components *)
@@ -408,10 +406,38 @@ let spin_helper gamestate player step =
   else
     (if not (check_for_fork playerid player_loc_info.loc.id gamestate newstep)
      then let newgs = move_multi_step gamestate playerid newstep in
-        handle_choice player newgs actionType
+     handle_choice player newgs actionType 
     else
       let new_gs = handle_fork playerid player_loc_info gamestate newstep in
       handle_choice player new_gs actionType)
+
+let rec reveal_results player_lst =
+  match player_lst with 
+  | [] -> ""
+  | h::t -> (Player.getNickname h) ^ ("   Karma: ") ^ (string_of_int(Player.getKarma h)) 
+                                   ^ ("   Points: ") ^ (string_of_int(Player.getPoints h))
+                                   ^ ("   Total: ") ^ (string_of_int((Player.getPoints h) 
+                                      + (Player.getKarma h))) 
+                                   ^ ("\n") ^ (reveal_results t)
+
+let rec find_max_score player_lst max =
+  match player_lst with 
+  | [] -> max
+  | h::t -> let total = (Player.getPoints h) + (Player.getKarma h) in
+            if (total >= max) then (find_max_score t total) else (find_max_score t max)
+
+let rec find_player_by_score player_lst score =
+  match player_lst with 
+  | [] -> []
+  | h::t -> if ((Player.getPoints h) + (Player.getKarma h)) = score
+            then (Player.getNickname h)::(find_player_by_score t score)
+            else find_player_by_score t score
+
+let rec winner_annoucement winner_lst =
+  match winner_lst with
+  | [] -> ""
+  | h::[] -> h
+  | h::t -> h ^ " " ^ (winner_annoucement t)
 
 let rec play (cmd : string) (gamestate : gamestate) (turn : int) : gamestate =
   let playerid = List.nth gamestate.active_players turn in
@@ -429,7 +455,7 @@ let rec play (cmd : string) (gamestate : gamestate) (turn : int) : gamestate =
   else if (cmd = "n" || cmd = "name") then (AT.print_string [get_pcol playerid]
     ((Player.getNickname player) ^ "\n"); gamestate)
   else if (cmd = "spin") then let step = ((Random.int 4) + 1) in
-    spin_helper gamestate player step
+    spin_helper gamestate player step 
   else if (cmd = "help") then (
     AT.print_string [get_pcol playerid]
     ("p/points:      check your total points\n");
@@ -450,7 +476,16 @@ let rec play (cmd : string) (gamestate : gamestate) (turn : int) : gamestate =
 
 and repl (state : gamestate) (turn : int) : unit =
   try
-    let playerid = List.nth state.active_players turn in
+    if ((List.length state.active_players) = 0) then 
+      (AT.print_string [gcol] ("Everybody has finished the game. " ^
+      "It's time to reveal the final results.\n" 
+      ^ (reveal_results state.players) 
+      ^ "Congratulations to our winner(s): " 
+      ^ (let players = state.players in
+         let winners = find_player_by_score players (find_max_score players 0) in
+         winner_annoucement winners)
+      ^ "!\n")) else
+   (let playerid = List.nth state.active_players turn in
     let player = List.nth state.players (playerid - 1) in
     let () = AT.print_string [get_pcol playerid] ("It is " ^
       (Player.getNickname player) ^ "'s turn. Please enter a command.\n>>> ") in
@@ -461,9 +496,10 @@ and repl (state : gamestate) (turn : int) : unit =
     else
       let new_gs = play check_cmd state turn in
       let new_turn = if (check_cmd <> "spin") then turn
+        else if (new_gs.turn = -1) then turn
         else ((turn + 1) mod (List.length state.active_players)) in
-      repl new_gs new_turn
-  with
+      repl new_gs new_turn)
+   with
     | _ -> AT.print_string [gcol]
       "Invalid command. Please try again.\n"; repl state turn
 
