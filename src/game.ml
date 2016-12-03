@@ -374,7 +374,7 @@ let handle_choice_helper player gamestate actionType =
     update_player_card_list playerid gamestate.playercard gamestate newpclst in
   let () = print_descrip playerid newcard in
   (if actionType = ChoiceF then (
-    update_player player actionType newcard;
+    ignore(update_player player actionType newcard);
     let l_info = List.assoc playerid gs.playermap in
     end_game_user gs playerid l_info)
    else (let newgs_remove = remove_card newcard gs.gamecomp gs in
@@ -406,28 +406,28 @@ let spin_helper gamestate player step =
   else
     (if not (check_for_fork playerid player_loc_info.loc.id gamestate newstep)
      then let newgs = move_multi_step gamestate playerid newstep in
-     handle_choice player newgs actionType 
+     handle_choice player newgs actionType
     else
       let new_gs = handle_fork playerid player_loc_info gamestate newstep in
       handle_choice player new_gs actionType)
 
 let rec reveal_results player_lst =
-  match player_lst with 
+  match player_lst with
   | [] -> ""
-  | h::t -> (Player.getNickname h) ^ ("   Karma: ") ^ (string_of_int(Player.getKarma h)) 
+  | h::t -> (Player.getNickname h) ^ ("   Karma: ") ^ (string_of_int(Player.getKarma h))
                                    ^ ("   Points: ") ^ (string_of_int(Player.getPoints h))
-                                   ^ ("   Total: ") ^ (string_of_int((Player.getPoints h) 
-                                      + (Player.getKarma h))) 
+                                   ^ ("   Total: ") ^ (string_of_int((Player.getPoints h)
+                                      + (Player.getKarma h)))
                                    ^ ("\n") ^ (reveal_results t)
 
 let rec find_max_score player_lst max =
-  match player_lst with 
+  match player_lst with
   | [] -> max
   | h::t -> let total = (Player.getPoints h) + (Player.getKarma h) in
             if (total >= max) then (find_max_score t total) else (find_max_score t max)
 
 let rec find_player_by_score player_lst score =
-  match player_lst with 
+  match player_lst with
   | [] -> []
   | h::t -> if ((Player.getPoints h) + (Player.getKarma h)) = score
             then (Player.getNickname h)::(find_player_by_score t score)
@@ -455,7 +455,7 @@ let rec play (cmd : string) (gamestate : gamestate) (turn : int) : gamestate =
   else if (cmd = "n" || cmd = "name") then (AT.print_string [get_pcol playerid]
     ((Player.getNickname player) ^ "\n"); gamestate)
   else if (cmd = "spin") then let step = ((Random.int 4) + 1) in
-    spin_helper gamestate player step 
+    spin_helper gamestate player step
   else if (cmd = "help") then (
     AT.print_string [get_pcol playerid]
     ("p/points:      check your total points\n");
@@ -476,11 +476,11 @@ let rec play (cmd : string) (gamestate : gamestate) (turn : int) : gamestate =
 
 and repl (state : gamestate) (turn : int) : unit =
   try
-    if ((List.length state.active_players) = 0) then 
+    if ((List.length state.active_players) = 0) then
       (AT.print_string [gcol] ("Everybody has finished the game. " ^
-      "It's time to reveal the final results.\n" 
-      ^ (reveal_results state.players) 
-      ^ "Congratulations to our winner(s): " 
+      "It's time to reveal the final results.\n"
+      ^ (reveal_results state.players)
+      ^ "Congratulations to our winner(s): "
       ^ (let players = state.players in
          let winners = find_player_by_score players (find_max_score players 0) in
          winner_annoucement winners)
@@ -496,7 +496,7 @@ and repl (state : gamestate) (turn : int) : unit =
     else
       let new_gs = play check_cmd state turn in
       let new_turn = if (check_cmd <> "spin") then turn
-        else if (new_gs.turn = -1) then turn
+        else if (new_gs.turn = -1 && ((Player.isHuman player) = false)) then turn
         else ((turn + 1) mod (List.length state.active_players)) in
       repl new_gs new_turn)
    with
