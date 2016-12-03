@@ -11,6 +11,7 @@ module Player : sig
   val getKarma : player -> int
   val getFuture : player -> string
   val getSummerPlans : player -> string
+  val isHuman : player -> bool
   val addNickname : player -> string -> player
   val addHistory : player -> string -> player
   val changeCollege : player -> string -> player
@@ -20,15 +21,16 @@ module Player : sig
   val changeKarma : player -> int -> player
   val changeFuture : player -> string -> player
   val changeSummerPlans : player -> string -> player
+  val setMode : player -> bool -> unit
 end =
 
 struct
   type player = {id:int; nickname: string ref; history: string ref;
                   college: string ref; course: string ref;
                   advisor: string ref; points: int ref; karma: int ref;
-                  future: string ref; summer_plans: string ref}
+                  future: string ref; summer_plans: string ref; mode: bool ref}
   let createPlayer n = {id = n; nickname = ref ""; history = ref ("ID: " ^ string_of_int(n) ^ "\n"); college = ref ""; course = ref "";
-                        advisor = ref ""; points = ref 0; karma = ref 0; future = ref ""; summer_plans = ref ""}
+                        advisor = ref ""; points = ref 0; karma = ref 0; future = ref ""; summer_plans = ref ""; mode = ref true}
   let getID p = p.id
   let getNickname p = !(p.nickname)
   let getHistory p = !(p.history)
@@ -39,6 +41,7 @@ struct
   let getKarma p = !(p.karma)
   let getFuture p = !(p.future)
   let getSummerPlans p = !(p.summer_plans)
+  let isHuman p = !(p.mode)
   let addHistory p h = p.history := !(p.history)^h; p
   let addNickname p n = p.nickname := n; addHistory p ("Name: " ^ n ^ "\n")
   let changeCollege p c = p.college := c; addHistory p ("College: " ^ c ^ "\n")
@@ -48,4 +51,5 @@ struct
   let changeKarma p k = p.karma := !(p.karma) + k; p
   let changeFuture p r = p.future:= r; p
   let changeSummerPlans p s = p.summer_plans:= s; p
+  let setMode p b = p.mode:= b
 end

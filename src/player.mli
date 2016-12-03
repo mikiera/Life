@@ -40,6 +40,9 @@ module Player : sig
   (* [getSummerPlans p] returns the player's summer plans *)
   val getSummerPlans : player -> string
 
+  (* [isHuman p] returns whether the player is a human player or an AI player. *)
+  val isHuman : player -> bool
+
   (* Methods that alter [Player] *)
   (* [addNickname p s] adds a nickname to the player *)
   val addNickname : player -> string -> player
@@ -67,5 +70,8 @@ module Player : sig
 
   (* [changeSummerPlans p s] changes the summer plans of the player to s *)
   val changeSummerPlans : player -> string -> player
+
+  (* [setMode p b] sets the player as an AI or a human player. *)
+  val setMode : player -> bool -> unit
 
 end
