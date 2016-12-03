@@ -405,8 +405,8 @@ let spin_helper gamestate player step =
 let rec reveal_results player_lst =
   match player_lst with 
   | [] -> ""
-  | h::t -> (Player.getNickname h) ^ ("   Karma: ") ^ (string_of_int(Player.getPoints h)) 
-                                   ^ ("   Points: ") ^ (string_of_int(Player.getKarma h))
+  | h::t -> (Player.getNickname h) ^ ("   Karma: ") ^ (string_of_int(Player.getKarma h)) 
+                                   ^ ("   Points: ") ^ (string_of_int(Player.getPoints h))
                                    ^ ("   Total: ") ^ (string_of_int((Player.getPoints h) 
                                       + (Player.getKarma h))) 
                                    ^ ("\n") ^ (reveal_results t)
