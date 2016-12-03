@@ -99,10 +99,14 @@ let rec find_player_by_id player_list player_id =
  * identifier square_id; if square is not found in locations, Failure is raised
  * locations is a list of locations, square_id is Null or Square i (i : int) *)
 let rec find_loc_by_sid (locations:location list) (square_id:square):location =
-  match locations with
+  if (square_id = Null) then raise (Failure "This is not a valid square id.")
+  else
+  (match locations with
   | [] -> raise (Failure "This square id is not in the game.")
-  | h::t -> if h.id = square_id then h else find_loc_by_sid t square_id
+  | h::t -> if h.id = square_id then h else find_loc_by_sid t square_id)
 
+(* [remove_card card gamecomp gamestate] removes a card from the gamestate and
+ * returns the new gamestate *)
 let remove_card card gamecomp gamestate =
   let newgamecomp =
     begin match card.card_type with
@@ -123,6 +127,8 @@ let remove_card card gamecomp gamestate =
     end in
   {gamestate with gamecomp = newgamecomp}
 
+(* [add_card card gamecomp gamestate] adds a card back into the gamestate and
+ * returns the new gamestate *)
 let add_card card gamecomp gamestate =
   let newgamecomp =
     begin match card.card_type with
@@ -143,7 +149,8 @@ let add_card card gamecomp gamestate =
     end in
   {gamestate with gamecomp = newgamecomp}
 
-
+(* [get_correct_comp actionType gamestate] returns the correct gamecomp
+ * card list based on the actionType *)
 let get_correct_comp actionType gamestate =
   match actionType with
     | ChoiceC -> gamestate.gamecomp.courses
@@ -152,13 +159,6 @@ let get_correct_comp actionType gamestate =
     | ChoiceS -> gamestate.gamecomp.summer
     | ChoiceCol -> failwith "no gamecomp"
     | Event -> failwith "no gamecomp"
-
-(* [change_dir gamestate choice playerid] modifies the location info of player
- * identified by playerid stored in gamestate.playermap
- * gamestate is a gamestate, choice is a direction, playerid is an int *)
-let change_dir (gamestate : gamestate) (choice : direction) (playerid : playerid) =
-    let player_loc_info = List.assoc playerid gamestate.playermap in
-    player_loc_info.dir <- choice
 
 (* [move_one_step gamestate playerid] returns the gamestate after the player
  * identified by playerid moves one step forward where the direction is
@@ -183,9 +183,9 @@ let change_pk (gs:gamestate) (pid:playerid) (action:action):Player.player =
     ignore((Player.changePoints) player action.points);
     (Player.changeKarma) player action.karma
 
-let check_if_at_end left right =
-  (left = Null && right = Null)
 
+(* [end_game_user gamestate playerid l_info] removes a user from the game once
+ * they reached the end; returns a gamestate *)
 let end_game_user gamestate playerid n l_info =
   let a = List.assoc l_info.loc.id gamestate.sqact in
   ignore(change_pk gamestate playerid a);
@@ -219,16 +219,31 @@ let rec check_for_fork playerid square gamestate num_step =
         else if loc.left <> Null && loc.right <> Null then true
         else check_for_fork playerid loc.right gamestate (num_step-1))
 
+(* [get_player_direction playerid gamestate] returns the dir of the player *)
+let get_player_direction playerid gamestate =
+  let locinfo = List.filter (fun (x,y) -> x = playerid) gamestate.playermap in
+  match locinfo with
+    | [] -> failwith "player not found"
+    | (h1, h2) ::t -> h2.dir
+
+(* [convert_dir_square loc dir] returns the correct square based on direction *)
+let convert_dir_square loc dir =
+  match dir with
+    | Left -> loc.left
+    | Right -> loc.right
+
 (* [get_step_for_choice_event playerid square gamestate num_step] returns a
  * tuple of corrected number of steps for mandatory stops and the actionType *)
  (* starts at loc.right *)
 let rec get_step_for_choice_event playerid square gamestate num_step =
   let loc = find_loc_by_sid gamestate.gamemap square in
   let action = List.assoc square gamestate.sqact in
+  let dir = get_player_direction playerid gamestate in
+  let locdir = convert_dir_square loc dir in
   if num_step = 1 then (num_step, action.actionType)
   else
     if (action.actionType = Event)
-      then get_step_for_choice_event playerid loc.right gamestate (num_step -1)
+      then get_step_for_choice_event playerid locdir gamestate (num_step -1)
     else (num_step, action.actionType)
 
 (* [handle_fork playerid player_loc_info gamestate step] handles fork events and
@@ -283,34 +298,61 @@ let get_start_msg actionType =
   "Choose your summer plans from the following list by typing the corresponding number"
   | _ -> "not a valid actionType"
 
-
+(* [get_card_by_id id cardlst] returns the card associated with that id *)
 let rec get_card_by_id id cardlst =
   match cardlst with
     | [] -> failwith "this card is not available"
     | h :: t -> if h.id = id then h else get_card_by_id id t
 
-
+(* [check_if_player_has_card playercardlst actionType]
+ * returns the card associated with that id *)
 let rec check_if_player_has_card playercardlst actionType =
   match playercardlst with
     | [] -> ([], playercardlst)
     | h :: t -> if h.card_type=actionType then ([h],t)
                 else check_if_player_has_card t actionType
 
+(* [update_player_has_card player actionType card]
+ * returns a player with changed fields based on action type, as
+ * well as new point and karma values *)
 let update_player player actionType card =
   let name = card.name in
   match actionType with
-    | ChoiceC -> (Player.changeCourse) player name
-    | ChoiceA -> (Player.changeAdvisor) player name
-    | ChoiceF -> (Player.changeFuture) player name
-    | ChoiceS -> (Player.changeSummerPlans) player name
+    | ChoiceC -> (ignore((Player.changeCourse) player name));
+                 (ignore((Player.changePoints) player card.points));
+                 (Player.changeKarma) player card.karma
+    | ChoiceA -> (ignore((Player.changeAdvisor) player name));
+                 (ignore((Player.changePoints) player card.points));
+                 (Player.changeKarma) player card.karma
+    | ChoiceF -> (ignore((Player.changeFuture) player name));
+                 (ignore((Player.changePoints) player card.points));
+                 (Player.changeKarma) player card.karma
+    | ChoiceS -> (ignore((Player.changeSummerPlans) player name));
+                 (ignore((Player.changePoints) player card.points));
+                 (Player.changeKarma) player card.karma
     | ChoiceCol -> (Player.changeCollege) player name
     | Event -> player
 
+(* [update_player_card_list playerid playercardlst gamestate newcardlst]
+ * updates the player card list to remove the player currently choosing cards *)
 let update_player_card_list playerid playercardlst gamestate newcardlst =
   let noplaylst = List.filter (fun (x,y) -> x <> playerid) playercardlst in
   let newlst = (playerid, newcardlst) :: noplaylst in
   {gamestate with playercard = newlst}
 
+(* [print_descrip playerid newcard] returns a string containing information
+ * about a player's choice *)
+let print_descrip playerid newcard =
+  match newcard.card_type with
+    | ChoiceA -> AT.print_string [get_pcol playerid]
+          ("\nYou picked "^newcard.name^"\n"^newcard.description^"\n \n")
+    | _ -> AT.print_string [get_pcol playerid]
+          ("\nYou picked "^newcard.name^"\n"^newcard.description^"\n"^
+          "The points associated with "^newcard.name^" is "^
+          (string_of_int newcard.points)^" points. \n \n")
+
+(* [handle_choice_helper player gamestate actionType] is a helper function
+ * that handles choice events and returns a new gamestate *)
 let handle_choice_helper player gamestate actionType =
   let playerid = Player.getID player in
   let cardlst = get_correct_comp actionType gamestate in
@@ -326,6 +368,7 @@ let handle_choice_helper player gamestate actionType =
   let newpclst = newcard :: fixpclst in
   let gs =
     update_player_card_list playerid gamestate.playercard gamestate newpclst in
+  let () = print_descrip playerid newcard in
   let newgs_remove = remove_card newcard gs.gamecomp gs in
   (ignore (update_player player actionType newcard));
   if oldcard = [] then newgs_remove
@@ -349,7 +392,6 @@ let spin_helper gamestate player step =
   let newstep = step - leftover + 1 in
   let () = AT.print_string [get_pcol (Player.getID player)]
       ("You have moved " ^ (string_of_int newstep) ^ " steps. Hooray!\n") in
-  let () = print_int newstep in
   if (actionType = Event) then
     (if not (check_for_fork playerid player_loc_info.loc.id gamestate newstep)
       then move_multi_step gamestate playerid newstep
@@ -450,9 +492,9 @@ and repl (state : gamestate) (turn : int) : unit =
   with
     | _ -> AT.print_string [gcol]
       "Invalid command. Please try again.\n"; repl state turn
-(*priya can you add end of the game when active player list is empty *)
 
 (* parsing functions *)
+
 
 let extract_card ctype card =
   let open Yojson.Basic.Util in
