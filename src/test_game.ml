@@ -115,16 +115,16 @@ let tests = [
   "test_find_loc_by_sid5" >:: (fun _ -> assert_raises (Failure "This is not a valid square id.")
                               (fun () -> (find_loc_by_sid locs (Null))));
 
-  "test_remove_course_card" >:: (fun _ -> assert_equal ({gs_for_remove with gamecomp = gamecomp_after}) 
+  "test_remove_course_card" >:: (fun _ -> assert_equal ({gs_for_remove with gamecomp = gamecomp_after})
                                 (remove_card course2 gamecomp gs_for_remove));
 
-  "test_remove_college" >:: (fun _ -> assert_equal (gs_for_remove) 
+  "test_remove_college" >:: (fun _ -> assert_equal (gs_for_remove)
                          (remove_card college2 gamecomp gs_for_remove));
 
-  "test_add_course_card" >:: (fun _ -> assert_equal (gs_for_remove) 
+  "test_add_course_card" >:: (fun _ -> assert_equal (gs_for_remove)
                              (add_card college2 gamecomp {gs_for_remove with gamecomp = gamecomp_after}));
 
-  "test_get_correct_comp" >:: (fun _ -> assert_equal (course_lst) 
+  "test_get_correct_comp" >:: (fun _ -> assert_equal (course_lst)
                              (get_correct_comp ChoiceC gs_for_remove));
 
   "move_one_step1" >:: (fun _ -> assert_equal gs1 (move_one_step gs 1));
@@ -135,6 +135,35 @@ let tests = [
                            (end_game_user gs 1 (List.assoc 1 gs.playermap)));
 
   "move_multi_step1" >:: (fun _ -> assert_equal gs4 (move_multi_step gs 1 2));
+
+  "test_play1" >:: (fun _ -> assert_equal gs1 (play "points" gs1 1));
+
+  "test_play2" >:: (fun _ -> assert_equal gs1 (play "p" gs1 1));
+
+  "test_play3" >:: (fun _ -> assert_equal gs1 (play "resume" gs1 1));
+
+  "test_play4" >:: (fun _ -> assert_equal gs1 (play "r" gs1 1));
+
+  "test_play5" >:: (fun _ -> assert_equal gs1 (play "advisor" gs1 0));
+
+  "test_play6" >:: (fun _ -> assert_equal gs1 (play "a" gs1 0));
+
+  "test_play7" >:: (fun _ -> assert_equal gs1 (play "courses" gs1 0));
+
+  "test_play8" >:: (fun _ -> assert_equal gs1 (play "c" gs1 0));
+
+  "test_play9" >:: (fun _ -> assert_equal gs1 (play "college" gs1 0));
+
+  "test_play10" >:: (fun _ -> assert_equal gs1 (play "co" gs1 0));
+
+  "test_play11" >:: (fun _ -> assert_equal gs1 (play "name" gs1 0));
+
+  "test_play12" >:: (fun _ -> assert_equal gs1 (play "n" gs1 0));
+
+  "test_play13" >:: (fun _ -> assert_equal gs1 (play "help" gs1 0));
+
+  "test_end_game_user" >:: (fun _ -> assert_equal ({gs1 with active_players = [2]; turn = -1})
+                           (end_game_user gs1 1 (List.assoc 1 gs1.playermap)));
 
   "start turn" >:: (fun _ -> assert_equal 0
     (let state = (init_game s) in state.turn));
