@@ -404,6 +404,21 @@ let handle_choice player gamestate actionType : gamestate =
   if (actionType = ChoiceCol) then pick_college player gamestate
   else handle_choice_helper player gamestate actionType
 
+(* [reset_direction player gamestate] resets the direction to right after
+ * fork events *)
+let reset_direction player gamestate =
+  let playerid = Player.getID player in
+  let player_loc_info = List.assoc playerid gamestate.playermap in
+  player_loc_info.dir <- Right
+
+(* [recheck_choice_in_path playerid gamestate square] returns a boolean
+ * on whether the current square is a choice or not *)
+let rec recheck_choice_in_path playerid gamestate square =
+  let loc = find_loc_by_sid gamestate.gamemap square in
+  let action = List.assoc square gamestate.sqact in
+  if (action.actionType = Event) then false
+  else true
+
 (* [spin_helper gamestate player step] is a helper function that handles spin
  * command *)
 let spin_helper gamestate player step =
@@ -418,14 +433,18 @@ let spin_helper gamestate player step =
   if (actionType = Event) then
     (if not (check_for_fork playerid player_loc_info.loc.id gamestate newstep)
       then move_multi_step gamestate playerid newstep
-    else handle_fork playerid player_loc_info gamestate newstep)
+    else let gs = handle_fork playerid player_loc_info gamestate newstep in
+        reset_direction player gs; gs)
   else
     (if not (check_for_fork playerid player_loc_info.loc.id gamestate newstep)
      then let newgs = move_multi_step gamestate playerid newstep in
      handle_choice player newgs actionType
     else
       let new_gs = handle_fork playerid player_loc_info gamestate newstep in
-      handle_choice player new_gs actionType)
+      let () = reset_direction player new_gs in begin
+          if (recheck_choice_in_path playerid new_gs player_loc_info.loc.id)
+          then handle_choice player new_gs actionType
+          else new_gs end)
 
 (* [reveal_results player_lst] creates a string which shows each player's points,
  * karma, and total points to print out at the end of the game. *)
