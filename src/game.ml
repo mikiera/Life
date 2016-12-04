@@ -270,13 +270,13 @@ let handle_fork playerid player_loc_info gamestate step =
   let player = List.nth gamestate.players (playerid - 1) in
   let msg =
   "There's a fork in your path. Do you want to turn left or right? (Type L/R)" in
-  let choice = if (Player.isHuman player) then print_choice (get_pcol playerid) msg ["L"; "l"; "R"; "r"]
-  else let () = print_endline msg in (ai_choice 2 ["l"; "r"]) in
-  let () = AT.print_string [get_pcol playerid] ("You have chosen to go " ^
-    (if choice = "l" then "left!\n" else "right!\n")) in
-  (if choice = "L" || choice = "l" then
-      player_loc_info.dir <- Left
-      else player_loc_info.dir <- Right);
+  let choice = if (Player.isHuman player)
+              then print_choice (get_pcol playerid) msg ["L"; "l"; "R"; "r"]
+              else let () = print_endline msg in (ai_choice 2 ["l"; "r"]) in
+              let () = AT.print_string [get_pcol playerid] ("You have chosen to go " ^
+              (if choice = "l" then "left!\n" else "right!\n")) in
+              (if choice = "L" || choice = "l" then player_loc_info.dir <- Left
+              else player_loc_info.dir <- Right);
   move_multi_step gamestate playerid step
 
 (* [pick_college player gamestate] allows the user to select a college and

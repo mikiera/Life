@@ -1,5 +1,6 @@
 (* main.ml
- * Like the main.ml file in A2, this file begins the game.
+ * Like the main.ml file in A2, this file begins the game and prompts the user
+ * to input a json file.
  *)
 
 let () =
