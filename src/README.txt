@@ -3,7 +3,7 @@ WELCOME TO THE LIFE OF CS MAJOR
 -:¦:--:¦:--:¦:--:¦:--:¦:--:¦:--:¦:--:¦:--:¦:--:¦:--:¦:--:¦:-
 
 
-This game is twist on the classic board game, The Game of Life. Enter as a freshman CS major at the Cornell University and find your path through a series of events and major life decisions. You will get to choose your class(es) and advisor as well as your internship plans and your future. Earn and lose points throughout your path. You can also earn karma--how much? You won't know until you graduate. So are you ready for this adventure?
+This game is a twist on the classic board game, The Game of Life. Enter as a freshman CS major at the Cornell University and find your path through a series of events and major life decisions. You will get to choose your class(es) and advisor as well as your internship plans and your future. Earn and lose points throughout your path. You can also earn karma--how much? You won't know until you graduate. So are you ready for this adventure?
 
 -:¦:--:¦:--:¦:--:¦:--:¦:--:¦:--:¦:--:¦:--:¦:--:¦:--:¦:--:¦:-
 
@@ -28,7 +28,7 @@ Setting up the game:
 
     Next the game will prompt you for each player's name and whether the 
     player is a human or not. Non human players are an AI that 
-    takes turn and decision automatically. 
+    take a turn and decision automatically. 
 
     Playing by yourself, but want a 
     companion? Choose one of two players and make one of them the AI!
@@ -52,9 +52,8 @@ Playing the game:
     type in l for left or r for right. 
 
     Sometimes, you will have to make a decision (for example,
-    picking a course or advisor...etc). For these descions, 
-    simply type in the number that corresponds to whatever
-    choice you pick. 
+    picking a course or advisor...etc). For these decisions, 
+    simply type in the number that corresponds to the choice you pick. 
 
     Except for the base commands, the game will always inform 
     you what commands are available for decisions and forks. 
@@ -67,7 +66,7 @@ Playing the game:
 
 -:¦:--:¦:--:¦:--:¦:--:¦:--:¦:--:¦:--:¦:--:¦:--:¦:--:¦:--:¦:-
 
-Enjoy the life of a CS Major and maybe one day, you code change the world!!
+Enjoy the life of a CS Major and maybe one day, your code change the world!!
 
 
 

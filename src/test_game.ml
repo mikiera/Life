@@ -108,8 +108,8 @@ let tests = [
 
   "test_play1" >:: (fun _ -> assert_equal gs1 (play "points" gs1 1));
   "test_play2" >:: (fun _ -> assert_equal gs1 (play "p" gs1 1));
-  "test_play3" >:: (fun _ -> assert_equal gs1 (play "history" gs1 1));
-  "test_play4" >:: (fun _ -> assert_equal gs1 (play "h" gs1 1));
+  "test_play3" >:: (fun _ -> assert_equal gs1 (play "resume" gs1 1));
+  "test_play4" >:: (fun _ -> assert_equal gs1 (play "r" gs1 1));
   "test_play5" >:: (fun _ -> assert_equal gs1 (play "advisor" gs1 0));
   "test_play6" >:: (fun _ -> assert_equal gs1 (play "a" gs1 0));
   "test_play7" >:: (fun _ -> assert_equal gs1 (play "courses" gs1 0));
