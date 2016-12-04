@@ -22,7 +22,7 @@ let tests = [
     "getPoints" >:: (fun _ -> assert_equal 20 (Player.getPoints p1));
     "getKarma" >:: (fun _ -> assert_equal 15 (Player.getKarma p1));
     "getRetirement" >:: (fun _ -> assert_equal "MEng" (Player.getFuture p1));
-    "getHistory" >:: (fun _-> assert_equal ("ID: 1\nName: Tom\nCollege: Engineering\nCourse: CS 3110\nAdvisor: Nick\n") (Player.getHistory p1));
+    "getHistory" >:: (fun _-> assert_equal ("ID: 1\nChanged Summer Plans to: Internship\nName: Tom\nCollege: Engineering\nChanged Course to: CS 3110\nChanged Advisor to: Nick\n") (Player.getHistory p1));
     "getSummerPlans" >:: (fun _ -> assert_equal "Internship" (Player.getSummerPlans p1));
 
     "changeCollege" >:: (fun _ -> assert_equal "AAP"
