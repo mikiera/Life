@@ -1,4 +1,4 @@
-# Life
+# Life of a CS Major
 WELCOME TO THE LIFE OF CS MAJOR
 
 -:¦:--:¦:--:¦:--:¦:--:¦:--:¦:--:¦:--:¦:--:¦:--:¦:--:¦:--:¦:-
