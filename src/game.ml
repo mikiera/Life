@@ -239,12 +239,13 @@ let convert_dir_square loc dir =
 let rec get_step_for_choice_event playerid square gamestate num_step =
   let loc = find_loc_by_sid gamestate.gamemap square in
   let action = List.assoc square gamestate.sqact in
-  let dir = get_player_direction playerid gamestate in
-  let locdir = convert_dir_square loc dir in
+  let dir = if (loc.left = Null && loc.right <> Null) then loc.right
+    else let temp = get_player_direction playerid gamestate in
+    convert_dir_square loc temp in
   if num_step = 1 then (num_step, action.actionType)
   else
     if (action.actionType = Event)
-      then get_step_for_choice_event playerid locdir gamestate (num_step -1)
+      then get_step_for_choice_event playerid dir gamestate (num_step -1)
     else (num_step, action.actionType)
 
 let print_msg msg =
@@ -258,7 +259,10 @@ let handle_fork playerid player_loc_info gamestate step =
   "There's a fork in your path. Do you want to turn left or right? (L/R)" in
   let choice = if (Player.isHuman player) then print_choice (get_pcol playerid) msg ["L"; "l"; "R"; "r"]
   else let () = print_msg msg in (ai_choice 2 ["l"; "r"]) in
-  (if choice = "L" || choice = "l" then player_loc_info.dir <- Left
+  let () = AT.print_string [get_pcol playerid] ("You have chosen to go " ^
+    (if choice = "l" then "left!\n" else "right!\n")) in
+  (if choice = "L" || choice = "l" then
+      player_loc_info.dir <- Left
       else player_loc_info.dir <- Right);
   move_multi_step gamestate playerid step
 
@@ -271,10 +275,10 @@ let pick_college player gamestate =
               else ai_choice 2 ["AS"; "ENG"] in
   if (choice = "AS" || choice = "as" || choice = "As")
     then let () = AT.print_string [dcol]
-      ("\nYou chose Arts and Sciences! Yay you don't have to take Math 1920!\n\n") in
+      ("\nYou chose Arts and Sciences! Yay you don't have to take Math 1920!\n") in
     (ignore((Player.changeCollege) player "Arts and Sciences"); gamestate)
   else let () = AT.print_string [dcol]
-    ("\nYou chose Engineering! Yay you don't have to take a language!\n\n") in
+    ("\nYou chose Engineering! Yay you don't have to take a language!\n") in
     (ignore((Player.changeCollege) player "Engineering"); gamestate)
 
 (* [create_message_from_cards msg cardlst] returns a string of all the names
@@ -356,11 +360,11 @@ let update_player_card_list playerid playercardlst gamestate newcardlst =
 let print_descrip playerid newcard =
   match newcard.card_type with
     | ChoiceA -> AT.print_string [dcol]
-          ("\nYou picked "^newcard.name^"\n"^newcard.description^"\n \n")
+          ("\nYou picked "^newcard.name^"\n"^newcard.description^"\n")
     | _ -> AT.print_string [dcol]
           ("\nYou picked "^newcard.name^"\n"^newcard.description^"\n"^
           "The points associated with "^newcard.name^" is "^
-          (string_of_int newcard.points)^" points. \n \n")
+          (string_of_int newcard.points)^" points. \n")
 
 (* [handle_choice_helper player gamestate actionType] is a helper function
  * that handles choice events and returns a new gamestate *)
@@ -405,6 +409,7 @@ let spin_helper gamestate player step =
   let (leftover,actionType) =
   get_step_for_choice_event playerid player_loc_info.loc.right gamestate step in
   let newstep = step - leftover + 1 in
+  let () = if not (Player.isHuman player) then AT.print_string [gcol] "spin\n" else () in
   let () = AT.print_string [get_pcol (Player.getID player)]
       ("You have moved " ^ (string_of_int newstep) ^ " steps. Hooray!\n") in
   if (actionType = Event) then
@@ -496,7 +501,7 @@ and repl (state : gamestate) (turn : int) : unit =
       ^ "!\n")) else
    (let playerid = List.nth state.active_players turn in
     let player = List.nth state.players (playerid - 1) in
-    let () = AT.print_string [get_pcol playerid] ("It is " ^
+    let () = AT.print_string [get_pcol playerid] ("\nIt is " ^
       (Player.getNickname player) ^ "'s turn. Please enter a command.\n>>> ") in
     let cmd = if (Player.isHuman player) then read_line () else "spin" in
     let check_cmd = cmd_checker cmd in
