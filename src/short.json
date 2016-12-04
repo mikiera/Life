@@ -481,7 +481,14 @@
 		"action": 
 			{
 			"type": "college",
-			"description": "First, you get must choose between Arts and Sciences or Engineering.",
+			"description": " __          __  _                            _           _____                      _ _ _ 
+ \\ \\        / / | |                          | |         / ____|                    | | | |
+  \\ \\  /\\  / /__| | ___ ___  _ __ ___   ___  | |_ ___   | |     ___  _ __ _ __   ___| | | |
+   \\ \/  \/ / _ \\ |/ __/ _ \\| '_ ` _ \\ / _ \\ | __/ _ \\  | |    / _ \\| '__| '_ \\ / _ \\ | | |
+    \\  /\\  /  __/ | (_| (_) | | | | | |  __/ | || (_) | | |___| (_) | |  | | | |  __/ | |_|
+     \/  \/ \\___|_|\\___\\___/|_| |_| |_|\\___|  \\__\\___/   \\_____\\___/|_|  |_| |_|\\___|_|_(_)
+ 
+ First, you get must choose between Arts and Sciences or Engineering.\n",
 			"points": 0,
 			"karma": 0
 			}
@@ -544,7 +551,32 @@
 		"action": 
 			{
 			"type": "event",
-			"description": "You need a partner for your next CS assignment. \nLuckily your best friend is also in your class. \nGet 900 points.",
+			"description": "                   ,
+                   |'.             ,
+                   |  '-._        / )
+                 .'  .._  ',     /_'-,
+                '   /  _'.'_\\   /._)')
+               :   /  '_' '_'  /  _.'
+               |E |   |Q| |Q| /   /
+              .'  _\\  '-' '-'    /
+            .'--.(S     ,__` )  /
+                  '-.     _.'  /
+                __.--'----(   /
+            _.-'     :   __\\ /
+           (      __.' :'  :Y
+            '.   '._,  :   :|
+              '.     ) :.__:|
+                \\    \\______/
+                 '._L/_H____]
+                  /_        /
+                 /  '-.__.-')
+                :      /   /
+                :     /   /
+              ,/_____/----;
+              '._____)----'
+              /     /   /
+
+You need a partner for your next CS assignment. \nLuckily your best friend is also in your class. \nGet 900 points.",
 			"points": 900,
 			"karma": 0
 			}
@@ -913,7 +945,12 @@
       "action": 
       {
       "type": "future",
-      "description": "Congratulations! You have graduated!! Now you get to choose your post-Cornell plans. \nYou also get karma points.",
+      "description": "\\ \\ / / / \\ \\ \\ / /
+ \\ V / / _ \\ \\ V / 
+  | | / ___ \\ | |  
+  |_|/_/   \\_\\|_|  
+
+Congratulations! You have graduated!! Now you get to choose your post-Cornell plans. You also get karma points.",
       "points": 0,
       "karma": 10
       }
