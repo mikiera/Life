@@ -62,6 +62,9 @@ let gcol = AT.black
 (* constant: color of "choice" text *)
 let ccol = AT.red
 
+(* constant: color of "description" text *)
+let dcol = AT.cyan
+
 (* [get_pcol id] gets the color for player with given id *)
 let get_pcol id = List.nth [AT.blue; AT.green; AT.magenta] (id mod 3)
 
@@ -267,10 +270,10 @@ let pick_college player gamestate =
   let choice = if (Player.isHuman player) then print_choice player ccol msg ["AS"; "as"; "As"; "ENG"; "eng"; "Eng"]
               else ai_choice 2 ["AS"; "ENG"] in
   if (choice = "AS" || choice = "as" || choice = "As")
-    then let () = AT.print_string [get_pcol (Player.getID player)]
+    then let () = AT.print_string [dcol]
       ("\nYou chose Arts and Sciences! Yay you don't have to take Math 1920!\n\n") in
     (ignore((Player.changeCollege) player "Arts and Sciences"); gamestate)
-  else let () = AT.print_string [get_pcol (Player.getID player)]
+  else let () = AT.print_string [dcol]
     ("\nYou chose Engineering! Yay you don't have to take a language!\n\n") in
     (ignore((Player.changeCollege) player "Engineering"); gamestate)
 
@@ -352,9 +355,9 @@ let update_player_card_list playerid playercardlst gamestate newcardlst =
  * about a player's choice *)
 let print_descrip playerid newcard =
   match newcard.card_type with
-    | ChoiceA -> AT.print_string [get_pcol playerid]
+    | ChoiceA -> AT.print_string [dcol]
           ("\nYou picked "^newcard.name^"\n"^newcard.description^"\n \n")
-    | _ -> AT.print_string [get_pcol playerid]
+    | _ -> AT.print_string [dcol]
           ("\nYou picked "^newcard.name^"\n"^newcard.description^"\n"^
           "The points associated with "^newcard.name^" is "^
           (string_of_int newcard.points)^" points. \n \n")
