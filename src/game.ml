@@ -334,11 +334,10 @@ let rec get_card_by_id id cardlst =
 
 (* [check_if_player_has_card playercardlst actionType]
  * returns the card associated with that id *)
-let rec check_if_player_has_card playercardlst actionType =
-  match playercardlst with
-    | [] -> ([], playercardlst)
-    | h :: t -> if h.card_type=actionType then ([h],t)
-                else check_if_player_has_card t actionType
+let check_if_player_has_card playercardlst actionType =
+  let lst = List.filter (fun x -> x.card_type <> actionType) playercardlst in
+  let card = List.filter (fun x -> x.card_type = actionType) playercardlst in
+  (card,lst)
 
 (* [update_player_has_card player actionType card]
  * returns a player with changed fields based on action type, as
