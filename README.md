@@ -18,6 +18,7 @@ HOW TO PLAY
 After make play the game will prompt you for a course roster.
 
 There are two main course rosters you can choose from:
+
 short.json : This is shorter version of the game! With only fifty squares, you get a small taste of the Life of a CS Major. 
 
 life.json: This is the full game!
