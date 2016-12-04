@@ -728,17 +728,17 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
     { "squareid": 26,
       "action": 
       {
-      "type": "event",
-      "description": "You have nothing to do. What a rare occurrence!!! \n42 points.",
-      "points": 42,
-      "karma": 24
+      "type": "summer_plans",
+      "description": "It's time to decide what you want to do this summer. \n461 points for being proactive.",
+      "points": 461,
+      "karma": 817
       }
     },
     { "squareid": 27,
       "action": 
       {
       "type": "event",
-      "description": "You haven't showered in 3 days. There's an assignment due.. BUT YOU HAVEN'T SHOWERED. \n-101 points",
+      "description": "You haven't showered in 3 days. There's an assignment due.. \nBUT YOU HAVEN'T SHOWERED. IN. THREE.DAYS \n-101 points",
       "points": -101,
       "karma": -803
       }
