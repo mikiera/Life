@@ -488,7 +488,7 @@ let rec play (cmd : string) (gamestate : gamestate) (turn : int) : gamestate =
   let player = List.nth gamestate.players (playerid - 1) in
   if (cmd = "p" || cmd = "points") then (AT.print_string [get_pcol playerid]
     (string_of_int (Player.getPoints player) ^ "\n"); gamestate)
-  else if (cmd = "h" || cmd = "history") then (AT.print_string [get_pcol playerid]
+  else if (cmd = "r" || cmd = "resume") then (AT.print_string [get_pcol playerid]
     (Player.getHistory player); gamestate)
   else if (cmd = "a" || cmd = "advisor") then (AT.print_string [get_pcol playerid]
     ((Player.getAdvisor player) ^ "\n"); gamestate)
@@ -505,19 +505,21 @@ let rec play (cmd : string) (gamestate : gamestate) (turn : int) : gamestate =
     AT.print_string [get_pcol playerid]
     ("p/points:      check your total points\n");
     AT.print_string [get_pcol playerid]
-    ("a/advisor:     see your advisor\n");
+    ("a/advisor:     check your advisor\n");
     AT.print_string [get_pcol playerid]
-    ("c/courses:     see your courses\n");
+    ("c/courses:     check your courses\n");
     AT.print_string [get_pcol playerid]
-    ("co/college:    see your college\n");
+    ("co/college:    check your college\n");
     AT.print_string [get_pcol playerid]
-    ("n/name:        see your nickname\n");
+    ("n/name:        check your nickname\n");
+    AT.print_string [get_pcol playerid]
+    ("r/resume:      check your resume\n");
     AT.print_string [get_pcol playerid]
     ("spin:          spin the wheel and try your luck!\n");
     AT.print_string [get_pcol playerid]
-    ("help:          see a list of commands available\n");
+    ("help:          the list of commands available\n");
     AT.print_string [get_pcol playerid]
-    ("help:          see a list of commands available\n");
+    ("q/quit/exit:   quit the game forever\n");
     gamestate)
   else raise Illegal
 
