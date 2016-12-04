@@ -65,7 +65,8 @@ let ccol = AT.red
 (* [get_pcol id] gets the color for player with given id *)
 let get_pcol id = List.nth [AT.blue; AT.green; AT.magenta] (id mod 3)
 
-let aiChoice n lst = let num = Random.int n in List.nth lst num
+let ai_choice n lst = let _ = Random.self_init in
+  let num = Random.int n in List.nth lst num
 
 (* remove for debugging purposes only *)
 let get_square_num square = match square with
@@ -253,7 +254,7 @@ let handle_fork playerid player_loc_info gamestate step =
   let msg =
   "There's a fork in your path. Do you want to turn left or right? (L/R)" in
   let choice = if (Player.isHuman player) then print_choice player (get_pcol playerid) msg ["L"; "l"; "R"; "r"]
-  else let () = print_msg msg in (aiChoice 2 ["l"; "r"]) in
+  else let () = print_msg msg in (ai_choice 2 ["l"; "r"]) in
   (if choice = "L" || choice = "l" then player_loc_info.dir <- Left
       else player_loc_info.dir <- Right);
   move_multi_step gamestate playerid step
@@ -264,7 +265,7 @@ let handle_fork playerid player_loc_info gamestate step =
 let pick_college player gamestate =
   let msg = "To choose Arts and Sciences, type AS. For Engineering, type ENG" in
   let choice = if (Player.isHuman player) then print_choice player ccol msg ["AS"; "as"; "As"; "ENG"; "eng"; "Eng"]
-              else aiChoice 2 ["AS"; "ENG"] in
+              else ai_choice 2 ["AS"; "ENG"] in
   if (choice = "AS" || choice = "as" || choice = "As")
     then (ignore((Player.changeCollege) player "Arts and Sciences"); gamestate)
   else (ignore((Player.changeCollege) player "Engineering"); gamestate)
@@ -364,7 +365,7 @@ let handle_choice_helper player gamestate actionType =
   let startmsg = get_start_msg actionType in
   let msg = startmsg^":"^cardmsg in
   let choice = if (Player.isHuman player) then print_choice player ccol msg valid_choices
-               else aiChoice (List.length(valid_choices)) valid_choices in
+               else ai_choice (List.length(valid_choices)) valid_choices in
   let id = int_of_string choice in
   let newcard = get_card_by_id id cardlst in
   let playercardlst = List.assoc playerid gamestate.playercard in
@@ -454,7 +455,8 @@ let rec play (cmd : string) (gamestate : gamestate) (turn : int) : gamestate =
     ((Player.getCollege player) ^ "\n"); gamestate)
   else if (cmd = "n" || cmd = "name") then (AT.print_string [get_pcol playerid]
     ((Player.getNickname player) ^ "\n"); gamestate)
-  else if (cmd = "spin") then let step = ((Random.int 4) + 1) in
+  else if (cmd = "spin") then let _ = Random.self_init in
+    let step = ((Random.int 4) + 1) in
     spin_helper gamestate player step
   else if (cmd = "help") then (
     AT.print_string [get_pcol playerid]
