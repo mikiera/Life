@@ -68,6 +68,7 @@ let dcol = AT.cyan
 (* [get_pcol id] gets the color for player with given id *)
 let get_pcol id = List.nth [AT.blue; AT.green; AT.magenta] (id mod 3)
 
+(* [ai_choice n lst] picks a ranodm choice from the given choices for an AI player.*)
 let ai_choice n lst = let _ = Random.self_init in
   let num = Random.int n in List.nth lst num
 
@@ -184,6 +185,8 @@ let move_one_step gamestate playerid =
         player_loc_info.loc <- (find_loc_by_sid map next_square); gamestate)
     else gamestate
 
+(* [change_pk gs pid action] adds the points and karma associated with an action
+ * to the player's karma and points. *)
 let change_pk (gs:gamestate) (pid:playerid) (action:action):Player.player =
     let player = find_player_by_id gs.players pid in
     ignore((Player.changePoints) player action.points);
@@ -213,6 +216,9 @@ let rec move_multi_step gamestate playerid n =
       else (move_multi_step (move_one_step gamestate playerid) playerid (n-1)))
     else failwith "Number of steps can't be negative"
 
+(* [check_for_fork playerid square gamestate num_step] recursively checks if
+ * there is a fork in the player's path given the number of steps he/she is
+ * going to move. *)
 let rec check_for_fork playerid square gamestate num_step =
   if num_step = 0 then false
   else (let loc = find_loc_by_sid gamestate.gamemap square in
@@ -248,9 +254,6 @@ let rec get_step_for_choice_event playerid square gamestate num_step =
       then get_step_for_choice_event playerid dir gamestate (num_step -1)
     else (num_step, action.actionType)
 
-let print_msg msg =
-  print_endline msg
-
 (* [handle_fork playerid player_loc_info gamestate step] handles fork events and
  * returns a new gamestate *)
 let handle_fork playerid player_loc_info gamestate step =
@@ -258,7 +261,7 @@ let handle_fork playerid player_loc_info gamestate step =
   let msg =
   "There's a fork in your path. Do you want to turn left or right? (L/R)" in
   let choice = if (Player.isHuman player) then print_choice (get_pcol playerid) msg ["L"; "l"; "R"; "r"]
-  else let () = print_msg msg in (ai_choice 2 ["l"; "r"]) in
+  else let () = print_endline msg in (ai_choice 2 ["l"; "r"]) in
   let () = AT.print_string [get_pcol playerid] ("You have chosen to go " ^
     (if choice = "l" then "left!\n" else "right!\n")) in
   (if choice = "L" || choice = "l" then
@@ -424,6 +427,8 @@ let spin_helper gamestate player step =
       let new_gs = handle_fork playerid player_loc_info gamestate newstep in
       handle_choice player new_gs actionType)
 
+(* [reveal_results player_lst] creates a string which shows each player's points,
+ * karma, and total points to print out at the end of the game. *)
 let rec reveal_results player_lst =
   match player_lst with
   | [] -> ""
@@ -433,12 +438,16 @@ let rec reveal_results player_lst =
                                       + (Player.getKarma h)))
                                    ^ ("\n") ^ (reveal_results t)
 
+(* [find_max_score player_lst max] traverses through the list of players to find
+ * the highest score earned in this game. *)
 let rec find_max_score player_lst max =
   match player_lst with
   | [] -> max
   | h::t -> let total = (Player.getPoints h) + (Player.getKarma h) in
             if (total >= max) then (find_max_score t total) else (find_max_score t max)
 
+(* [find_player_by_score player_lst score] traverses through the list of players
+ * to find the player(s) with the highest score. *)
 let rec find_player_by_score player_lst score =
   match player_lst with
   | [] -> []
@@ -446,12 +455,15 @@ let rec find_player_by_score player_lst score =
             then (Player.getNickname h)::(find_player_by_score t score)
             else find_player_by_score t score
 
+(* [winner_announcement winner_lst] creates a string of all of the winners of a game. *)
 let rec winner_annoucement winner_lst =
   match winner_lst with
   | [] -> ""
   | h::[] -> h
   | h::t -> h ^ " " ^ (winner_annoucement t)
 
+(* [play cmd gamesate turn] uses the user/AI command and the gamestate to perform
+ * the appropriate action and move the game forward. *)
 let rec play (cmd : string) (gamestate : gamestate) (turn : int) : gamestate =
   let playerid = List.nth gamestate.active_players turn in
   let player = List.nth gamestate.players (playerid - 1) in
@@ -488,6 +500,8 @@ let rec play (cmd : string) (gamestate : gamestate) (turn : int) : gamestate =
     gamestate)
   else raise Illegal
 
+(* [repl state turn] interacts with the player by reading in user input
+ * and outputting the appropriate result.*)
 and repl (state : gamestate) (turn : int) : unit =
   try
     if ((List.length state.active_players) = 0) then
@@ -520,7 +534,8 @@ and repl (state : gamestate) (turn : int) : unit =
 
 (* parsing functions *)
 
-
+(* [extract_card ctype card] takes in a card from the Json file and returns a
+ * card type representing all the necessary info. *)
 let extract_card ctype card =
   let open Yojson.Basic.Util in
   let name = card |> member "name" |> to_string in
@@ -531,7 +546,8 @@ let extract_card ctype card =
   {name=name; description = desc; id = id; points= points;
   karma=karma; card_type = ctype}
 
-
+(* [make_loc_list loc] takes in a location from the Json and returns a
+ * location type for the game. *)
 let make_loc_list loc : location =
   let open Yojson.Basic.Util in
   let id = loc |> member "squareid" |> to_int in
@@ -542,7 +558,7 @@ let make_loc_list loc : location =
   let realright = if right <> 0 then Square right else Null in
   {id = realid; left = realleft; right = realright}
 
-
+(* [parse_action action] takes in an action and returns the appropriate action type. *)
 let parse_action action : action =
   let open Yojson.Basic.Util in
   let atype = action |> member "type" |> to_string in
@@ -561,7 +577,7 @@ let parse_action action : action =
   {actionType = finaltype; description = description; points = points;
   karma = karma}
 
-
+(* [sq_act_list sqact] creates a sqaure action list based on the Json.*)
 let sq_act_list sqact =
   let open Yojson.Basic.Util in
   let id = sqact |> member "squareid" |> to_int in
@@ -605,6 +621,8 @@ let rec setup_players state =
   with
     | _ -> setup_players state
 
+(* [init_game j] uses the user-inputted json file to parse the json and
+ * initiliaze the gamestate.*)
 let init_game j =
   let open Yojson.Basic.Util in
   let courses = j |> member "courses" |> to_list
@@ -631,7 +649,10 @@ let init_game j =
   playercard = [];
   sqact = sqact}
 
-
+(* [main_helper file_name] tries to ruse the given file to initialize and setup
+ * the game so that the users can start playing.
+ * If file_name is an invalid json file or an exception arises in the game due to
+ * an invlaid command, an error is raised and the user is prompted again. *)
 let rec main_helper (file_name : string) =
   try
     let json = Yojson.Basic.from_file file_name in
@@ -646,6 +667,6 @@ let rec main_helper (file_name : string) =
     | _ -> let () = print_endline "Invalid input. Please try again";
       print_string ">>> "; in (main_helper (read_line ()))
 
-
+(* [main file_name] takes in the json file inputed by the user. *)
 let main file_name =
    main_helper file_name
