@@ -429,7 +429,7 @@ let spin_helper gamestate player step =
   let newstep = step - leftover + 1 in
   let () = if not (Player.isHuman player) then AT.print_string [gcol] "spin\n" else () in
   let () = AT.print_string [get_pcol (Player.getID player)]
-      ("You have moved " ^ (string_of_int newstep) ^ " steps. Hooray!\n") in
+      ("You have moved " ^ (string_of_int newstep) ^ " step(s). Hooray!\n") in
   if (actionType = Event) then
     (if not (check_for_fork playerid player_loc_info.loc.id gamestate newstep)
       then move_multi_step gamestate playerid newstep
@@ -536,6 +536,9 @@ and repl (state : gamestate) (turn : int) : unit =
       ^ "!\n")) else
    (let playerid = List.nth state.active_players turn in
     let player = List.nth state.players (playerid - 1) in
+    let () = if (turn = 0) then AT.print_string [gcol]
+        ("\n•·.·´`·.·•NEW ROUND•·.·´`·.·•\n")
+      else () in
     let () = AT.print_string [get_pcol playerid] ("\nIt is " ^
       (Player.getNickname player) ^ "'s turn. Please enter a command.\n>>> ") in
     let cmd = if (Player.isHuman player) then read_line () else "spin" in
