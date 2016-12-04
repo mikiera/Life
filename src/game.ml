@@ -285,10 +285,10 @@ let pick_college player gamestate =
               else ai_choice 2 ["AS"; "ENG"] in
   if (choice = "AS" || choice = "as" || choice = "As")
     then let () = AT.print_string [get_pcol (Player.getID player)]
-      ("\nYou chose Arts and Sciences! Yay you don't have to take Math 1920!\n") in
+      ("You chose Arts and Sciences! Yay you don't have to take Math 1920!\n") in
     (ignore((Player.changeCollege) player "Arts and Sciences"); gamestate)
   else let () = AT.print_string [get_pcol (Player.getID player)]
-    ("\nYou chose Engineering! Yay you don't have to take a language!\n") in
+    ("You chose Engineering! Yay you don't have to take a language!\n") in
     (ignore((Player.changeCollege) player "Engineering"); gamestate)
 
 (* [create_message_from_cards msg cardlst] returns a string of all the names
@@ -453,7 +453,7 @@ let handle_points player action gamestate =
   let fake_act = {actionType = Points; description = point_opt_obj.description;
     points = point_opt_obj.points; karma = point_opt_obj.karma; optlist = []} in
   ignore (change_pk gamestate playerid fake_act);
-  let () = AT.print_string [get_pcol playerid] ("\n" ^ point_opt_obj.description ^ "\n") in
+  let () = AT.print_string [get_pcol playerid] (point_opt_obj.description ^ "\n") in
   gamestate
 
 let get_action gamestate player =
