@@ -89,6 +89,11 @@ let gamecomp = {courses = course_lst; advisors = []; summer = []; future = []}
 let gs_for_remove = {turn = 1; playermap = ploc_lst; sqact = sqact_lst; start = 1; start_points = 2; gamemap = locations; gamecomp = gamecomp; players = player_lst; playercard = []; active_players = [1;2]}
 let gamecomp_after = {courses = [course1; course3]; advisors = []; summer = []; future = []}
 
+let ploc_lst_choice = [(1, {loc = loc1; dir = Right}); (2, {loc = loc1; dir = Right})]
+let gs_for_choice = {turn = 1; playermap = ploc_lst_choice; sqact = sqact_lst; start = 1;
+                     start_points = 0; gamemap = locations; gamecomp = gcomp; players = 
+                     player_lst; playercard = pcard_lst; active_players = [1;2]}
+
 let tests = [
 
   (* check parsing *)
@@ -140,6 +145,15 @@ let tests = [
                            (end_game_user gs 1 (List.assoc 1 gs.playermap)));
 
   "move_multi_step1" >:: (fun _ -> assert_equal gs4 (move_multi_step gs 1 2));
+
+  "test_get_step_for_choice" >:: (fun _ -> assert_equal (2, ChoiceCol) 
+                                 (get_step_for_choice_event 1 (Square 2) gs_for_choice 2));
+
+  "test_get_step_for_choice_1" >:: (fun _ -> assert_equal (1, ChoiceCol) 
+                                 (get_step_for_choice_event 1 (Square 2) gs_for_choice 1));
+
+  "test_get_step_for_choice_2" >:: (fun _ -> assert_equal (0, ChoiceCol) 
+                                 (get_step_for_choice_event 1 (Square 2) gs_for_choice 0));
 
   "test_play1" >:: (fun _ -> assert_equal gs1 (play "points" gs1 1));
 
