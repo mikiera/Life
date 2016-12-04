@@ -5,8 +5,9 @@ open Random
 
 module AT = ANSITerminal
 
-exception Illegal
-
+(********************
+ * Type Definitions *
+ ********************)
 
 type turn = int
 
@@ -65,6 +66,10 @@ type gamestate = {turn: turn;
                   playercard: playercard list;
                   active_players: int list}
 
+(**********
+ * Colors *
+ **********)
+
 (* constant: game color *)
 let gcol = AT.black
 
@@ -74,14 +79,13 @@ let ccol = AT.cyan
 (* [get_pcol id] gets the color for player with given id *)
 let get_pcol id = List.nth [AT.blue; AT.green; AT.magenta] (id mod 3)
 
-(* [ai_choice n lst] picks a ranodm choice from the given choices for an AI player.*)
+(*********************
+ * Helper functions: *
+ *********************)
+
+(* [ai_choice n lst] picks a ranodm choice from the given choices for an AI.*)
 let ai_choice n lst = let () = Random.self_init () in
   let num = Random.int n in List.nth lst num
-
-(* remove for debugging purposes only *)
-let get_square_num square = match square with
-  | Square n -> n
-  | Null -> 0
 
 (* [cmd_checker c] returns the string c with all lowercase letters and no
  * leading or trailing spaces *)
@@ -97,6 +101,10 @@ let rec print_choice color descrip choices =
   let fixedresult = cmd_checker result in
   if (List.mem fixedresult choices) then fixedresult
   else (print_choice color descrip choices)
+
+(****************************************
+ * Helper functions: Extracting objects *
+ ****************************************)
 
 (* [find_player_by_id player_list player_id] returns the Player object
  * that has the id player_id; if the player_id does not correspond with a
@@ -117,6 +125,31 @@ let rec find_loc_by_sid (locations:location list) (square_id:square):location =
   (match locations with
   | [] -> raise (Failure "This square id is not in the game.")
   | h::t -> if h.id = square_id then h else find_loc_by_sid t square_id)
+
+(* [get_player_direction playerid gamestate] returns the dir of the player *)
+let get_player_direction playerid gamestate =
+  let locinfo = List.filter (fun (x,y) -> x = playerid) gamestate.playermap in
+  match locinfo with
+    | [] -> failwith "player not found"
+    | (h1, h2) ::t -> h2.dir
+
+(* [convert_dir_square loc dir] returns the correct square based on direction *)
+let convert_dir_square loc dir =
+  match dir with
+    | Left -> loc.left
+    | Right -> loc.right
+
+(* [get_list_of_valid_choices cardlst lst] returns a list of all the valid
+ * choices for given card list *)
+let rec get_list_of_valid_choices cardlst lst =
+  match cardlst with
+    | [] -> lst
+    | h :: t -> let newlst = (string_of_int h.id) :: lst in
+                get_list_of_valid_choices t newlst
+
+(**************************************
+ * Helper functions: Manipulate cards *
+ **************************************)
 
 (* [remove_card card gamecomp gamestate] removes a card from the gamestate and
  * returns the new gamestate *)
@@ -172,6 +205,10 @@ let get_correct_comp actionType gamestate =
     | ChoiceS -> gamestate.gamecomp.summer
     | ChoiceCol -> failwith "no gamecomp"
     | Event | Points -> failwith "no gamecomp"
+
+(*********************
+ * Helper functions: *
+ *********************)
 
 (* [move_one_step gamestate playerid] returns the gamestate after the player
  * identified by playerid moves one step forward where the direction is
@@ -233,18 +270,7 @@ let rec check_for_fork playerid square gamestate num_step =
         else if loc.left <> Null && loc.right <> Null then true
         else check_for_fork playerid loc.right gamestate (num_step-1))
 
-(* [get_player_direction playerid gamestate] returns the dir of the player *)
-let get_player_direction playerid gamestate =
-  let locinfo = List.filter (fun (x,y) -> x = playerid) gamestate.playermap in
-  match locinfo with
-    | [] -> failwith "player not found"
-    | (h1, h2) ::t -> h2.dir
 
-(* [convert_dir_square loc dir] returns the correct square based on direction *)
-let convert_dir_square loc dir =
-  match dir with
-    | Left -> loc.left
-    | Right -> loc.right
 
 (* [get_step_for_choice_event playerid square gamestate num_step] returns a
  * tuple of corrected number of steps for mandatory stops and the actionType *)
@@ -265,12 +291,13 @@ let rec get_step_for_choice_event playerid square gamestate num_step =
  * returns a new gamestate *)
 let handle_fork playerid player_loc_info gamestate step =
   let player = List.nth gamestate.players (playerid - 1) in
-  let msg =
-  "There's a fork in your path. Do you want to turn left or right? (Type L/R)" in
+  let msg = "There's a fork in your path. Do you want to turn left or right?"
+    ^ " (Type L/R)" in
   let choice = if (Player.isHuman player)
               then print_choice (get_pcol playerid) msg ["L"; "l"; "R"; "r"]
               else let () = print_endline msg in (ai_choice 2 ["l"; "r"]) in
-              let () = AT.print_string [get_pcol playerid] ("You have chosen to go " ^
+              let () = AT.print_string [get_pcol playerid]
+              ("You have chosen to go " ^
               (if choice = "l" then "left!\n" else "right!\n")) in
               (if choice = "L" || choice = "l" then player_loc_info.dir <- Left
               else player_loc_info.dir <- Right);
@@ -280,12 +307,14 @@ let handle_fork playerid player_loc_info gamestate step =
  * modifies a player and returns a new gamestate
  *)
 let pick_college player gamestate =
-  let msg = "To choose Arts and Sciences, type AS. For Engineering, type ENG." in
-  let choice = if (Player.isHuman player) then print_choice ccol msg ["AS"; "as"; "As"; "ENG"; "eng"; "Eng"]
-              else ai_choice 2 ["AS"; "ENG"] in
+  let msg = "To choose Arts and Sciences, type AS."
+    ^ " For Engineering, type ENG." in
+  let choice = if (Player.isHuman player)
+    then print_choice ccol msg ["AS"; "as"; "As"; "ENG"; "eng"; "Eng"]
+    else ai_choice 2 ["AS"; "ENG"] in
   if (choice = "AS" || choice = "as" || choice = "As")
     then let () = AT.print_string [get_pcol (Player.getID player)]
-      ("You chose Arts and Sciences! Yay you don't have to take Math 1920!\n") in
+    ("You chose Arts and Sciences! Yay you don't have to take Math 1920!\n") in
     (ignore((Player.changeCollege) player "Arts and Sciences"); gamestate)
   else let () = AT.print_string [get_pcol (Player.getID player)]
     ("You chose Engineering! Yay you don't have to take a language!\n") in
@@ -304,26 +333,20 @@ let rec create_message_from_cards msg cardlst =
                 let newmsg = msg^"\n"^id^") "^desc in
                 create_message_from_cards newmsg t
 
-(* [get_list_of_valid_choices cardlst lst] returns a list of all the valid
- * choices for given card list *)
-let rec get_list_of_valid_choices cardlst lst =
-  match cardlst with
-    | [] -> lst
-    | h :: t -> let newlst = (string_of_int h.id) :: lst in
-                get_list_of_valid_choices t newlst
+
 
 (* [get_start_msg actionType] returns the string start message for choice
  * events *)
 let get_start_msg actionType =
   match actionType with
-  | ChoiceC ->
-  "Choose a course from the following list by typing the course number:"
-  | ChoiceA ->
-  "Choose an advisor from the following list by typing the advisor number:"
-  | ChoiceF ->
-  "Determine your future from the following list by typing the corresponding number:"
-  | ChoiceS ->
-  "Choose your summer plans from the following list by typing the corresponding number:"
+  | ChoiceC -> ("Choose a course from the following list by typing " ^
+    "the course number:")
+  | ChoiceA -> ("Choose an advisor from the following list by typing " ^
+    "the advisor number:")
+  | ChoiceF -> ("Determine your future from the following list by typing " ^
+    "the corresponding number:")
+  | ChoiceS -> ("Choose your summer plans from the following list by typing " ^
+    "the corresponding number:")
   | _ -> "not a valid actionType"
 
 (* [get_card_by_id id cardlst] returns the card associated with that id *)
@@ -372,11 +395,11 @@ let update_player_card_list playerid playercardlst gamestate newcardlst =
 let print_descrip playerid newcard =
   match newcard.card_type with
     | ChoiceA -> AT.print_string [get_pcol playerid]
-          ("You picked "^newcard.name^"\n"^newcard.description^"\n")
+          ("You picked " ^ newcard.name ^ "\n" ^ newcard.description ^ "\n")
     | _ -> AT.print_string [get_pcol playerid]
-          ("You picked "^newcard.name^"\n"^newcard.description^"\n"^
-          "The points associated with "^newcard.name^" is "^
-          (string_of_int newcard.points)^" points. \n")
+          ("You picked " ^ newcard.name ^ "\n" ^ newcard.description ^ "\n" ^
+          "The points associated with " ^ newcard.name ^ " is " ^
+          (string_of_int newcard.points) ^ " points. \n")
 
 (* [handle_choice_helper player gamestate actionType] is a helper function
  * that handles choice events and returns a new gamestate *)
@@ -387,9 +410,10 @@ let handle_choice_helper player gamestate actionType =
   let cardmsg = create_message_from_cards "" cardlst in
   let startmsg = get_start_msg actionType in
   let msg = startmsg ^ " " ^ cardmsg in
-  let choice = if (Player.isHuman player) then print_choice ccol msg valid_choices
-               else let () = AT.print_string [ccol] (msg ^ "\n") in
-               ai_choice (List.length(valid_choices)) valid_choices in
+  let choice = if (Player.isHuman player)
+    then print_choice ccol msg valid_choices
+    else let () = AT.print_string [ccol] (msg ^ "\n") in
+    ai_choice (List.length(valid_choices)) valid_choices in
   let id = int_of_string choice in
   let newcard = get_card_by_id id cardlst in
   let playercardlst = List.assoc playerid gamestate.playercard in
@@ -451,17 +475,24 @@ let handle_points player action gamestate =
       | h :: t -> h
     end in
   let fake_act = {actionType = Points; description = point_opt_obj.description;
-    points = point_opt_obj.points; karma = point_opt_obj.karma; optlist = []} in
+    points = point_opt_obj.points; karma = point_opt_obj.karma;
+      optlist = []} in
   ignore (change_pk gamestate playerid fake_act);
-  let () = AT.print_string [get_pcol playerid] (point_opt_obj.description ^ "\n") in
+  let () = AT.print_string [get_pcol playerid]
+    (point_opt_obj.description ^ "\n") in
   gamestate
 
+(*  *)
 let get_action gamestate player =
     let playerid = Player.getID player in
     let player_loc_info = List.assoc playerid gamestate.playermap in
     let location = player_loc_info.loc.id in
     List.assoc location gamestate.sqact
 
+
+(*********************
+ * Helper functions: *
+ *********************)
 
 (* [spin_helper gamestate player step] is a helper function that handles spin
  * command *)
@@ -508,16 +539,19 @@ let spin_helper gamestate player step =
            handle_choice player new_gs actionType
           else new_gs end)
 
+(*********************
+ * Helper functions: Ending the Game *
+ *********************)
 (* [reveal_results player_lst] creates a string which shows each player's points,
  * karma, and total points to print out at the end of the game. *)
 let rec reveal_results player_lst =
   match player_lst with
   | [] -> ""
-  | h::t -> (Player.getNickname h) ^ ("\n   Karma: ") ^ (string_of_int(Player.getKarma h))
-                                   ^ ("\n   Points: ") ^ (string_of_int(Player.getPoints h))
-                                   ^ ("\n   Total: ") ^ (string_of_int((Player.getPoints h)
-                                      + (Player.getKarma h)))
-                                   ^ ("\n") ^ (reveal_results t)
+  | h::t -> (Player.getNickname h) ^ ("\n   Karma: ")
+      ^ (string_of_int(Player.getKarma h)) ^ ("\n   Points: ")
+      ^ (string_of_int(Player.getPoints h)) ^ ("\n   Total: ")
+      ^ (string_of_int((Player.getPoints h) + (Player.getKarma h)))
+      ^ ("\n") ^ (reveal_results t)
 
 (* [find_max_score player_lst max] traverses through the list of players to find
  * the highest score earned in this game. *)
@@ -525,7 +559,8 @@ let rec find_max_score player_lst max =
   match player_lst with
   | [] -> max
   | h::t -> let total = (Player.getPoints h) + (Player.getKarma h) in
-            if (total >= max) then (find_max_score t total) else (find_max_score t max)
+            if (total >= max) then (find_max_score t total)
+            else (find_max_score t max)
 
 (* [find_player_by_score player_lst score] traverses through the list of players
  * to find the player(s) with the highest score. *)
@@ -536,31 +571,42 @@ let rec find_player_by_score player_lst score =
             then (Player.getNickname h)::(find_player_by_score t score)
             else find_player_by_score t score
 
-(* [winner_announcement winner_lst] creates a string of all of the winners of a game. *)
+(* [winner_announcement winner_lst] creates a string of all the winners. *)
 let rec winner_annoucement winner_lst =
   match winner_lst with
   | [] -> ""
   | h::[] -> h
   | h::t -> h ^ " " ^ (winner_annoucement t)
 
-(* [play cmd gamesate turn] uses the user/AI command and the gamestate to perform
- * the appropriate action and move the game forward. *)
+
+(*********************
+ * Functions: play, REPL *
+ *********************)
+
+(* [play cmd gamesate turn] uses the user/AI command and the gamestate to
+ * perform the appropriate action and move the game forward. *)
 let rec play (cmd : string) (gamestate : gamestate) (turn : int) : gamestate =
   let playerid = List.nth gamestate.active_players turn in
   let player = List.nth gamestate.players (playerid - 1) in
   if (cmd = "p" || cmd = "points") then (AT.print_string [get_pcol playerid]
     (string_of_int (Player.getPoints player) ^ "\n"); gamestate)
-  else if (cmd = "r" || cmd = "resume") then (AT.print_string [get_pcol playerid]
+  else if (cmd = "r" || cmd = "resume")
+    then (AT.print_string [get_pcol playerid]
     (Player.getHistory player); gamestate)
-  else if (cmd = "a" || cmd = "advisor") then (AT.print_string [get_pcol playerid]
+  else if (cmd = "a" || cmd = "advisor")
+    then (AT.print_string [get_pcol playerid]
     ((Player.getAdvisor player) ^ "\n"); gamestate)
-  else if (cmd = "c" || cmd = "courses") then (AT.print_string [get_pcol playerid]
+  else if (cmd = "c" || cmd = "courses")
+    then (AT.print_string [get_pcol playerid]
     ((Player.getCourse player) ^ "\n"); gamestate)
-  else if (cmd = "co" || cmd = "college") then (AT.print_string [get_pcol playerid]
+  else if (cmd = "co" || cmd = "college")
+    then (AT.print_string [get_pcol playerid]
     ((Player.getCollege player) ^ "\n"); gamestate)
-  else if (cmd = "n" || cmd = "name") then (AT.print_string [get_pcol playerid]
+  else if (cmd = "n" || cmd = "name")
+    then (AT.print_string [get_pcol playerid]
     ((Player.getNickname player) ^ "\n"); gamestate)
-  else if (cmd = "sp" || cmd = "summer") then (AT.print_string [get_pcol playerid]
+  else if (cmd = "sp" || cmd = "summer")
+    then (AT.print_string [get_pcol playerid]
     ((Player.getSummerPlans player) ^ "\n"); gamestate)
   else if (cmd = "spin" ) then let () = Random.self_init () in
     let step = ((Random.int 4) + 1) in
@@ -587,7 +633,7 @@ let rec play (cmd : string) (gamestate : gamestate) (turn : int) : gamestate =
     AT.print_string [get_pcol playerid]
     ("q/quit/exit:   quit the game forever\n");
     gamestate)
-  else raise Illegal
+  else raise (Failure "")
 
 (* [repl state turn] interacts with the player by reading in user input
  * and outputting the appropriate result.*)
@@ -599,21 +645,23 @@ and repl (state : gamestate) (turn : int) : unit =
       ^ (reveal_results state.players)
       ^ "\nCongratulations to our winner(s): "
       ^ (let players = state.players in
-         let winners = find_player_by_score players (find_max_score players 0) in
-         winner_annoucement winners)
+         let winners = find_player_by_score players (find_max_score players 0)
+         in winner_annoucement winners)
       ^ "!\n\nThanks for playing the Life of a CS Major!"
       ^ "\nPriyanka | Vicky | Harshita | Julia <3\n")) else
    (let playerid = List.nth state.active_players turn in
     let player = List.nth state.players (playerid - 1) in
     let () = AT.print_string [get_pcol playerid] ("\nIt is " ^
-      (Player.getNickname player) ^ "'s turn. Please enter a command.\n>>> ") in
+      (Player.getNickname player) ^ "'s turn. Please enter a command.\n" ^
+      "(Type \"spin\" to play, \"help\" for more information).\n>>> ") in
     let cmd = if (Player.isHuman player) then read_line () else "spin" in
     let check_cmd = cmd_checker cmd in
     if (check_cmd = "quit" || check_cmd = "exit" || check_cmd = "q")
     then AT.print_string [gcol] "You have terminated the game.\n"
     else
       let new_gs = play check_cmd state turn in
-      let () = if ((turn = (List.length state.active_players - 1)) && check_cmd = "spin")
+      let () = if ((turn = (List.length state.active_players - 1))
+        && check_cmd = "spin")
         then (AT.print_string [gcol; AT.Bold]
           ("\n»»------------------¤------------------««\n" ^
           "»»------------- New Round -------------««" ^
@@ -628,7 +676,9 @@ and repl (state : gamestate) (turn : int) : unit =
     | _ -> AT.print_string [gcol]
       "Invalid command. Please try again.\n"; repl state turn
 
-(* parsing functions *)
+(*********************
+ * Functions: Parsing *
+ *********************)
 
 (* [extract_card ctype card] takes in a card from the Json file and returns a
  * card type representing all the necessary info. *)
@@ -663,7 +713,8 @@ let parse_optlist opt =
   let karma = opt |> member "karma" |> to_int in
   {optstr = optstr; description = description; points = points; karma = karma}
 
-(* [parse_action action] takes in an action and returns the appropriate action type. *)
+(* [parse_action action] takes in an action and
+ * returns the appropriate action type. *)
 let parse_action action : action =
   let open Yojson.Basic.Util in
   let atype = action |> member "type" |> to_string in
@@ -680,7 +731,8 @@ let parse_action action : action =
   let description = action |> member "description" |> to_string in
   let points = action |> member "points" |> to_int in
   let karma = action |> member "karma" |> to_int in
-  let optlist = action |> member "optlist" |> to_list |> (List.map parse_optlist) in
+  let optlist = action |> member "optlist" |> to_list |>
+    (List.map parse_optlist) in
   {actionType = finaltype; description = description; points = points;
   karma = karma; optlist = optlist}
 
@@ -760,8 +812,8 @@ let init_game j =
 
 (* [main_helper file_name] tries to ruse the given file to initialize and setup
  * the game so that the users can start playing.
- * If file_name is an invalid json file or an exception arises in the game due to
- * an invlaid command, an error is raised and the user is prompted again. *)
+ * If file_name is an invalid json file or an exception arises in the game due
+ * to an invlaid command, an error is raised and the user is prompted again. *)
 let rec main_helper (file_name : string) =
   try
     let json = Yojson.Basic.from_file file_name in
