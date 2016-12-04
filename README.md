@@ -40,6 +40,7 @@ Play the game by typing in commands based
 on the prompt. All commands are case insensitive!
 
 To take a turn: type spin
+
 For a list of all commands: type help
 
 To see your name: type name or n
