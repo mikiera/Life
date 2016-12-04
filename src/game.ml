@@ -663,9 +663,9 @@ and repl (state : gamestate) (turn : int) : unit =
       let () = if ((turn = (List.length state.active_players - 1))
         && check_cmd = "spin")
         then (AT.print_string [gcol; AT.Bold]
-          ("\n»»------------------¤------------------««\n" ^
+          ("\n" ^
           "»»------------- New Round -------------««" ^
-          "\n»»------------------¤------------------««\n"))
+          "\n"))
         else () in
       let new_turn = if (check_cmd <> "spin") then turn
         else if (new_gs.turn = -1) then
