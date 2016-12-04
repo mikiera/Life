@@ -475,7 +475,7 @@
 			"description": "Get ready for the Life of a CS Major! Where will you go?",
 			"points": 0,
 			"karma": 0,
-      "optdict": []
+      "optlist": []
 			}
 		},																					
 		{"squareid": 2,
@@ -492,7 +492,7 @@
  First, you get must choose between Arts and Sciences or Engineering.\n",
 			"points": 0,
 			"karma": 0,
-      "optdict": []
+      "optlist": []
 			}
 		},
 		{"squareid": 3,
@@ -502,7 +502,7 @@
 			"description": "It's your first day on campus and you got lost. \nLose 20 points.",
 			"points": -20,
 			"karma": 0,
-      "optdict": []
+      "optlist": []
 			}
 		},
 		{"squareid": 4,
@@ -512,7 +512,7 @@
 			"description": "You applied for a project team and now you're waiting on results. \nGet some karma.",
 			"points": 0,
 			"karma": 500,
-      "optdict": []
+      "optlist": []
 			}
 		},
 		{"squareid": 5,
@@ -522,7 +522,7 @@
 			"description": "You got a 100 on your first CS assignment. Congratulations! \nYou get 500 points.",
 			"points": 500,
 			"karma": 0,
-      "optdict": []
+      "optlist": []
 			}
 		},
 		{"squareid": 6,
@@ -532,7 +532,7 @@
 			"description": "You went to a gbody for WICC or ASCU. \nYou got a really awesome mentor to help you out! \nGet 300 points and some karma.",
 			"points": 300,
 			"karma": 100,
-      "optdict": []
+      "optlist": []
 			}
 		},
 		{"squareid": 7,
@@ -542,7 +542,7 @@
 			"description": "Career fair is coming up, should you go? \nType y to go to career fair (spend 15 points). \nType n to stay in lecture (spend 5 points).",
 			"points": 0,
 			"karma": 0,
-      "optdict": [
+      "optlist": [
         {"option": "y", "description": "You went to career fair and got tons of swag! (and maybe a job?)", "points": -15, "karma": 267},
         {"option": "n", "description": "You decided to go to class and don't need to catch up on the material later.", "points": -5, "karma": 24}
         ]
@@ -555,7 +555,7 @@
 			"description": "You need a partner for your next CS assignment. \nBut you couldn't find one. \nLose 900 points.",
 			"points": -900,
 			"karma": 0,
-      "optdict": []
+      "optlist": []
 			}
 		},
 		{"squareid": 9,
@@ -590,7 +590,7 @@
 You need a partner for your next CS assignment. \nLuckily your best friend is also in your class. \nGet 900 points.",
 			"points": 900,
 			"karma": 0,
-      "optdict": []
+      "optlist": []
 			}
 		},
 		{"squareid": 10,
@@ -600,7 +600,7 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
 			"description": "You went to a tech talk for Google and got free dinner. \nGet 300 points and karma",
 			"points": 300,
 			"karma": 0,
-      "optdict": []
+      "optlist": []
 			}
 		},
 		{"squareid": 11,
@@ -610,7 +610,7 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
 			"description": "As a freshman, you got onto a project team for the CS team with no experience! \nGet 1000 points and karma!",
 			"points": 1000,
 			"karma": 1000,
-      "optdict": []
+      "optlist": []
 			}
 		},
 		{"squareid": 12,
@@ -620,7 +620,7 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
 			"description": "You aced your first CS prelim! Two standard deviations above the mean! \nGet 1500 points and karma!",
 			"points": 1500,
 			"karma": 600,
-      "optdict": []
+      "optlist": []
 			}
 		},
 		{"squareid": 13,
@@ -630,7 +630,7 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
 			"description": "You failed your first CS prelim! Two standard deviations below the mean! \nLose 800 points.",
 			"points": -800,
 			"karma": 0,
-      "optdict": []
+      "optlist": []
 			}
 		},
 		{"squareid": 14,
@@ -640,7 +640,7 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
 			"description": "You slept through lecture today and the Prof took attendance. \nLose 500 points and get some karma for getting sleep.",
 			"points": -500,
 			"karma": 40,
-      "optdict": []
+      "optlist": []
 			}
 		},
 		{"squareid": 15,
@@ -650,7 +650,7 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
 			"description": "It's pre-enroll. Select a course for next semester! \nGet 400 points for waking up on time.",
 			"points": 400,
 			"karma": 0,
-      "optdict": []
+      "optlist": []
 			}
 		},
 		{"squareid": 16,
@@ -660,7 +660,7 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
 			"description": "Your laptop ran out of battery while you were on central. \nLose 200 points. ",
 			"points": -200,
 			"karma": 0,
-      "optdict": []
+      "optlist": []
 			}
 		},
 		{"squareid": 17,
@@ -670,7 +670,7 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
 			"description": "You pulled your first all-nighter. Congrats? \nGet 500 points and karma. ",
 			"points": 500,
 			"karma": 1000,
-      "optdict": []
+      "optlist": []
 			}
 		},
 		{"squareid": 18,
@@ -680,7 +680,7 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
 			"description": "You went to office hours and got to know your professor well. \nGet 200 points and karma.",
 			"points": 200,
 			"karma": 0,
-      "optdict": []
+      "optlist": []
 			}
 		},
     { "squareid": 19,
@@ -690,7 +690,7 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "description": "You decided to go to an ACSU GBody meeting. \nGet 0 points for eating free pizza.",
       "points": 0,
       "karma": -5,
-      "optdict": []
+      "optlist": []
       }
     },
     { "squareid": 20,
@@ -700,7 +700,7 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "description": "You created an actual Github for independent projects. \nGet 202 points for at least trying.",
       "points": 202,
       "karma": 112,
-      "optdict": []
+      "optlist": []
       }
     },
     { "squareid": 21,
@@ -710,7 +710,7 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "description": "You affiliated with the CS major! Congrats fam :') \n9999 points",
       "points": 9999,
       "karma": 456,
-      "optdict": []
+      "optlist": []
       }
     },
     { "squareid": 22,
@@ -720,7 +720,7 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "description": "The semester's been rough and you have to drop your class :( \nGet 111 points for caring about your own health.",
       "points": 111,
       "karma": 52,
-      "optdict": []
+      "optlist": []
       }
     },
     { "squareid": 23,
@@ -730,7 +730,7 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "description": "There are no assignments due this weekend! \nGo out tonight with some friends and get 99 points.",
       "points": 99,
       "karma": 274,
-      "optdict": []
+      "optlist": []
       }
     },
     { "squareid": 24,
@@ -740,7 +740,7 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "description": "You submitted an empty zip file on CMS. \nLose 398 points for carelessness :(",
       "points": -398,
       "karma": 35,
-      "optdict": []
+      "optlist": []
       }
     },
     { "squareid": 25,
@@ -750,7 +750,7 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "description": "You're stuck on 2-3 trees, but your best friend is a 3110 TA! \nAsk them for 3110 points-I mean help on the assignment.",
       "points": 3110,
       "karma": 3110,
-      "optdict": []
+      "optlist": []
       }
     },
     { "squareid": 26,
@@ -760,7 +760,7 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "description": "It's time to decide what you want to do this summer. \n461 points for being proactive.",
       "points": 461,
       "karma": 817,
-      "optdict": []
+      "optlist": []
       }
     },
     { "squareid": 27,
@@ -770,7 +770,7 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "description": "You haven't showered in 3 days. There's an assignment due.. \nBUT YOU HAVEN'T SHOWERED. IN. THREE.DAYS \n-101 points",
       "points": -101,
       "karma": -803,
-      "optdict": []
+      "optlist": []
       }
     },
    	{ "squareid": 28,
@@ -780,7 +780,7 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
   		"description": "You completed 3110! This has been 3110. \nGet 3110 points.",
   		"points": 3110,
   		"karma": 696,
-      "optdict": []
+      "optlist": []
   		}
   	},
     { "squareid": 29,
@@ -790,7 +790,7 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "description": "Your question on Piazza was never answered. \nYou look at the red dot and feel 78 points slipping away.",
       "points": -78,
       "karma": -21,
-      "optdict": []
+      "optlist": []
       }
     },
     { "squareid": 30,
@@ -800,7 +800,7 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "description": "You need to choose an advisor. \nYou also get karma points.",
       "points": 600,
       "karma": 1000,
-      "optdict": []
+      "optlist": []
       }
     }, 
     { "squareid": 31,
@@ -810,7 +810,7 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "description": "Your CS partner decided to drop the class. \nTough luck bud, you have to find a new one. \nLose 33 points.",
       "points": -33,
       "karma": -2,
-      "optdict": []
+      "optlist": []
       }
     }, 
     { "squareid": 32,
@@ -820,7 +820,7 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "description": "You crashed. Your computer crashed. It's a really unfortunate week. \nYou lose 444 points, but at least you got some karma points for making through a rough time.",
       "points": -444,
       "karma": 67,
-      "optdict": []
+      "optlist": []
       }
     }, 
     { "squareid": 33,
@@ -830,7 +830,7 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "description": "You go to bed on one day and you get up on a different calendar day. w0w. \nYou get 688 points.",
       "points": 688,
       "karma": 511,
-      "optdict": []
+      "optlist": []
       }
     }, 
     { "squareid": 34,
@@ -840,7 +840,7 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "description": "You slept through a prelim. Uh oh. \nYou will have to lose 298 points.",
       "points": -298,
       "karma": -105,
-      "optdict": []
+      "optlist": []
       }
     }, 
     { "squareid": 35,
@@ -850,7 +850,7 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "description": "You got flown out to an interview. \nGet 836 points and a ton of free food that's all paid for.",
       "points": 836,
       "karma": 800,
-      "optdict": []
+      "optlist": []
       }
     },
     { "squareid": 36,
@@ -860,7 +860,7 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "description": "Regrades are due tonight, but the handback room was closed when you went there to check. \nYou lose 39 points.",
       "points": -39,
       "karma": -12,
-      "optdict": []
+      "optlist": []
       }
     }, 
     { "squareid": 37,
@@ -870,7 +870,7 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "description": "CMS crashed. \nLose 307 points for being unlucky.",
       "points": -307,
       "karma": -15,
-      "optdict": []
+      "optlist": []
       }
     },
     { "squareid": 38,
@@ -880,7 +880,7 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "description": "It's time for Grace Hopper! Get free swag and maybe a job.. \nGet 456 points!",
       "points": 456,
       "karma": 564,
-      "optdict": []
+      "optlist": []
       }
     }, 
     { "squareid": 39,
@@ -890,7 +890,7 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "description": "You're at office hours, but the line was so long, the TAs couldn't get to you. \nLose 165 points, your sanity, your temper, and your faith in humanity. ",
       "points": -165,
       "karma": -561,
-      "optdict": []
+      "optlist": []
       }
     }, 
     { "squareid": 40,
@@ -900,7 +900,7 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "description": "YOUR CODE WORKS. YOUR GROUP MEMBERS ARE JUMPING UP AND DOWN FOR JOY!!! \nYou got 475 points.",
       "points": 475,
       "karma": 14742,
-      "optdict": []
+      "optlist": []
       }
     }, 
     { "squareid": 41,
@@ -910,7 +910,7 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "description": "Life segfaulted. \nLose 480 points.",
       "points": -480,
       "karma": -129,
-      "optdict": []
+      "optlist": []
       }
     }, 
     { "squareid": 42,
@@ -920,7 +920,7 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "description": "You got an award for your hack at Big Red Hacks. \nYayyyyy, get 510 points!",
       "points": 510,
       "karma": 150,
-      "optdict": []
+      "optlist": []
       }
     }, 
     { "squareid": 43,
@@ -930,7 +930,7 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "description": "You learned how to inspect element and you start messing with things :) \nGet 71 points",
       "points": 71,
       "karma": 17,
-      "optdict": []
+      "optlist": []
       }
     }, 
     { "squareid": 44,
@@ -940,7 +940,7 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "description": "Your faculty advisor went on sabbatical, so you need to choose a new advisor. \nYou lost 6 points.",
       "points": -6,
       "karma": 1000,
-      "optdict": []
+      "optlist": []
       }
     }, 
     { "squareid": 45,
@@ -950,7 +950,7 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "description": "You finally used Vim enough to know how to quit. \nGood job - the gods of CS award you with 621 points.",
       "points": 621,
       "karma": 216,
-      "optdict": []
+      "optlist": []
       }
     }, 
     { "squareid": 46,
@@ -960,7 +960,7 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "description": "Wow! You got hired as the head TA. \nGet 530 points for loving baby CS majors <3",
       "points": 530,
       "karma": 1503,
-      "optdict": []
+      "optlist": []
       }
     }, 
     { "squareid": 47,
@@ -970,7 +970,7 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "description": "You're tired, but you still need to graduate. There's no time to waste. \nGo to Carpenter and crank out that pset. Lose 13 points.",
       "points": -13,
       "karma": -171,
-      "optdict": []
+      "optlist": []
       }
     }, 
     { "squareid": 48,
@@ -980,7 +980,7 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "description": "You give your CS partner (and now lifetime friend) a hug. \nIt's been a long journey, but you've made it. \nGet 528 points :)",
       "points": 528,
       "karma": 803,
-      "optdict": []
+      "optlist": []
       }
     }, 
     { "squareid": 49,
@@ -990,7 +990,7 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "description": "You're looking forward to graduation. \nFeel the senioritis settle in for 395 points ;)",
       "points": 395,
       "karma": 593,
-      "optdict": []
+      "optlist": []
       }
     }, 
     { "squareid": 50,
@@ -1005,7 +1005,7 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
 Congratulations! You have graduated!! Now you get to choose your post-Cornell plans. You also get karma points.",
       "points": 0,
       "karma": 10,
-      "optdict": []
+      "optlist": []
       }
     }],
 	"start": 1,

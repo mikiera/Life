@@ -447,7 +447,7 @@ let handle_points player action gamestate =
   let point_opt_obj =
     let obj_lst = List.filter (fun x -> x.optstr = result) action.optlist in
     begin match obj_lst with
-      | [] -> raise (Failure "No valid options, check JSON optdicts")
+      | [] -> raise (Failure "No valid options, check JSON optlists")
       | h :: t -> h
     end in
   let fake_act = {actionType = Points; description = point_opt_obj.description;
@@ -666,7 +666,7 @@ let parse_action action : action =
   let description = action |> member "description" |> to_string in
   let points = action |> member "points" |> to_int in
   let karma = action |> member "karma" |> to_int in
-  let optlist = action |> member "optdict" |> to_list |> (List.map parse_optlist) in
+  let optlist = action |> member "optlist" |> to_list |> (List.map parse_optlist) in
   {actionType = finaltype; description = description; points = points;
   karma = karma; optlist = optlist}
 

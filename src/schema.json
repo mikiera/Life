@@ -50,7 +50,7 @@
 		  	"description": "string",
 		  	"points": "int",
 		  	"karma": "int",
-		  	"optdict": [{"option" : "string", 
+		  	"optlist": [{"option" : "string", 
 		  							"description" : "string",
 		  							"points" : "int",
 		  							"karma" : "int"}]
