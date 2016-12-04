@@ -106,6 +106,20 @@ let tests = [
 
   "move_one_step2" >:: (fun _ -> assert_equal gs3 (move_one_step gs1 1));
 
+  "test_play1" >:: (fun _ -> assert_equal gs1 (play "points" gs1 1));
+  "test_play2" >:: (fun _ -> assert_equal gs1 (play "p" gs1 1));
+  "test_play3" >:: (fun _ -> assert_equal gs1 (play "history" gs1 1));
+  "test_play4" >:: (fun _ -> assert_equal gs1 (play "h" gs1 1));
+  "test_play5" >:: (fun _ -> assert_equal gs1 (play "advisor" gs1 0));
+  "test_play6" >:: (fun _ -> assert_equal gs1 (play "a" gs1 0));
+  "test_play7" >:: (fun _ -> assert_equal gs1 (play "courses" gs1 0));
+  "test_play8" >:: (fun _ -> assert_equal gs1 (play "c" gs1 0));
+  "test_play9" >:: (fun _ -> assert_equal gs1 (play "college" gs1 0));
+  "test_play10" >:: (fun _ -> assert_equal gs1 (play "co" gs1 0));
+  "test_play11" >:: (fun _ -> assert_equal gs1 (play "name" gs1 0));
+  "test_play12" >:: (fun _ -> assert_equal gs1 (play "n" gs1 0));
+  "test_play13" >:: (fun _ -> assert_equal gs1 (play "help" gs1 0));
+
 
   "start turn" >:: (fun _ -> assert_equal 0
     (let state = (init_game s) in state.turn));
