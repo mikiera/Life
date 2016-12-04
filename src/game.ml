@@ -560,7 +560,9 @@ let rec play (cmd : string) (gamestate : gamestate) (turn : int) : gamestate =
     ((Player.getCollege player) ^ "\n"); gamestate)
   else if (cmd = "n" || cmd = "name") then (AT.print_string [get_pcol playerid]
     ((Player.getNickname player) ^ "\n"); gamestate)
-  else if (cmd = "spin") then let () = Random.self_init () in
+  else if (cmd = "sp" || cmd = "summer") then (AT.print_string [get_pcol playerid]
+    ((Player.getSummerPlans player) ^ "\n"); gamestate)
+  else if (cmd = "spin" ) then let () = Random.self_init () in
     let step = ((Random.int 4) + 1) in
     spin_helper gamestate player step
   else if (cmd = "help") then (
@@ -574,6 +576,8 @@ let rec play (cmd : string) (gamestate : gamestate) (turn : int) : gamestate =
     ("co/college:    check your college\n");
     AT.print_string [get_pcol playerid]
     ("n/name:        check your nickname\n");
+    AT.print_string [get_pcol playerid]
+    ("sp/summer:     check your summer plans\n");
     AT.print_string [get_pcol playerid]
     ("r/resume:      check your resume\n");
     AT.print_string [get_pcol playerid]
