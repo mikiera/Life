@@ -383,23 +383,23 @@
       "right": 30
     },
     { "squareid": 30,
-      "left": 31,
-      "right": 32
-    },
-    { "squareid": 31,
       "left": 0,
+      "right": 31
+    },
+ 	{ "squareid": 31,
+      "left": 32,
       "right": 33
     },
     { "squareid": 32,
       "left": 0,
-      "right": 33
+      "right": 34
     },
     { "squareid": 33,
-      "left": 34,
-      "right": 35
+      "left": 0,
+      "right": 34
     },
     { "squareid": 34,
-      "left": 0,
+      "left": 35,
       "right": 36
     },
     { "squareid": 35,
@@ -412,7 +412,7 @@
     },
     { "squareid": 37,
       "left": 0,
-      "right": 38
+      "right": 39
     },
     { "squareid": 38,
       "left": 0,
@@ -427,24 +427,24 @@
       "right": 41
     },
     { "squareid": 41,
-      "left": 42,
-      "right": 43
+      "left": 0,
+      "right": 42
     },
     { "squareid": 42,
-      "left": 0,
-      "right": 45
+      "left": 43,
+      "right": 44
     },
     { "squareid": 43,
       "left": 0,
-      "right": 44
+      "right": 46
     },
     { "squareid": 44,
       "left": 0,
-      "right": 47
+      "right": 45
     },
     { "squareid": 45,
       "left": 0,
-      "right": 46
+      "right": 48
     },
     { "squareid": 46,
       "left": 0,
@@ -462,10 +462,14 @@
       "left": 0,
       "right": 50
     },
-		{ "squareid": 50,
-		   "left": 0,
-			"right": 0
-		}],
+    { "squareid": 50,
+      "left": 0,
+      "right": 51
+    },
+	{ "squareid": 51,
+	   "left": 0,
+		"right": 0
+	}],
 
 	"square_action" : [
 		{"squareid": 1,
@@ -807,13 +811,24 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "action": 
       {
       "type": "event",
+      "description": "CS sucks. Eat some food.\nLose 500 pounds.",
+      "points": -500,
+      "karma": 100,
+      "optdict": []
+      }
+    }, 
+
+    { "squareid": 32,
+      "action": 
+      {
+      "type": "event",
       "description": "Your CS partner decided to drop the class. \nTough luck bud, you have to find a new one. \nLose 33 points.",
       "points": -33,
       "karma": -2,
       "optdict": []
       }
     }, 
-    { "squareid": 32,
+    { "squareid": 33,
       "action": 
       {
       "type": "event",
@@ -823,7 +838,7 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "optdict": []
       }
     }, 
-    { "squareid": 33,
+    { "squareid": 34,
       "action": 
       {
       "type": "event",
@@ -833,7 +848,7 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "optdict": []
       }
     }, 
-    { "squareid": 34,
+    { "squareid": 35,
       "action": 
       {
       "type": "event",
@@ -843,7 +858,7 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "optdict": []
       }
     }, 
-    { "squareid": 35,
+    { "squareid": 36,
       "action": 
       {
       "type": "event",
@@ -853,7 +868,7 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "optdict": []
       }
     },
-    { "squareid": 36,
+    { "squareid": 37,
       "action": 
       {
       "type": "event",
@@ -863,7 +878,7 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "optdict": []
       }
     }, 
-    { "squareid": 37,
+    { "squareid": 38,
       "action": 
       {
       "type": "event",
@@ -873,7 +888,7 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "optdict": []
       }
     },
-    { "squareid": 38,
+    { "squareid": 39,
       "action": 
       {
       "type": "event",
@@ -883,7 +898,7 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "optdict": []
       }
     }, 
-    { "squareid": 39,
+    { "squareid": 40,
       "action": 
       {
       "type": "event",
@@ -893,7 +908,7 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "optdict": []
       }
     }, 
-    { "squareid": 40,
+    { "squareid": 41,
       "action": 
       {
       "type": "event",
@@ -903,7 +918,7 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "optdict": []
       }
     }, 
-    { "squareid": 41,
+    { "squareid": 42,
       "action": 
       {
       "type": "event",
@@ -913,7 +928,7 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "optdict": []
       }
     }, 
-    { "squareid": 42,
+    { "squareid": 43,
       "action": 
       {
       "type": "event",
@@ -923,7 +938,7 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "optdict": []
       }
     }, 
-    { "squareid": 43,
+    { "squareid": 44,
       "action": 
       {
       "type": "event",
@@ -933,7 +948,7 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "optdict": []
       }
     }, 
-    { "squareid": 44,
+    { "squareid": 45,
       "action": 
       {
       "type": "advisor",
@@ -943,7 +958,7 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "optdict": []
       }
     }, 
-    { "squareid": 45,
+    { "squareid": 46,
       "action": 
       {
       "type": "event",
@@ -953,7 +968,7 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "optdict": []
       }
     }, 
-    { "squareid": 46,
+    { "squareid": 47,
       "action": 
       {
       "type": "event",
@@ -963,7 +978,7 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "optdict": []
       }
     }, 
-    { "squareid": 47,
+    { "squareid": 48,
       "action": 
       {
       "type": "event",
@@ -973,7 +988,7 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "optdict": []
       }
     }, 
-    { "squareid": 48,
+    { "squareid": 49,
       "action": 
       {
       "type": "event",
@@ -983,7 +998,7 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "optdict": []
       }
     }, 
-    { "squareid": 49,
+    { "squareid": 50,
       "action": 
       {
       "type": "event",
@@ -993,7 +1008,7 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "optdict": []
       }
     }, 
-    { "squareid": 50,
+    { "squareid": 51,
       "action": 
       {
       "type": "future",

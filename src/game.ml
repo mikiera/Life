@@ -297,7 +297,10 @@ let pick_college player gamestate =
 (* [create_message_from_cards msg cardlst] returns a string of all the names
  * of the cards in the card list in game components *)
 let rec create_message_from_cards msg cardlst =
-  match cardlst with
+  let sorted = List.sort (fun x y -> if x.id > y.id then 1
+                                     else if x.id < y.id then -1
+                                     else 0) cardlst in
+  match sorted with
     | [] -> msg
     | h :: t -> let desc = h.name in
                 let id = string_of_int h.id in
@@ -477,8 +480,10 @@ let spin_helper gamestate player step =
       ("You have moved " ^ (string_of_int newstep) ^ " step(s). Hooray!\n") in
   if (actionType = Event) then
     (if not (check_for_fork playerid player_loc_info.loc.id gamestate newstep)
-      then move_multi_step gamestate playerid newstep
-    else let gs = handle_fork playerid player_loc_info gamestate newstep in
+      then
+      move_multi_step gamestate playerid newstep
+    else
+      let gs = handle_fork playerid player_loc_info gamestate newstep in
         reset_direction player gs; gs)
   else if (actionType = Points) then
     (if not (check_for_fork playerid player_loc_info.loc.id gamestate newstep)
@@ -486,20 +491,23 @@ let spin_helper gamestate player step =
         let gs = move_multi_step gamestate playerid newstep in
         let act = get_action gamestate player in
         handle_points player act gs
-    else let gs = handle_fork playerid player_loc_info gamestate newstep in
+    else
+        let gs = handle_fork playerid player_loc_info gamestate newstep in
         reset_direction player gs;
         let gs = move_multi_step gamestate playerid newstep in
         let act = get_action gamestate player in
         handle_points player act gs)
   else
     (if not (check_for_fork playerid player_loc_info.loc.id gamestate newstep)
-     then let newgs = move_multi_step gamestate playerid newstep in
+     then
+     let newgs = move_multi_step gamestate playerid newstep in
      handle_choice player newgs actionType
     else
       let new_gs = handle_fork playerid player_loc_info gamestate newstep in
-      let () = reset_direction player new_gs in begin
+          begin
           if (recheck_choice_in_path playerid new_gs player_loc_info.loc.id)
-          then handle_choice player new_gs actionType
+          then
+           handle_choice player new_gs actionType
           else new_gs end)
 
 (* [reveal_results player_lst] creates a string which shows each player's points,
