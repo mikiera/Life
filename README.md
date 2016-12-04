@@ -18,6 +18,7 @@ HOW TO PLAY
 After make play the game will prompt you for a course roster.
 
 There are two main course rosters you can choose from:
+
 short.json : This is shorter version of the game! With only fifty squares, you get a small taste of the Life of a CS Major. 
 
 life.json: This is the full game!
@@ -39,13 +40,21 @@ Play the game by typing in commands based
 on the prompt. All commands are case insensitive!
 
 To take a turn: type spin
+
 For a list of all commands: type help
+
 To see your name: type name or n
+
 To see your college: type college or co
+
 To see your course: type course or c
+
 To see your advisor: type advisor or a
+
 To see your summer plans: type summer or sp
+
 To see your resume: type resume or r
+
 To see your points: type points or p
 
 When you come across a fork in your path, the game will
