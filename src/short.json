@@ -497,7 +497,7 @@
 		"action": 
 			{
 			"type": "event",
-			"description": "It's your first day on campus and you got lost. Lose 20 points.",
+			"description": "It's your first day on campus and you got lost. \nLose 20 points.",
 			"points": -20,
 			"karma": 0
 			}
@@ -506,7 +506,7 @@
 		"action": 
 			{
 			"type": "event",
-			"description": "You applied for a project team and now you're waiting on results. Get some karma.",
+			"description": "You applied for a project team and now you're waiting on results. \nGet some karma.",
 			"points": 0,
 			"karma": 500
 			}
@@ -515,7 +515,7 @@
 		"action": 
 			{
 			"type": "event",
-			"description": "You got a 100 on your first CS assignment. Congratulations! You get 500 points.",
+			"description": "You got a 100 on your first CS assignment. Congratulations! \nYou get 500 points.",
 			"points": 500,
 			"karma": 0
 			}
@@ -524,7 +524,7 @@
 		"action": 
 			{
 			"type": "event",
-			"description": "You went to a gbody for WICC or ASCU. You got a really awesome mentor to help you out! Get 300 points and some karma.",
+			"description": "You went to a gbody for WICC or ASCU. \nYou got a really awesome mentor to help you out! \nGet 300 points and some karma.",
 			"points": 300,
 			"karma": 100
 			}
@@ -533,7 +533,7 @@
 		"action": 
 			{
 			"type": "event",
-			"description": "Career fair is coming up, should you go? Might as well for some swag. Get 700 points.",
+			"description": "Career fair is coming up, should you go? \nMight as well for some swag. \nGet 700 points.",
 			"points": 700,
 			"karma": 0
 			}
@@ -542,7 +542,7 @@
 		"action": 
 			{
 			"type": "event",
-			"description": "You need a partner for your next CS assignment. But you couldn't find one. Lose 900 points.",
+			"description": "You need a partner for your next CS assignment. \nBut you couldn't find one. \nLose 900 points.",
 			"points": -900,
 			"karma": 0
 			}
@@ -576,7 +576,7 @@
               '._____)----'
               /     /   /
 
-You need a partner for your next CS assignment. Luckily your best friend is also in your class. Get 900 points.",
+You need a partner for your next CS assignment. \nLuckily your best friend is also in your class. \nGet 900 points.",
 			"points": 900,
 			"karma": 0
 			}
@@ -585,7 +585,7 @@ You need a partner for your next CS assignment. Luckily your best friend is also
 		"action": 
 			{
 			"type": "event",
-			"description": "You went to a tech talk for Google and got free dinner. Get 300 points and karma",
+			"description": "You went to a tech talk for Google and got free dinner. \nGet 300 points and karma",
 			"points": 300,
 			"karma": 0
 			}
@@ -594,7 +594,7 @@ You need a partner for your next CS assignment. Luckily your best friend is also
 		"action": 
 			{
 			"type": "event",
-			"description": "As a freshman, you got onto a project team for the CS team with no experience! Get 1000 points and karma!",
+			"description": "As a freshman, you got onto a project team for the CS team with no experience! \nGet 1000 points and karma!",
 			"points": 1000,
 			"karma": 1000
 			}
@@ -603,7 +603,7 @@ You need a partner for your next CS assignment. Luckily your best friend is also
 		"action": 
 			{
 			"type": "event",
-			"description": "You aced your first CS prelim! Two standard deviations above the mean! Get 1500 points and karma!",
+			"description": "You aced your first CS prelim! Two standard deviations above the mean! \nGet 1500 points and karma!",
 			"points": 1500,
 			"karma": 600
 			}
@@ -612,7 +612,7 @@ You need a partner for your next CS assignment. Luckily your best friend is also
 		"action": 
 			{
 			"type": "event",
-			"description": "You failed your first CS prelim! Two standard deviations below the mean! Lose 800 points.",
+			"description": "You failed your first CS prelim! Two standard deviations below the mean! \nLose 800 points.",
 			"points": -800,
 			"karma": 0
 			}
@@ -621,7 +621,7 @@ You need a partner for your next CS assignment. Luckily your best friend is also
 		"action": 
 			{
 			"type": "event",
-			"description": "You slept through lecture today and the Prof took attendance. Lose 500 points and get some karma for getting sleep.",
+			"description": "You slept through lecture today and the Prof took attendance. \nLose 500 points and get some karma for getting sleep.",
 			"points": -500,
 			"karma": 40
 			}
@@ -630,7 +630,7 @@ You need a partner for your next CS assignment. Luckily your best friend is also
 		"action": 
 			{
 			"type": "course",
-			"description": "It's pre-enroll. Select a course for next semester! Get 400 points for waking up on time.",
+			"description": "It's pre-enroll. Select a course for next semester! \nGet 400 points for waking up on time.",
 			"points": 400,
 			"karma": 0
 			}
@@ -639,7 +639,7 @@ You need a partner for your next CS assignment. Luckily your best friend is also
 		"action": 
 			{
 			"type": "event",
-			"description": "Your laptop ran out of battery while you were on central. Lose 200 points. ",
+			"description": "Your laptop ran out of battery while you were on central. \nLose 200 points. ",
 			"points": -200,
 			"karma": 0
 			}
@@ -648,7 +648,7 @@ You need a partner for your next CS assignment. Luckily your best friend is also
 		"action": 
 			{
 			"type": "event",
-			"description": "You pulled your first all-nighter. Congrats? Get 500 points and karma. ",
+			"description": "You pulled your first all-nighter. Congrats? \nGet 500 points and karma. ",
 			"points": 500,
 			"karma": 1000
 			}
@@ -657,7 +657,7 @@ You need a partner for your next CS assignment. Luckily your best friend is also
 		"action": 
 			{
 			"type": "event",
-			"description": "You went to office hours and got to know your professor well. Get 200 points and karma.",
+			"description": "You went to office hours and got to know your professor well. \nGet 200 points and karma.",
 			"points": 200,
 			"karma": 0
 			}
@@ -666,7 +666,7 @@ You need a partner for your next CS assignment. Luckily your best friend is also
       "action": 
       {
       "type": "event",
-      "description": "You decided to go to an ACSU GBody meeting. Get 0 points for eating free pizza.",
+      "description": "You decided to go to an ACSU GBody meeting. \nGet 0 points for eating free pizza.",
       "points": 0,
       "karma": -5
       }
@@ -675,7 +675,7 @@ You need a partner for your next CS assignment. Luckily your best friend is also
       "action": 
       {
       "type": "event",
-      "description": "You created an actual Github for independent projects. Get 202 points for at least trying.",
+      "description": "You created an actual Github for independent projects. \nGet 202 points for at least trying.",
       "points": 202,
       "karma": 112
       }
@@ -684,7 +684,7 @@ You need a partner for your next CS assignment. Luckily your best friend is also
       "action": 
       {
       "type": "event",
-      "description": "You affiliated with the CS major! Congrats fam :') 9999 points",
+      "description": "You affiliated with the CS major! Congrats fam :') \n9999 points",
       "points": 9999,
       "karma": 456
       }
@@ -693,7 +693,7 @@ You need a partner for your next CS assignment. Luckily your best friend is also
       "action": 
       {
       "type": "course",
-      "description": "The semester's been rough and you have to drop your class :( Get 111 points for caring about your own health.",
+      "description": "The semester's been rough and you have to drop your class :( \nGet 111 points for caring about your own health.",
       "points": 111,
       "karma": 52
       }
@@ -702,7 +702,7 @@ You need a partner for your next CS assignment. Luckily your best friend is also
       "action": 
       {
       "type": "event",
-      "description": "There are no assignments due this weekend! Go out tonight with some friends and get 99 points.",
+      "description": "There are no assignments due this weekend! \nGo out tonight with some friends and get 99 points.",
       "points": 99,
       "karma": 274
       }
@@ -711,7 +711,7 @@ You need a partner for your next CS assignment. Luckily your best friend is also
       "action": 
       {
       "type": "event",
-      "description": "You submitted an empty zip file on CMS. Lose 398 points for carelessness :(",
+      "description": "You submitted an empty zip file on CMS. \nLose 398 points for carelessness :(",
       "points": -398,
       "karma": 35
       }
@@ -720,7 +720,7 @@ You need a partner for your next CS assignment. Luckily your best friend is also
       "action": 
       {
       "type": "event",
-      "description": "You're stuck on 2-3 trees, but your best friend is a 3110 TA! Ask them for 3110 points-I mean help on the assignment.",
+      "description": "You're stuck on 2-3 trees, but your best friend is a 3110 TA! \nAsk them for 3110 points-I mean help on the assignment.",
       "points": 3110,
       "karma": 3110
       }
@@ -729,7 +729,7 @@ You need a partner for your next CS assignment. Luckily your best friend is also
       "action": 
       {
       "type": "event",
-      "description": "You have nothing to do. What a rare occurrence!!! 42 points.",
+      "description": "You have nothing to do. What a rare occurrence!!! \n42 points.",
       "points": 42,
       "karma": 24
       }
@@ -738,7 +738,7 @@ You need a partner for your next CS assignment. Luckily your best friend is also
       "action": 
       {
       "type": "event",
-      "description": "You haven't showered in 3 days. There's an assignment due.. BUT YOU HAVEN'T SHOWERED. -101 points",
+      "description": "You haven't showered in 3 days. There's an assignment due.. BUT YOU HAVEN'T SHOWERED. \n-101 points",
       "points": -101,
       "karma": -803
       }
@@ -747,7 +747,7 @@ You need a partner for your next CS assignment. Luckily your best friend is also
 	  "action": 
 		{
 		"type": "event",
-		"description": "You completed 3110! This has been 3110. Get 3110 points.",
+		"description": "You completed 3110! This has been 3110. \nGet 3110 points.",
 		"points": 3110,
 		"karma": 696
 		}
@@ -756,7 +756,7 @@ You need a partner for your next CS assignment. Luckily your best friend is also
       "action": 
       {
       "type": "event",
-      "description": "Your question on Piazza was never answered. You look at the red dot and feel 78 points slipping away.",
+      "description": "Your question on Piazza was never answered. \nYou look at the red dot and feel 78 points slipping away.",
       "points": -78,
       "karma": -21
       }
@@ -765,7 +765,7 @@ You need a partner for your next CS assignment. Luckily your best friend is also
       "action": 
       {
       "type": "advisor",
-      "description": "You need to choose an advisor. You also get karma points.",
+      "description": "You need to choose an advisor. \nYou also get karma points.",
       "points": 600,
       "karma": 1000
       }
@@ -774,7 +774,7 @@ You need a partner for your next CS assignment. Luckily your best friend is also
       "action": 
       {
       "type": "event",
-      "description": "Your CS partner decided to drop the class. Tough luck bud, you have to find a new one. lose 33 points.",
+      "description": "Your CS partner decided to drop the class. \nTough luck bud, you have to find a new one. \nLose 33 points.",
       "points": -33,
       "karma": -2
       }
@@ -783,7 +783,7 @@ You need a partner for your next CS assignment. Luckily your best friend is also
       "action": 
       {
       "type": "event",
-      "description": "You crashed. Your computer crashed. It's a really unfortunate week. You lose 444 points, but at least you got some karma points for making through a rough time.",
+      "description": "You crashed. Your computer crashed. It's a really unfortunate week. \nYou lose 444 points, but at least you got some karma points for making through a rough time.",
       "points": -444,
       "karma": 67
       }
@@ -792,7 +792,7 @@ You need a partner for your next CS assignment. Luckily your best friend is also
       "action": 
       {
       "type": "event",
-      "description": "You go to bed on one day and you get up on a different calendar day. w0w. You get 688 points.",
+      "description": "You go to bed on one day and you get up on a different calendar day. w0w. \nYou get 688 points.",
       "points": 688,
       "karma": 511
       }
@@ -801,7 +801,7 @@ You need a partner for your next CS assignment. Luckily your best friend is also
       "action": 
       {
       "type": "event",
-      "description": "You slept through a prelim. Uh oh. You will have to lose 298 points.",
+      "description": "You slept through a prelim. Uh oh. \nYou will have to lose 298 points.",
       "points": -298,
       "karma": -105
       }
@@ -810,7 +810,7 @@ You need a partner for your next CS assignment. Luckily your best friend is also
       "action": 
       {
       "type": "event",
-      "description": "You got flown out to an interview. Get 836 points and a ton of free food that's all paid for.",
+      "description": "You got flown out to an interview. \nGet 836 points and a ton of free food that's all paid for.",
       "points": 836,
       "karma": 800
       }
@@ -819,7 +819,7 @@ You need a partner for your next CS assignment. Luckily your best friend is also
       "action": 
       {
       "type": "event",
-      "description": "Regrades are due tonight, but the handback room was closed when you went there to check. You lose 39 points.",
+      "description": "Regrades are due tonight, but the handback room was closed when you went there to check. \nYou lose 39 points.",
       "points": -39,
       "karma": -12
       }
@@ -828,7 +828,7 @@ You need a partner for your next CS assignment. Luckily your best friend is also
       "action": 
       {
       "type": "event",
-      "description": "CMS crashed. Lose 307 points for being unlucky.",
+      "description": "CMS crashed. \nLose 307 points for being unlucky.",
       "points": -307,
       "karma": -15
       }
@@ -837,7 +837,7 @@ You need a partner for your next CS assignment. Luckily your best friend is also
       "action": 
       {
       "type": "event",
-      "description": "It's time for Grace Hopper! Get free swag and maybe a job.. Get 456 points!",
+      "description": "It's time for Grace Hopper! Get free swag and maybe a job.. \nGet 456 points!",
       "points": 456,
       "karma": 564
       }
@@ -846,7 +846,7 @@ You need a partner for your next CS assignment. Luckily your best friend is also
       "action": 
       {
       "type": "event",
-      "description": "You're at office hours, but the line was so long, the TAs couldn't get to you. Lose 165 points, your sanity, your temper, and your faith in humanity. ",
+      "description": "You're at office hours, but the line was so long, the TAs couldn't get to you. \nLose 165 points, your sanity, your temper, and your faith in humanity. ",
       "points": -165,
       "karma": -561
       }
@@ -855,7 +855,7 @@ You need a partner for your next CS assignment. Luckily your best friend is also
       "action": 
       {
       "type": "event",
-      "description": "YOUR CODE WORKS. YOUR GROUP MEMBERS ARE JUMPING UP AND DOWN FOR JOY!!! You got 475 points.",
+      "description": "YOUR CODE WORKS. YOUR GROUP MEMBERS ARE JUMPING UP AND DOWN FOR JOY!!! \nYou got 475 points.",
       "points": 475,
       "karma": 14742
       }
@@ -864,7 +864,7 @@ You need a partner for your next CS assignment. Luckily your best friend is also
       "action": 
       {
       "type": "event",
-      "description": "Life segfaulted. Lose 480 points.",
+      "description": "Life segfaulted. \nLose 480 points.",
       "points": -480,
       "karma": -129
       }
@@ -873,7 +873,7 @@ You need a partner for your next CS assignment. Luckily your best friend is also
       "action": 
       {
       "type": "event",
-      "description": "You got an award for your hack at Big Red Hacks. Yayyyyy, get 510 points!",
+      "description": "You got an award for your hack at Big Red Hacks. \nYayyyyy, get 510 points!",
       "points": 510,
       "karma": 150
       }
@@ -882,7 +882,7 @@ You need a partner for your next CS assignment. Luckily your best friend is also
       "action": 
       {
       "type": "event",
-      "description": "You learned how to inspect element and you start messing with things :) Get 71 points",
+      "description": "You learned how to inspect element and you start messing with things :) \nGet 71 points",
       "points": 71,
       "karma": 17
       }
@@ -891,7 +891,7 @@ You need a partner for your next CS assignment. Luckily your best friend is also
       "action": 
       {
       "type": "advisor",
-      "description": "Your faculty advisor went on sabbatical, so you need to choose a new advisor. You lost 6 points.",
+      "description": "Your faculty advisor went on sabbatical, so you need to choose a new advisor. \nYou lost 6 points.",
       "points": -6,
       "karma": 1000
       }
@@ -900,7 +900,7 @@ You need a partner for your next CS assignment. Luckily your best friend is also
       "action": 
       {
       "type": "event",
-      "description": "You finally used Vim enough to know how to quit. Good job - the gods of CS award you with 621 points.",
+      "description": "You finally used Vim enough to know how to quit. \nGood job - the gods of CS award you with 621 points.",
       "points": 621,
       "karma": 216
       }
@@ -909,7 +909,7 @@ You need a partner for your next CS assignment. Luckily your best friend is also
       "action": 
       {
       "type": "event",
-      "description": "Wow! You got hired as the head TA. Get 530 points for loving baby CS majors <3",
+      "description": "Wow! You got hired as the head TA. \nGet 530 points for loving baby CS majors <3",
       "points": 530,
       "karma": 1503
       }
@@ -918,7 +918,7 @@ You need a partner for your next CS assignment. Luckily your best friend is also
       "action": 
       {
       "type": "event",
-      "description": "You're tired, but you still need to graduate. There's no time to waste. Go to Carpenter and crank out that pset. Lose 13 points.",
+      "description": "You're tired, but you still need to graduate. There's no time to waste. \nGo to Carpenter and crank out that pset. Lose 13 points.",
       "points": -13,
       "karma": -171
       }
@@ -927,7 +927,7 @@ You need a partner for your next CS assignment. Luckily your best friend is also
       "action": 
       {
       "type": "event",
-      "description": "You give your CS partner (and now lifetime friend) a hug. It's been a long journey, but you've made it. Get 528 points :)",
+      "description": "You give your CS partner (and now lifetime friend) a hug. \nIt's been a long journey, but you've made it. \nGet 528 points :)",
       "points": 528,
       "karma": 803
       }
@@ -936,7 +936,7 @@ You need a partner for your next CS assignment. Luckily your best friend is also
       "action": 
       {
       "type": "event",
-      "description": "You're looking forward to graduation. Feel the senioritis settle in for 395 points ;)",
+      "description": "You're looking forward to graduation. \nFeel the senioritis settle in for 395 points ;)",
       "points": 395,
       "karma": 593
       }
