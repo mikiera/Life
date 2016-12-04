@@ -250,7 +250,7 @@ let convert_dir_square loc dir =
     | Right -> loc.right
 
 (* [get_step_for_choice_event playerid square gamestate num_step] returns a
- * tuple of corrected number of steps for mandatory stops and the actionType *)
+ * tuple of leftover number of steps from mandatory stops and the actionType *)
  (* starts at loc.right *)
 let rec get_step_for_choice_event playerid square gamestate num_step =
   let loc = find_loc_by_sid gamestate.gamemap square in
