@@ -29,8 +29,8 @@ struct
                   college: string ref; course: string ref;
                   advisor: string ref; points: int ref; karma: int ref;
                   future: string ref; summer_plans: string ref; mode: bool ref}
-  let createPlayer n = {id = n; nickname = ref ""; history = ref ("ID: " ^ string_of_int(n) ^ "\n"); college = ref ""; course = ref "";
-                        advisor = ref ""; points = ref 0; karma = ref 0; future = ref ""; summer_plans = ref ""; mode = ref true}
+  let createPlayer n = {id = n; nickname = ref ""; history = ref ("ID: " ^ string_of_int(n) ^ "\n"); college = ref "None"; course = ref "None";
+                        advisor = ref "None"; points = ref 0; karma = ref 0; future = ref "None"; summer_plans = ref "None"; mode = ref true}
   let getID p = p.id
   let getNickname p = !(p.nickname)
   let getHistory p = !(p.history)

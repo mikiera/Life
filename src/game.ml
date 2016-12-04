@@ -7,7 +7,7 @@ module AT = ANSITerminal
 
 exception Illegal
 
-(* equivalent to player id, 1-indexed *)
+
 type turn = int
 
 type square = Null | Square of int
@@ -267,8 +267,12 @@ let pick_college player gamestate =
   let choice = if (Player.isHuman player) then print_choice player ccol msg ["AS"; "as"; "As"; "ENG"; "eng"; "Eng"]
               else ai_choice 2 ["AS"; "ENG"] in
   if (choice = "AS" || choice = "as" || choice = "As")
-    then (ignore((Player.changeCollege) player "Arts and Sciences"); gamestate)
-  else (ignore((Player.changeCollege) player "Engineering"); gamestate)
+    then let () = AT.print_string [get_pcol (Player.getID player)]
+      ("\nYou chose Arts and Sciences! Yay you don't have to take Math 1920!\n\n") in
+    (ignore((Player.changeCollege) player "Arts and Sciences"); gamestate)
+  else let () = AT.print_string [get_pcol (Player.getID player)]
+    ("\nYou chose Engineering! Yay you don't have to take a language!\n\n") in
+    (ignore((Player.changeCollege) player "Engineering"); gamestate)
 
 (* [create_message_from_cards msg cardlst] returns a string of all the names
  * of the cards in the card list in game components *)
@@ -624,6 +628,8 @@ let rec main_helper (file_name : string) =
     let json = Yojson.Basic.from_file file_name in
     let gamestate1 = init_game json in
     let gamestate2 = setup_players gamestate1 in
+    let () = AT.print_string [gcol] ("\nInstructions: To take a turn, type spin."^
+    "\nTo see a "^"list of call commands, type help.\n \n") in
     repl gamestate2 (gamestate2.turn)
   with
     | Yojson.Json_error _ -> let () = print_endline ("Invalid json file. Please"
