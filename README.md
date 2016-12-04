@@ -32,7 +32,7 @@ player is a human or not. Non human players are an AI that
 takes turn and decision automatically. 
 
 Playing by yourself, but want a 
-companion? Choose one of two players and make one of them the AI!
+companion? Make some of the players an AI!
 
 ###Playing the game:
 Play the game by typing in commands based
