@@ -45,11 +45,11 @@ struct
   let addHistory p h = p.history := !(p.history)^h; p
   let addNickname p n = p.nickname := n; addHistory p ("Name: " ^ n ^ "\n")
   let changeCollege p c = p.college := c; addHistory p ("College: " ^ c ^ "\n")
-  let changeCourse p c = p.course := c; addHistory p ("Course: " ^ c ^ "\n")
-  let changeAdvisor p a = p.advisor:= a; addHistory p ("Advisor: " ^ a ^ "\n")
+  let changeCourse p c = p.course := c; addHistory p ("Changed Course to: " ^ c ^ "\n")
+  let changeAdvisor p a = p.advisor:= a; addHistory p ("Changed Advisor to: " ^ a ^ "\n")
   let changePoints p n = p.points := !(p.points) + n; p
   let changeKarma p k = p.karma := !(p.karma) + k; p
   let changeFuture p r = p.future:= r; p
-  let changeSummerPlans p s = p.summer_plans:= s; p
+  let changeSummerPlans p s = p.summer_plans:= s; addHistory p ("Changed Summer Plans to: " ^s ^"\n")
   let setMode p b = p.mode:= b
 end

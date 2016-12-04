@@ -104,9 +104,7 @@ let tests = [
 
   "move_one_step1" >:: (fun _ -> assert_equal gs1 (move_one_step gs 1));
 
-  "move_one_step2" >:: (fun _ -> assert_equal gs2 (move_one_step gs 2));
-
-  "move_one_step3" >:: (fun _ -> assert_equal gs3 (move_one_step gs1 1));
+  "move_one_step2" >:: (fun _ -> assert_equal gs3 (move_one_step gs1 1));
 
 
   "start turn" >:: (fun _ -> assert_equal 0
