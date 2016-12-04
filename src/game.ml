@@ -256,7 +256,7 @@ let print_msg msg =
 let handle_fork playerid player_loc_info gamestate step =
   let player = List.nth gamestate.players (playerid - 1) in
   let msg =
-  "There's a fork in your path. Do you want to turn left or right? (L/R)" in
+  "There's a fork in your path. Do you want to turn left or right? (Type L/R)" in
   let choice = if (Player.isHuman player) then print_choice (get_pcol playerid) msg ["L"; "l"; "R"; "r"]
   else let () = print_msg msg in (ai_choice 2 ["l"; "r"]) in
   let () = AT.print_string [get_pcol playerid] ("You have chosen to go " ^
@@ -270,7 +270,7 @@ let handle_fork playerid player_loc_info gamestate step =
  * modifies a player and returns a new gamestate
  *)
 let pick_college player gamestate =
-  let msg = "To choose Arts and Sciences, type AS. For Engineering, type ENG" in
+  let msg = "To choose Arts and Sciences, type AS. For Engineering, type ENG." in
   let choice = if (Player.isHuman player) then print_choice ccol msg ["AS"; "as"; "As"; "ENG"; "eng"; "Eng"]
               else ai_choice 2 ["AS"; "ENG"] in
   if (choice = "AS" || choice = "as" || choice = "As")
@@ -304,13 +304,13 @@ let rec get_list_of_valid_choices cardlst lst =
 let get_start_msg actionType =
   match actionType with
   | ChoiceC ->
-  "Choose a course from the following list by typing the course number"
+  "Choose a course from the following list by typing the course number:"
   | ChoiceA ->
-  "Choose an advisor from the following list by typing the advisor number"
+  "Choose an advisor from the following list by typing the advisor number:"
   | ChoiceF ->
-  "Determine your future from the following list by typing the corresponding number"
+  "Determine your future from the following list by typing the corresponding number:"
   | ChoiceS ->
-  "Choose your summer plans from the following list by typing the corresponding number"
+  "Choose your summer plans from the following list by typing the corresponding number:"
   | _ -> "not a valid actionType"
 
 (* [get_card_by_id id cardlst] returns the card associated with that id *)
@@ -485,6 +485,8 @@ let rec play (cmd : string) (gamestate : gamestate) (turn : int) : gamestate =
     ("spin:          spin the wheel and try your luck!\n");
     AT.print_string [get_pcol playerid]
     ("help:          see a list of commands available\n");
+    AT.print_string [get_pcol playerid]
+    ("help:          see a list of commands available\n");
     gamestate)
   else raise Illegal
 
@@ -590,7 +592,7 @@ let rec setup_players state =
       let name = read_line () in
       let named_player = Player.addNickname player name in
       let final_player = Player.changePoints named_player state.start_points in
-      let aimsg = "Will this player be a human player? (Y/N)" in
+      let aimsg = "Will this player be a human player? A non-human will automatically take their turns. (Type Y/N)" in
       let res = print_choice (get_pcol id) aimsg ["Y"; "y"; "N"; "n"] in
       let () = if (res = "N" || res = "n") then (Player.setMode final_player false); ailist := (!ailist @ [id]) in
       let locobj = find_loc_by_sid state.gamemap (Square state.start) in
