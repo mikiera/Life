@@ -32,27 +32,32 @@ let locations = [{id = Square 1; left = Null; right = Square 2};
 let action1 = {actionType = Event;
          description = "event. should not be printed";
            points = 0;
-           karma = 0}
+           karma = 0;
+           optlist = []}
 
 let action2 = {actionType = ChoiceCol;
            description = "You get to choose between Arts and Sciences or Engineering.";
            points = 0;
-           karma = 0}
+           karma = 0;
+           optlist = []}
 
 let action3 = {actionType = Event;
          description = "You got a 100 on your first CS assignment. Congratulations! You get 500 points.";
          points = 500;
-         karma = 0}
+         karma = 0;
+           optlist = []}
 
 let action4 = {actionType = ChoiceA;
            description = "You need to choose an advisor. You also get karma points.";
            points = 600;
-           karma = 1000}
+           karma = 1000;
+           optlist = []}
 
 let action5 = {actionType = ChoiceF;
            description = "Congratulations! You have graduated!! Now you get to choose your post-Cornell plans. You also get karma points.";
            points = 0;
-           karma = 1000}
+           karma = 1000;
+           optlist = []}
 
 let square_action_lst = [(Square 1, action1);(Square 2, action2); (Square 3, action3); (Square 4, action4); (Square 5, action5)]
 
@@ -131,7 +136,7 @@ let tests = [
 
   "move_one_step2" >:: (fun _ -> assert_equal gs3 (move_one_step gs1 1));
 
-  "test_end_game_user" >:: (fun _ -> assert_equal (gs_end) 
+  "test_end_game_user" >:: (fun _ -> assert_equal (gs_end)
                            (end_game_user gs 1 (List.assoc 1 gs.playermap)));
 
   "move_multi_step1" >:: (fun _ -> assert_equal gs4 (move_multi_step gs 1 2));
