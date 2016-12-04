@@ -41,12 +41,19 @@ on the prompt. All commands are case insensitive!
 
 To take a turn: type spin
 For a list of all commands: type help
+
 To see your name: type name or n
+
 To see your college: type college or co
+
 To see your course: type course or c
+
 To see your advisor: type advisor or a
+
 To see your summer plans: type summer or sp
+
 To see your resume: type resume or r
+
 To see your points: type points or p
 
 When you come across a fork in your path, the game will
