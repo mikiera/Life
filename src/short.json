@@ -535,15 +535,15 @@
       "karma": -803
       }
     },
-	 	{ "squareid": 28,
-		  "action": 
-			{
-			"type": "event",
-			"description": "You completed 3110! This has been 3110. Get 3110 points.",
-			"points": 3110,
-			"karma": 696
-			}
-		},
+ 	{ "squareid": 28,
+	  "action": 
+		{
+		"type": "event",
+		"description": "You completed 3110! This has been 3110. Get 3110 points.",
+		"points": 3110,
+		"karma": 696
+		}
+	},
     { "squareid": 29,
       "action": 
       {
