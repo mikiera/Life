@@ -259,7 +259,7 @@ let rec get_step_for_choice_event playerid square gamestate num_step =
 let handle_fork playerid player_loc_info gamestate step =
   let player = List.nth gamestate.players (playerid - 1) in
   let msg =
-  "There's a fork in your path. Do you want to turn left or right? (L/R)" in
+  "There's a fork in your path. Do you want to turn left or right? (Type L/R)" in
   let choice = if (Player.isHuman player) then print_choice (get_pcol playerid) msg ["L"; "l"; "R"; "r"]
   else let () = print_endline msg in (ai_choice 2 ["l"; "r"]) in
   let () = AT.print_string [get_pcol playerid] ("You have chosen to go " ^
@@ -273,7 +273,7 @@ let handle_fork playerid player_loc_info gamestate step =
  * modifies a player and returns a new gamestate
  *)
 let pick_college player gamestate =
-  let msg = "To choose Arts and Sciences, type AS. For Engineering, type ENG" in
+  let msg = "To choose Arts and Sciences, type AS. For Engineering, type ENG." in
   let choice = if (Player.isHuman player) then print_choice ccol msg ["AS"; "as"; "As"; "ENG"; "eng"; "Eng"]
               else ai_choice 2 ["AS"; "ENG"] in
   if (choice = "AS" || choice = "as" || choice = "As")
@@ -307,13 +307,13 @@ let rec get_list_of_valid_choices cardlst lst =
 let get_start_msg actionType =
   match actionType with
   | ChoiceC ->
-  "Choose a course from the following list by typing the course number"
+  "Choose a course from the following list by typing the course number:"
   | ChoiceA ->
-  "Choose an advisor from the following list by typing the advisor number"
+  "Choose an advisor from the following list by typing the advisor number:"
   | ChoiceF ->
-  "Determine your future from the following list by typing the corresponding number"
+  "Determine your future from the following list by typing the corresponding number:"
   | ChoiceS ->
-  "Choose your summer plans from the following list by typing the corresponding number"
+  "Choose your summer plans from the following list by typing the corresponding number:"
   | _ -> "not a valid actionType"
 
 (* [get_card_by_id id cardlst] returns the card associated with that id *)
@@ -404,6 +404,21 @@ let handle_choice player gamestate actionType : gamestate =
   if (actionType = ChoiceCol) then pick_college player gamestate
   else handle_choice_helper player gamestate actionType
 
+(* [reset_direction player gamestate] resets the direction to right after
+ * fork events *)
+let reset_direction player gamestate =
+  let playerid = Player.getID player in
+  let player_loc_info = List.assoc playerid gamestate.playermap in
+  player_loc_info.dir <- Right
+
+(* [recheck_choice_in_path playerid gamestate square] returns a boolean
+ * on whether the current square is a choice or not *)
+let rec recheck_choice_in_path playerid gamestate square =
+  let loc = find_loc_by_sid gamestate.gamemap square in
+  let action = List.assoc square gamestate.sqact in
+  if (action.actionType = Event) then false
+  else true
+
 (* [spin_helper gamestate player step] is a helper function that handles spin
  * command *)
 let spin_helper gamestate player step =
@@ -414,18 +429,22 @@ let spin_helper gamestate player step =
   let newstep = step - leftover + 1 in
   let () = if not (Player.isHuman player) then AT.print_string [gcol] "spin\n" else () in
   let () = AT.print_string [get_pcol (Player.getID player)]
-      ("You have moved " ^ (string_of_int newstep) ^ " steps. Hooray!\n") in
+      ("You have moved " ^ (string_of_int newstep) ^ " step(s). Hooray!\n") in
   if (actionType = Event) then
     (if not (check_for_fork playerid player_loc_info.loc.id gamestate newstep)
       then move_multi_step gamestate playerid newstep
-    else handle_fork playerid player_loc_info gamestate newstep)
+    else let gs = handle_fork playerid player_loc_info gamestate newstep in
+        reset_direction player gs; gs)
   else
     (if not (check_for_fork playerid player_loc_info.loc.id gamestate newstep)
      then let newgs = move_multi_step gamestate playerid newstep in
      handle_choice player newgs actionType
     else
       let new_gs = handle_fork playerid player_loc_info gamestate newstep in
-      handle_choice player new_gs actionType)
+      let () = reset_direction player new_gs in begin
+          if (recheck_choice_in_path playerid new_gs player_loc_info.loc.id)
+          then handle_choice player new_gs actionType
+          else new_gs end)
 
 (* [reveal_results player_lst] creates a string which shows each player's points,
  * karma, and total points to print out at the end of the game. *)
@@ -497,6 +516,8 @@ let rec play (cmd : string) (gamestate : gamestate) (turn : int) : gamestate =
     ("spin:          spin the wheel and try your luck!\n");
     AT.print_string [get_pcol playerid]
     ("help:          see a list of commands available\n");
+    AT.print_string [get_pcol playerid]
+    ("help:          see a list of commands available\n");
     gamestate)
   else raise Illegal
 
@@ -515,6 +536,9 @@ and repl (state : gamestate) (turn : int) : unit =
       ^ "!\n")) else
    (let playerid = List.nth state.active_players turn in
     let player = List.nth state.players (playerid - 1) in
+    let () = if (turn = 0) then AT.print_string [gcol]
+        ("\n•·.·´`·.·•NEW ROUND•·.·´`·.·•\n")
+      else () in
     let () = AT.print_string [get_pcol playerid] ("\nIt is " ^
       (Player.getNickname player) ^ "'s turn. Please enter a command.\n>>> ") in
     let cmd = if (Player.isHuman player) then read_line () else "spin" in
@@ -606,7 +630,7 @@ let rec setup_players state =
       let name = read_line () in
       let named_player = Player.addNickname player name in
       let final_player = Player.changePoints named_player state.start_points in
-      let aimsg = "Will this player be a human player? (Y/N)" in
+      let aimsg = "Will this player be a human player? A non-human will automatically take their turns. (Type Y/N)" in
       let res = print_choice (get_pcol id) aimsg ["Y"; "y"; "N"; "n"] in
       let () = if (res = "N" || res = "n") then (Player.setMode final_player false); ailist := (!ailist @ [id]) in
       let locobj = find_loc_by_sid state.gamemap (Square state.start) in
