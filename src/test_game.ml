@@ -69,7 +69,16 @@ let gs = {turn = 1; playermap = ploc_lst; sqact = sqact_lst; start = 1; start_po
 let gs1 = {turn = 1; playermap = ploc_lst2; sqact = sqact_lst; start = 1; start_points = 2; gamemap = locations; gamecomp = gcomp; players = player_lst; playercard = pcard_lst; active_players = [1;2]}
 let gs2 = {turn = 1; playermap = ploc_lst3; sqact = sqact_lst; start = 1; start_points = 2; gamemap = locations; gamecomp = gcomp; players = player_lst; playercard = pcard_lst; active_players = [1;2]}
 let gs3 = {turn = 1; playermap = ploc_lst4; sqact = sqact_lst; start = 1; start_points = 2; gamemap = locations; gamecomp = gcomp; players = player_lst; playercard = pcard_lst; active_players = [1;2]}
-(* let course1 = {name = "Graphics";} *)
+let course1 = {name = "1110"; description = ""; id = 1; points = 10; karma = 2; card_type = ChoiceC}
+let course2 = {name = "2110"; description = ""; id = 2; points = 15; karma = 3; card_type = ChoiceC}
+let course3 = {name = "3110"; description = ""; id = 3; points = 20; karma = 3; card_type = ChoiceC}
+let college1 = {name = "AS"; description = "Arts and Science"; id = 1; points = 20; karma = 1; card_type = ChoiceCol}
+let college2 = {name = "ENG"; description = "Engineering"; id = 2; points = 20; karma = 5; card_type = ChoiceCol}
+let course_lst = [course1; course2; course3]
+let college_lst = [college1; college2]
+let gamecomp = {courses = course_lst; advisors = []; summer = []; future = []}
+let gs_for_remove = {turn = 1; playermap = ploc_lst; sqact = sqact_lst; start = 1; start_points = 2; gamemap = locations; gamecomp = gamecomp; players = player_lst; playercard = []; active_players = [1;2]}
+let gamecomp_after = {courses = [course1; course3]; advisors = []; summer = []; future = []}
 
 let tests = [
 
@@ -102,12 +111,26 @@ let tests = [
   "test_find_loc_by_sid5" >:: (fun _ -> assert_raises (Failure "This is not a valid square id.")
                               (fun () -> (find_loc_by_sid locs (Null))));
 
+  "test_remove_course_card" >:: (fun _ -> assert_equal ({gs_for_remove with gamecomp = gamecomp_after}) 
+                                (remove_card course2 gamecomp gs_for_remove));
+
+  "test_remove_college" >:: (fun _ -> assert_equal (gs_for_remove) 
+                         (remove_card college2 gamecomp gs_for_remove));
+
+  "test_add_course_card" >:: (fun _ -> assert_equal (gs_for_remove) 
+                             (add_card college2 gamecomp {gs_for_remove with gamecomp = gamecomp_after}));
+
+  "test_get_correct_comp" >:: (fun _ -> assert_equal (course_lst) 
+                             (get_correct_comp ChoiceC gs_for_remove));
+
   "move_one_step1" >:: (fun _ -> assert_equal gs1 (move_one_step gs 1));
 
   "move_one_step2" >:: (fun _ -> assert_equal gs2 (move_one_step gs 2));
 
   "move_one_step3" >:: (fun _ -> assert_equal gs3 (move_one_step gs1 1));
 
+  "test_end_game_user" >:: (fun _ -> assert_equal ({gs1 with active_players = [2]; turn = -1}) 
+                           (end_game_user gs1 1 (List.assoc 1 gs1.playermap)));
 
   "start turn" >:: (fun _ -> assert_equal 0
     (let state = (init_game s) in state.turn));

@@ -4,6 +4,6 @@
 open OUnit2
 
 let test_suite = "Life test suite" >:::
-  Test_game.tests @ Test_player.tests @ Test_map.tests
+  Test_game.tests @ Test_player.tests
 
 let _ = run_test_tt_main test_suite
