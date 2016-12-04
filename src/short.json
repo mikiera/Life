@@ -275,18 +275,18 @@
 		  "right": 3
 		},
 		{ "squareid": 3,
-			"left": 0,
+			"left": 5,
 			"right": 4
 		},
 		{ "squareid": 4,
-		   "left": 5,
-			"right": 6
+		   "left": 0,
+			"right": 50
 		},
 		{ "squareid": 5,
 		   "left": 0,
-			"right": 6
+			"right": 50
 		},
-		{ "squareid": 6,
+		{ "squareid": 50,
 		   "left": 0,
 			"right": 0
 		}],

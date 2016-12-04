@@ -84,12 +84,12 @@ let cmd_checker c =
 (* [print_choice color descrip choices] will print the description in color
  * If the user's input matches a string in list choices
  * color is an ANSITerminal color, descrip is string, choices is string list *)
-let rec print_choice player color descrip choices =
+let rec print_choice color descrip choices =
   let () = AT.print_string [color] (descrip ^ "\n> ") in
   let result = read_line () in
   let fixedresult = cmd_checker result in
   if (List.mem fixedresult choices) then fixedresult
-  else (print_choice player color descrip choices)
+  else (print_choice color descrip choices)
 
 (* [find_player_by_id player_list player_id] returns the Player object
  * that has the id player_id; if the player_id does not correspond with a
@@ -256,7 +256,7 @@ let handle_fork playerid player_loc_info gamestate step =
   let player = List.nth gamestate.players (playerid - 1) in
   let msg =
   "There's a fork in your path. Do you want to turn left or right? (L/R)" in
-  let choice = if (Player.isHuman player) then print_choice player (get_pcol playerid) msg ["L"; "l"; "R"; "r"]
+  let choice = if (Player.isHuman player) then print_choice (get_pcol playerid) msg ["L"; "l"; "R"; "r"]
   else let () = print_msg msg in (ai_choice 2 ["l"; "r"]) in
   (if choice = "L" || choice = "l" then player_loc_info.dir <- Left
       else player_loc_info.dir <- Right);
@@ -267,7 +267,7 @@ let handle_fork playerid player_loc_info gamestate step =
  *)
 let pick_college player gamestate =
   let msg = "To choose Arts and Sciences, type AS. For Engineering, type ENG" in
-  let choice = if (Player.isHuman player) then print_choice player ccol msg ["AS"; "as"; "As"; "ENG"; "eng"; "Eng"]
+  let choice = if (Player.isHuman player) then print_choice ccol msg ["AS"; "as"; "As"; "ENG"; "eng"; "Eng"]
               else ai_choice 2 ["AS"; "ENG"] in
   if (choice = "AS" || choice = "as" || choice = "As")
     then let () = AT.print_string [dcol]
@@ -371,7 +371,7 @@ let handle_choice_helper player gamestate actionType =
   let cardmsg = create_message_from_cards "" cardlst in
   let startmsg = get_start_msg actionType in
   let msg = startmsg^":"^cardmsg in
-  let choice = if (Player.isHuman player) then print_choice player ccol msg valid_choices
+  let choice = if (Player.isHuman player) then print_choice ccol msg valid_choices
                else ai_choice (List.length(valid_choices)) valid_choices in
   let id = int_of_string choice in
   let newcard = get_card_by_id id cardlst in
@@ -505,7 +505,8 @@ and repl (state : gamestate) (turn : int) : unit =
     else
       let new_gs = play check_cmd state turn in
       let new_turn = if (check_cmd <> "spin") then turn
-        else if (new_gs.turn = -1 && ((Player.isHuman player) = false)) then turn
+        else if (new_gs.turn = -1) then
+          if (turn = (List.length state.active_players - 1)) then 0 else turn
         else ((turn + 1) mod (List.length state.active_players)) in
       repl new_gs new_turn)
    with
@@ -585,7 +586,7 @@ let rec setup_players state =
       let named_player = Player.addNickname player name in
       let final_player = Player.changePoints named_player state.start_points in
       let aimsg = "Will this player be a human player? (Y/N)" in
-      let res = print_choice final_player (get_pcol id) aimsg ["Y"; "y"; "N"; "n"] in
+      let res = print_choice (get_pcol id) aimsg ["Y"; "y"; "N"; "n"] in
       let () = if (res = "N" || res = "n") then (Player.setMode final_player false); ailist := (!ailist @ [id]) in
       let locobj = find_loc_by_sid state.gamemap (Square state.start) in
       let playerloc = { loc=locobj; dir=Right } in
