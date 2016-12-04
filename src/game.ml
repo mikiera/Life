@@ -69,10 +69,7 @@ type gamestate = {turn: turn;
 let gcol = AT.black
 
 (* constant: color of "choice" text *)
-let ccol = AT.red
-
-(* constant: color of "description" text *)
-let dcol = AT.cyan
+let ccol = AT.cyan
 
 (* [get_pcol id] gets the color for player with given id *)
 let get_pcol id = List.nth [AT.blue; AT.green; AT.magenta] (id mod 3)
@@ -287,10 +284,10 @@ let pick_college player gamestate =
   let choice = if (Player.isHuman player) then print_choice ccol msg ["AS"; "as"; "As"; "ENG"; "eng"; "Eng"]
               else ai_choice 2 ["AS"; "ENG"] in
   if (choice = "AS" || choice = "as" || choice = "As")
-    then let () = AT.print_string [dcol]
+    then let () = AT.print_string [get_pcol (Player.getID player)]
       ("\nYou chose Arts and Sciences! Yay you don't have to take Math 1920!\n") in
     (ignore((Player.changeCollege) player "Arts and Sciences"); gamestate)
-  else let () = AT.print_string [dcol]
+  else let () = AT.print_string [get_pcol (Player.getID player)]
     ("\nYou chose Engineering! Yay you don't have to take a language!\n") in
     (ignore((Player.changeCollege) player "Engineering"); gamestate)
 
@@ -374,10 +371,10 @@ let update_player_card_list playerid playercardlst gamestate newcardlst =
  * about a player's choice *)
 let print_descrip playerid newcard =
   match newcard.card_type with
-    | ChoiceA -> AT.print_string [dcol]
-          ("\nYou picked "^newcard.name^"\n"^newcard.description^"\n")
-    | _ -> AT.print_string [dcol]
-          ("\nYou picked "^newcard.name^"\n"^newcard.description^"\n"^
+    | ChoiceA -> AT.print_string [get_pcol playerid]
+          ("You picked "^newcard.name^"\n"^newcard.description^"\n")
+    | _ -> AT.print_string [get_pcol playerid]
+          ("You picked "^newcard.name^"\n"^newcard.description^"\n"^
           "The points associated with "^newcard.name^" is "^
           (string_of_int newcard.points)^" points. \n")
 
@@ -391,7 +388,7 @@ let handle_choice_helper player gamestate actionType =
   let startmsg = get_start_msg actionType in
   let msg = startmsg ^ " " ^ cardmsg in
   let choice = if (Player.isHuman player) then print_choice ccol msg valid_choices
-               else let () = AT.print_string [ccol] msg in
+               else let () = AT.print_string [ccol] (msg ^ "\n") in
                ai_choice (List.length(valid_choices)) valid_choices in
   let id = int_of_string choice in
   let newcard = get_card_by_id id cardlst in
@@ -445,7 +442,7 @@ let handle_points player action gamestate =
   let result = if (Player.isHuman player)
     then print_choice ccol action.description choices
     else let () = AT.print_string [ccol]
-      ("\n" ^ action.description ^ "\n") in
+      (action.description ^ "\n") in
       ai_choice (List.length(choices)) choices in
   let point_opt_obj =
     let obj_lst = List.filter (fun x -> x.optstr = result) action.optlist in
@@ -456,7 +453,7 @@ let handle_points player action gamestate =
   let fake_act = {actionType = Points; description = point_opt_obj.description;
     points = point_opt_obj.points; karma = point_opt_obj.karma; optlist = []} in
   ignore (change_pk gamestate playerid fake_act);
-  let () = AT.print_string [dcol] ("\n" ^ point_opt_obj.description ^ "\n") in
+  let () = AT.print_string [get_pcol playerid] ("\n" ^ point_opt_obj.description ^ "\n") in
   gamestate
 
 let get_action gamestate player =
@@ -477,7 +474,8 @@ let spin_helper gamestate player step =
   let () = if not (Player.isHuman player)
     then AT.print_string [gcol] "spin\n" else () in
   let () = AT.print_string [get_pcol (Player.getID player)]
-      ("You have moved " ^ (string_of_int newstep) ^ " step(s). Hooray!\n") in
+      ("You have moved " ^ (string_of_int newstep) ^ " step(s). Hooray!\n" ^
+        "---------------------------------\n") in
   if (actionType = Event) then
     (if not (check_for_fork playerid player_loc_info.loc.id gamestate newstep)
       then
@@ -515,9 +513,9 @@ let spin_helper gamestate player step =
 let rec reveal_results player_lst =
   match player_lst with
   | [] -> ""
-  | h::t -> (Player.getNickname h) ^ ("   Karma: ") ^ (string_of_int(Player.getKarma h))
-                                   ^ ("   Points: ") ^ (string_of_int(Player.getPoints h))
-                                   ^ ("   Total: ") ^ (string_of_int((Player.getPoints h)
+  | h::t -> (Player.getNickname h) ^ ("\n   Karma: ") ^ (string_of_int(Player.getKarma h))
+                                   ^ ("\n   Points: ") ^ (string_of_int(Player.getPoints h))
+                                   ^ ("\n   Total: ") ^ (string_of_int((Player.getPoints h)
                                       + (Player.getKarma h)))
                                    ^ ("\n") ^ (reveal_results t)
 
@@ -592,14 +590,15 @@ let rec play (cmd : string) (gamestate : gamestate) (turn : int) : gamestate =
 and repl (state : gamestate) (turn : int) : unit =
   try
     if ((List.length state.active_players) = 0) then
-      (AT.print_string [gcol] ("Everybody has finished the game. " ^
+      (AT.print_string [AT.yellow] ("\nEverybody has finished the game. " ^
       "It's time to reveal the final results.\n"
       ^ (reveal_results state.players)
-      ^ "Congratulations to our winner(s): "
+      ^ "\nCongratulations to our winner(s): "
       ^ (let players = state.players in
          let winners = find_player_by_score players (find_max_score players 0) in
          winner_annoucement winners)
-      ^ "!\n")) else
+      ^ "!\n\nThanks for playing the Life of a CS Major!"
+      ^ "\nPriyanka | Vicky | Harshita | Julia <3\n")) else
    (let playerid = List.nth state.active_players turn in
     let player = List.nth state.players (playerid - 1) in
     let () = AT.print_string [get_pcol playerid] ("\nIt is " ^
@@ -611,7 +610,10 @@ and repl (state : gamestate) (turn : int) : unit =
     else
       let new_gs = play check_cmd state turn in
       let () = if ((turn = (List.length state.active_players - 1)) && check_cmd = "spin")
-        then (AT.print_string [gcol] "\n•·.·´`·.·•NEW ROUND•·.·´`·.·•\n")
+        then (AT.print_string [gcol; AT.Bold]
+          ("\n»»------------------¤------------------««\n" ^
+          "»»------------- New Round -------------««" ^
+          "\n»»------------------¤------------------««\n"))
         else () in
       let new_turn = if (check_cmd <> "spin") then turn
         else if (new_gs.turn = -1) then
@@ -761,8 +763,10 @@ let rec main_helper (file_name : string) =
     let json = Yojson.Basic.from_file file_name in
     let gamestate1 = init_game json in
     let gamestate2 = setup_players gamestate1 in
-    let () = AT.print_string [gcol] ("\nInstructions: To take a turn, type spin."^
-    "\nTo see a "^"list of call commands, type help.\n \n") in
+    let () = AT.print_string [gcol; AT.Bold]
+    ("\nInstructions: To take a turn, " ^
+    "type spin.\nTo see a "^"list of all commands, type help.\n" ^
+    "Commands are case insensitive.\n") in
     repl gamestate2 (gamestate2.turn)
   with
     | Yojson.Json_error _ -> let () = print_endline ("Invalid json file. Please"

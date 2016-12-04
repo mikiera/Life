@@ -1083,14 +1083,7 @@
     "action": 
       {
       "type": "college",
-      "description": " __          __  _                            _           _____                      _ _ _ 
- \\ \\        / / | |                          | |         / ____|                    | | | |
-  \\ \\  /\\  / /__| | ___ ___  _ __ ___   ___  | |_ ___   | |     ___  _ __ _ __   ___| | | |
-   \\ \/  \/ / _ \\ |/ __/ _ \\| '_ ` _ \\ / _ \\ | __/ _ \\  | |    / _ \\| '__| '_ \\ / _ \\ | | |
-    \\  /\\  /  __/ | (_| (_) | | | | | |  __/ | || (_) | | |___| (_) | |  | | | |  __/ | |_|
-     \/  \/ \\___|_|\\___\\___/|_| |_| |_|\\___|  \\__\\___/   \\_____\\___/|_|  |_| |_|\\___|_|_(_)
- 
- First, you get must choose between Arts and Sciences or Engineering.\n",
+      "description": "Get ready for college applications! Choose between Arts and Sciences or Engineering.\n",
       "points": 0,
       "karma": 0,
       "optlist": []
@@ -1368,7 +1361,7 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "action": 
       {
       "type": "event",
-      "description": "You haven't showered in 3 days. There's an assignment due.. \nBUT YOU HAVEN'T SHOWERED. IN. THREE.DAYS \n-101 points",
+      "description": "You haven't showered in 3 days. There's an assignment due.. \nBUT YOU HAVEN'T SHOWERED. IN. THREE. DAYS \n-101 points",
       "points": -101,
       "karma": -803,
       "optlist": []
