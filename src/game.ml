@@ -15,12 +15,21 @@ type square = Null | Square of int
 type location = {id: square; left: square; right: square}
 
 type actionType = Event | ChoiceC | ChoiceA | ChoiceS | ChoiceF | ChoiceCol
+  | Points
+
+type pointopt = {
+  optstr: string;
+  description: string;
+  points: int;
+  karma: int
+}
 
 type action = {
       actionType: actionType;
       description: string;
       points: int;
-      karma: int
+      karma: int;
+      optlist: pointopt list
   }
 
 type direction = Left | Right
@@ -69,7 +78,7 @@ let dcol = AT.cyan
 let get_pcol id = List.nth [AT.blue; AT.green; AT.magenta] (id mod 3)
 
 (* [ai_choice n lst] picks a ranodm choice from the given choices for an AI player.*)
-let ai_choice n lst = let _ = Random.self_init in
+let ai_choice n lst = let () = Random.self_init () in
   let num = Random.int n in List.nth lst num
 
 (* remove for debugging purposes only *)
@@ -130,7 +139,7 @@ let remove_card card gamecomp gamestate =
                 let cardlst = List.filter (fun x -> x.id <> card.id) lst in
                 {gamecomp with summer = cardlst}
     | ChoiceCol -> gamecomp
-    | Event -> gamecomp
+    | Event | Points -> gamecomp
     end in
   {gamestate with gamecomp = newgamecomp}
 
@@ -152,7 +161,7 @@ let add_card card gamecomp gamestate =
                 let cardlst = card :: lst in
                 {gamecomp with summer = cardlst}
     | ChoiceCol -> gamecomp
-    | Event -> gamecomp
+    | Event | Points -> gamecomp
     end in
   {gamestate with gamecomp = newgamecomp}
 
@@ -165,7 +174,7 @@ let get_correct_comp actionType gamestate =
     | ChoiceF -> gamestate.gamecomp.future
     | ChoiceS -> gamestate.gamecomp.summer
     | ChoiceCol -> failwith "no gamecomp"
-    | Event -> failwith "no gamecomp"
+    | Event | Points -> failwith "no gamecomp"
 
 (* [move_one_step gamestate playerid] returns the gamestate after the player
  * identified by playerid moves one step forward where the direction is
@@ -207,8 +216,9 @@ let rec move_multi_step gamestate playerid n =
     if n = 0 then (let l_info = List.assoc playerid gamestate.playermap in
                    let current_square = l_info.loc.id in
                    let action = List.assoc current_square gamestate.sqact in
-                   let () = AT.print_string [get_pcol playerid]
-                    (action.description ^ "\n") in
+                   let () = if (action.actionType <> Points)
+                    then AT.print_string [get_pcol playerid]
+                    (action.description ^ "\n") else () in
                    ignore(change_pk gamestate playerid action); gamestate)
     else if n > 0 then (let l_info = List.assoc playerid gamestate.playermap in
       if (l_info.loc.left = Null && l_info.loc.right = Null)
@@ -250,7 +260,7 @@ let rec get_step_for_choice_event playerid square gamestate num_step =
     convert_dir_square loc temp in
   if num_step = 1 then (num_step, action.actionType)
   else
-    if (action.actionType = Event)
+    if (action.actionType = Event || action.actionType = Points)
       then get_step_for_choice_event playerid dir gamestate (num_step -1)
     else (num_step, action.actionType)
 
@@ -349,7 +359,7 @@ let update_player player actionType card =
                  (ignore((Player.changePoints) player card.points));
                  (Player.changeKarma) player card.karma
     | ChoiceCol -> (Player.changeCollege) player name
-    | Event -> player
+    | Event | Points -> player
 
 (* [update_player_card_list playerid playercardlst gamestate newcardlst]
  * updates the player card list to remove the player currently choosing cards *)
@@ -377,9 +387,10 @@ let handle_choice_helper player gamestate actionType =
   let valid_choices = get_list_of_valid_choices cardlst [] in
   let cardmsg = create_message_from_cards "" cardlst in
   let startmsg = get_start_msg actionType in
-  let msg = startmsg^":"^cardmsg in
+  let msg = startmsg ^ " " ^ cardmsg in
   let choice = if (Player.isHuman player) then print_choice ccol msg valid_choices
-               else ai_choice (List.length(valid_choices)) valid_choices in
+               else let () = AT.print_string [ccol] msg in
+               ai_choice (List.length(valid_choices)) valid_choices in
   let id = int_of_string choice in
   let newcard = get_card_by_id id cardlst in
   let playercardlst = List.assoc playerid gamestate.playercard in
@@ -414,10 +425,44 @@ let reset_direction player gamestate =
 (* [recheck_choice_in_path playerid gamestate square] returns a boolean
  * on whether the current square is a choice or not *)
 let rec recheck_choice_in_path playerid gamestate square =
-  let loc = find_loc_by_sid gamestate.gamemap square in
   let action = List.assoc square gamestate.sqact in
   if (action.actionType = Event) then false
   else true
+
+(*  *)
+let rec create_list_valid_opts optlst lst =
+  match optlst with
+    | [] -> lst
+    | h :: t -> let newlist = h.optstr :: lst in
+      create_list_valid_opts t newlist
+
+(* [handle_points player action gamestate] *)
+let handle_points player action gamestate =
+  let playerid = Player.getID player in
+  let choices = create_list_valid_opts action.optlist [] in
+  let result = if (Player.isHuman player)
+    then print_choice ccol action.description choices
+    else let () = AT.print_string [ccol]
+      ("\n" ^ action.description ^ "\n") in
+      ai_choice (List.length(choices)) choices in
+  let point_opt_obj =
+    let obj_lst = List.filter (fun x -> x.optstr = result) action.optlist in
+    begin match obj_lst with
+      | [] -> raise (Failure "No valid options, check JSON optdicts")
+      | h :: t -> h
+    end in
+  let fake_act = {actionType = Points; description = point_opt_obj.description;
+    points = point_opt_obj.points; karma = point_opt_obj.karma; optlist = []} in
+  ignore (change_pk gamestate playerid fake_act);
+  let () = AT.print_string [dcol] ("\n" ^ point_opt_obj.description ^ "\n") in
+  gamestate
+
+let get_action gamestate player =
+    let playerid = Player.getID player in
+    let player_loc_info = List.assoc playerid gamestate.playermap in
+    let location = player_loc_info.loc.id in
+    List.assoc location gamestate.sqact
+
 
 (* [spin_helper gamestate player step] is a helper function that handles spin
  * command *)
@@ -427,7 +472,8 @@ let spin_helper gamestate player step =
   let (leftover,actionType) =
   get_step_for_choice_event playerid player_loc_info.loc.right gamestate step in
   let newstep = step - leftover + 1 in
-  let () = if not (Player.isHuman player) then AT.print_string [gcol] "spin\n" else () in
+  let () = if not (Player.isHuman player)
+    then AT.print_string [gcol] "spin\n" else () in
   let () = AT.print_string [get_pcol (Player.getID player)]
       ("You have moved " ^ (string_of_int newstep) ^ " step(s). Hooray!\n") in
   if (actionType = Event) then
@@ -435,6 +481,17 @@ let spin_helper gamestate player step =
       then move_multi_step gamestate playerid newstep
     else let gs = handle_fork playerid player_loc_info gamestate newstep in
         reset_direction player gs; gs)
+  else if (actionType = Points) then
+    (if not (check_for_fork playerid player_loc_info.loc.id gamestate newstep)
+      then
+        let gs = move_multi_step gamestate playerid newstep in
+        let act = get_action gamestate player in
+        handle_points player act gs
+    else let gs = handle_fork playerid player_loc_info gamestate newstep in
+        reset_direction player gs;
+        let gs = move_multi_step gamestate playerid newstep in
+        let act = get_action gamestate player in
+        handle_points player act gs)
   else
     (if not (check_for_fork playerid player_loc_info.loc.id gamestate newstep)
      then let newgs = move_multi_step gamestate playerid newstep in
@@ -498,7 +555,7 @@ let rec play (cmd : string) (gamestate : gamestate) (turn : int) : gamestate =
     ((Player.getCollege player) ^ "\n"); gamestate)
   else if (cmd = "n" || cmd = "name") then (AT.print_string [get_pcol playerid]
     ((Player.getNickname player) ^ "\n"); gamestate)
-  else if (cmd = "spin") then let _ = Random.self_init in
+  else if (cmd = "spin") then let () = Random.self_init () in
     let step = ((Random.int 4) + 1) in
     spin_helper gamestate player step
   else if (cmd = "help") then (
@@ -538,9 +595,6 @@ and repl (state : gamestate) (turn : int) : unit =
       ^ "!\n")) else
    (let playerid = List.nth state.active_players turn in
     let player = List.nth state.players (playerid - 1) in
-    let () = if (turn = 0) then AT.print_string [gcol]
-        ("\n•·.·´`·.·•NEW ROUND•·.·´`·.·•\n")
-      else () in
     let () = AT.print_string [get_pcol playerid] ("\nIt is " ^
       (Player.getNickname player) ^ "'s turn. Please enter a command.\n>>> ") in
     let cmd = if (Player.isHuman player) then read_line () else "spin" in
@@ -549,6 +603,9 @@ and repl (state : gamestate) (turn : int) : unit =
     then AT.print_string [gcol] "You have terminated the game.\n"
     else
       let new_gs = play check_cmd state turn in
+      let () = if ((turn = (List.length state.active_players - 1)) && check_cmd = "spin")
+        then (AT.print_string [gcol] "\n•·.·´`·.·•NEW ROUND•·.·´`·.·•\n")
+        else () in
       let new_turn = if (check_cmd <> "spin") then turn
         else if (new_gs.turn = -1) then
           if (turn = (List.length state.active_players - 1)) then 0 else turn
@@ -584,6 +641,15 @@ let make_loc_list loc : location =
   let realright = if right <> 0 then Square right else Null in
   {id = realid; left = realleft; right = realright}
 
+(* [parse_optlist opt]  *)
+let parse_optlist opt =
+  let open Yojson.Basic.Util in
+  let optstr = opt |> member "option" |> to_string in
+  let description = opt |> member "description" |> to_string in
+  let points = opt |> member "points" |> to_int in
+  let karma = opt |> member "karma" |> to_int in
+  {optstr = optstr; description = description; points = points; karma = karma}
+
 (* [parse_action action] takes in an action and returns the appropriate action type. *)
 let parse_action action : action =
   let open Yojson.Basic.Util in
@@ -595,13 +661,15 @@ let parse_action action : action =
     | "summer" -> ChoiceS
     | "future" -> ChoiceF
     | "college" -> ChoiceCol
+    | "point" -> Points
     | _ -> Event  end
   in
   let description = action |> member "description" |> to_string in
   let points = action |> member "points" |> to_int in
   let karma = action |> member "karma" |> to_int in
+  let optlist = action |> member "optdict" |> to_list |> (List.map parse_optlist) in
   {actionType = finaltype; description = description; points = points;
-  karma = karma}
+  karma = karma; optlist = optlist}
 
 (* [sq_act_list sqact] creates a sqaure action list based on the Json.*)
 let sq_act_list sqact =
@@ -632,9 +700,11 @@ let rec setup_players state =
       let name = read_line () in
       let named_player = Player.addNickname player name in
       let final_player = Player.changePoints named_player state.start_points in
-      let aimsg = "Will this player be a human player? A non-human will automatically take their turns. (Type Y/N)" in
+      let aimsg = "Will this player be a human player? A non-human will" ^
+        " automatically take their turns. (Type Y/N)" in
       let res = print_choice (get_pcol id) aimsg ["Y"; "y"; "N"; "n"] in
-      let () = if (res = "N" || res = "n") then (Player.setMode final_player false); ailist := (!ailist @ [id]) in
+      let () = if (res = "N" || res = "n") then
+        (Player.setMode final_player false); ailist := (!ailist @ [id]) in
       let locobj = find_loc_by_sid state.gamemap (Square state.start) in
       let playerloc = { loc=locobj; dir=Right } in
       activeplayers := (!activeplayers @ [id]);

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-ocamlbuild -pkgs oUnit,yojson,ANSITerminal,str,unix player.cmo gamemap.cmo game.byte main.byte test_game.byte test_player.byte test_map.byte test_main.byte
+ocamlbuild -pkgs oUnit,yojson,ANSITerminal,str,unix player.cmo game.byte main.byte test_game.byte test_player.byte test_main.byte
 if [[ $? -ne 0 ]]; then
   cat <<EOF
 ===========================================================
