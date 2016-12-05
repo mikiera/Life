@@ -1757,9 +1757,9 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "action": 
       {
       "type": "event",
-      "description": "",
-      "points": 0,
-      "karma": 0,
+      "description": "You have discovered your favorite data structure-linkedlists! \nGet 100 points for linking!",
+      "points": 100,
+      "karma": 234,
       "optlist": []
       }
     },
@@ -1767,9 +1767,9 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "action": 
       {
       "type": "event",
-      "description": "",
-      "points": 0,
-      "karma": 0,
+      "description": "You have discovered your least favorite data structure-trees. \nYou're environmental science friends don't understand why you hate trees.\nLose 100 points.",
+      "points": -100,
+      "karma":10,
       "optlist": []
       }
     },
@@ -1777,9 +1777,9 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "action": 
       {
       "type": "event",
-      "description": "",
-      "points": 0,
-      "karma": 0,
+      "description": "You went home for fall break! It was so nice to be with your fam. \nGet 193 points.",
+      "points": 193,
+      "karma": 1249,
       "optlist": []
       }
     },
@@ -1787,9 +1787,9 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "action": 
       {
       "type": "event",
-      "description": "",
-      "points": 0,
-      "karma": 0,
+      "description": "You got sick from staying up late. Take care of yourself. \nLose 1923 points.",
+      "points": -1923,
+      "karma": 24,
       "optlist": []
       }
     },
@@ -1797,9 +1797,9 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "action": 
       {
       "type": "event",
-      "description": "",
-      "points": 0,
-      "karma": 0,
+      "description": "It's the last lecture of your favorite CS class. Your mind was blown. \nGet 3000 points.",
+      "points": 3000,
+      "karma": 235,
       "optlist": []
       }
     },
@@ -1827,9 +1827,9 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "action": 
       {
       "type": "event",
-      "description": "",
-      "points": 0,
-      "karma": 0,
+      "description": "You got your classic chipotle chicken from Duffield. Life tastes good. \nGet 679 points.",
+      "points": 679,
+      "karma": 23,
       "optlist": []
       }
     },
@@ -1837,9 +1837,9 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "action": 
       {
       "type": "event",
-      "description": "",
-      "points": 0,
-      "karma": 0,
+      "description": "It's only week six of the semester and you ran out of BRBs. \nLose 500 points.",
+      "points": -500,
+      "karma": -345,
       "optlist": []
       }
     },
@@ -1857,9 +1857,9 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "action": 
       {
       "type": "event",
-      "description": "",
-      "points": 0,
-      "karma": 0,
+      "description": "The consultant at office hours didn't answer your question. \nLose 135 points.",
+      "points": -135,
+      "karma": 10,
       "optlist": []
       }
     },
@@ -1887,9 +1887,9 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "action": 
       {
       "type": "event",
-      "description": "",
-      "points": 0,
-      "karma": 0,
+      "description": "Your code works on your partner's computer but not yours. You have no idea why. \nLose 1900 points for the inconvenience.",
+      "points": -1900,
+      "karma": -90,
       "optlist": []
       }
     },
@@ -1897,9 +1897,9 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "action": 
       {
       "type": "event",
-      "description": "",
-      "points": 0,
-      "karma": 0,
+      "description": "Your code did not pass make check. You will receive little to no credit. \nLose 310 points.",
+      "points": -310,
+      "karma": -100,
       "optlist": []
       }
     },
@@ -1907,9 +1907,9 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "action": 
       {
       "type": "event",
-      "description": "",
-      "points": 0,
-      "karma": 0,
+      "description": "Your code passed make check. Yes. Does it work though? \nGet 310 points.",
+      "points": 310,
+      "karma": 1000,
       "optlist": []
       }
     },
@@ -1917,9 +1917,9 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "action": 
       {
       "type": "event",
-      "description": "",
-      "points": 0,
-      "karma": 0,
+      "description": "You are no longer scared of the terminal. Congrats. \nGet 10 points.",
+      "points": 10,
+      "karma": 10,
       "optlist": []
       }
     },
@@ -1957,9 +1957,9 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "action": 
       {
       "type": "event",
-      "description": "",
-      "points": 0,
-      "karma": 0,
+      "description": "You're assignment is due in 4 hours and it's 4AM right now. Will you finish? Probably not. \nLose 700 points for ruining your health and your grades.",
+      "points": -700,
+      "karma": -345,
       "optlist": []
       }
     },
@@ -1977,9 +1977,9 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "action": 
       {
       "type": "event",
-      "description": "",
-      "points": 0,
-      "karma": 0,
+      "description": "You applied to be consultant because you want to inspire. \nGet 1000 points for paying it forward.",
+      "points": 1000,
+      "karma": 1235,
       "optlist": []
       }
     },
@@ -2017,9 +2017,9 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "action": 
       {
       "type": "event",
-      "description": "",
-      "points": 0,
-      "karma": 0,
+      "description": "You're CS partner did all the work and now you feel like shit. \nLose 100 points.",
+      "points": -100,
+      "karma": -1000,
       "optlist": []
       }
     },
@@ -2057,8 +2057,8 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "action": 
       {
       "type": "event",
-      "description": "",
-      "points": 0,
+      "description": "3110 is hard. You have pulled 3 allnighters. \nLose 3110 points.",
+      "points": -3110,
       "karma": 0,
       "optlist": []
       }
@@ -2097,9 +2097,9 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "action": 
       {
       "type": "event",
-      "description": "",
-      "points": 0,
-      "karma": 0,
+      "description": "A3 was a hot mess. Functors are funky. Why do you need a Set and Dict? \nLose 400 points for not understanding the assignment.",
+      "points": -400,
+      "karma": 235,
       "optlist": []
       }
     },
@@ -2107,9 +2107,9 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "action": 
       {
       "type": "event",
-      "description": "",
-      "points": 0,
-      "karma": 0,
+      "description": "You don't understand proofs but somehow you pulled an A on A5. \nGet 523 points for getting lucky.",
+      "points": 523,
+      "karma": 124,
       "optlist": []
       }
     },
@@ -2147,9 +2147,9 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "action": 
       {
       "type": "event",
-      "description": "",
-      "points": 0,
-      "karma": 0,
+      "description": "You tried to get a winternship, but didn't succeed. Now you will sit home and watch Silicon Valley wishing you were there. \nLose 500 points.",
+      "points": -500,
+      "karma": 232,
       "optlist": []
       }
     },
@@ -2177,9 +2177,9 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "action": 
       {
       "type": "event",
-      "description": "",
-      "points": 0,
-      "karma": 0,
+      "description": "Cornell CS finally feels like home \nGet 1000 points and some karma.",
+      "points": 1000,
+      "karma": 4000,
       "optlist": []
       }
     },
@@ -2187,9 +2187,9 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "action": 
       {
       "type": "event",
-      "description": "",
-      "points": 0,
-      "karma": 0,
+      "description": "Your phone died. Your laptop died. There are no chargers. \nLose 30 points for being unprepared.",
+      "points": -30,
+      "karma": -199,
       "optlist": []
       }
     },
@@ -2217,9 +2217,9 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "action": 
       {
       "type": "event",
-      "description": "",
-      "points": 0,
-      "karma": 0,
+      "description": "You made your own personal website! It's beautiful \nGet 352 points.",
+      "points": 352,
+      "karma": 90,
       "optlist": []
       }
     },
@@ -2227,9 +2227,9 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "action": 
       {
       "type": "event",
-      "description": "",
-      "points": 0,
-      "karma": 0,
+      "description": "You put the wrong form number on your exam and thus you failed the exam. \nLose 800 points.",
+      "points": -800,
+      "karma": 100,
       "optlist": []
       }
     },
@@ -2257,9 +2257,9 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "action": 
       {
       "type": "event",
-      "description": "",
-      "points": 0,
-      "karma": 0,
+      "description": "You're almost done with a crazy assignment. Push through! \nGet 823 points for perseverance and hard work.",
+      "points": 823,
+      "karma": 9,
       "optlist": []
       }
     },
@@ -2267,9 +2267,9 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "action": 
       {
       "type": "event",
-      "description": "",
-      "points": 0,
-      "karma": 0,
+      "description": "The best days are the days when you can code leisurely. Too bad, that doesn't happen with your time management. \nLose 235 points.",
+      "points": -235,
+      "karma": 90,
       "optlist": []
       }
     },
@@ -2307,9 +2307,9 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "action": 
       {
       "type": "event",
-      "description": "",
-      "points": 0,
-      "karma": 0,
+      "description": "You are more salty about this class than the ocean. \nLose 30 points for being sodium annoyed (SO DAMN ANNOYED)",
+      "points": -30,
+      "karma": 100,
       "optlist": []
       }
     },
@@ -2317,9 +2317,9 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "action": 
       {
       "type": "event",
-      "description": "",
-      "points": 0,
-      "karma": 0,
+      "description": "Handshake confuses you. But somehow you still got an interivew? \nGet 899 points.",
+      "points": 899,
+      "karma": 235,
       "optlist": []
       }
     },
@@ -2337,9 +2337,9 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
           "karma":1000
         },
         { "option": "f", 
-          "description": "School is important, but so is your career. Don't give up so easily. Get 300 karma.", 
+          "description": "School is important, but so is your career. Don't give up so easily. Lose 300 karma.", 
           "points":-50, 
-          "karma":300 
+          "karma":-300 
         }]
       }
     },
@@ -2347,9 +2347,9 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "action": 
       {
       "type": "event",
-      "description": "",
-      "points": 0,
-      "karma": 0,
+      "description": "You went to your first hackathon and it was so much fun! You didn't place, but it's the experience that matters.\nGet 234 points.",
+      "points": 234,
+      "karma": 23,
       "optlist": []
       }
     },
@@ -2357,9 +2357,9 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "action": 
       {
       "type": "event",
-      "description": "",
-      "points": 0,
-      "karma": 0,
+      "description": "You got 12 hours of sleep. WOW. WOW. \n1248 points.",
+      "points": 1248,
+      "karma": 2934,
       "optlist": []
       }
     },
@@ -2407,9 +2407,9 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "action": 
       {
       "type": "event",
-      "description": "",
-      "points": 0,
-      "karma": 0,
+      "description": "Some lucky person in Gates let you borrow their charge. \nGet 100 points.",
+      "points": 100,
+      "karma": 98,
       "optlist": []
       }
     },
@@ -2437,9 +2437,9 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "action": 
       {
       "type": "event",
-      "description": "",
-      "points": 0,
-      "karma": 0,
+      "description": "Even though you dropped a class, you're still so stressed because you procrastinate. \nLose 100 points for poor time management.",
+      "points": -100,
+      "karma": 10,
       "optlist": []
       }
     },
@@ -2447,9 +2447,9 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "action": 
       {
       "type": "event",
-      "description": "",
-      "points": 0,
-      "karma": 0,
+      "description": "You are tired. Zero net gain.",
+      "points": -100,
+      "karma": 100,
       "optlist": []
       }
     },
@@ -2477,9 +2477,9 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "action": 
       {
       "type": "event",
-      "description": "",
-      "points": 0,
-      "karma": 0,
+      "description": "You spent the whole day sleeping and now you have to pull an allnighter to make it up. \nLose 600 points for a messed up sleep schedule.",
+      "points": -600,
+      "karma": 100,
       "optlist": []
       }
     },
@@ -2497,9 +2497,9 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "action": 
       {
       "type": "event",
-      "description": "",
-      "points": 0,
-      "karma": 0,
+      "description": "You're so excited for summer that you bragged to your best friend who got rejected from the company you got into and has no offers. \nLose 1000 for being inconsiderate.",
+      "points": -1000,
+      "karma": -200,
       "optlist": []
       }
     },
@@ -2587,8 +2587,8 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "action": 
       {
       "type": "event",
-      "description": "",
-      "points": 0,
+      "description": "Your MIPS processor is due tomorrow, but nothing works. What is ADDIU? What is JAR? \nLose 500 points for not listening to Bracy.",
+      "points": -500,
       "karma": 0,
       "optlist": []
       }
@@ -2617,9 +2617,9 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "action": 
       {
       "type": "event",
-      "description": "",
-      "points": 0,
-      "karma": 0,
+      "description": "C is a piece of shit. It compiles everything. \nLose 500 points for not understanding pointers.",
+      "points": -500,
+      "karma": -900,
       "optlist": []
       }
     },
@@ -2627,8 +2627,8 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "action": 
       {
       "type": "event",
-      "description": "",
-      "points": 0,
+      "description": "You forgot how to code in Python. Python is like English. It was your first language. What is your life? \nLose 10 points.",
+      "points": -10,
       "karma": 0,
       "optlist": []
       }
@@ -2647,7 +2647,7 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
           "karma": 200
         },
         { "option": "s", 
-          "description": "Good thing you're a good debugger. \nGet 200 karma.", 
+          "description": "Good thing you're a good debugger, or at least persistent. \nGet 200 karma.", 
           "points":-860 , 
           "karma":200 
         }]
@@ -2657,9 +2657,9 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "action": 
       {
       "type": "event",
-      "description": "",
-      "points": 0,
-      "karma": 0,
+      "description": "You went the whole day without your laptop dying. THIS IS PROGRESS. \n500 points.",
+      "points": 500,
+      "karma": 500,
       "optlist": []
       }
     },
@@ -2677,9 +2677,9 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "action": 
       {
       "type": "event",
-      "description": "",
-      "points": 0,
-      "karma": 0,
+      "description": "You still don't get Vim and don't know how to quit. This is sad. Maybe you're an emacs person? \n-1073 points.",
+      "points": -1073,
+      "karma": 23,
       "optlist": []
       }
     },
@@ -2707,9 +2707,9 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "action": 
       {
       "type": "event",
-      "description": "",
-      "points": 0,
-      "karma": 0,
+      "description": "You went bowling with Palantir! How cool! Maybe you'll get a job there? \n2129 points.",
+      "points": 2129,
+      "karma": -124,
       "optlist": []
       }
     },
@@ -2717,9 +2717,9 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "action": 
       {
       "type": "event",
-      "description": "",
-      "points": 0,
-      "karma": 0,
+      "description": "You finished your business minor! CONGRATS! \n812 points.",
+      "points": 812,
+      "karma": 142,
       "optlist": []
       }
     },
@@ -2737,9 +2737,9 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "action": 
       {
       "type": "event",
-      "description": "",
-      "points": 0,
-      "karma": 0,
+      "description": "SLEEP IS FOR THE WEAK. You have been brainwashed. \n-892 points.",
+      "points": -892,
+      "karma": -235,
       "optlist": []
       }
     },
@@ -2747,9 +2747,9 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "action": 
       {
       "type": "event",
-      "description": "",
-      "points": 0,
-      "karma": 0,
+      "description": "YOUR CODE WORKS. OMG IT WORKS. YOU HAVE NO IDEA WHY. BUT IT WORKS. SUBMIT NOW. \n10000 points.",
+      "points": 10000,
+      "karma": -3466,
       "optlist": []
       }
     },
@@ -2777,9 +2777,9 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "action": 
       {
       "type": "event",
-      "description": "",
-      "points": 0,
-      "karma": 0,
+      "description": "You have been stress eating and gained 20 points. \nLose 300 points.",
+      "points": -300,
+      "karma":-235,
       "optlist": []
       }
     },
@@ -2817,9 +2817,9 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "action": 
       {
       "type": "event",
-      "description": "",
-      "points": 0,
-      "karma": 0,
+      "description": "You accidentally did git checkout . and lost all your work. \nLose 800 points.",
+      "points": -800,
+      "karma": -900,
       "optlist": []
       }
     },
@@ -2827,9 +2827,9 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "action": 
       {
       "type": "event",
-      "description": "",
-      "points": 0,
-      "karma": 0,
+      "description": "You haven't been to class in 3 weeks. \nLose 700 points.",
+      "points": -700,
+      "karma": 2,
       "optlist": []
       }
     },
@@ -2837,9 +2837,9 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "action": 
       {
       "type": "event",
-      "description": "",
-      "points": 0,
-      "karma": 0,
+      "description": "You haven't been to class in three weeks but it's video recorded so you're all good. \nGet 2352 points.",
+      "points": 2352,
+      "karma": 135,
       "optlist": []
       }
     },
@@ -2867,9 +2867,9 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "action": 
       {
       "type": "event",
-      "description": "",
-      "points": 0,
-      "karma": 0,
+      "description": "Gimme Coffee is giving away free coffee to VIP members like you. \nGet 1000 points and free drinks.",
+      "points": 1000,
+      "karma": 89,
       "optlist": []
       }
     },
@@ -2877,9 +2877,9 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "action": 
       {
       "type": "event",
-      "description": "",
-      "points": 0,
-      "karma": 0,
+      "description": "Gimme Coffee is closed. \nLose 50 points.",
+      "points": -50,
+      "karma": -60,
       "optlist": []
       }
     },
@@ -2887,9 +2887,9 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "action": 
       {
       "type": "event",
-      "description": "",
-      "points": 0,
-      "karma": 0,
+      "description": "The CS gods have blessed you. \nGet 1990 points.",
+      "points": 1990,
+      "karma": 10000,
       "optlist": []
       }
     },
@@ -2917,9 +2917,9 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "action": 
       {
       "type": "event",
-      "description": "",
-      "points": 0,
-      "karma": 0,
+      "description": "You got a C on your prelim. What's new? \nLose 300 points.",
+      "points": -300,
+      "karma": -300,
       "optlist": []
       }
     },
@@ -2927,9 +2927,9 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "action": 
       {
       "type": "event",
-      "description": "",
-      "points": 0,
-      "karma": 0,
+      "description": "You got an A on your prelim. This hasn't happened in a long time. \nGet 346 points.",
+      "points": 346,
+      "karma": 10,
       "optlist": []
       }
     },
@@ -2937,9 +2937,9 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "action": 
       {
       "type": "event",
-      "description": "",
-      "points": 0,
-      "karma": 0,
+      "description": "You were supposed to finish your assignment at 12AM, but now it's 5AM and you feel like crying. \nLose 1500 points.",
+      "points": -1500,
+      "karma": 100,
       "optlist": []
       }
     },
@@ -2957,9 +2957,9 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "action": 
       {
       "type": "event",
-      "description": "",
-      "points": 0,
-      "karma": 0,
+      "description": "Your little sister got into Cornell! Congrats! You've inspired her to be a CS major. \nGet 1923 for being a great role model.",
+      "points": 1923,
+      "karma": 235,
       "optlist": []
       }
     },
@@ -2967,9 +2967,9 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "action": 
       {
       "type": "event",
-      "description": "",
-      "points": 0,
-      "karma": 0,
+      "description": "You see the sunrise. YOU STAYED UP ALL NIGHT. NOW YOU CAN'T THINK, THEREFORE YOU CAN'T CODE. \nLose 2352 points.",
+      "points": -2352,
+      "karma": 100,
       "optlist": []
       }
     },
@@ -2997,9 +2997,9 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "action": 
       {
       "type": "event",
-      "description": "",
-      "points": 0,
-      "karma": 0,
+      "description": "You became Presdient of WICC/ACSU! CONGRATULATIONS! \nGet 1000 points and some karma.",
+      "points": 1000,
+      "karma": 124,
       "optlist": []
       }
     },
@@ -3007,8 +3007,8 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "action": 
       {
       "type": "event",
-      "description": "",
-      "points": 0,
+      "description": "You got your code to compile. Now you can take a break. \nGet 10 points for procrastinating.",
+      "points": 10,
       "karma": 0,
       "optlist": []
       }
@@ -3027,9 +3027,9 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "action": 
       {
       "type": "event",
-      "description": "",
-      "points": 0,
-      "karma": 0,
+      "description": "You had a breakdown today. The only thing holding you together is your skin. You can push through. \nGet 100 points for staying strong.",
+      "points": 100,
+      "karma": 1033,
       "optlist": []
       }
     },
@@ -3057,9 +3057,9 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "action": 
       {
       "type": "event",
-      "description": "",
-      "points": 0,
-      "karma": 0,
+      "description": "You somehow fried your 1TB hard drive with everything on it. \nLose 10000 points. ",
+      "points": -10000,
+      "karma": 900,
       "optlist": []
       }
     },
@@ -3067,9 +3067,9 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "action": 
       {
       "type": "event",
-      "description": "",
-      "points": 0,
-      "karma": 0,
+      "description": "You to enjoy the sunset today. \n800 points for appreciating the beauty.",
+      "points": 800,
+      "karma": 100,
       "optlist": []
       }
     },
@@ -3097,9 +3097,9 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "action": 
       {
       "type": "event",
-      "description": "",
-      "points": 0,
-      "karma": 0,
+      "description": "You got into a huge fight with your CS partner. She's not talking to you. \nLose 5000 points because she is your lifeline.",
+      "points": -5000,
+      "karma": 10,
       "optlist": []
       }
     },
@@ -3107,9 +3107,9 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "action": 
       {
       "type": "event",
-      "description": "",
-      "points": 0,
-      "karma": 0,
+      "description": "You need coffee, but you're broke and out of BRBs. \nLose 60 points for having to rely only on water.",
+      "points": -60,
+      "karma": -100,
       "optlist": []
       }
     },
@@ -3137,9 +3137,9 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "action": 
       {
       "type": "event",
-      "description": "",
-      "points": 0,
-      "karma": 0,
+      "description": "You saw lots of cute dogs today. Dogs make you happy. \nGet 10 points.",
+      "points": 10,
+      "karma": 19,
       "optlist": []
       }
     },
@@ -3157,8 +3157,8 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "action": 
       {
       "type": "event",
-      "description": "",
-      "points": 0,
+      "description": "Error 404: Brain not found. You need sleep. \nLose 1000 points for not sleeping.",
+      "points": -1000,
       "karma": 0,
       "optlist": []
       }
@@ -3167,9 +3167,9 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "action": 
       {
       "type": "event",
-      "description": "",
-      "points": 0,
-      "karma": 0,
+      "description": "It's 4AM and you're carrying your group project cause everyone else is busy. \nGet 1000 points for being a good team member.",
+      "points": 1000,
+      "karma": 1000,
       "optlist": []
       }
     },
@@ -3187,9 +3187,9 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "action": 
       {
       "type": "event",
-      "description": "",
+      "description": "Today was another normal day. 0 points for mediocrity.",
       "points": 0,
-      "karma": 0,
+      "karma": 10,
       "optlist": []
       }
     },
@@ -3197,9 +3197,9 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "action": 
       {
       "type": "event",
-      "description": "",
-      "points": 0,
-      "karma": 0,
+      "description": "You got a lunch with some one you're interested in.\nGet 100 points.",
+      "points": 100,
+      "karma": 10,
       "optlist": []
       }
     },
