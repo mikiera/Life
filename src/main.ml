@@ -14,7 +14,8 @@ let () =
     ^ "\n\nWelcome to Gates Hall (of Hell).\n"
     ^ "You are a prospective Computer Science major at Cornell University!\n"
     ^ "You code die here.. or change the world.. ARE YOU READY?\n\n"));
-  print_endline "Please enter the name of the course roster you want to load.";
+  print_endline ("Please enter the name of the course roster you want to load.\n"
+                ^ "Choose short.json for a snippet of the game or life.json for a full version");
   print_string  ">>> ";
   let file_name = read_line () in
   Game.main file_name
