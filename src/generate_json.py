@@ -11,5 +11,5 @@ def generate_square(begin, end):
   for i in range(begin, end + 1):
     print ("{ \"squareid\": " + str(i) + ",\n  \"action\": \n  {\n  \"type\":" +
     " \"event\",\n  \"description\": \"\",\n  \"points\": 0,\n  \"karma\": 0,"
-    + "\n  \"optdict\": []\n  }\n}")
+    + "\n  \"optdict\": []\n  }\n},")
 

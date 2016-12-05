@@ -668,7 +668,7 @@ let rec play (cmd : string) (gamestate : gamestate) (turn : int) : gamestate =
 and repl (state : gamestate) (turn : int) : unit =
   try
     if ((List.length state.active_players) = 0) then
-      (AT.print_string [AT.yellow] ("\nEverybody has finished the game. " ^
+      (AT.print_string [AT.black] ("\nEverybody has finished the game. " ^
       "It's time to reveal the final results.\n"
       ^ (reveal_results state.players)
       ^ "\nCongratulations to our winner(s): "
@@ -676,7 +676,8 @@ and repl (state : gamestate) (turn : int) : unit =
          let winners = find_player_by_score players (find_max_score players 0)
          in winner_annoucement winners)
       ^ "!\n\nThanks for playing the Life of a CS Major!"
-      ^ "\nPriyanka | Vicky | Harshita | Julia <3\n")) else
+      ^ "\nPriyanka | Vicky | Harshita | Julia <3"
+      ^ "\nThis has been the Life of a CS major.\n")) else
    (let playerid = List.nth state.active_players turn in
     let player = List.nth state.players (playerid - 1) in
     let () = AT.print_string [get_pcol playerid] ("\nIt is " ^
@@ -733,7 +734,7 @@ let make_loc_list loc : location =
   let realright = if right <> 0 then Square right else Null in
   {id = realid; left = realleft; right = realright}
 
-(* [parse_optlist opt]  *)
+(* [parse_optlist opt] returns the object associated with options *)
 let parse_optlist opt =
   let open Yojson.Basic.Util in
   let optstr = opt |> member "option" |> to_string in
@@ -754,7 +755,7 @@ let parse_action action : action =
     | "summer" -> ChoiceS
     | "future" -> ChoiceF
     | "college" -> ChoiceCol
-    | "point" -> Points
+    | "points" -> Points
     | _ -> Event  end
   in
   let description = action |> member "description" |> to_string in
