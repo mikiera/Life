@@ -1,5 +1,4 @@
 (* game.ml *)
-(* open Gamemap *)
 open Player
 open Random
 
@@ -8,7 +7,6 @@ module AT = ANSITerminal
 (********************
  * Type Definitions *
  ********************)
-
 type turn = int
 
 type square = Null | Square of int
@@ -79,6 +77,7 @@ let ccol = AT.cyan
 (* [get_pcol id] gets the color for player with given id *)
 let get_pcol id = List.nth [AT.blue; AT.green; AT.magenta] (id mod 3)
 
+
 (******************************
  * Helper functions: Commands *
  ******************************)
@@ -101,6 +100,7 @@ let rec print_choice color descrip choices =
   let fixedresult = cmd_checker result in
   if (List.mem fixedresult choices) then fixedresult
   else (print_choice color descrip choices)
+
 
 (****************************************
  * Helper functions: Extracting objects *
@@ -160,6 +160,7 @@ let get_action gamestate player =
     let player_loc_info = List.assoc playerid gamestate.playermap in
     let location = player_loc_info.loc.id in
     List.assoc location gamestate.sqact
+
 
 (**************************************
  * Helper functions: Manipulate cards *
@@ -226,6 +227,7 @@ let check_if_player_has_card playercardlst actionType =
   let lst = List.filter (fun x -> x.card_type <> actionType) playercardlst in
   let card = List.filter (fun x -> x.card_type = actionType) playercardlst in
   (card,lst)
+
 
 (******************************************
  * Helper functions: Update Player object *
@@ -307,7 +309,6 @@ let rec winner_annoucement winner_lst =
   | h::[] -> h
   | h::t -> h ^ " " ^ (winner_annoucement t)
 
-
 (* [end_game_user gamestate playerid l_info] removes a user from the game once
  * they reached the end; returns a gamestate *)
 let end_game_user gamestate playerid l_info =
@@ -341,7 +342,8 @@ let move_one_step gamestate playerid =
         player_loc_info.loc <- (find_loc_by_sid map next_square); gamestate)
     else gamestate
 
-(*  *)
+(* [move_multi_step gamestate playerid n] returns the gamestate after moving
+ * the player identified by playerid n number of steps *)
 let rec move_multi_step gamestate playerid n =
     if n = 0 then (let l_info = List.assoc playerid gamestate.playermap in
                    let current_square = l_info.loc.id in
@@ -387,8 +389,6 @@ let handle_fork playerid player_loc_info gamestate step =
               else player_loc_info.dir <- Right);
   move_multi_step gamestate playerid step
 
-
-
 (*************************************************
  * Helper functions: Handling Choices - Printing *
  *************************************************)
@@ -405,7 +405,6 @@ let rec create_message_from_cards msg cardlst =
                 let id = string_of_int h.id in
                 let newmsg = msg^"\n"^id^") "^desc in
                 create_message_from_cards newmsg t
-
 
 (* [get_start_msg actionType] returns the string start message for choice
  * events *)
@@ -467,8 +466,7 @@ let rec get_step_for_choice_event playerid square gamestate num_step =
     else (num_step, action.actionType)
 
 (* [pick_college player gamestate] allows the user to select a college and
- * modifies a player and returns a new gamestate
- *)
+ * modifies a player and returns a new gamestate *)
 let pick_college player gamestate =
   let msg = "To choose Arts and Sciences, type AS."
     ^ " For Engineering, type ENG." in
@@ -525,14 +523,17 @@ let handle_choice player gamestate actionType : gamestate =
  * Helper functions: Handling Point Objects *
  ********************************************)
 
-(*  *)
+(* [create_list_valid_opts] creates a list containing all of the strings in the
+ * optstr field in optlst aftering appending it to lst *)
 let rec create_list_valid_opts optlst lst =
   match optlst with
     | [] -> lst
     | h :: t -> let newlist = h.optstr :: lst in
       create_list_valid_opts t newlist
 
-(* [handle_points player action gamestate] *)
+(* [handle_points player action gamestate] returns the gamestate after handling
+ * a Points event by prompting the player for a course of action
+ * action is an action object of type Points *)
 let handle_points player action gamestate =
   let playerid = Player.getID player in
   let choices = create_list_valid_opts action.optlist [] in
@@ -703,6 +704,7 @@ and repl (state : gamestate) (turn : int) : unit =
     | _ -> AT.print_string [gcol]
       "Invalid command. Please try again.\n"; repl state turn
 
+
 (**********************
  * Functions: Parsing *
  **********************)
@@ -771,7 +773,6 @@ let sq_act_list sqact =
   let action = sqact |> member "action" |> parse_action in
   (finalid, action)
 
-
 (* [init_game j] uses the user-inputted json file to parse the json and
  * initiliaze the gamestate.*)
 let init_game j =
@@ -799,6 +800,7 @@ let init_game j =
   gamemap = gamemap;
   playercard = [];
   sqact = sqact}
+
 
 (********************************
  * Helper functions: Setup Game *
