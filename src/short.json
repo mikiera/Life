@@ -339,8 +339,8 @@
       "right": 20
     },
     { "squareid": 19,
-      "left": 21,
-      "right": 22
+      "left": 0,
+      "right": 21
     },
     { "squareid": 20,
       "left": 0,
@@ -355,44 +355,44 @@
       "right": 24
     },
     { "squareid": 23,
-      "left": 25,
-      "right": 26
+      "left": 0,
+      "right": 25
     },
     { "squareid": 24,
       "left": 0,
-      "right": 27
+      "right": 25
     },
     { "squareid": 25,
       "left": 0,
-      "right": 28
+      "right": 26
     },
     { "squareid": 26,
       "left": 0,
       "right": 27
     },
     { "squareid": 27,
-      "left": 0,
-      "right": 28
+      "left": 28,
+      "right": 29
     },
     { "squareid": 28,
       "left": 0,
-      "right": 29
+      "right": 30
     },
     { "squareid": 29,
       "left": 0,
-      "right": 30
+      "right": 31
     },
     { "squareid": 30,
       "left": 0,
-      "right": 31
+      "right": 32
     },
  	{ "squareid": 31,
-      "left": 32,
-      "right": 33
+      "left": 0,
+      "right": 32
     },
     { "squareid": 32,
       "left": 0,
-      "right": 34
+      "right": 33
     },
     { "squareid": 33,
       "left": 0,
