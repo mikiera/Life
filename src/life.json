@@ -1350,7 +1350,7 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
     { "squareid": 26,
       "action": 
       {
-      "type": "summer_plans",
+      "type": "summer",
       "description": "It's time to decide what you want to do this summer. \n461 points for being proactive.",
       "points": 461,
       "karma": 817,
