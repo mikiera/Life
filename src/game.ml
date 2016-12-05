@@ -381,7 +381,8 @@ let handle_fork playerid player_loc_info gamestate step =
     ^ " (Type L/R)" in
   let choice = if (Player.isHuman player)
               then print_choice (get_pcol playerid) msg ["L"; "l"; "R"; "r"]
-              else let () = print_endline msg in (ai_choice 2 ["l"; "r"]) in
+              else let () = AT.print_string [get_pcol playerid] (msg ^ "\n") in
+               (ai_choice 2 ["l"; "r"]) in
               let () = AT.print_string [get_pcol playerid]
               ("You have chosen to go " ^
               (if choice = "l" then "left!\n" else "right!\n")) in
@@ -443,6 +444,13 @@ let rec recheck_choice_in_path playerid gamestate square =
   if (action.actionType = Event) then false
   else true
 
+(* [recheck_choice_in_path playerid gamestate square] returns a boolean
+ * on whether the current square is a choice or not *)
+let rec recheck_points_in_path playerid gamestate square =
+  let action = List.assoc square gamestate.sqact in
+  if (action.actionType = Points) then true
+  else false
+
 (* [reset_direction player gamestate] resets the direction to right after
  * fork events *)
 let reset_direction player gamestate =
@@ -461,7 +469,7 @@ let rec get_step_for_choice_event playerid square gamestate num_step =
     convert_dir_square loc temp in
   if num_step = 1 then (num_step, action.actionType)
   else
-    if (action.actionType = Event || action.actionType = Points)
+    if ((action.actionType = Event) || (action.actionType = Points))
       then get_step_for_choice_event playerid dir gamestate (num_step -1)
     else (num_step, action.actionType)
 
@@ -590,9 +598,13 @@ let spin_helper gamestate player step =
     else
         let gs = handle_fork playerid player_loc_info gamestate newstep in
         reset_direction player gs;
-        let gs = move_multi_step gamestate playerid newstep in
-        let act = get_action gamestate player in
-        handle_points player act gs)
+        begin
+          if (recheck_points_in_path playerid gs player_loc_info.loc.id)
+          then
+            let act = get_action gs player in
+            handle_points player act gs
+          else gs
+        end)
   else
     (if not (check_for_fork playerid player_loc_info.loc.id gamestate newstep)
      then
@@ -677,7 +689,7 @@ and repl (state : gamestate) (turn : int) : unit =
          in winner_annoucement winners)
       ^ "!\n\nThanks for playing the Life of a CS Major!"
       ^ "\nPriyanka | Vicky | Harshita | Julia <3"
-      ^ "\nThis has been the Life of a CS major.\n")) else
+      ^ "\nThis has been the Life of a CS major.\n\n")) else
    (let playerid = List.nth state.active_players turn in
     let player = List.nth state.players (playerid - 1) in
     let () = AT.print_string [get_pcol playerid] ("\nIt is " ^
@@ -696,10 +708,10 @@ and repl (state : gamestate) (turn : int) : unit =
           "»»------------- New Round -------------««" ^
           "\n"))
         else () in
-      let new_turn = if (check_cmd <> "spin") then turn
-        else if (new_gs.turn = -1) then
-          if (turn = (List.length state.active_players - 1)) then 0 else turn
-        else ((turn + 1) mod (List.length state.active_players)) in
+      let new_turn = if (new_gs.turn = -1) then
+          (if (turn = ((List.length state.active_players) - 1)) then 0 else turn)
+        else if (check_cmd <> "spin") then turn
+        else ((turn + 1) mod (List.length new_gs.active_players)) in
       let new_gs2 = {new_gs with turn = new_turn} in
       repl new_gs2 new_turn)
    with

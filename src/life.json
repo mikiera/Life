@@ -1357,7 +1357,7 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "action": 
       {
       "type": "event",
-      "description": "You forgot to accept your partner's invite on CMS. \n Now you pray to the CS gods.\nLose 1023 points.",
+      "description": "You forgot to accept your partner's invite on CMS. \nNow you pray to the CS gods.\nLose 1023 points.",
       "points": -1023,
       "karma": -45,
       "optlist": []
