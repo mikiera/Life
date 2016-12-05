@@ -699,7 +699,8 @@ and repl (state : gamestate) (turn : int) : unit =
         else if (new_gs.turn = -1) then
           if (turn = (List.length state.active_players - 1)) then 0 else turn
         else ((turn + 1) mod (List.length state.active_players)) in
-      repl new_gs new_turn)
+      let new_gs2 = {new_gs with turn = new_turn} in
+      repl new_gs2 new_turn)
    with
     | _ -> AT.print_string [gcol]
       "Invalid command. Please try again.\n"; repl state turn
