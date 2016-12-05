@@ -79,9 +79,9 @@ let ccol = AT.cyan
 (* [get_pcol id] gets the color for player with given id *)
 let get_pcol id = List.nth [AT.blue; AT.green; AT.magenta] (id mod 3)
 
-(*********************
- * Helper functions: *
- *********************)
+(******************************
+ * Helper functions: Commands *
+ ******************************)
 
 (* [ai_choice n lst] picks a ranodm choice from the given choices for an AI.*)
 let ai_choice n lst = let () = Random.self_init () in
@@ -147,6 +147,20 @@ let rec get_list_of_valid_choices cardlst lst =
     | h :: t -> let newlst = (string_of_int h.id) :: lst in
                 get_list_of_valid_choices t newlst
 
+(* [get_card_by_id id cardlst] returns the card associated with that id *)
+let rec get_card_by_id id cardlst =
+  match cardlst with
+    | [] -> failwith "this card is not available"
+    | h :: t -> if h.id = id then h else get_card_by_id id t
+
+(* [get_action gamestate player] returns the action object corresponding
+ * to the player location, player is a Player object *)
+let get_action gamestate player =
+    let playerid = Player.getID player in
+    let player_loc_info = List.assoc playerid gamestate.playermap in
+    let location = player_loc_info.loc.id in
+    List.assoc location gamestate.sqact
+
 (**************************************
  * Helper functions: Manipulate cards *
  **************************************)
@@ -206,27 +220,16 @@ let get_correct_comp actionType gamestate =
     | ChoiceCol -> failwith "no gamecomp"
     | Event | Points -> failwith "no gamecomp"
 
-(*********************
- * Helper functions: *
- *********************)
+(* [check_if_player_has_card playercardlst actionType]
+ * returns the card associated with that id *)
+let check_if_player_has_card playercardlst actionType =
+  let lst = List.filter (fun x -> x.card_type <> actionType) playercardlst in
+  let card = List.filter (fun x -> x.card_type = actionType) playercardlst in
+  (card,lst)
 
-(* [move_one_step gamestate playerid] returns the gamestate after the player
- * identified by playerid moves one step forward where the direction is
- * determined by the location information stored in gamestate.playermap
- * gamestate is a gamestate, playerid is an int *)
-let move_one_step gamestate playerid =
-    let player_loc_info = List.assoc playerid gamestate.playermap in
-    let current_dir = player_loc_info.dir in
-    let current_loc = player_loc_info.loc in
-    let map = gamestate.gamemap in
-    if ((current_dir = Right && current_loc.right <> Null)
-        || current_loc.left = Null)
-      then (let next_square = current_loc.right in
-        player_loc_info.loc <- (find_loc_by_sid map next_square); gamestate)
-    else if (current_dir = Left && current_loc.left <> Null)
-      then (let next_square = current_loc.left in
-        player_loc_info.loc <- (find_loc_by_sid map next_square); gamestate)
-    else gamestate
+(******************************************
+ * Helper functions: Update Player object *
+ ******************************************)
 
 (* [change_pk gs pid action] adds the points and karma associated with an action
  * to the player's karma and points. *)
@@ -234,133 +237,6 @@ let change_pk (gs:gamestate) (pid:playerid) (action:action):Player.player =
     let player = find_player_by_id gs.players pid in
     ignore((Player.changePoints) player action.points);
     (Player.changeKarma) player action.karma
-
-
-(* [end_game_user gamestate playerid l_info] removes a user from the game once
- * they reached the end; returns a gamestate *)
-let end_game_user gamestate playerid l_info =
-  let a = List.assoc l_info.loc.id gamestate.sqact in
-  ignore(change_pk gamestate playerid a);
-  let new_turn = -1 in
-  let active_players = gamestate.active_players in
-  let new_active = List.filter (fun x -> (x <> playerid)) active_players in
-  {gamestate with active_players = new_active; turn = new_turn}
-
-let rec move_multi_step gamestate playerid n =
-    if n = 0 then (let l_info = List.assoc playerid gamestate.playermap in
-                   let current_square = l_info.loc.id in
-                   let action = List.assoc current_square gamestate.sqact in
-                   let () = if (action.actionType <> Points)
-                    then AT.print_string [get_pcol playerid]
-                    (action.description ^ "\n") else () in
-                   ignore(change_pk gamestate playerid action); gamestate)
-    else if n > 0 then (let l_info = List.assoc playerid gamestate.playermap in
-      if (l_info.loc.left = Null && l_info.loc.right = Null)
-        then gamestate
-      else (move_multi_step (move_one_step gamestate playerid) playerid (n-1)))
-    else failwith "Number of steps can't be negative"
-
-(* [check_for_fork playerid square gamestate num_step] recursively checks if
- * there is a fork in the player's path given the number of steps he/she is
- * going to move. *)
-let rec check_for_fork playerid square gamestate num_step =
-  if num_step = 0 then false
-  else (let loc = find_loc_by_sid gamestate.gamemap square in
-        if loc.right = Null then false
-        else if loc.left <> Null && loc.right <> Null then true
-        else check_for_fork playerid loc.right gamestate (num_step-1))
-
-
-
-(* [get_step_for_choice_event playerid square gamestate num_step] returns a
- * tuple of leftover number of steps from mandatory stops and the actionType *)
- (* starts at loc.right *)
-let rec get_step_for_choice_event playerid square gamestate num_step =
-  let loc = find_loc_by_sid gamestate.gamemap square in
-  let action = List.assoc square gamestate.sqact in
-  let dir = if (loc.left = Null && loc.right <> Null) then loc.right
-    else let temp = get_player_direction playerid gamestate in
-    convert_dir_square loc temp in
-  if num_step = 1 then (num_step, action.actionType)
-  else
-    if (action.actionType = Event || action.actionType = Points)
-      then get_step_for_choice_event playerid dir gamestate (num_step -1)
-    else (num_step, action.actionType)
-
-(* [handle_fork playerid player_loc_info gamestate step] handles fork events and
- * returns a new gamestate *)
-let handle_fork playerid player_loc_info gamestate step =
-  let player = List.nth gamestate.players (playerid - 1) in
-  let msg = "There's a fork in your path. Do you want to turn left or right?"
-    ^ " (Type L/R)" in
-  let choice = if (Player.isHuman player)
-              then print_choice (get_pcol playerid) msg ["L"; "l"; "R"; "r"]
-              else let () = print_endline msg in (ai_choice 2 ["l"; "r"]) in
-              let () = AT.print_string [get_pcol playerid]
-              ("You have chosen to go " ^
-              (if choice = "l" then "left!\n" else "right!\n")) in
-              (if choice = "L" || choice = "l" then player_loc_info.dir <- Left
-              else player_loc_info.dir <- Right);
-  move_multi_step gamestate playerid step
-
-(* [pick_college player gamestate] allows the user to select a college and
- * modifies a player and returns a new gamestate
- *)
-let pick_college player gamestate =
-  let msg = "To choose Arts and Sciences, type AS."
-    ^ " For Engineering, type ENG." in
-  let choice = if (Player.isHuman player)
-    then print_choice ccol msg ["AS"; "as"; "As"; "ENG"; "eng"; "Eng"]
-    else ai_choice 2 ["AS"; "ENG"] in
-  if (choice = "AS" || choice = "as" || choice = "As")
-    then let () = AT.print_string [get_pcol (Player.getID player)]
-    ("You chose Arts and Sciences! Yay you don't have to take Math 1920!\n") in
-    (ignore((Player.changeCollege) player "Arts and Sciences"); gamestate)
-  else let () = AT.print_string [get_pcol (Player.getID player)]
-    ("You chose Engineering! Yay you don't have to take a language!\n") in
-    (ignore((Player.changeCollege) player "Engineering"); gamestate)
-
-(* [create_message_from_cards msg cardlst] returns a string of all the names
- * of the cards in the card list in game components *)
-let rec create_message_from_cards msg cardlst =
-  let sorted = List.sort (fun x y -> if x.id > y.id then 1
-                                     else if x.id < y.id then -1
-                                     else 0) cardlst in
-  match sorted with
-    | [] -> msg
-    | h :: t -> let desc = h.name in
-                let id = string_of_int h.id in
-                let newmsg = msg^"\n"^id^") "^desc in
-                create_message_from_cards newmsg t
-
-
-
-(* [get_start_msg actionType] returns the string start message for choice
- * events *)
-let get_start_msg actionType =
-  match actionType with
-  | ChoiceC -> ("Choose a course from the following list by typing " ^
-    "the course number:")
-  | ChoiceA -> ("Choose an advisor from the following list by typing " ^
-    "the advisor number:")
-  | ChoiceF -> ("Determine your future from the following list by typing " ^
-    "the corresponding number:")
-  | ChoiceS -> ("Choose your summer plans from the following list by typing " ^
-    "the corresponding number:")
-  | _ -> "not a valid actionType"
-
-(* [get_card_by_id id cardlst] returns the card associated with that id *)
-let rec get_card_by_id id cardlst =
-  match cardlst with
-    | [] -> failwith "this card is not available"
-    | h :: t -> if h.id = id then h else get_card_by_id id t
-
-(* [check_if_player_has_card playercardlst actionType]
- * returns the card associated with that id *)
-let check_if_player_has_card playercardlst actionType =
-  let lst = List.filter (fun x -> x.card_type <> actionType) playercardlst in
-  let card = List.filter (fun x -> x.card_type = actionType) playercardlst in
-  (card,lst)
 
 (* [update_player_has_card player actionType card]
  * returns a player with changed fields based on action type, as
@@ -390,6 +266,161 @@ let update_player_card_list playerid playercardlst gamestate newcardlst =
   let newlst = (playerid, newcardlst) :: noplaylst in
   {gamestate with playercard = newlst}
 
+
+(*************************************
+ * Helper functions: Ending the Game *
+ *************************************)
+
+(* [reveal_results player_lst] creates a string which shows each player's points,
+ * karma, and total points to print out at the end of the game. *)
+let rec reveal_results player_lst =
+  match player_lst with
+  | [] -> ""
+  | h::t -> (Player.getNickname h) ^ ("\n   Karma: ")
+      ^ (string_of_int(Player.getKarma h)) ^ ("\n   Points: ")
+      ^ (string_of_int(Player.getPoints h)) ^ ("\n   Total: ")
+      ^ (string_of_int((Player.getPoints h) + (Player.getKarma h)))
+      ^ ("\n") ^ (reveal_results t)
+
+(* [find_max_score player_lst max] traverses through the list of players to find
+ * the highest score earned in this game. *)
+let rec find_max_score player_lst max =
+  match player_lst with
+  | [] -> max
+  | h::t -> let total = (Player.getPoints h) + (Player.getKarma h) in
+            if (total >= max) then (find_max_score t total)
+            else (find_max_score t max)
+
+(* [find_player_by_score player_lst score] traverses through the list of players
+ * to find the player(s) with the highest score. *)
+let rec find_player_by_score player_lst score =
+  match player_lst with
+  | [] -> []
+  | h::t -> if ((Player.getPoints h) + (Player.getKarma h)) = score
+            then (Player.getNickname h)::(find_player_by_score t score)
+            else find_player_by_score t score
+
+(* [winner_announcement winner_lst] creates a string of all the winners. *)
+let rec winner_annoucement winner_lst =
+  match winner_lst with
+  | [] -> ""
+  | h::[] -> h
+  | h::t -> h ^ " " ^ (winner_annoucement t)
+
+
+(* [end_game_user gamestate playerid l_info] removes a user from the game once
+ * they reached the end; returns a gamestate *)
+let end_game_user gamestate playerid l_info =
+  let a = List.assoc l_info.loc.id gamestate.sqact in
+  ignore(change_pk gamestate playerid a);
+  let new_turn = -1 in
+  let active_players = gamestate.active_players in
+  let new_active = List.filter (fun x -> (x <> playerid)) active_players in
+  {gamestate with active_players = new_active; turn = new_turn}
+
+
+(******************************
+ * Helper functions: Movement *
+ ******************************)
+
+(* [move_one_step gamestate playerid] returns the gamestate after the player
+ * identified by playerid moves one step forward where the direction is
+ * determined by the location information stored in gamestate.playermap
+ * gamestate is a gamestate, playerid is an int *)
+let move_one_step gamestate playerid =
+    let player_loc_info = List.assoc playerid gamestate.playermap in
+    let current_dir = player_loc_info.dir in
+    let current_loc = player_loc_info.loc in
+    let map = gamestate.gamemap in
+    if ((current_dir = Right && current_loc.right <> Null)
+        || current_loc.left = Null)
+      then (let next_square = current_loc.right in
+        player_loc_info.loc <- (find_loc_by_sid map next_square); gamestate)
+    else if (current_dir = Left && current_loc.left <> Null)
+      then (let next_square = current_loc.left in
+        player_loc_info.loc <- (find_loc_by_sid map next_square); gamestate)
+    else gamestate
+
+(*  *)
+let rec move_multi_step gamestate playerid n =
+    if n = 0 then (let l_info = List.assoc playerid gamestate.playermap in
+                   let current_square = l_info.loc.id in
+                   let action = List.assoc current_square gamestate.sqact in
+                   let () = if (action.actionType <> Points)
+                    then AT.print_string [get_pcol playerid]
+                    (action.description ^ "\n") else () in
+                   ignore(change_pk gamestate playerid action); gamestate)
+    else if n > 0 then (let l_info = List.assoc playerid gamestate.playermap in
+      if (l_info.loc.left = Null && l_info.loc.right = Null)
+        then gamestate
+      else (move_multi_step (move_one_step gamestate playerid) playerid (n-1)))
+    else failwith "Number of steps can't be negative"
+
+
+(************************************
+ * Helper functions: Handling Forks *
+ ************************************)
+
+(* [check_for_fork playerid square gamestate num_step] recursively checks if
+ * there is a fork in the player's path given the number of steps he/she is
+ * going to move. *)
+let rec check_for_fork playerid square gamestate num_step =
+  if num_step = 0 then false
+  else (let loc = find_loc_by_sid gamestate.gamemap square in
+        if loc.right = Null then false
+        else if loc.left <> Null && loc.right <> Null then true
+        else check_for_fork playerid loc.right gamestate (num_step-1))
+
+(* [handle_fork playerid player_loc_info gamestate step] handles fork events and
+ * returns a new gamestate *)
+let handle_fork playerid player_loc_info gamestate step =
+  let player = List.nth gamestate.players (playerid - 1) in
+  let msg = "There's a fork in your path. Do you want to turn left or right?"
+    ^ " (Type L/R)" in
+  let choice = if (Player.isHuman player)
+              then print_choice (get_pcol playerid) msg ["L"; "l"; "R"; "r"]
+              else let () = print_endline msg in (ai_choice 2 ["l"; "r"]) in
+              let () = AT.print_string [get_pcol playerid]
+              ("You have chosen to go " ^
+              (if choice = "l" then "left!\n" else "right!\n")) in
+              (if choice = "L" || choice = "l" then player_loc_info.dir <- Left
+              else player_loc_info.dir <- Right);
+  move_multi_step gamestate playerid step
+
+
+
+(*************************************************
+ * Helper functions: Handling Choices - Printing *
+ *************************************************)
+
+(* [create_message_from_cards msg cardlst] returns a string of all the names
+ * of the cards in the card list in game components *)
+let rec create_message_from_cards msg cardlst =
+  let sorted = List.sort (fun x y -> if x.id > y.id then 1
+                                     else if x.id < y.id then -1
+                                     else 0) cardlst in
+  match sorted with
+    | [] -> msg
+    | h :: t -> let desc = h.name in
+                let id = string_of_int h.id in
+                let newmsg = msg^"\n"^id^") "^desc in
+                create_message_from_cards newmsg t
+
+
+(* [get_start_msg actionType] returns the string start message for choice
+ * events *)
+let get_start_msg actionType =
+  match actionType with
+  | ChoiceC -> ("Choose a course from the following list by typing " ^
+    "the course number:")
+  | ChoiceA -> ("Choose an advisor from the following list by typing " ^
+    "the advisor number:")
+  | ChoiceF -> ("Determine your future from the following list by typing " ^
+    "the corresponding number:")
+  | ChoiceS -> ("Choose your summer plans from the following list by typing " ^
+    "the corresponding number:")
+  | _ -> "not a valid actionType"
+
 (* [print_descrip playerid newcard] returns a string containing information
  * about a player's choice *)
 let print_descrip playerid newcard =
@@ -400,6 +431,57 @@ let print_descrip playerid newcard =
           ("You picked " ^ newcard.name ^ "\n" ^ newcard.description ^ "\n" ^
           "The points associated with " ^ newcard.name ^ " is " ^
           (string_of_int newcard.points) ^ " points. \n")
+
+
+(**************************************
+ * Helper functions: Handling Choices *
+ **************************************)
+
+(* [recheck_choice_in_path playerid gamestate square] returns a boolean
+ * on whether the current square is a choice or not *)
+let rec recheck_choice_in_path playerid gamestate square =
+  let action = List.assoc square gamestate.sqact in
+  if (action.actionType = Event) then false
+  else true
+
+(* [reset_direction player gamestate] resets the direction to right after
+ * fork events *)
+let reset_direction player gamestate =
+  let playerid = Player.getID player in
+  let player_loc_info = List.assoc playerid gamestate.playermap in
+  player_loc_info.dir <- Right
+
+(* [get_step_for_choice_event playerid square gamestate num_step] returns a
+ * tuple of leftover number of steps from mandatory stops and the actionType *)
+ (* starts at loc.right *)
+let rec get_step_for_choice_event playerid square gamestate num_step =
+  let loc = find_loc_by_sid gamestate.gamemap square in
+  let action = List.assoc square gamestate.sqact in
+  let dir = if (loc.left = Null && loc.right <> Null) then loc.right
+    else let temp = get_player_direction playerid gamestate in
+    convert_dir_square loc temp in
+  if num_step = 1 then (num_step, action.actionType)
+  else
+    if (action.actionType = Event || action.actionType = Points)
+      then get_step_for_choice_event playerid dir gamestate (num_step -1)
+    else (num_step, action.actionType)
+
+(* [pick_college player gamestate] allows the user to select a college and
+ * modifies a player and returns a new gamestate
+ *)
+let pick_college player gamestate =
+  let msg = "To choose Arts and Sciences, type AS."
+    ^ " For Engineering, type ENG." in
+  let choice = if (Player.isHuman player)
+    then print_choice ccol msg ["AS"; "as"; "As"; "ENG"; "eng"; "Eng"]
+    else ai_choice 2 ["AS"; "ENG"] in
+  if (choice = "AS" || choice = "as" || choice = "As")
+    then let () = AT.print_string [get_pcol (Player.getID player)]
+    ("You chose Arts and Sciences! Yay you don't have to take Math 1920!\n") in
+    (ignore((Player.changeCollege) player "Arts and Sciences"); gamestate)
+  else let () = AT.print_string [get_pcol (Player.getID player)]
+    ("You chose Engineering! Yay you don't have to take a language!\n") in
+    (ignore((Player.changeCollege) player "Engineering"); gamestate)
 
 (* [handle_choice_helper player gamestate actionType] is a helper function
  * that handles choice events and returns a new gamestate *)
@@ -438,19 +520,10 @@ let handle_choice player gamestate actionType : gamestate =
   if (actionType = ChoiceCol) then pick_college player gamestate
   else handle_choice_helper player gamestate actionType
 
-(* [reset_direction player gamestate] resets the direction to right after
- * fork events *)
-let reset_direction player gamestate =
-  let playerid = Player.getID player in
-  let player_loc_info = List.assoc playerid gamestate.playermap in
-  player_loc_info.dir <- Right
 
-(* [recheck_choice_in_path playerid gamestate square] returns a boolean
- * on whether the current square is a choice or not *)
-let rec recheck_choice_in_path playerid gamestate square =
-  let action = List.assoc square gamestate.sqact in
-  if (action.actionType = Event) then false
-  else true
+(********************************************
+ * Helper functions: Handling Point Objects *
+ ********************************************)
 
 (*  *)
 let rec create_list_valid_opts optlst lst =
@@ -482,17 +555,10 @@ let handle_points player action gamestate =
     (point_opt_obj.description ^ "\n") in
   gamestate
 
-(*  *)
-let get_action gamestate player =
-    let playerid = Player.getID player in
-    let player_loc_info = List.assoc playerid gamestate.playermap in
-    let location = player_loc_info.loc.id in
-    List.assoc location gamestate.sqact
 
-
-(*********************
- * Helper functions: *
- *********************)
+(******************************
+ * Helper functions: Spinning *
+ ******************************)
 
 (* [spin_helper gamestate player step] is a helper function that handles spin
  * command *)
@@ -539,49 +605,10 @@ let spin_helper gamestate player step =
            handle_choice player new_gs actionType
           else new_gs end)
 
-(*********************
- * Helper functions: Ending the Game *
- *********************)
-(* [reveal_results player_lst] creates a string which shows each player's points,
- * karma, and total points to print out at the end of the game. *)
-let rec reveal_results player_lst =
-  match player_lst with
-  | [] -> ""
-  | h::t -> (Player.getNickname h) ^ ("\n   Karma: ")
-      ^ (string_of_int(Player.getKarma h)) ^ ("\n   Points: ")
-      ^ (string_of_int(Player.getPoints h)) ^ ("\n   Total: ")
-      ^ (string_of_int((Player.getPoints h) + (Player.getKarma h)))
-      ^ ("\n") ^ (reveal_results t)
 
-(* [find_max_score player_lst max] traverses through the list of players to find
- * the highest score earned in this game. *)
-let rec find_max_score player_lst max =
-  match player_lst with
-  | [] -> max
-  | h::t -> let total = (Player.getPoints h) + (Player.getKarma h) in
-            if (total >= max) then (find_max_score t total)
-            else (find_max_score t max)
-
-(* [find_player_by_score player_lst score] traverses through the list of players
- * to find the player(s) with the highest score. *)
-let rec find_player_by_score player_lst score =
-  match player_lst with
-  | [] -> []
-  | h::t -> if ((Player.getPoints h) + (Player.getKarma h)) = score
-            then (Player.getNickname h)::(find_player_by_score t score)
-            else find_player_by_score t score
-
-(* [winner_announcement winner_lst] creates a string of all the winners. *)
-let rec winner_annoucement winner_lst =
-  match winner_lst with
-  | [] -> ""
-  | h::[] -> h
-  | h::t -> h ^ " " ^ (winner_annoucement t)
-
-
-(*********************
+(*************************
  * Functions: play, REPL *
- *********************)
+ *************************)
 
 (* [play cmd gamesate turn] uses the user/AI command and the gamestate to
  * perform the appropriate action and move the game forward. *)
@@ -676,9 +703,9 @@ and repl (state : gamestate) (turn : int) : unit =
     | _ -> AT.print_string [gcol]
       "Invalid command. Please try again.\n"; repl state turn
 
-(*********************
+(**********************
  * Functions: Parsing *
- *********************)
+ **********************)
 
 (* [extract_card ctype card] takes in a card from the Json file and returns a
  * card type representing all the necessary info. *)
@@ -744,6 +771,39 @@ let sq_act_list sqact =
   let action = sqact |> member "action" |> parse_action in
   (finalid, action)
 
+
+(* [init_game j] uses the user-inputted json file to parse the json and
+ * initiliaze the gamestate.*)
+let init_game j =
+  let open Yojson.Basic.Util in
+  let courses = j |> member "courses" |> to_list
+    |> List.map (extract_card ChoiceC) in
+  let advisors = j |> member "advisors" |> to_list
+    |>  List.map (extract_card ChoiceA) in
+  let summer = j |> member "summer_plans" |> to_list
+    |>  List.map (extract_card ChoiceS) in
+  let future = j |> member "future_plans" |> to_list
+    |>  List.map (extract_card ChoiceF) in
+  let gamecomp = {courses = courses; advisors = advisors;
+  summer = summer; future = future } in
+  let start = j |> member "start" |> to_int in
+  let start_points = j |> member "start_points" |> to_int in
+  let gamemap = j |> member "map" |> to_list |> List.map make_loc_list in
+  let sqact = j |> member "square_action" |> to_list |> List.map sq_act_list in
+  {turn=0; playermap = [];
+  gamecomp = gamecomp;
+  players = [];
+  active_players = [];
+  start = start;
+  start_points = start_points;
+  gamemap = gamemap;
+  playercard = [];
+  sqact = sqact}
+
+(********************************
+ * Helper functions: Setup Game *
+ ********************************)
+
 (* [setup_player state] takes a game generated after parsing a game json and
  * initializes it with players *)
 let rec setup_players state =
@@ -782,38 +842,10 @@ let rec setup_players state =
   with
     | _ -> setup_players state
 
-(* [init_game j] uses the user-inputted json file to parse the json and
- * initiliaze the gamestate.*)
-let init_game j =
-  let open Yojson.Basic.Util in
-  let courses = j |> member "courses" |> to_list
-    |> List.map (extract_card ChoiceC) in
-  let advisors = j |> member "advisors" |> to_list
-    |>  List.map (extract_card ChoiceA) in
-  let summer = j |> member "summer_plans" |> to_list
-    |>  List.map (extract_card ChoiceS) in
-  let future = j |> member "future_plans" |> to_list
-    |>  List.map (extract_card ChoiceF) in
-  let gamecomp = {courses = courses; advisors = advisors;
-  summer = summer; future = future } in
-  let start = j |> member "start" |> to_int in
-  let start_points = j |> member "start_points" |> to_int in
-  let gamemap = j |> member "map" |> to_list |> List.map make_loc_list in
-  let sqact = j |> member "square_action" |> to_list |> List.map sq_act_list in
-  {turn=0; playermap = [];
-  gamecomp = gamecomp;
-  players = [];
-  active_players = [];
-  start = start;
-  start_points = start_points;
-  gamemap = gamemap;
-  playercard = [];
-  sqact = sqact}
-
 (* [main_helper file_name] tries to ruse the given file to initialize and setup
  * the game so that the users can start playing.
  * If file_name is an invalid json file or an exception arises in the game due
- * to an invlaid command, an error is raised and the user is prompted again. *)
+ * to an invalid command, an error is raised and the user is prompted again. *)
 let rec main_helper (file_name : string) =
   try
     let json = Yojson.Basic.from_file file_name in
