@@ -2327,19 +2327,19 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "action": 
       {
       "type": "points",
-      "description": "You didn't do well in an interview. Type t to keep trying (spend  points) or",
+      "description": "You didn't do well in an interview. Type t to keep trying (spend 100 points) or Type f to focus on your homework (spend 50 points).",
       "points": 0,
       "karma": 0,
       "optdict": [
-        { "option": "", 
-          "description": "", 
-          "points": , 
-          "karma": 
+        { "option": "t", 
+          "description": "Perseverance is key! Practice makes perfect. Get 1000 karma for not giving up.", 
+          "points":-100 , 
+          "karma":1000
         },
-        { "option": "", 
-          "description": "", 
-          "points": , 
-          "karma": 
+        { "option": "f", 
+          "description": "School is important, but so is your career. Don't give up so easily. Get 300 karma.", 
+          "points":-50, 
+          "karma":300 
         }]
       }
     },
@@ -2387,19 +2387,19 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "action": 
       {
       "type": "points",
-      "description": "You realize that cs might not be for you switch to a minor",
+      "description": "You realize that CS might not be for you. \nType s to switch to a minor (spend 1000 points) or Type m to push through and stay a major (spend 1299 points).",
       "points": 0,
       "karma": 0,
       "optdict": [
-        { "option": "", 
-          "description": "", 
-          "points": , 
-          "karma": 
+        { "option": "s", 
+          "description": "It's ok to realize CS might not be for you. Kudos to you for figuring out what's best for you. Get 800 karma.", 
+          "points":-1000 , 
+          "karma":800 
         },
-        { "option": "", 
-          "description": "", 
-          "points": , 
-          "karma": 
+        { "option": "m", 
+          "description": "Sometimes, there are obstacles in life. You know you love CS. You can do it. Get 1000 points for perserverance.", 
+          "points": -1299, 
+          "karma": 1000
         }]
       }
     },
@@ -2457,19 +2457,19 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "action": 
       {
       "type": "points",
-      "description": "Cancel office hours to do your own work",
+      "description": "You have lots of work but you also have office hours for CS 1110 and there's an assignment due tonight. \nType c to cancel office hours to do your own work (spend 100 points) or Type h to hold office hours and support those baby CS majors (spend 50 points). ",
       "points": 0,
       "karma": 0,
       "optdict": [
-        { "option": "", 
-          "description": "", 
-          "points": , 
-          "karma": 
+        { "option": "c", 
+          "description": "You really let down those kids. \nYou disappered when they needed you most. \nLose 400 karma. ", 
+          "points":-100 , 
+          "karma": -400
         },
-        { "option": "", 
-          "description": "", 
-          "points": , 
-          "karma": 
+        { "option": "h", 
+          "description": "You really needed to do work. \nYour academics are important too, plus there are lots of other TAs. \nLose 550 karma.", 
+          "points": -50, 
+          "karma": -550
         }]
       }
     },
@@ -2507,19 +2507,19 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "action": 
       {
       "type": "points",
-      "description": " cs assignment vs humanities paper ",
+      "description": " You have two assignments due that both count for 50 % of your grade. \nType c to do your cs assignment (spend 4110 points) or Type h to write your humanities paper (spend 190 points)",
       "points": 0,
       "karma": 0,
       "optdict": [
-        { "option": "", 
-          "description": "", 
-          "points": , 
-          "karma": 
+        { "option": "c", 
+          "description": "You have late days you could have used. You should've done your paper. \nGet only 10 karma for poor prioritization.", 
+          "points":-4110 , 
+          "karma":10
         },
-        { "option": "", 
-          "description": "", 
-          "points": , 
-          "karma": 
+        { "option": "h", 
+          "description": "You really needed help with the writing. Good on you for spending some time working on this. \nGet 500 karma for taking a break from CS.", 
+          "points":-190 , 
+          "karma": 500
         }]
       }
     },
@@ -2547,19 +2547,19 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "action": 
       {
       "type": "points",
-      "description": "Order pizza at 2am or not",
+      "description": "You're hungry and you have lots of work to do. \nType p to order pizza at 2am (spend 5 points) or Type n to not order (spend 50 points)",
       "points": 0,
       "karma": 0,
       "optdict": [
-        { "option": "", 
-          "description": "", 
-          "points": , 
-          "karma": 
+        { "option": "p", 
+          "description": "Pizza is good. But it's not good for you. \nYou also ate all of it and crashed instead of finishing your project. \nLose 500 karma for gaining 500 pounds.", 
+          "points":-5 , 
+          "karma":-500 
         },
-        { "option": "", 
-          "description": "", 
-          "points": , 
-          "karma": 
+        { "option": "n", 
+          "description": "You were so hungry. You need fuel to get through the night so you eat a salad. \nGain 100 karma for staying healthy.", 
+          "points":-50 , 
+          "karma": 100
         }]
       }
     },
@@ -2597,19 +2597,19 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "action": 
       {
       "type": "points",
-      "description": "to shower or not to shower that is the question",
+      "description": "To shower or not to shower that is the question. \nType y to shower (spend 400 points) or type n to not (spend 40 points).",
       "points": 0,
       "karma": 0,
       "optdict": [
-        { "option": "", 
-          "description": "", 
-          "points": , 
-          "karma": 
+        { "option": "y", 
+          "description": "Hygiene is important. You smell good now. \nGet 1000 karma.", 
+          "points":-400 , 
+          "karma": 1000
         },
-        { "option": "", 
-          "description": "", 
-          "points": , 
-          "karma": 
+        { "option": "n", 
+          "description": "You got some extra time, but you stink. Literally. But you have deodorant so it's ok for one day. \nGet 800 karma.", 
+          "points":-40 , 
+          "karma": 800
         }]
       }
     },
@@ -2637,19 +2637,19 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "action": 
       {
       "type": "points",
-      "description": "ask ta for help outside of consulting hours",
+      "description": "You need help and you see your favorite TA chilling in Duffield Hall. \nType a to ask ta for help outside of consulting hours (spend 1000 points) or \nType s to struggle on your own, but not bother the TA (spend 860 points).",
       "points": 0,
       "karma": 0,
       "optdict": [
-        { "option": "", 
-          "description": "", 
-          "points": , 
-          "karma": 
+        { "option": "a", 
+          "description": "Luckily, he's super nice and helps you out. \nGet 200 karma.", 
+          "points":-1000 , 
+          "karma": 200
         },
-        { "option": "", 
-          "description": "", 
-          "points": , 
-          "karma": 
+        { "option": "s", 
+          "description": "Good thing you're a good debugger. \nGet 200 karma.", 
+          "points":-860 , 
+          "karma":200 
         }]
       }
     },
@@ -2687,19 +2687,19 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "action": 
       {
       "type": "points",
-      "description": "download vm or try to install natively",
+      "description": "You need Linux. Type d to download vm (spend 5 points) or Type i try to install natively (spend 300 points).",
       "points": 0,
       "karma": 0,
       "optdict": [
-        { "option": "", 
-          "description": "", 
-          "points": , 
-          "karma": 
+        { "option": "d", 
+          "description": "VMs take up so much space and take super longer to download. \nLose 30 karma.", 
+          "points":-5 , 
+          "karma": -30
         },
-        { "option": "", 
-          "description": "", 
-          "points": , 
-          "karma": 
+        { "option": "i", 
+          "description": "It's so much nicer to run things natively even though there are so many configuration issues. \nGet 50 karma.", 
+          "points":-300 , 
+          "karma": 50
         }]
       }
     },
@@ -2757,19 +2757,19 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "action": 
       {
       "type": "points",
-      "description": "Go to lecture (find out about extension get tons of points) or skip to finish homework",
+      "description": "You can either go to lecture (type g and spend 30 points) or skip to finish homework (type s and spend 35 points).",
       "points": 0,
       "karma": 0,
       "optdict": [
-        { "option": "", 
-          "description": "", 
-          "points": , 
-          "karma": 
+        { "option": "g", 
+          "description": "You find out about extension! Kudos to you for going to class. \nGet 500 karma.", 
+          "points":-30 , 
+          "karma":500 
         },
-        { "option": "", 
-          "description": "", 
-          "points": , 
-          "karma": 
+        { "option": "s", 
+          "description": "You forgot to turn in the homework. That kinda sucks. No lecture and no value from skipping. \nLose 300 karma.", 
+          "points": -35, 
+          "karma": -300
         }]
       }
     },
@@ -2787,19 +2787,19 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "action": 
       {
       "type": "points",
-      "description": "debug friend's program or your own",
+      "description": "Type f to debug your friend's program (spend 50 points) or Type o to debug your own (spend 1 points).",
       "points": 0,
       "karma": 0,
       "optdict": [
-        { "option": "", 
-          "description": "", 
-          "points": , 
-          "karma": 
+        { "option": "f", 
+          "description": "You're a good friend. But you didn't finish your project. \nGet 100 karma for true altruism.", 
+          "points":-50 , 
+          "karma":100 
         },
-        { "option": "", 
-          "description": "", 
-          "points": , 
-          "karma": 
+        { "option": "0", 
+          "description": "Your friend had to drop the class because he couldn't finish and thus failed the assignment. \nYou however knew that your bug was just a one line fix. \nLose 100 karma for not helping him out.", 
+          "points":-1 , 
+          "karma": -100
         }]
       }
     },
@@ -2847,19 +2847,19 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "action": 
       {
       "type": "points",
-      "description": "submit a regrade (lose points)",
+      "description": "You got your exam back and it's not what you expected. \nType y to submit a regrade and potentially lose more points (spend 200 points) or Type n to keep your low score even though you think you deserve more (spend 200 points)",
       "points": 0,
       "karma": 0,
       "optdict": [
-        { "option": "", 
-          "description": "", 
-          "points": , 
-          "karma": 
+        { "option": "y", 
+          "description": "You were right. They misgraded your question and you got 25 points back bumping you to an A. \nGet 1400 points for checking and going through your exam.", 
+          "points":-200 , 
+          "karma":1400 
         },
-        { "option": "", 
-          "description": "", 
-          "points": , 
-          "karma": 
+        { "option": "n", 
+          "description": "You should've gotten a regrade. What's losing maybe a couple points in comparison to getting 25 back. \nLose 100 for not making a good judgement.", 
+          "points":-200 , 
+          "karma": -100
         }]
       }
     },
@@ -2897,19 +2897,19 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "action": 
       {
       "type": "points",
-      "description": "play LOL",
+      "description": "You love playing games. You love making games. \nType l to play League of Legends (spend 1000 points) or Type c to code your own game (spend 900 points).",
       "points": 0,
       "karma": 0,
       "optdict": [
-        { "option": "", 
-          "description": "", 
-          "points": , 
-          "karma": 
+        { "option": "l", 
+          "description": "You didn't sleep. But you had fun! \nYay for gaming, get 1000 karma.", 
+          "points":-1000 , 
+          "karma": 1000
         },
-        { "option": "", 
-          "description": "", 
-          "points": , 
-          "karma": 
+        { "option": "c", 
+          "description": "You didn't sleep. But you made a super successful game for the app store. \nYay for gaming, get 1000 karma.", 
+          "points":-900 , 
+          "karma":1000
         }]
       }
     },
@@ -2977,19 +2977,19 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "action": 
       {
       "type": "points",
-      "description": "forgot iclicker skip class?",
+      "description": "You realize you forgot iclicker during class. Type l to leave class now and do other work or Type s to stay in class (point values are unknown)",
       "points": 0,
       "karma": 0,
       "optdict": [
-        { "option": "", 
-          "description": "", 
-          "points": , 
-          "karma": 
+        { "option": "l", 
+          "description": "You shouldn't go to class just for iclicker. You should go to learn. \nLose 400 karma.", 
+          "points":-1000 , 
+          "karma":-400 
         },
-        { "option": "", 
-          "description": "", 
-          "points": , 
-          "karma": 
+        { "option": "s", 
+          "description": "You stayed in class and you learned a lot. You also remembered how compelling of a speaker your Professor is. \nGet 2000 karma.", 
+          "points":-2300 , 
+          "karma": 2000
         }]
       }
     },
@@ -3037,19 +3037,19 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "action": 
       {
       "type": "points",
-      "description": "Start a side project",
+      "description": "You have some time on your hands. \nType s to start a side project (spend 1000 points) or Type b to binge watch a new netflix show (spend 2000 points). ",
       "points": 0,
       "karma": 0,
       "optdict": [
-        { "option": "", 
-          "description": "", 
-          "points": , 
-          "karma": 
+        { "option": "s", 
+          "description": "Side projects are awesome. You have complete control! \nGet 1900 karma for challenging yourself.", 
+          "points":-1000 , 
+          "karma": 1900
         },
-        { "option": "", 
-          "description": "", 
-          "points": , 
-          "karma": 
+        { "option": "b", 
+          "description": "It's important to relax. Enjoy watching netflix for 23 hours and get 2300 karma too.", 
+          "points":-2000 , 
+          "karma": 2300
         }]
       }
     },
@@ -3077,19 +3077,19 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "action": 
       {
       "type": "points",
-      "description": "answer a question in class dare to be wrong",
+      "description": "The prof asks a question. \nType a to answer a question in class and dare to be wrong or type q to remain quiet (point values unknown)",
       "points": 0,
       "karma": 0,
       "optdict": [
-        { "option": "", 
-          "description": "", 
-          "points": , 
-          "karma": 
+        { "option": "a", 
+          "description": "Good on you for taking a chance. But you got it wrong. \nLose 10 karma.", 
+          "points":-90 , 
+          "karma":-10 
         },
-        { "option": "", 
-          "description": "", 
-          "points": , 
-          "karma": 
+        { "option": "q", 
+          "description": "You should've spoken up, you knew the answer! Be brave. \nLose 10 karma.", 
+          "points":-90 , 
+          "karma":-10
         }]
       }
     },
@@ -3117,19 +3117,19 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "action": 
       {
       "type": "points",
-      "description": "Marathon a tv show",
+      "description": "Type m to marathon a tv show (spend 100 points) or type s to sleep for more than 15 hours (spend 150 points).",
       "points": 0,
       "karma": 0,
       "optdict": [
-        { "option": "", 
-          "description": "", 
-          "points": , 
-          "karma": 
+        { "option": "m", 
+          "description": "The show was so good. \nGet 1000 karma.", 
+          "points":-100 , 
+          "karma": 1000
         },
-        { "option": "", 
-          "description": "", 
-          "points": , 
-          "karma": 
+        { "option": "s", 
+          "description": "Sleep is so good. \nGet 1200 karma.", 
+          "points":-150 , 
+          "karma": 1200
         }]
       }
     },
@@ -3217,19 +3217,19 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "action": 
       {
       "type": "points",
-      "description": "choose to do research and departmental honors",
+      "description": "You can choose to do research with one of the coolest professors at Cornell. \nType y to do research and spend 100 points or Type n to not do research and enjoy senior spring (spend 10 points).",
       "points": 0,
       "karma": 0,
       "optdict": [
-        { "option": "", 
-          "description": "", 
-          "points": , 
-          "karma": 
+        { "option": "y", 
+          "description": "You can get departmental honors! Yay for getting honor cords at grad. \nGet 5000 karma.", 
+          "points":-100 , 
+          "karma":5000 
         },
-        { "option": "", 
-          "description": "", 
-          "points": , 
-          "karma": 
+        { "option": "n", 
+          "description": "Nothing's new. Nothing has changed. \nGet 1000 karma.", 
+          "points":-10 , 
+          "karma": 1000
         }]
       }
     },
@@ -3257,19 +3257,19 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "action": 
       {
       "type": "points",
-      "description": "Take a 4000 level class pass fail",
+      "description": "Type y to take a 4000 level class pass/fail or type n to take a 12 credit semester (spending point values unknown)",
       "points": 0,
       "karma": 0,
       "optdict": [
-        { "option": "", 
-          "description": "", 
-          "points": , 
-          "karma": 
+        { "option": "y", 
+          "description": "Learning is fun. Learning under no pressure is even more fun. \nGet 4000 karma.", 
+          "points":-10 , 
+          "karma": 4000
         },
-        { "option": "", 
-          "description": "", 
-          "points": , 
-          "karma": 
+        { "option": "n", 
+          "description": "It's senior spring. It's chill. It's time you take a break and enjoy Cornell. \nGet 1000 karma.", 
+          "points":-12 , 
+          "karma": 1000
         }]
       }
     },
@@ -3327,19 +3327,19 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "action": 
       {
       "type": "points",
-      "description": "Spend time finding SO or friends",
+      "description": "You can spend time finding a SO (type s) or spend time with friends (type f). (spending point values unknown)",
       "points": 0,
       "karma": 0,
       "optdict": [
-        { "option": "", 
-          "description": "", 
-          "points": , 
-          "karma": 
+        { "option": "s", 
+          "description": "Sometimes, you just need a companion in life. \nGet 100 karma for taking a chance to find someone you love.", 
+          "points":-100 , 
+          "karma":100 
         },
-        { "option": "", 
-          "description": "", 
-          "points": , 
-          "karma": 
+        { "option": "f", 
+          "description": "Friends are so important. They kept you sane during some of the most challenging moments here. \nGet 400 karma for friends forever.", 
+          "points":-100 , 
+          "karma": 400
         }]
       }
     },
