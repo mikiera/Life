@@ -339,8 +339,8 @@
       "right": 20
     },
     { "squareid": 19,
-      "left": 21,
-      "right": 22
+      "left": 0,
+      "right": 21
     },
     { "squareid": 20,
       "left": 0,
@@ -355,40 +355,40 @@
       "right": 24
     },
     { "squareid": 23,
-      "left": 25,
-      "right": 26
+      "left": 0,
+      "right": 25
     },
     { "squareid": 24,
       "left": 0,
-      "right": 27
+      "right": 25
     },
     { "squareid": 25,
-      "left": 0,
-      "right": 28
+      "left": 26,
+      "right": 27
     },
     { "squareid": 26,
       "left": 0,
-      "right": 27
+      "right": 28
     },
     { "squareid": 27,
       "left": 0,
-      "right": 28
+      "right": 29
     },
     { "squareid": 28,
       "left": 0,
-      "right": 29
+      "right": 30
     },
     { "squareid": 29,
       "left": 0,
       "right": 30
     },
     { "squareid": 30,
-      "left": 31,
-      "right": 32
+      "left": 0,
+      "right": 31
     },
     { "squareid": 31,
       "left": 0,
-      "right": 33
+      "right": 32
     },
     { "squareid": 32,
       "left": 0,
@@ -448,619 +448,619 @@
     },
     { "squareid": 46,
       "left": 0,
-      "right": 47
+      "right": 48
     },
     { "squareid": 47,
       "left": 0,
-      "right": 48
+      "right": 49
     },
     { "squareid": 48,
       "left": 0,
-      "right": 49
+      "right": 50
     },
     { "squareid": 49,
       "left": 0,
-      "right": 50
+      "right": 51
     },
     { "squareid": 50,
        "left": 0,
-      "right": 0
+      "right": 52
     },
     { "squareid": 51,
       "left": 0,
-      "right": 0
+      "right": 52
     },
     { "squareid": 52,
       "left": 0,
-      "right": 0
+      "right": 53
     },
     { "squareid": 53,
       "left": 0,
-      "right": 0
+      "right": 54
     },
     { "squareid": 54,
-      "left": 0,
-      "right": 0
+      "left": 55,
+      "right": 56
     },
     { "squareid": 55,
       "left": 0,
-      "right": 0
+      "right": 57
     },
     { "squareid": 56,
       "left": 0,
-      "right": 0
+      "right": 58
     },
     { "squareid": 57,
       "left": 0,
-      "right": 0
+      "right": 59
     },
     { "squareid": 58,
       "left": 0,
-      "right": 0
+      "right": 60
     },
     { "squareid": 59,
       "left": 0,
-      "right": 0
+      "right": 62
     },
     { "squareid": 60,
       "left": 0,
-      "right": 0
+      "right": 61
     },
     { "squareid": 61,
       "left": 0,
-      "right": 0
+      "right": 64
     },
     { "squareid": 62,
       "left": 0,
-      "right": 0
+      "right": 63
     },
     { "squareid": 63,
-      "left": 0,
-      "right": 0
+      "left": 65,
+      "right": 66
     },
     { "squareid": 64,
       "left": 0,
-      "right": 0
+      "right": 67
     },
     { "squareid": 65,
       "left": 0,
-      "right": 0
+      "right": 68
     },
     { "squareid": 66,
       "left": 0,
-      "right": 0
+      "right": 69
     },
     { "squareid": 67,
       "left": 0,
-      "right": 0
+      "right": 70
     },
     { "squareid": 68,
       "left": 0,
-      "right": 0
+      "right": 69
     },
     { "squareid": 69,
       "left": 0,
-      "right": 0
+      "right": 70
     },
     { "squareid": 70,
-      "left": 0,
-      "right": 0
+      "left": 71,
+      "right": 72
     },
     { "squareid": 71,
       "left": 0,
-      "right": 0
+      "right": 73
     },
     { "squareid": 72,
       "left": 0,
-      "right": 0
+      "right": 73
     },
     { "squareid": 73,
       "left": 0,
-      "right": 0
+      "right": 74
     },
     { "squareid": 74,
       "left": 0,
-      "right": 0
+      "right": 75
     },
     { "squareid": 75,
       "left": 0,
-      "right": 0
+      "right": 76
     },
     { "squareid": 76,
       "left": 0,
-      "right": 0
+      "right": 77
     },
     { "squareid": 77,
       "left": 0,
-      "right": 0
+      "right": 78
     },
     { "squareid": 78,
       "left": 0,
-      "right": 0
+      "right": 79
     },
     { "squareid": 79,
       "left": 0,
-      "right": 0
+      "right": 80
     },
     { "squareid": 80,
-      "left": 0,
-      "right": 0
+      "left": 81,
+      "right": 82
     },
     { "squareid": 81,
       "left": 0,
-      "right": 0
+      "right": 83
     },
     { "squareid": 82,
       "left": 0,
-      "right": 0
+      "right": 84
     },
     { "squareid": 83,
       "left": 0,
-      "right": 0
+      "right": 85
     },
     { "squareid": 84,
       "left": 0,
-      "right": 0
+      "right": 85
     },
     { "squareid": 85,
       "left": 0,
-      "right": 0
+      "right": 86
     },
     { "squareid": 86,
       "left": 0,
-      "right": 0
+      "right": 87
     },
     { "squareid": 87,
       "left": 0,
-      "right": 0
+      "right": 88
     },
     { "squareid": 88,
       "left": 0,
-      "right": 0
+      "right": 89
     },
     { "squareid": 89,
-      "left": 0,
-      "right": 0
+      "left": 90,
+      "right": 91
     },
     { "squareid": 90,
       "left": 0,
-      "right": 0
+      "right": 92
     },
     { "squareid": 91,
       "left": 0,
-      "right": 0
+      "right": 93
     },
     { "squareid": 92,
       "left": 0,
-      "right": 0
+      "right": 94
     },
     { "squareid": 93,
       "left": 0,
-      "right": 0
+      "right": 94
     },
     { "squareid": 94,
-      "left": 0,
-      "right": 0
+      "left": 95,
+      "right": 96
     },
     { "squareid": 95,
       "left": 0,
-      "right": 0
+      "right": 97
     },
     { "squareid": 96,
       "left": 0,
-      "right": 0
+      "right": 98
     },
     { "squareid": 97,
       "left": 0,
-      "right": 0
+      "right": 99
     },
     { "squareid": 98,
       "left": 0,
-      "right": 0
+      "right": 99
     },
     { "squareid": 99,
       "left": 0,
-      "right": 0
+      "right": 100
     },
     { "squareid": 100,
       "left": 0,
-      "right": 0
+      "right": 101
     },
     { "squareid": 101,
       "left": 0,
-      "right": 0
+      "right": 102
     },
     { "squareid": 102,
       "left": 0,
-      "right": 0
+      "right": 103
     },
     { "squareid": 103,
       "left": 0,
-      "right": 0
+      "right": 104
     },
     { "squareid": 104,
-      "left": 0,
-      "right": 0
+      "left": 105,
+      "right": 106
     },
     { "squareid": 105,
       "left": 0,
-      "right": 0
+      "right": 107
     },
     { "squareid": 106,
       "left": 0,
-      "right": 0
+      "right": 108
     },
     { "squareid": 107,
       "left": 0,
-      "right": 0
+      "right": 109
     },
     { "squareid": 108,
       "left": 0,
-      "right": 0
+      "right": 109
     },
     { "squareid": 109,
       "left": 0,
-      "right": 0
+      "right": 110
     },
     { "squareid": 110,
       "left": 0,
-      "right": 0
+      "right": 111
     },
     { "squareid": 111,
-      "left": 0,
-      "right": 0
+      "left": 112,
+      "right": 113
     },
     { "squareid": 112,
       "left": 0,
-      "right": 0
+      "right": 114
     },
     { "squareid": 113,
       "left": 0,
-      "right": 0
+      "right": 115
     },
     { "squareid": 114,
       "left": 0,
-      "right": 0
+      "right": 116
     },
     { "squareid": 115,
       "left": 0,
-      "right": 0
+      "right": 116
     },
     { "squareid": 116,
       "left": 0,
-      "right": 0
+      "right": 117
     },
     { "squareid": 117,
       "left": 0,
-      "right": 0
+      "right": 118
     },
     { "squareid": 118,
       "left": 0,
-      "right": 0
+      "right": 119
     },
     { "squareid": 119,
       "left": 0,
-      "right": 0
+      "right": 120
     },
     { "squareid": 120,
       "left": 0,
-      "right": 0
+      "right": 121
     },
     { "squareid": 121,
       "left": 0,
-      "right": 0
+      "right": 122
     },
     { "squareid": 122,
-      "left": 0,
-      "right": 0
+      "left": 123,
+      "right": 124
     },
     { "squareid": 123,
       "left": 0,
-      "right": 0
+      "right": 125
     },
     { "squareid": 124,
       "left": 0,
-      "right": 0
+      "right": 125
     },
     { "squareid": 125,
       "left": 0,
-      "right": 0
+      "right": 126
     },
     { "squareid": 126,
       "left": 0,
-      "right": 0
+      "right": 127
     },
     { "squareid": 127,
       "left": 0,
-      "right": 0
+      "right": 128
     },
     { "squareid": 128,
       "left": 0,
-      "right": 0
+      "right": 129
     },
     { "squareid": 129,
       "left": 0,
-      "right": 0
+      "right": 130
     },
     { "squareid": 130,
-      "left": 0,
-      "right": 0
+      "left": 131,
+      "right": 132
     },
     { "squareid": 131,
       "left": 0,
-      "right": 0
+      "right": 133
     },
     { "squareid": 132,
       "left": 0,
-      "right": 0
+      "right": 134
     },
     { "squareid": 133,
       "left": 0,
-      "right": 0
+      "right": 135
     },
     { "squareid": 134,
       "left": 0,
-      "right": 0
+      "right": 135
     },
     { "squareid": 135,
       "left": 0,
-      "right": 0
+      "right": 136
     },
     { "squareid": 136,
       "left": 0,
-      "right": 0
+      "right": 137
     },
     { "squareid": 137,
       "left": 0,
-      "right": 0
+      "right": 138
     },
     { "squareid": 138,
-      "left": 0,
-      "right": 0
+      "left": 139,
+      "right": 140
     },
     { "squareid": 139,
       "left": 0,
-      "right": 0
+      "right": 141
     },
     { "squareid": 140,
       "left": 0,
-      "right": 0
+      "right": 142
     },
     { "squareid": 141,
       "left": 0,
-      "right": 0
+      "right": 143
     },
     { "squareid": 142,
       "left": 0,
-      "right": 0
+      "right": 143
     },
     { "squareid": 143,
       "left": 0,
-      "right": 0
+      "right": 144
     },
     { "squareid": 144,
       "left": 0,
-      "right": 0
+      "right": 145
     },
     { "squareid": 145,
       "left": 0,
-      "right": 0
+      "right": 146
     },
     { "squareid": 146,
       "left": 0,
-      "right": 0
+      "right": 147
     },
     { "squareid": 147,
       "left": 0,
-      "right": 0
+      "right": 148
     },
     { "squareid": 148,
       "left": 0,
-      "right": 0
+      "right": 149
     },
     { "squareid": 149,
-      "left": 0,
-      "right": 0
+      "left": 150,
+      "right": 151
     },
     { "squareid": 150,
       "left": 0,
-      "right": 0
+      "right": 152
     },
     { "squareid": 151,
       "left": 0,
-      "right": 0
+      "right": 153
     },
     { "squareid": 152,
       "left": 0,
-      "right": 0
+      "right": 154
     },
     { "squareid": 153,
       "left": 0,
-      "right": 0
+      "right": 155
     },
     { "squareid": 154,
       "left": 0,
-      "right": 0
+      "right": 156
     },
     { "squareid": 155,
       "left": 0,
-      "right": 0
+      "right": 156
     },
     { "squareid": 156,
       "left": 0,
-      "right": 0
+      "right": 157
     },
     { "squareid": 157,
       "left": 0,
-      "right": 0
+      "right": 158
     },
     { "squareid": 158,
       "left": 0,
-      "right": 0
+      "right": 159
     },
     { "squareid": 159,
       "left": 0,
-      "right": 0
+      "right": 160
     },
     { "squareid": 160,
       "left": 0,
-      "right": 0
+      "right": 161
     },
     { "squareid": 161,
       "left": 0,
-      "right": 0
+      "right": 162
     },
     { "squareid": 162,
       "left": 0,
-      "right": 0
+      "right": 163
     },
     { "squareid": 163,
       "left": 0,
-      "right": 0
+      "right": 164
     },
     { "squareid": 164,
       "left": 0,
-      "right": 0
+      "right": 165
     },
     { "squareid": 165,
-      "left": 0,
-      "right": 0
+      "left": 166,
+      "right": 167
     },
     { "squareid": 166,
       "left": 0,
-      "right": 0
+      "right": 168
     },
     { "squareid": 167,
       "left": 0,
-      "right": 0
+      "right": 168
     },
     { "squareid": 168,
       "left": 0,
-      "right": 0
+      "right": 169
     },
     { "squareid": 169,
       "left": 0,
-      "right": 0
+      "right": 170
     },
     { "squareid": 170,
-      "left": 0,
-      "right": 0
+      "left": 171,
+      "right": 172
     },
     { "squareid": 171,
       "left": 0,
-      "right": 0
+      "right": 173
     },
     { "squareid": 172,
       "left": 0,
-      "right": 0
+      "right": 174
     },
     { "squareid": 173,
       "left": 0,
-      "right": 0
+      "right": 175
     },
     { "squareid": 174,
       "left": 0,
-      "right": 0
+      "right": 175
     },
     { "squareid": 175,
       "left": 0,
-      "right": 0
+      "right": 176
     },
     { "squareid": 176,
       "left": 0,
-      "right": 0
+      "right": 177
     },
     { "squareid": 177,
       "left": 0,
-      "right": 0
+      "right": 178
     },
     { "squareid": 178,
       "left": 0,
-      "right": 0
+      "right": 179
     },
     { "squareid": 179,
       "left": 0,
-      "right": 0
+      "right": 180
     },
     { "squareid": 180,
       "left": 0,
-      "right": 0
+      "right": 181
     },
     { "squareid": 181,
       "left": 0,
-      "right": 0
+      "right": 182
     },
     { "squareid": 182,
       "left": 0,
-      "right": 0
+      "right": 183
     },
     { "squareid": 183,
       "left": 0,
-      "right": 0
+      "right": 184
     },
     { "squareid": 184,
       "left": 0,
-      "right": 0
+      "right": 185
     },
     { "squareid": 185,
-      "left": 0,
-      "right": 0
+      "left": 186,
+      "right": 187
     },
     { "squareid": 186,
       "left": 0,
-      "right": 0
+      "right": 188
     },
     { "squareid": 187,
       "left": 0,
-      "right": 0
+      "right": 189
     },
     { "squareid": 188,
       "left": 0,
-      "right": 0
+      "right": 190
     },
     { "squareid": 189,
       "left": 0,
-      "right": 0
+      "right": 191
     },
     { "squareid": 190,
       "left": 0,
-      "right": 0
+      "right": 192
     },
     { "squareid": 191,
       "left": 0,
-      "right": 0
+      "right": 192
     },
     { "squareid": 192,
       "left": 0,
-      "right": 0
+      "right": 193
     },
     { "squareid": 193,
-      "left": 0,
-      "right": 0
+      "left": 194,
+      "right": 195
     },
     { "squareid": 194,
       "left": 0,
-      "right": 0
+      "right": 196
     },
     { "squareid": 195,
       "left": 0,
-      "right": 0
+      "right": 196
     },
     { "squareid": 196,
       "left": 0,
-      "right": 0
+      "right": 197
     },
     { "squareid": 197,
       "left": 0,
-      "right": 0
+      "right": 198
     },
     { "squareid": 198,
       "left": 0,
-      "right": 0
+      "right": 0199
     },
     { "squareid": 199,
       "left": 0,
-      "right": 0
+      "right": 200
     },
     { "squareid": 200,
       "left": 0,
@@ -3413,7 +3413,7 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "optlist": []
       }
     }, 
-    { "squareid": 195,
+    { "squareid": 197,
       "action": 
       {
       "type": "event",

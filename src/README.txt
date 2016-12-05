@@ -10,8 +10,8 @@ This game is a twist on the classic board game, The Game of Life. Enter as a fre
 HOW TO PLAY
 
 Starting the game: 
-    1) make clean
-    2) make play
+    1) type 'make clean'
+    2) type 'make play'
 
 Setting up the game:
     After make play the game will prompt you for a course roster.
@@ -66,7 +66,7 @@ Playing the game:
 
 -:¦:--:¦:--:¦:--:¦:--:¦:--:¦:--:¦:--:¦:--:¦:--:¦:--:¦:--:¦:-
 
-Enjoy the life of a CS Major and maybe one day, your code change the world!!
+Enjoy the life of a CS Major and maybe one day, you code change the world!!
 
 
 
