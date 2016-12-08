@@ -1990,12 +1990,12 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "points": 0,
       "karma": 0,
       "optlist": [
-        { "option": "t", 
+        { "option": "g", 
           "description": "You go to PennApps and win an award. Yayyyyy! \nGet 464 points for having fun and building a sleek app.", 
           "points": -108, 
           "karma": 464
         },
-        { "option": "o", 
+        { "option": "s", 
           "description": "You stay in Ithaca to finish your work. Free food and swag would have been nice. \nLose 60 points for caring too much about grades.", 
           "points": -8, 
           "karma": -60
@@ -2040,12 +2040,12 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "points": 0,
       "karma": 0,
       "optlist": [
-        { "option": "t", 
+        { "option": "p", 
           "description": "You got an ACSU tshirt, and your friends who aren't paid members are a little jealous.\nSmirk and get 82 points.", 
           "points": -5, 
           "karma": 82
         },
-        { "option": "o", 
+        { "option": "n", 
           "description": "You don't spend the $5, and instead, grab some quality bubble tea from Collegetown.\n83 points :)", 
           "points": 0, 
           "karma": 83
@@ -2120,12 +2120,12 @@ You need a partner for your next CS assignment. \nLuckily your best friend is al
       "points": 0,
       "karma": 0,
       "optlist": [
-        { "option": "t", 
+        { "option": "l", 
           "description": "wOW. Life is such a cool game. You made a great decision.\nGet 3110 karma ;)", 
           "points": -1000, 
           "karma": 3110
         },
-        { "option": "o", 
+        { "option": "m", 
           "description": "A boring messenging application is still pretty difficult.\nGet 1110 karma", 
           "points": -500, 
           "karma": 1110
